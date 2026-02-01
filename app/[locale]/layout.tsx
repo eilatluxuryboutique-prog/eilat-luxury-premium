@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/ui/header";
 import Providers from "@/app/providers";
 import ThemeProvider from "@/components/theme-provider";
+import AiAssistant from "@/components/ai-assistant";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,6 +53,7 @@ export default async function RootLayout({
                         <ThemeProvider>
                             <Header initialData={siteContent || {}} />
                             {children}
+                            <AiAssistant />
                         </ThemeProvider>
                     </Providers>
                 </NextIntlClientProvider>

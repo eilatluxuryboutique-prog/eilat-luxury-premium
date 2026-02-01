@@ -13,6 +13,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "Eilat Booking Premium",
     description: "Luxury vacation apartments in Eilat",
+    icons: {
+        icon: '/globe.svg',
+    }
 };
 
 export const dynamic = 'force-dynamic';

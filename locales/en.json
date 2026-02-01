@@ -1,0 +1,26 @@
+{
+    "Metadata": {
+        "title": "Eilat Booking Premium - Luxury Vacations in Eilat",
+        "description": "Book your next vacation in Eilat at the most luxurious holiday apartments."
+    },
+    "Navigation": {
+        "home": "Home",
+        "apartments": "Apartments",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "Hero": {
+        "title": "Luxury Hospitality in Eilat",
+        "subtitle": "Exclusive holiday apartments in prime locations",
+        "cta": "Book Now"
+    },
+    "Featured": {
+        "title": "Our Featured Apartments",
+        "subtitle": "Choose from our exclusive collection for the perfect vacation",
+        "night": "night",
+        "book": "Book Now",
+        "details": "More Details",
+        "guests": "Guests",
+        "rooms": "Rooms"
+    }
+}

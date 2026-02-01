@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  --background: #121212;
+  --foreground: #ffffff;
+  --primary: #FFD700;
+  /* Gold */
+  --card: #1E1E1E;
+  --card-foreground: #ffffff;
+  --accent: #FFD700;
+  --accent-foreground: #000000;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Overrides */
+  --color-primary: var(--primary);
+  --color-yellow-400: var(--primary);
+  /* Force yellow-400 to be our Gold */
+  --color-yellow-500: #E6C200;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  /* Use Inter if avail, or system */
+}

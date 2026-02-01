@@ -1,0 +1,17 @@
+{
+    "Metadata": {
+        "title": "Eilat Booking Premium - Vacances de luxe à Eilat",
+        "description": "Réservez vos prochaines vacances à Eilat dans les appartements les plus luxueux."
+    },
+    "Navigation": {
+        "home": "Accueil",
+        "apartments": "Appartements",
+        "about": "À propos",
+        "contact": "Contact"
+    },
+    "Hero": {
+        "title": "Hospitalité de luxe à Eilat",
+        "subtitle": "Appartements de vacances exclusifs dans les meilleurs emplacements",
+        "cta": "Réserver"
+    }
+}

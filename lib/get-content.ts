@@ -26,7 +26,7 @@ export async function getSiteContent() {
         if (count === 0) {
             console.warn('DB Connected but empty. Returning fallback.');
             return {
-                theme: { logoColor: 'text-yellow-400' },
+                theme: { logoColor: 'text-gold-gradient' },
                 hero: { videoUrl: 'https://res.cloudinary.com/drr2qzpzk/video/upload/v1769920628/eilat_premium/hero_final_1769920616899.mp4' }
             };
         }
@@ -35,7 +35,7 @@ export async function getSiteContent() {
     } catch (error) {
         console.error('Failed to fetch site content (DB Error):', error);
         return {
-            theme: { logoColor: 'text-yellow-400' },
+            theme: { logoColor: 'text-gold-gradient' },
             hero: { videoUrl: 'https://res.cloudinary.com/drr2qzpzk/video/upload/v1769920628/eilat_premium/hero_final_1769920616899.mp4' }
         };
     }

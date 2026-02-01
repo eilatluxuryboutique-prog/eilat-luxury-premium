@@ -13,7 +13,7 @@ export default function Header({ initialData }: { initialData?: any }) {
     const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
 
     // Use logo color from content or default to Gold (requested by user)
-    const logoColorClass = initialData?.theme?.logoColor || 'text-yellow-400';
+    const logoColorClass = initialData?.theme?.logoColor || 'text-gold-gradient';
 
     return (
         <>

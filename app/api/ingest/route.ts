@@ -36,7 +36,7 @@ export async function GET(request: Request) {
 
         const newData = {
             hero: { videoUrl: uploadRes.secure_url },
-            theme: { logoColor: 'text-yellow-400', primaryColor: '#FFD700' }
+            theme: { logoColor: 'text-gold-gradient', primaryColor: '#FFD700' }
         };
 
         // Update DB

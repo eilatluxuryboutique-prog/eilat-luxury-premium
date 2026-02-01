@@ -22,19 +22,37 @@
   --color-yellow-400: var(--primary);
   /* Force yellow-400 to be our Gold */
   --color-yellow-500: #E6C200;
+
+  /* Gold Theme v4 */
+  --color-gold-light: #FDE047;
+  --color-gold: #FFD700;
+  --color-gold-dark: #B8860B;
+  --color-gold-rich: #D4AF37;
+
+  --image-gold-gradient: linear-gradient(135deg, #FFD700 0%, #FDB931 50%, #D4AF37 100%);
+
+  --shadow-gold-glow: 0 0 15px rgba(255, 215, 0, 0.6);
+  --shadow-gold-sm: 0 0 5px rgba(255, 215, 0, 0.4);
 }
 
 @layer utilities {
   .text-gold-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold via-gold-light to-gold-dark;
+    background-image: linear-gradient(to right, var(--color-gold), var(--color-gold-light), var(--color-gold-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .bg-gold-glass {
-    @apply bg-gold/10 backdrop-blur-md border border-gold/30 shadow-gold-sm;
+    background-color: color-mix(in srgb, var(--color-gold) 10%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 30%, transparent);
+    box-shadow: var(--shadow-gold-sm);
   }
 
   .border-gold-glow {
-    @apply border border-gold/50 shadow-gold-glow;
+    border: 1px solid color-mix(in srgb, var(--color-gold) 50%, transparent);
+    box-shadow: var(--shadow-gold-glow);
   }
 }
 

@@ -16,7 +16,7 @@ export async function getSiteContent() {
             if (!data.hero?.videoUrl || data.hero.videoUrl.trim() === '') {
                 // Fallback to Beach (User requested beach over Dog)
                 data.hero = data.hero || {};
-                data.hero.videoUrl = 'https://res.cloudinary.com/demo/video/upload/beach.mp4';
+                data.hero.videoUrl = 'https://res.cloudinary.com/drr2qzpzk/video/upload/v1769920628/eilat_premium/hero_final_1769920616899.mp4';
             }
             return data;
         }
@@ -27,7 +27,7 @@ export async function getSiteContent() {
             console.warn('DB Connected but empty. Returning fallback.');
             return {
                 theme: { logoColor: 'text-yellow-400' },
-                hero: { videoUrl: 'https://res.cloudinary.com/demo/video/upload/beach.mp4' }
+                hero: { videoUrl: 'https://res.cloudinary.com/drr2qzpzk/video/upload/v1769920628/eilat_premium/hero_final_1769920616899.mp4' }
             };
         }
 
@@ -36,7 +36,7 @@ export async function getSiteContent() {
         console.error('Failed to fetch site content (DB Error):', error);
         return {
             theme: { logoColor: 'text-yellow-400' },
-            hero: { videoUrl: 'https://res.cloudinary.com/demo/video/upload/beach.mp4' }
+            hero: { videoUrl: 'https://res.cloudinary.com/drr2qzpzk/video/upload/v1769920628/eilat_premium/hero_final_1769920616899.mp4' }
         };
     }
 }

@@ -24,6 +24,20 @@
   --color-yellow-500: #E6C200;
 }
 
+@layer utilities {
+  .text-gold-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold via-gold-light to-gold-dark;
+  }
+
+  .bg-gold-glass {
+    @apply bg-gold/10 backdrop-blur-md border border-gold/30 shadow-gold-sm;
+  }
+
+  .border-gold-glow {
+    @apply border border-gold/50 shadow-gold-glow;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

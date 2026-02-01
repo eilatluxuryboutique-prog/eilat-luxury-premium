@@ -62,54 +62,54 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </p>
                 </motion.div>
 
-                {/* Glassmorphism Search Bar */}
+                {/* Glassmorphism Search Bar (Gold Theme) */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-full p-2 hidden md:flex items-center"
+                    className="w-full max-w-4xl bg-gold-glass border-gold-glow rounded-full p-2 hidden md:flex items-center shadow-gold-glow"
                 >
                     {/* Location Input */}
-                    <div className="flex-1 px-6 border-r border-white/10 flex items-center gap-3">
-                        <MapPin className="text-white/70" size={20} />
+                    <div className="flex-1 px-6 border-r border-gold/30 flex items-center gap-3">
+                        <MapPin className="text-gold-light" size={20} />
                         <div className="flex flex-col text-left">
-                            <label className="text-xs text-white/50 uppercase tracking-wider">Location</label>
+                            <label className="text-xs text-gold/80 uppercase tracking-wider font-bold">Location</label>
                             <input
                                 type="text"
                                 placeholder="Eilat, Israel"
-                                className="bg-transparent text-white placeholder-white/50 focus:outline-none"
+                                className="bg-transparent text-white placeholder-white/70 focus:outline-none"
                             />
                         </div>
                     </div>
 
                     {/* Dates Input */}
-                    <div className="flex-1 px-6 border-r border-white/10 flex items-center gap-3">
-                        <Calendar className="text-white/70" size={20} />
+                    <div className="flex-1 px-6 border-r border-gold/30 flex items-center gap-3">
+                        <Calendar className="text-gold-light" size={20} />
                         <div className="flex flex-col text-left">
-                            <label className="text-xs text-white/50 uppercase tracking-wider">Dates</label>
+                            <label className="text-xs text-gold/80 uppercase tracking-wider font-bold">Dates</label>
                             <input
                                 type="text"
                                 placeholder="Add dates"
-                                className="bg-transparent text-white placeholder-white/50 focus:outline-none"
+                                className="bg-transparent text-white placeholder-white/70 focus:outline-none"
                             />
                         </div>
                     </div>
 
                     {/* Guests Input */}
                     <div className="flex-1 px-6 flex items-center gap-3">
-                        <Users className="text-white/70" size={20} />
+                        <Users className="text-gold-light" size={20} />
                         <div className="flex flex-col text-left">
-                            <label className="text-xs text-white/50 uppercase tracking-wider">Guests</label>
+                            <label className="text-xs text-gold/80 uppercase tracking-wider font-bold">Guests</label>
                             <input
                                 type="text"
                                 placeholder="Add guests"
-                                className="bg-transparent text-white placeholder-white/50 focus:outline-none"
+                                className="bg-transparent text-white placeholder-white/70 focus:outline-none"
                             />
                         </div>
                     </div>
 
                     {/* Search Button */}
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 transition-colors">
+                    <button className="bg-gold-gradient hover:brightness-110 text-black font-bold rounded-full p-4 transition-all shadow-gold-sm">
                         <Search size={24} />
                     </button>
                 </motion.div>

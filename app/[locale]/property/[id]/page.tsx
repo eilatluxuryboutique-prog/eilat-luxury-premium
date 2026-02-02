@@ -1,18 +1,11 @@
-'use client';
-
-import { properties } from '@/lib/mock-data';
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import { MapPin, Users, Bed, Wifi, Star, Check } from 'lucide-react';
-import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 export default async function PropertyPage(props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
+    const t = useTranslations('Property');
     const property = properties.find(p => p.id === params.id);
 
-    if (!property) {
-        notFound();
-    }
+    // ... (rest of filtering)
 
     return (
         <main className="min-h-screen bg-[#121212] text-white pt-24 pb-20">
@@ -37,7 +30,7 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                     </div>
                     <div className="text-right">
                         <div className="text-3xl font-bold text-[#FFD700]">₪{property.price}</div>
-                        <div className="text-neutral-500 text-sm">per night</div>
+                        <div className="text-neutral-500 text-sm">{t('per_night')}</div>
                     </div>
                 </div>
 
@@ -72,12 +65,12 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     {/* Left: Description & Amenities */}
                     <div className="lg:col-span-2">
-                        <h2 className="text-2xl font-bold mb-4">About this property</h2>
-                        <p className="text-neutral-300 leading-relaxed mb-8 text-lg">
+                        <h2 className="text-2xl font-bold mb-4">{t('about')}</h2>
+                        <p className="text-neutral-300 leading-relaxed mb-8 text-lg text-right" dir="rtl">
                             {property.description}
                         </p>
 
-                        <h3 className="text-xl font-bold mb-4">Amenities</h3>
+                        <h3 className="text-xl font-bold mb-4">{t('amenities')}</h3>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
                             {property.amenities.map(am => (
                                 <div key={am} className="flex items-center gap-3 bg-white/5 p-4 rounded-xl">
@@ -93,8 +86,8 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                                     <Users size={24} />
                                 </div>
                                 <div>
-                                    <div className="text-sm text-neutral-400">Guests</div>
-                                    <div className="font-bold">{property.guests} Max</div>
+                                    <div className="text-sm text-neutral-400">{t('guests')}</div>
+                                    <div className="font-bold">{property.guests} {t('guests_max')}</div>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
@@ -102,8 +95,8 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                                     <Bed size={24} />
                                 </div>
                                 <div>
-                                    <div className="text-sm text-neutral-400">Rooms</div>
-                                    <div className="font-bold">{property.rooms} Bedrooms</div>
+                                    <div className="text-sm text-neutral-400">{t('rooms')}</div>
+                                    <div className="font-bold">{property.rooms} {t('bedrooms')}</div>
                                 </div>
                             </div>
                         </div>
@@ -113,20 +106,20 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                     <div>
                         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sticky top-24">
                             <div className="text-center mb-6">
-                                <span className="text-neutral-400">Total Price</span>
+                                <span className="text-neutral-400">{t('total_price')}</span>
                                 <div className="text-4xl font-bold text-[#FFD700] my-2">₪{property.price}</div>
-                                <span className="text-neutral-400 block">+ taxes may apply</span>
+                                <span className="text-neutral-400 block">{t('taxes')}</span>
                             </div>
 
                             <Link
                                 href={`/checkout?propertyId=${property.id}&guests=${property.guests}`}
                                 className="w-full bg-[#FFD700] hover:bg-[#E6C200] text-black font-bold py-4 rounded-xl text-lg transition-all transform hover:scale-[1.02] shadow-lg mb-4 flex items-center justify-center"
                             >
-                                Book Now
+                                {t('book_now')}
                             </Link>
 
                             <p className="text-center text-xs text-neutral-500">
-                                You won't be charged yet.
+                                {t('not_charged')}
                             </p>
                         </div>
                     </div>

@@ -3,22 +3,25 @@
 import { Link } from '@/navigation';
 import { motion } from 'framer-motion';
 import { Hotel, Home, Building, Camera, Palmtree } from 'lucide-react';
-
-const categories = [
-    { id: 'hotels', label: 'Luxury Hotels', type: 'hotel', icon: Hotel, color: 'text-gold' },
-    { id: 'apartments', label: 'Apartments', type: 'apartment', icon: Building, color: 'text-blue-400' },
-    { id: 'villas', label: 'Exclusive Villas', type: 'villa', icon: Home, color: 'text-green-400' },
-    { id: 'attractions', label: 'Attractions', type: '', icon: Camera, color: 'text-purple-400' },
-    { id: 'vacation', label: 'Vacation', type: '', icon: Palmtree, color: 'text-orange-400' },
-];
+import { useTranslations } from 'next-intl';
 
 export default function CategoriesList() {
+    const t = useTranslations('Categories');
+
+    const categories = [
+        { id: 'hotels', label: t('hotels'), type: 'hotel', icon: Hotel, color: 'text-gold' },
+        { id: 'apartments', label: t('apartments'), type: 'apartment', icon: Building, color: 'text-blue-400' },
+        { id: 'villas', label: t('villas'), type: 'villa', icon: Home, color: 'text-green-400' },
+        { id: 'attractions', label: t('attractions'), type: '', icon: Camera, color: 'text-purple-400' },
+        { id: 'vacation', label: t('vacation'), type: '', icon: Palmtree, color: 'text-orange-400' },
+    ];
+
     return (
         <section className="py-12 bg-[#121212]">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl md:text-3xl font-bold text-white">
-                        Browse by Category
+                        {t('title')}
                     </h2>
                 </div>
 

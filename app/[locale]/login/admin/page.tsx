@@ -12,7 +12,7 @@ export default function AdminLoginPage() {
                 subtitle={t('login_admin_subtitle')}
                 role="admin"
                 redirectPath="/admin"
-                showRegisterLink={false}
+                showRegisterLink={true}
             />
         </main>
     );

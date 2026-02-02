@@ -118,6 +118,14 @@
         "my_account": "החשבון שלי",
         "business_dashboard": "לוח בקרה עסקי",
         "admin_panel": "ניהול ראשי",
-        "login_link": "התחברות / הרשמה"
+        "login_link": "התחברות / הרשמה",
+        "login_gateway_title": "מי אתה?",
+        "login_gateway_subtitle": "בחר את סוג הכניסה שלך",
+        "login_admin_title": "כניסת מנהל",
+        "login_admin_subtitle": "גישה לאזור הניהול",
+        "login_host_title": "כניסת בעל עסק",
+        "login_host_subtitle": "נהל את הנכסים שלך",
+        "login_customer_title": "כניסת לקוח",
+        "login_customer_subtitle": "צפה בהזמנות שלך"
     }
 }

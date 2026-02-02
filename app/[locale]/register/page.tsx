@@ -7,10 +7,14 @@ import { motion } from 'framer-motion';
 import { Building, User, ChevronRight, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function RegisterPage() {
+export default function RegisterPage({ searchParams }: { searchParams: { role?: string } }) {
     const t = useTranslations('Auth');
     const router = useRouter();
-    const [role, setRole] = useState<'guest' | 'host'>('guest');
+
+    // Default to 'guest', but allow override via URL ?role=host
+    const initialRole = searchParams?.role === 'host' ? 'host' : 'guest';
+    const [role, setRole] = useState<'guest' | 'host'>(initialRole);
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -55,8 +59,8 @@ export default function RegisterPage() {
                     <button
                         onClick={() => setRole('guest')}
                         className={`p-6 rounded-xl border flex flex-col items-center gap-3 transition-all ${role === 'guest'
-                                ? 'bg-gold/10 border-gold text-white'
-                                : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10'
+                            ? 'bg-gold/10 border-gold text-white'
+                            : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10'
                             }`}
                     >
                         <User size={32} className={role === 'guest' ? 'text-gold' : ''} />
@@ -65,8 +69,8 @@ export default function RegisterPage() {
                     <button
                         onClick={() => setRole('host')}
                         className={`p-6 rounded-xl border flex flex-col items-center gap-3 transition-all ${role === 'host'
-                                ? 'bg-gold/10 border-gold text-white'
-                                : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10'
+                            ? 'bg-gold/10 border-gold text-white'
+                            : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10'
                             }`}
                     >
                         <Building size={32} className={role === 'host' ? 'text-gold' : ''} />

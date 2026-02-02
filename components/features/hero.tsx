@@ -12,7 +12,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
     const t = useTranslations('Hero');
     const tSearch = useTranslations('SearchForm');
     const router = useRouter();
-    const [videoUrl, setVideoUrl] = useState(initialVideoUrl || '/videos/hero-placeholder.mp4');
+    const [videoUrl, setVideoUrl] = useState(initialVideoUrl || 'https://videos.pexels.com/video-files/5047805/5047805-uhd_2560_1440_30fps.mp4');
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
     // Search State

@@ -63,6 +63,20 @@
         "title": "תוצאות חיפוש",
         "view_all": "צפה בהכל"
     },
+    "Categories": {
+        "title": "חופשה לפי קטגוריה",
+        "hotels": "מלונות יוקרה",
+        "apartments": "דירות נופש",
+        "villas": "וילות אקסקלוסיביות",
+        "attractions": "אטרקציות",
+        "vacation": "חופש"
+    },
+    "Home": {
+        "hotels_title": "מלונות יוקרה",
+        "villas_title": "וילות אקסקלוסיביות",
+        "apartments_title": "דירות נופש",
+        "view_all": "הצג הכל"
+    },
     "SearchForm": {
         "property_type": "סוג הנכס",
         "location": "מיקום",

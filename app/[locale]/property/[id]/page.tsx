@@ -10,6 +10,10 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
     const t = useTranslations('Property');
     const property = properties.find(p => p.id === params.id);
 
+    if (!property) {
+        notFound();
+    }
+
     // ... (rest of filtering)
 
     return (

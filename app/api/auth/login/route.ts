@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import User from '@/models/User';
-import { comparePassword, loginUser } from '@/lib/auth';
+import { comparePassword, loginUser, hashPassword } from '@/lib/auth';
 
 export async function POST(req: Request) {
     try {

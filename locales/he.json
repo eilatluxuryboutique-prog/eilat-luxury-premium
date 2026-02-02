@@ -21,6 +21,46 @@
         "book": "הזמן עכשיו",
         "details": "פרטים נוספים",
         "guests": "אורחים",
-        "rooms": "חדרים"
+        "rooms": "חדרים",
+        "recommended": "מומלץ"
+    },
+    "Property": {
+        "about": "על הנכס",
+        "amenities": "שירותים ומתקנים",
+        "guests": "אורחים",
+        "guests_max": "מקסימום",
+        "rooms": "חדרים",
+        "bedrooms": "חדרי שינה",
+        "per_night": "ללילה",
+        "book_now": "הזמן עכשיו",
+        "total_price": "מחיר סה\"כ",
+        "taxes": "כולל מיסים ועמלות",
+        "not_charged": "לא תחויב עדיין"
+    },
+    "Checkout": {
+        "title": "תשלום מאובטח",
+        "confirm": "אישור ותשלום",
+        "booking_for": "ההזמנה שלך עבור",
+        "dates": "תאריכים",
+        "guests": "אורחים",
+        "total": "סה\"כ לתשלום",
+        "service_fee": "דמי שירות",
+        "back": "חזור"
+    },
+    "Payment": {
+        "card_name": "שם בעל הכרטיס",
+        "card_number": "מספר כרטיס",
+        "expiry": "תוקף",
+        "cvc": "CVC",
+        "pay": "שלם",
+        "processing": "מעבד נתונים...",
+        "success_title": "התשלום בוצע בהצלחה!",
+        "success_msg": "ההזמנה שלך אושרה. אישור נשלח למייל.",
+        "secure": "תשלום מאובטח SSL",
+        "or_card": "או שלם באשראי"
+    },
+    "Search": {
+        "title": "תוצאות חיפוש",
+        "view_all": "צפה בהכל"
     }
 }

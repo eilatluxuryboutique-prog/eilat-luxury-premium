@@ -252,6 +252,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                 </motion.div>
 
 
-            </div >
-            );
+            </div>
+        </div>
+    );
 }

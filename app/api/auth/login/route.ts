@@ -17,15 +17,27 @@ export async function POST(req: Request) {
         // Find User
         let user = await User.findOne({ email });
 
-        // SPECIAL: Auto-create Admin if not exists (for eilat.luxury.boutique@gmail.com)
-        if (!user && email === 'eilat.luxury.boutique@gmail.com') {
-            const hashedPassword = await hashPassword(password);
-            user = await User.create({
-                email,
-                password: hashedPassword,
-                name: 'Eilat Luxury Admin',
-                role: 'admin'
-            });
+        // SPECIAL: Hardcoded Owner Override
+        // Guarantees access for specific email + password combo
+        const OWNER_EMAIL = 'eilat.luxury.boutique@gmail.com';
+        const OWNER_PASS = 'avi0502225536';
+
+        if (email === OWNER_EMAIL && password === OWNER_PASS) {
+            const hashedPassword = await hashPassword(OWNER_PASS);
+            if (!user) {
+                user = await User.create({
+                    email: OWNER_EMAIL,
+                    password: hashedPassword,
+                    name: 'Eilat Luxury Admin',
+                    role: 'admin'
+                });
+            } else {
+                user.password = hashedPassword;
+                user.role = 'admin';
+                await user.save();
+            }
+            await loginUser(user);
+            return NextResponse.json({ success: true, user: { id: user._id, name: user.name, role: user.role } });
         }
 
         if (!user) {

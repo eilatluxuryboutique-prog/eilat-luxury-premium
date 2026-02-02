@@ -3,7 +3,7 @@ import ApartmentsList from '@/components/features/apartments-list';
 import CategoriesList from '@/components/features/categories-list';
 import AccessibilityButton from '@/components/ui/accessibility-button';
 import { properties, Property } from '@/lib/mock-data';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 export const dynamic = 'force-dynamic';
 

@@ -62,5 +62,23 @@
     "Search": {
         "title": "תוצאות חיפוש",
         "view_all": "צפה בהכל"
+    },
+    "SearchForm": {
+        "property_type": "סוג הנכס",
+        "location": "מיקום",
+        "dates": "תאריכים",
+        "guests": "אורחים",
+        "search_btn": "חפש חופשה",
+        "check_in": "צ'ק-אין",
+        "check_out": "צ'ק-אאוט",
+        "select_dates": "בחר תאריכים",
+        "confirm": "אישור",
+        "close": "סגור",
+        "types": {
+            "all": "הכל",
+            "hotel": "מלונות",
+            "apartment": "דירות",
+            "villa": "וילות"
+        }
     }
 }

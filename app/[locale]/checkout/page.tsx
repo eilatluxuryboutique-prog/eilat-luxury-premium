@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 export default function CheckoutPage() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    // const t = useTranslations('Checkout'); // Use mock text for now
+    const t = useTranslations('Checkout');
 
     const propertyId = searchParams.get('propertyId');
     const checkIn = searchParams.get('checkIn');
@@ -24,7 +24,7 @@ export default function CheckoutPage() {
             <div className="min-h-screen bg-[#121212] flex items-center justify-center text-white">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold mb-4">Property Not Found</h1>
-                    <button onClick={() => router.back()} className="text-gold hover:underline">Go Back</button>
+                    <button onClick={() => router.back()} className="text-gold hover:underline">{t('back')}</button>
                 </div>
             </div>
         );
@@ -45,9 +45,9 @@ export default function CheckoutPage() {
                 <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                     <button onClick={() => router.back()} className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
                         <ArrowLeft size={20} />
-                        <span>Back</span>
+                        <span>{t('back')}</span>
                     </button>
-                    <h1 className="font-bold text-lg hidden md:block">Secure Checkout</h1>
+                    <h1 className="font-bold text-lg hidden md:block">{t('title')}</h1>
                     <div className="text-gold">
                         <ShieldCheck size={24} />
                     </div>
@@ -55,13 +55,13 @@ export default function CheckoutPage() {
             </header>
 
             <main className="container mx-auto px-4 py-8">
-                <div className="flex flex-collg:flex-row gap-8 lg:gap-12 max-w-6xl mx-auto">
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 max-w-6xl mx-auto">
 
                     {/* Left Column: Form */}
                     <div className="flex-1 order-2 lg:order-1">
                         <div className="mb-8">
-                            <h2 className="text-3xl font-bold mb-2">Confirm and Pay</h2>
-                            <p className="text-neutral-400">Complete your booking for {property.title}</p>
+                            <h2 className="text-3xl font-bold mb-2">{t('confirm')}</h2>
+                            <p className="text-neutral-400">{t('booking_for')} {property.title}</p>
                         </div>
 
                         <PaymentForm amount={grandTotal} />
@@ -86,14 +86,14 @@ export default function CheckoutPage() {
 
                             <div className="py-6 border-t border-b border-white/10 space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <p className="text-neutral-400 text-sm">Dates</p>
+                                    <p className="text-neutral-400 text-sm">{t('dates')}</p>
                                     <div className="text-right">
                                         <div className="font-medium">{new Date(start).toLocaleDateString()} - {new Date(end).toLocaleDateString()}</div>
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <p className="text-neutral-400 text-sm">Guests</p>
-                                    <div className="font-medium">{guests || 2} Guests</div>
+                                    <p className="text-neutral-400 text-sm">{t('guests')}</p>
+                                    <div className="font-medium">{guests || 2} {t('guests')}</div>
                                 </div>
                             </div>
 
@@ -103,11 +103,11 @@ export default function CheckoutPage() {
                                     <span>₪{total.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between text-neutral-400">
-                                    <span>Service fee</span>
+                                    <span>{t('service_fee')}</span>
                                     <span>₪{serviceFee.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between text-xl font-bold text-white pt-4 border-t border-white/10 mt-4">
-                                    <span>Total</span>
+                                    <span>{t('total')}</span>
                                     <span>₪{grandTotal.toLocaleString()}</span>
                                 </div>
                             </div>

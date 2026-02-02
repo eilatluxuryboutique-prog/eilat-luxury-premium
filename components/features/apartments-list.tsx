@@ -55,7 +55,7 @@ export default function ApartmentsList({ limit, items }: { limit?: number; items
                                         <span className="text-xs font-bold">{apt.rating}</span>
                                     </div>
                                     <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-md text-xs z-10">
-                                        Recommended
+                                        {t('recommended')}
                                     </div>
                                 </div>
 
@@ -92,10 +92,10 @@ export default function ApartmentsList({ limit, items }: { limit?: number; items
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <span className="text-xl font-bold text-white">₪{apt.price}</span>
-                                            <span className="text-neutral-500 text-xs"> / night</span>
+                                            <span className="text-neutral-500 text-xs"> {t('night')}</span>
                                         </div>
                                         <span className="bg-[#FFD700] text-black px-4 py-2 rounded-lg text-sm font-bold group-hover:bg-[#E6C200] transition-colors">
-                                            Details
+                                            {t('details')}
                                         </span>
                                     </div>
                                 </div>

@@ -11,6 +11,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
     const t = useTranslations('Hero');
     const router = useRouter();
     const [videoUrl, setVideoUrl] = useState(initialVideoUrl || '/videos/hero-placeholder.mp4');
+    const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
     // Search State
     const [searchParams, setSearchParams] = useState({
@@ -83,35 +84,44 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
 
                 {/* Replica Search Bar (Functional) */}
                 <motion.div
+                    id="hero-search-bar" // Add ID for click outside detection
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="w-full max-w-5xl bg-black/60 backdrop-blur-md border border-gold/50 rounded-full p-1 hidden md:flex items-center shadow-2xl relative z-30"
                 >
-                    {/* 1. Property Type (Dropdown) */}
-                    <div className="flex-1 px-4 border-l border-white/10 relative group">
-                        <button className="w-full h-full flex items-center justify-end gap-3 text-right focus:outline-none">
+                    {/* 1. Property Type */}
+                    <div className="flex-1 px-4 border-l border-white/10 relative">
+                        <button
+                            onClick={() => setOpenDropdown(openDropdown === 'type' ? null : 'type')}
+                            className="w-full h-full flex items-center justify-end gap-3 text-right focus:outline-none"
+                        >
                             <div className="flex flex-col items-end">
                                 <label className="text-xs text-white/50">סוג נכס</label>
                                 <span className="font-bold text-white text-lg">{searchParams.type || 'הכל'}</span>
                             </div>
-                            <div className="p-2 rounded-full text-gold">
+                            <div className={`p-2 rounded-full text-gold transition-transform duration-300 ${openDropdown === 'type' ? 'rotate-180' : ''}`}>
                                 <Home size={24} />
                             </div>
                         </button>
 
-                        {/* Dropdown Menu */}
-                        <div className="absolute top-full right-0 mt-4 w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden hidden group-hover:block z-40">
-                            {['הכל', 'מלונות', 'דירות', 'וילות'].map((type) => (
-                                <button
-                                    key={type}
-                                    onClick={() => setSearchParams({ ...searchParams, type: type === 'הכל' ? '' : type })}
-                                    className="w-full text-right px-4 py-3 text-white hover:bg-gold/20 transition-colors border-b border-white/5 last:border-0"
-                                >
-                                    {type}
-                                </button>
-                            ))}
-                        </div>
+                        {/* Dropdown Menu (Click-based) */}
+                        {openDropdown === 'type' && (
+                            <div className="absolute top-full right-0 mt-4 w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
+                                {['הכל', 'מלונות', 'דירות', 'וילות'].map((type) => (
+                                    <button
+                                        key={type}
+                                        onClick={() => {
+                                            setSearchParams({ ...searchParams, type: type === 'הכל' ? '' : type });
+                                            setOpenDropdown(null);
+                                        }}
+                                        className="w-full text-right px-4 py-3 text-white hover:bg-gold/20 transition-colors border-b border-white/5 last:border-0"
+                                    >
+                                        {type}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* 2. Location */}
@@ -125,39 +135,87 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                         </div>
                     </div>
 
-                    {/* 3. Dates */}
-                    <div className="flex-1 px-4 border-l border-white/10 flex items-center justify-end gap-3 text-right cursor-pointer hover:bg-white/5 transition-colors rounded-lg">
-                        <div className="flex flex-col items-end">
-                            <label className="text-xs text-white/50">תאריכים</label>
-                            <input
-                                type="date"
-                                className="bg-transparent text-white font-bold text-lg text-right focus:outline-none w-full [color-scheme:dark]"
-                                onChange={(e) => setSearchParams({ ...searchParams, checkIn: e.target.value })}
-                            />
-                        </div>
-                        <div className="p-2 rounded-full text-gold">
-                            <Calendar size={24} />
-                        </div>
+                    {/* 3. Dates (Range) */}
+                    <div className="flex-1 px-4 border-l border-white/10 relative">
+                        <button
+                            onClick={() => setOpenDropdown(openDropdown === 'dates' ? null : 'dates')}
+                            className="w-full h-full flex items-center justify-end gap-3 text-right focus:outline-none"
+                        >
+                            <div className="flex flex-col items-end">
+                                <label className="text-xs text-white/50">תאריכים</label>
+                                <span className="font-bold text-white text-lg whitespace-nowrap">
+                                    {searchParams.checkIn ? `${searchParams.checkIn} - ${searchParams.checkOut || '?'}` : 'בחר תאריכים'}
+                                </span>
+                            </div>
+                            <div className="p-2 rounded-full text-gold">
+                                <Calendar size={24} />
+                            </div>
+                        </button>
+
+                        {/* Date Range Popover */}
+                        {openDropdown === 'dates' && (
+                            <div className="absolute top-full right-0 mt-4 w-64 bg-gray-900 border border-gold/30 rounded-xl shadow-xl p-4 z-40 flex flex-col gap-3">
+                                <div>
+                                    <label className="text-xs text-neutral-400 block mb-1">תאריך הגעה (Check-in)</label>
+                                    <input
+                                        type="date"
+                                        className="w-full bg-neutral-800 text-white rounded p-2 focus:ring-1 focus:ring-gold outline-none [color-scheme:dark]"
+                                        value={searchParams.checkIn}
+                                        onChange={(e) => setSearchParams({ ...searchParams, checkIn: e.target.value })}
+                                        min={new Date().toISOString().split('T')[0]}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="text-xs text-neutral-400 block mb-1">תאריך עזיבה (Check-out)</label>
+                                    <input
+                                        type="date"
+                                        className="w-full bg-neutral-800 text-white rounded p-2 focus:ring-1 focus:ring-gold outline-none [color-scheme:dark]"
+                                        value={searchParams.checkOut}
+                                        onChange={(e) => setSearchParams({ ...searchParams, checkOut: e.target.value })}
+                                        min={searchParams.checkIn || new Date().toISOString().split('T')[0]}
+                                    />
+                                </div>
+                                <button
+                                    onClick={() => setOpenDropdown(null)}
+                                    className="bg-gold text-black font-bold py-2 rounded mt-2 hover:bg-gold-light"
+                                >
+                                    אישור
+                                </button>
+                            </div>
+                        )}
                     </div>
 
                     {/* 4. Guests */}
-                    <div className="flex-1 px-4 flex items-center justify-end gap-3 text-right cursor-pointer hover:bg-white/5 transition-colors rounded-lg group relative">
-                        <div className="flex flex-col items-end">
-                            <label className="text-xs text-white/50">אורחים</label>
-                            <span className="font-bold text-white text-lg">{searchParams.guests} אורחים</span>
-                        </div>
-                        <div className="p-2 rounded-full text-gold">
-                            <Users size={24} />
-                        </div>
+                    <div className="flex-1 px-4 flex items-center justify-end gap-3 text-right relative">
+                        <button
+                            onClick={() => setOpenDropdown(openDropdown === 'guests' ? null : 'guests')}
+                            className="w-full h-full flex items-center justify-end gap-3 text-right focus:outline-none"
+                        >
+                            <div className="flex flex-col items-end">
+                                <label className="text-xs text-white/50">אורחים</label>
+                                <span className="font-bold text-white text-lg">{searchParams.guests} אורחים</span>
+                            </div>
+                            <div className="p-2 rounded-full text-gold">
+                                <Users size={24} />
+                            </div>
+                        </button>
 
                         {/* Guests Dropdown */}
-                        <div className="absolute top-full left-0 mt-4 w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden hidden group-hover:block z-40">
-                            <div className="flex items-center justify-between p-4">
-                                <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.max(1, p.guests - 1) }))} className="w-8 h-8 bg-gray-800 rounded-full text-white">-</button>
-                                <span className="text-white font-bold">{searchParams.guests}</span>
-                                <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.min(20, p.guests + 1) }))} className="w-8 h-8 bg-gold text-black rounded-full">+</button>
+                        {openDropdown === 'guests' && (
+                            <div className="absolute top-full left-0 mt-4 w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
+                                <div className="flex items-center justify-between p-4">
+                                    <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.max(1, p.guests - 1) }))} className="w-8 h-8 bg-gray-800 rounded-full text-white hover:bg-gray-700">-</button>
+                                    <span className="text-white font-bold text-xl">{searchParams.guests}</span>
+                                    <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.min(20, p.guests + 1) }))} className="w-8 h-8 bg-gold text-black rounded-full hover:bg-gold-light">+</button>
+                                </div>
+                                <button
+                                    onClick={() => setOpenDropdown(null)}
+                                    className="w-full bg-white/5 text-gold py-2 text-sm hover:bg-white/10"
+                                >
+                                    סגור
+                                </button>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     {/* 5. Search Button */}

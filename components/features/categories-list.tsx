@@ -1,8 +1,8 @@
 'use client';
 
+import { Link } from '@/navigation';
 import { motion } from 'framer-motion';
 import { Hotel, Home, Building, Camera, Palmtree } from 'lucide-react';
-import Link from 'next/link';
 
 const categories = [
     { id: 'hotels', label: 'Luxury Hotels', type: 'hotel', icon: Hotel, color: 'text-gold' },

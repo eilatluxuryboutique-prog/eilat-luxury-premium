@@ -10,7 +10,8 @@ const intlMiddleware = createMiddleware({
 export default async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
-    const isProtected = /\/(he|en|ru|fr|ar)?\/?(admin|host|account)/.test(pathname);
+    const isLoginPage = pathname.includes('/login');
+    const isProtected = !isLoginPage && /\/(he|en|ru|fr|ar)?\/?(admin|host|account)/.test(pathname);
 
     if (isProtected) {
         const token = req.cookies.get('auth-token')?.value;

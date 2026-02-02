@@ -5,46 +5,12 @@ import { motion } from 'framer-motion';
 import { Users, Bed, Wifi, MapPin, Star } from 'lucide-react';
 import Image from 'next/image';
 
-// Mock Data
-const apartments = [
-    {
-        id: 1,
-        title: "Royal Beach Penthouse",
-        location: "North Beach, Eilat",
-        price: 1200,
-        rating: 4.9,
-        guests: 6,
-        rooms: 3,
-        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2560&auto=format&fit=crop",
-        features: ["Sea View", "Private Pool", "WiFi"]
-    },
-    {
-        id: 2,
-        title: "Desert Luxury Villa",
-        location: "Shachamon, Eilat",
-        price: 850,
-        rating: 4.8,
-        guests: 8,
-        rooms: 4,
-        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2670&auto=format&fit=crop",
-        features: ["Mountain View", "Jacuzzi", "BBQ"]
-    },
-    {
-        id: 3,
-        title: "Lagoon Tech Apartment",
-        location: "Marina, Eilat",
-        price: 600,
-        rating: 4.7,
-        guests: 4,
-        rooms: 2,
-        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2670&auto=format&fit=crop",
-        features: ["Smart Home", "Balcony", "Gym"]
-    }
-];
+import { Property, properties as allProperties } from '@/lib/mock-data';
 
-export default function ApartmentsList({ limit }: { limit?: number }) {
+export default function ApartmentsList({ limit, items }: { limit?: number; items?: Property[] }) {
     const t = useTranslations('Featured');
-    const displayedApartments = limit ? apartments.slice(0, limit) : apartments;
+    const sourceData = items || allProperties;
+    const displayedApartments = limit ? sourceData.slice(0, limit) : sourceData;
 
     return (
         <section className="py-16 bg-[#121212]">
@@ -106,10 +72,12 @@ export default function ApartmentsList({ limit }: { limit?: number }) {
                                         <Bed size={12} />
                                         <span>{apt.rooms}</span>
                                     </div>
-                                    <div className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
-                                        <Wifi size={12} />
-                                        <span>Wifi</span>
-                                    </div>
+                                    {apt.amenities.slice(0, 2).map((am, i) => (
+                                        <div key={i} className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
+                                            <Wifi size={12} />
+                                            <span>{am}</span>
+                                        </div>
+                                    ))}
                                 </div>
 
                                 {/* Divider */}
@@ -121,9 +89,9 @@ export default function ApartmentsList({ limit }: { limit?: number }) {
                                         <span className="text-xl font-bold text-white">₪{apt.price}</span>
                                         <span className="text-neutral-500 text-xs"> / night</span>
                                     </div>
-                                    <button className="bg-[#FFD700] text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-[#E6C200] transition-colors">
+                                    <a href={`/property/${apt.id}`} className="bg-[#FFD700] text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-[#E6C200] transition-colors">
                                         Details
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </motion.div>

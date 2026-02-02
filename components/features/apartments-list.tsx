@@ -42,8 +42,9 @@ const apartments = [
     }
 ];
 
-export default function ApartmentsList() {
+export default function ApartmentsList({ limit }: { limit?: number }) {
     const t = useTranslations('Featured');
+    const displayedApartments = limit ? apartments.slice(0, limit) : apartments;
 
     return (
         <section className="py-16 bg-[#121212]">
@@ -61,7 +62,7 @@ export default function ApartmentsList() {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {apartments.map((apt, index) => (
+                    {displayedApartments.map((apt, index) => (
                         <motion.div
                             key={apt.id}
                             initial={{ opacity: 0, y: 20 }}

@@ -1,9 +1,8 @@
-import { SignJWT, jwtVerify } from 'jose';
+import { signToken, verifyToken } from './token';
 import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 
-const SECRET_KEY = process.env.JWT_SECRET_KEY || 'your-secret-key-change-this';
-const key = new TextEncoder().encode(SECRET_KEY);
+export { signToken, verifyToken };
 
 export async function hashPassword(password: string) {
     return await bcrypt.hash(password, 10);
@@ -11,23 +10,6 @@ export async function hashPassword(password: string) {
 
 export async function comparePassword(password: string, hash: string) {
     return await bcrypt.compare(password, hash);
-}
-
-export async function signToken(payload: any) {
-    return await new SignJWT(payload)
-        .setProtectedHeader({ alg: 'HS256' })
-        .setIssuedAt()
-        .setExpirationTime('7d')
-        .sign(key);
-}
-
-export async function verifyToken(token: string) {
-    try {
-        const { payload } = await jwtVerify(token, key);
-        return payload;
-    } catch (e) {
-        return null;
-    }
 }
 
 export async function getSession() {

@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 import { Property, properties as allProperties } from '@/lib/mock-data';
 
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 // ... imports
 

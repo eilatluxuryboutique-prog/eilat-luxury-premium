@@ -37,9 +37,7 @@ export default async function Home() {
             <Hero initialVideoUrl={content?.hero?.videoUrl} />
             <CategoriesList />
 
-            <div className="bg-red-500 text-white p-2 text-center font-bold">
-                DEBUG: Loaded {properties.length} Properties. Hotels: {hotels.length}
-            </div>
+
 
             <div className="flex flex-col gap-8 pb-20">
                 <Section title={`Luxury Hotels (${hotels.length})`} items={hotels} link="/search?type=hotel" />

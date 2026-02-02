@@ -251,13 +251,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </div>
                 </motion.div>
 
-                {/* OLD MOBILE CTA - REMOVED */}
 
-                {/* Mobile CTA (Search bar is complex for mobile, simplified button usually better initially) */}
-                >
-                {t('cta')}
-            </motion.button>
-        </div>
-        </div >
-    );
+            </div >
+            );
 }

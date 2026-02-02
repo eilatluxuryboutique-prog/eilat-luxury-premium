@@ -4,7 +4,7 @@ import { properties } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { MapPin, Users, Bed, Wifi, Star, Check } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 export default function PropertyPage({ params }: { params: { id: string } }) {
     const property = properties.find(p => p.id === params.id);

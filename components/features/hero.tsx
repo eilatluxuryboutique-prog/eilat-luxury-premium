@@ -6,7 +6,7 @@ import { Search, Calendar, Users, MapPin, Home } from 'lucide-react';
 import EditableText from '../admin/editable-text';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) {
     const t = useTranslations('Hero');

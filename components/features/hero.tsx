@@ -82,32 +82,35 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </p>
                 </motion.div>
 
-                {/* Replica Search Bar (Functional) */}
+                {/* Replica Search Bar (Functional & Responsive) */}
                 <motion.div
-                    id="hero-search-bar" // Add ID for click outside detection
+                    id="hero-search-bar"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="w-full max-w-5xl bg-black/60 backdrop-blur-md border border-gold/50 rounded-full p-1 hidden md:flex items-center shadow-2xl relative z-30"
+                    className="w-full max-w-5xl bg-black/80 md:bg-black/60 backdrop-blur-md border border-gold/50 rounded-3xl md:rounded-full p-4 md:p-1 flex flex-col md:flex-row items-center shadow-2xl relative z-30 gap-4 md:gap-0"
                 >
                     {/* 1. Property Type */}
-                    <div className="flex-1 px-4 border-l border-white/10 relative">
+                    <div className="w-full md:flex-1 px-4 border-b md:border-b-0 md:border-l border-white/10 relative pb-4 md:pb-0">
                         <button
                             onClick={() => setOpenDropdown(openDropdown === 'type' ? null : 'type')}
-                            className="w-full h-full flex items-center justify-end gap-3 text-right focus:outline-none"
+                            className="w-full h-full flex items-center justify-between md:justify-end gap-3 text-right focus:outline-none"
                         >
-                            <div className="flex flex-col items-end">
-                                <label className="text-xs text-white/50">סוג נכס</label>
-                                <span className="font-bold text-white text-lg">{searchParams.type || 'הכל'}</span>
-                            </div>
-                            <div className={`p-2 rounded-full text-gold transition-transform duration-300 ${openDropdown === 'type' ? 'rotate-180' : ''}`}>
-                                <Home size={24} />
+                            <span className="md:hidden text-gold font-bold">סוג נכס</span>
+                            <div className="flex items-center gap-3">
+                                <div className="flex flex-col items-end">
+                                    <label className="text-xs text-white/50 hidden md:block">סוג נכס</label>
+                                    <span className="font-bold text-white text-lg">{searchParams.type || 'הכל'}</span>
+                                </div>
+                                <div className={`p-2 rounded-full text-gold transition-transform duration-300 ${openDropdown === 'type' ? 'rotate-180' : ''}`}>
+                                    <Home size={24} />
+                                </div>
                             </div>
                         </button>
 
-                        {/* Dropdown Menu (Click-based) */}
+                        {/* Dropdown Menu */}
                         {openDropdown === 'type' && (
-                            <div className="absolute top-full right-0 mt-4 w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
+                            <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
                                 {['הכל', 'מלונות', 'דירות', 'וילות'].map((type) => (
                                     <button
                                         key={type}
@@ -125,36 +128,42 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </div>
 
                     {/* 2. Location */}
-                    <div className="flex-1 px-4 border-l border-white/10 flex items-center justify-end gap-3 text-right">
-                        <div className="flex flex-col items-end">
-                            <label className="text-xs text-white/50">מיקום</label>
-                            <span className="font-bold text-white text-lg">אילת, ישראל</span>
-                        </div>
-                        <div className="p-2 rounded-full text-gold">
-                            <MapPin size={24} />
+                    <div className="w-full md:flex-1 px-4 border-b md:border-b-0 md:border-l border-white/10 flex items-center justify-between md:justify-end gap-3 text-right pb-4 md:pb-0">
+                        <span className="md:hidden text-gold font-bold">מיקום</span>
+                        <div className="flex items-center gap-3">
+                            <div className="flex flex-col items-end">
+                                <label className="text-xs text-white/50 hidden md:block">מיקום</label>
+                                <span className="font-bold text-white text-lg">אילת, ישראל</span>
+                            </div>
+                            <div className="p-2 rounded-full text-gold">
+                                <MapPin size={24} />
+                            </div>
                         </div>
                     </div>
 
                     {/* 3. Dates (Range) */}
-                    <div className="flex-1 px-4 border-l border-white/10 relative">
+                    <div className="w-full md:flex-1 px-4 border-b md:border-b-0 md:border-l border-white/10 relative pb-4 md:pb-0">
                         <button
                             onClick={() => setOpenDropdown(openDropdown === 'dates' ? null : 'dates')}
-                            className="w-full h-full flex items-center justify-end gap-3 text-right focus:outline-none"
+                            className="w-full h-full flex items-center justify-between md:justify-end gap-3 text-right focus:outline-none"
                         >
-                            <div className="flex flex-col items-end">
-                                <label className="text-xs text-white/50">תאריכים</label>
-                                <span className="font-bold text-white text-lg whitespace-nowrap">
-                                    {searchParams.checkIn ? `${searchParams.checkIn} - ${searchParams.checkOut || '?'}` : 'בחר תאריכים'}
-                                </span>
-                            </div>
-                            <div className="p-2 rounded-full text-gold">
-                                <Calendar size={24} />
+                            <span className="md:hidden text-gold font-bold">תאריכים</span>
+                            <div className="flex items-center gap-3">
+                                <div className="flex flex-col items-end">
+                                    <label className="text-xs text-white/50 hidden md:block">תאריכים</label>
+                                    <span className="font-bold text-white text-lg whitespace-nowrap">
+                                        {searchParams.checkIn ? `${searchParams.checkIn} - ${searchParams.checkOut || '?'}` : 'בחר תאריכים'}
+                                    </span>
+                                </div>
+                                <div className="p-2 rounded-full text-gold">
+                                    <Calendar size={24} />
+                                </div>
                             </div>
                         </button>
 
                         {/* Date Range Popover */}
                         {openDropdown === 'dates' && (
-                            <div className="absolute top-full right-0 mt-4 w-64 bg-gray-900 border border-gold/30 rounded-xl shadow-xl p-4 z-40 flex flex-col gap-3">
+                            <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-64 bg-gray-900 border border-gold/30 rounded-xl shadow-xl p-4 z-40 flex flex-col gap-3">
                                 <div>
                                     <label className="text-xs text-neutral-400 block mb-1">תאריך הגעה (Check-in)</label>
                                     <input
@@ -186,23 +195,26 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </div>
 
                     {/* 4. Guests */}
-                    <div className="flex-1 px-4 flex items-center justify-end gap-3 text-right relative">
-                        <button
-                            onClick={() => setOpenDropdown(openDropdown === 'guests' ? null : 'guests')}
-                            className="w-full h-full flex items-center justify-end gap-3 text-right focus:outline-none"
-                        >
-                            <div className="flex flex-col items-end">
-                                <label className="text-xs text-white/50">אורחים</label>
-                                <span className="font-bold text-white text-lg">{searchParams.guests} אורחים</span>
-                            </div>
-                            <div className="p-2 rounded-full text-gold">
-                                <Users size={24} />
-                            </div>
-                        </button>
+                    <div className="w-full md:flex-1 px-4 flex items-center justify-between md:justify-end gap-3 text-right relative pb-4 md:pb-0">
+                        <span className="md:hidden text-gold font-bold">אורחים</span>
+                        <div className="w-full flex justify-end">
+                            <button
+                                onClick={() => setOpenDropdown(openDropdown === 'guests' ? null : 'guests')}
+                                className="w-full md:w-auto h-full flex items-center justify-end gap-3 text-right focus:outline-none"
+                            >
+                                <div className="flex flex-col items-end">
+                                    <label className="text-xs text-white/50 hidden md:block">אורחים</label>
+                                    <span className="font-bold text-white text-lg">{searchParams.guests} אורחים</span>
+                                </div>
+                                <div className="p-2 rounded-full text-gold">
+                                    <Users size={24} />
+                                </div>
+                            </button>
+                        </div>
 
                         {/* Guests Dropdown */}
                         {openDropdown === 'guests' && (
-                            <div className="absolute top-full left-0 mt-4 w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
+                            <div className="absolute top-full left-0 mt-2 md:mt-4 w-full md:w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
                                 <div className="flex items-center justify-between p-4">
                                     <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.max(1, p.guests - 1) }))} className="w-8 h-8 bg-gray-800 rounded-full text-white hover:bg-gray-700">-</button>
                                     <span className="text-white font-bold text-xl">{searchParams.guests}</span>
@@ -219,26 +231,24 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </div>
 
                     {/* 5. Search Button */}
-                    <div className="pl-1">
+                    <div className="w-full md:w-auto pl-1 pb-2 md:pb-0">
                         <button
                             onClick={handleSearch}
-                            className="bg-gold hover:bg-gold-light text-black rounded-full p-4 shadow-lg transition-transform hover:scale-105 flex items-center justify-center"
+                            className="w-full md:w-auto bg-gold hover:bg-gold-light text-black rounded-full p-4 shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-2"
                         >
+                            <span className="md:hidden font-bold">חפש חופשה</span>
                             <Search size={24} strokeWidth={3} />
                         </button>
                     </div>
                 </motion.div>
 
+                {/* OLD MOBILE CTA - REMOVED */}
+
                 {/* Mobile CTA (Search bar is complex for mobile, simplified button usually better initially) */}
-                <motion.button
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="md:hidden bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium shadow-lg"
                 >
-                    {t('cta')}
-                </motion.button>
-            </div>
+                {t('cta')}
+            </motion.button>
         </div>
+        </div >
     );
 }

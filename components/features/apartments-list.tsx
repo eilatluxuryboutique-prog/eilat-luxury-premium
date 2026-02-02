@@ -7,6 +7,10 @@ import Image from 'next/image';
 
 import { Property, properties as allProperties } from '@/lib/mock-data';
 
+import Link from 'next/link';
+
+// ... imports
+
 export default function ApartmentsList({ limit, items }: { limit?: number; items?: Property[] }) {
     const t = useTranslations('Featured');
     const sourceData = items || allProperties;
@@ -21,9 +25,9 @@ export default function ApartmentsList({ limit, items }: { limit?: number; items
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{t('title')}</h2>
                         <p className="text-neutral-400">{t('subtitle')}</p>
                     </div>
-                    <button className="text-[#FFD700] font-medium hover:underline hidden md:block">
+                    <Link href="/search" className="text-[#FFD700] font-medium hover:underline hidden md:block">
                         View All
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Grid */}
@@ -37,63 +41,65 @@ export default function ApartmentsList({ limit, items }: { limit?: number; items
                             transition={{ delay: index * 0.1 }}
                             className="group bg-[#1E1E1E] rounded-2xl overflow-hidden border border-white/5 hover:border-[#FFD700]/50 transition-all duration-300"
                         >
-                            {/* Image */}
-                            <div className="relative h-48 overflow-hidden">
-                                <Image
-                                    src={apt.image}
-                                    alt={apt.title}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
-                                <div className="absolute top-3 left-3 bg-[#FFD700] text-black px-2 py-1 rounded-md flex items-center gap-1 shadow-lg">
-                                    <Star size={12} fill="currentColor" />
-                                    <span className="text-xs font-bold">{apt.rating}</span>
-                                </div>
-                                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-md text-xs">
-                                    Recommended
-                                </div>
-                            </div>
-
-                            {/* Content */}
-                            <div className="p-4">
-                                <h3 className="text-lg font-bold text-white mb-1 truncate">{apt.title}</h3>
-                                <div className="flex items-center gap-1 text-neutral-400 text-xs mb-3">
-                                    <MapPin size={12} />
-                                    <span>{apt.location}</span>
+                            <Link href={`/property/${apt.id}`} className="block h-full">
+                                {/* Image */}
+                                <div className="relative h-48 overflow-hidden">
+                                    <Image
+                                        src={apt.image}
+                                        alt={apt.title}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                    <div className="absolute top-3 left-3 bg-[#FFD700] text-black px-2 py-1 rounded-md flex items-center gap-1 shadow-lg z-10">
+                                        <Star size={12} fill="currentColor" />
+                                        <span className="text-xs font-bold">{apt.rating}</span>
+                                    </div>
+                                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-md text-xs z-10">
+                                        Recommended
+                                    </div>
                                 </div>
 
-                                {/* Features Icons */}
-                                <div className="flex gap-3 mb-4 text-neutral-500">
-                                    <div className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
-                                        <Users size={12} />
-                                        <span>{apt.guests}</span>
+                                {/* Content */}
+                                <div className="p-4">
+                                    <h3 className="text-lg font-bold text-white mb-1 truncate group-hover:text-[#FFD700] transition-colors">{apt.title}</h3>
+                                    <div className="flex items-center gap-1 text-neutral-400 text-xs mb-3">
+                                        <MapPin size={12} />
+                                        <span>{apt.location}</span>
                                     </div>
-                                    <div className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
-                                        <Bed size={12} />
-                                        <span>{apt.rooms}</span>
-                                    </div>
-                                    {apt.amenities.slice(0, 2).map((am, i) => (
-                                        <div key={i} className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
-                                            <Wifi size={12} />
-                                            <span>{am}</span>
+
+                                    {/* Features Icons */}
+                                    <div className="flex gap-3 mb-4 text-neutral-500">
+                                        <div className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
+                                            <Users size={12} />
+                                            <span>{apt.guests}</span>
                                         </div>
-                                    ))}
-                                </div>
-
-                                {/* Divider */}
-                                <div className="h-px bg-white/10 mb-4" />
-
-                                {/* Price & Action */}
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <span className="text-xl font-bold text-white">₪{apt.price}</span>
-                                        <span className="text-neutral-500 text-xs"> / night</span>
+                                        <div className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
+                                            <Bed size={12} />
+                                            <span>{apt.rooms}</span>
+                                        </div>
+                                        {apt.amenities.slice(0, 2).map((am, i) => (
+                                            <div key={i} className="flex items-center gap-1 text-xs bg-white/5 px-2 py-1 rounded">
+                                                <Wifi size={12} />
+                                                <span>{am}</span>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <a href={`/property/${apt.id}`} className="bg-[#FFD700] text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-[#E6C200] transition-colors">
-                                        Details
-                                    </a>
+
+                                    {/* Divider */}
+                                    <div className="h-px bg-white/10 mb-4" />
+
+                                    {/* Price & Action */}
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <span className="text-xl font-bold text-white">₪{apt.price}</span>
+                                            <span className="text-neutral-500 text-xs"> / night</span>
+                                        </div>
+                                        <span className="bg-[#FFD700] text-black px-4 py-2 rounded-lg text-sm font-bold group-hover:bg-[#E6C200] transition-colors">
+                                            Details
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </motion.div>
                     ))}
                 </div>

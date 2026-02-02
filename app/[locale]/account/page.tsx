@@ -1,11 +1,12 @@
 import { getSession } from '@/lib/auth';
-import { redirect } from '@/navigation';
+import { redirect } from 'next/navigation';
 import { Calendar, User } from 'lucide-react';
 
-export default async function AccountPage() {
+export default async function AccountPage(props: { params: Promise<{ locale: string }> }) {
+    const params = await props.params;
     const session: any = await getSession();
     if (!session) {
-        redirect('/login');
+        redirect(`/${params.locale}/login`);
     }
 
     return (

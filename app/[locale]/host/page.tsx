@@ -1,13 +1,14 @@
 import { getSession } from '@/lib/auth';
-import { redirect } from '@/navigation';
+import { redirect } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Plus, Home, Settings } from 'lucide-react';
 import Link from 'next/link';
 
-export default async function HostDashboard() {
+export default async function HostDashboard(props: { params: Promise<{ locale: string }> }) {
+    const params = await props.params;
     const session: any = await getSession();
     if (!session || (session.role !== 'host' && session.role !== 'admin')) {
-        redirect('/login');
+        redirect(`/${params.locale}/login`);
     }
 
     // TODO: Fetch existing properties for this host

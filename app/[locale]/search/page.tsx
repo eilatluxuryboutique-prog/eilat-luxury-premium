@@ -3,14 +3,12 @@
 import { useTranslations } from 'next-intl';
 import ApartmentsList from '@/components/features/apartments-list';
 import { properties } from '@/lib/mock-data';
+import { useSearchParams } from 'next/navigation';
 
-export default function SearchPage({
-    searchParams
-}: {
-    searchParams: { [key: string]: string | string[] | undefined }
-}) {
+export default function SearchPage() {
     const t = useTranslations('Apartments');
-    const type = typeof searchParams.type === 'string' ? searchParams.type : '';
+    const searchParams = useSearchParams();
+    const type = searchParams.get('type') || '';
 
     // Filter Logic
     const filteredItems = properties.filter(item => {

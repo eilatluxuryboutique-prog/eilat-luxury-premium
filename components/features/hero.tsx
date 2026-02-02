@@ -241,13 +241,21 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
 
                     {/* 5. Search Button */}
                     <div className="w-full md:w-auto pl-1 pb-2 md:pb-0">
-                        <button
-                            onClick={handleSearch}
+                        <Link
+                            href={{
+                                pathname: '/search',
+                                query: {
+                                    ...(searchParams.type && { type: searchParams.type }),
+                                    ...(searchParams.guests && { guests: searchParams.guests }),
+                                    ...(searchParams.checkIn && { checkIn: searchParams.checkIn }),
+                                    ...(searchParams.checkOut && { checkOut: searchParams.checkOut }),
+                                }
+                            }}
                             className="w-full md:w-auto bg-gold hover:bg-gold-light text-black rounded-full p-4 shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-2"
                         >
                             <span className="md:hidden font-bold">חפש חופשה</span>
                             <Search size={24} strokeWidth={3} />
-                        </button>
+                        </Link>
                     </div>
                 </motion.div>
 

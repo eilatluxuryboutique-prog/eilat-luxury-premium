@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { properties } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import { Link } from '@/navigation';
 
 export default async function PropertyPage(props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
-    const t = useTranslations('Property');
+    const t = await getTranslations('Property');
     const property = properties.find(p => p.id === params.id);
 
     if (!property) {

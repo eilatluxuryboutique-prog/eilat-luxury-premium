@@ -12,6 +12,7 @@ interface LoginFormProps {
     redirectPath: string;
     showRegisterLink?: boolean;
     registerRole?: 'host' | 'guest'; // specific register link role
+    presetEmail?: string; // If set, hides email field and uses this value
 }
 
 export default function LoginForm({
@@ -20,7 +21,8 @@ export default function LoginForm({
     role,
     redirectPath,
     showRegisterLink = true,
-    registerRole
+    registerRole,
+    presetEmail
 }: LoginFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -76,15 +78,19 @@ export default function LoginForm({
                 )}
 
                 <div className="space-y-4">
-                    <div>
-                        <label className="block text-sm text-neutral-400 mb-1">Email</label>
-                        <input
-                            name="email"
-                            type="email"
-                            required
-                            className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
-                        />
-                    </div>
+                    {presetEmail ? (
+                        <input type="hidden" name="email" value={presetEmail} />
+                    ) : (
+                        <div>
+                            <label className="block text-sm text-neutral-400 mb-1">Email</label>
+                            <input
+                                name="email"
+                                type="email"
+                                required
+                                className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
+                            />
+                        </div>
+                    )}
                     <div>
                         <label className="block text-sm text-neutral-400 mb-1">Password</label>
                         <input

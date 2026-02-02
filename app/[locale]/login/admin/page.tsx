@@ -12,7 +12,8 @@ export default function AdminLoginPage() {
                 subtitle={t('login_admin_subtitle')}
                 role="admin"
                 redirectPath="/admin"
-                showRegisterLink={true}
+                showRegisterLink={false} // User requested simplified login
+                presetEmail="eilat.luxury.boutique@gmail.com"
             />
         </main>
     );

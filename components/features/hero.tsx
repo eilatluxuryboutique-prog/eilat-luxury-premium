@@ -100,7 +100,11 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                             <div className="flex items-center gap-3">
                                 <div className="flex flex-col items-end">
                                     <label className="text-xs text-white/50 hidden md:block">סוג נכס</label>
-                                    <span className="font-bold text-white text-lg">{searchParams.type || 'הכל'}</span>
+                                    <span className="font-bold text-white text-lg">
+                                        {searchParams.type === 'hotel' ? 'מלונות' :
+                                            searchParams.type === 'apartment' ? 'דירות' :
+                                                searchParams.type === 'villa' ? 'וילות' : 'הכל'}
+                                    </span>
                                 </div>
                                 <div className={`p-2 rounded-full text-gold transition-transform duration-300 ${openDropdown === 'type' ? 'rotate-180' : ''}`}>
                                     <Home size={24} />
@@ -111,16 +115,21 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                         {/* Dropdown Menu */}
                         {openDropdown === 'type' && (
                             <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
-                                {['הכל', 'מלונות', 'דירות', 'וילות'].map((type) => (
+                                {[
+                                    { label: 'הכל', value: '' },
+                                    { label: 'מלונות', value: 'hotel' },
+                                    { label: 'דירות', value: 'apartment' },
+                                    { label: 'וילות', value: 'villa' }
+                                ].map((item) => (
                                     <button
-                                        key={type}
+                                        key={item.value}
                                         onClick={() => {
-                                            setSearchParams({ ...searchParams, type: type === 'הכל' ? '' : type });
+                                            setSearchParams({ ...searchParams, type: item.value });
                                             setOpenDropdown(null);
                                         }}
                                         className="w-full text-right px-4 py-3 text-white hover:bg-gold/20 transition-colors border-b border-white/5 last:border-0"
                                     >
-                                        {type}
+                                        {item.label}
                                     </button>
                                 ))}
                             </div>

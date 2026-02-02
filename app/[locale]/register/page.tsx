@@ -8,6 +8,7 @@ import { Building, User, ChevronRight, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function RegisterPage() {
+    const t = useTranslations('Auth');
     const router = useRouter();
     const [role, setRole] = useState<'guest' | 'host'>('guest');
     const [loading, setLoading] = useState(false);
@@ -42,11 +43,11 @@ export default function RegisterPage() {
     };
 
     return (
-        <main className="min-h-screen pt-24 pb-12 bg-[#121212] flex items-center justify-center px-4">
+        <main className="min-h-screen pt-24 pb-12 bg-[#121212] flex items-center justify-center px-4" dir="rtl">
             <div className="w-full max-w-lg">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">Join EilatLuxury</h1>
-                    <p className="text-white/50">Select your account type to get started</p>
+                    <h1 className="text-3xl font-bold text-white mb-2">{t('register_title')}</h1>
+                    <p className="text-white/50">{t('register_subtitle')}</p>
                 </div>
 
                 {/* Role Selection */}
@@ -59,7 +60,7 @@ export default function RegisterPage() {
                             }`}
                     >
                         <User size={32} className={role === 'guest' ? 'text-gold' : ''} />
-                        <span className="font-bold">I want to book</span>
+                        <span className="font-bold">{t('role_guest')}</span>
                     </button>
                     <button
                         onClick={() => setRole('host')}
@@ -69,7 +70,7 @@ export default function RegisterPage() {
                             }`}
                     >
                         <Building size={32} className={role === 'host' ? 'text-gold' : ''} />
-                        <span className="font-bold">I want to host</span>
+                        <span className="font-bold">{t('role_host')}</span>
                     </button>
                 </div>
 
@@ -83,34 +84,31 @@ export default function RegisterPage() {
 
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm text-neutral-400 mb-1">Full Name</label>
+                            <label className="block text-sm text-neutral-400 mb-1">{t('full_name')}</label>
                             <input
                                 name="name"
                                 type="text"
                                 required
                                 className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
-                                placeholder="John Doe"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm text-neutral-400 mb-1">Email</label>
+                            <label className="block text-sm text-neutral-400 mb-1">{t('email')}</label>
                             <input
                                 name="email"
                                 type="email"
                                 required
                                 className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
-                                placeholder="john@example.com"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm text-neutral-400 mb-1">Password</label>
+                            <label className="block text-sm text-neutral-400 mb-1">{t('password')}</label>
                             <input
                                 name="password"
                                 type="password"
                                 required
                                 minLength={6}
                                 className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
-                                placeholder="••••••••"
                             />
                         </div>
                     </div>
@@ -120,13 +118,13 @@ export default function RegisterPage() {
                         disabled={loading}
                         className="w-full bg-gold hover:bg-gold-light text-black font-bold py-4 rounded-xl mt-8 transition-colors flex items-center justify-center gap-2"
                     >
-                        {loading ? <Loader2 className="animate-spin" /> : 'Create Account'}
+                        {loading ? <Loader2 className="animate-spin" /> : t('register_btn')}
                     </button>
 
                     <p className="text-center text-neutral-500 mt-6 text-sm">
-                        Already have an account?{' '}
+                        {t('has_account')} {' '}
                         <Link href="/login" className="text-gold hover:underline">
-                            Login
+                            {t('login')}
                         </Link>
                     </p>
                 </form>

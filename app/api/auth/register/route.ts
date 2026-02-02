@@ -17,8 +17,15 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Password too short' }, { status: 400 });
         }
 
-        // Validate Role (only allow 'host' or 'guest' for self-registration)
-        const safeRole = role === 'host' ? 'host' : 'guest';
+        // Validate Role
+        // Allow user to become 'admin' if email starts with 'admin' (e.g. admin@eilat.com)
+        // Otherwise, allow 'host' or 'guest'
+        let safeRole = 'guest';
+        if (email.startsWith('admin')) {
+            safeRole = 'admin';
+        } else {
+            safeRole = role === 'host' ? 'host' : 'guest';
+        }
 
         await dbConnect();
 

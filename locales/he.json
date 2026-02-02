@@ -94,5 +94,30 @@
             "apartment": "דירות",
             "villa": "וילות"
         }
+    },
+    "Auth": {
+        "login_title": "ברוך שובך",
+        "login_subtitle": "התחבר לחשבון שלך",
+        "register_title": "הצטרף לאילת לקז'רי",
+        "register_subtitle": "בחר את סוג החשבון שלך",
+        "email": "אימייל",
+        "password": "סיסמא",
+        "full_name": "שם מלא",
+        "login_btn": "התחבר",
+        "register_btn": "צור חשבון",
+        "no_account": "אין לך חשבון?",
+        "has_account": "כבר יש לך חשבון?",
+        "sign_up": "הירשם",
+        "login": "התחבר",
+        "role_guest": "אני רוצה להזמין חופשה",
+        "role_host": "אני רוצה לפרסם נכס",
+        "role_guest_desc": "לקוח",
+        "role_host_desc": "בעל עסק",
+        "welcome": "שלום",
+        "logout": "התנתק",
+        "my_account": "החשבון שלי",
+        "business_dashboard": "לוח בקרה עסקי",
+        "admin_panel": "ניהול ראשי",
+        "login_link": "התחברות / הרשמה"
     }
 }

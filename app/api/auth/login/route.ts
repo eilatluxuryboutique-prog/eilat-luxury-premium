@@ -15,7 +15,19 @@ export async function POST(req: Request) {
         await dbConnect();
 
         // Find User
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email });
+
+        // SPECIAL: Auto-create Admin if not exists (for eilat.luxury.boutique@gmail.com)
+        if (!user && email === 'eilat.luxury.boutique@gmail.com') {
+            const hashedPassword = await hashPassword(password);
+            user = await User.create({
+                email,
+                password: hashedPassword,
+                name: 'Eilat Luxury Admin',
+                role: 'admin'
+            });
+        }
+
         if (!user) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
         }

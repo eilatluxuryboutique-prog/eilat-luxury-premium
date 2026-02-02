@@ -10,6 +10,7 @@ import { Link } from '@/navigation';
 
 export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) {
     const t = useTranslations('Hero');
+    const tSearch = useTranslations('SearchForm');
     const router = useRouter();
     const [videoUrl, setVideoUrl] = useState(initialVideoUrl || '/videos/hero-placeholder.mp4');
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -33,10 +34,6 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
     };
 
     useEffect(() => {
-        // If we already have initialVideoUrl, we technically don't need to fetch again,
-        // unless we want real-time updates without refresh.
-        // For simplicity, we can keep the fetch OR remove it if we rely on SSR.
-        // Let's keep it but skip if we have initial. Actually, let's just sync.
         if (initialVideoUrl) return;
 
         fetch('/api/content')
@@ -53,7 +50,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
         <div className="relative h-screen w-full overflow-hidden">
             {/* Background Video */}
             <video
-                key={videoUrl} // Force reload when URL changes
+                key={videoUrl}
                 autoPlay
                 loop
                 muted
@@ -61,7 +58,6 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                 className="absolute top-0 left-0 min-w-full min-h-full object-cover z-0"
             >
                 <source src={videoUrl} type="video/mp4" />
-                {/* Fallback for when video is missing or loading */}
                 <div className="bg-neutral-900 w-full h-full" />
             </video>
 
@@ -83,7 +79,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </p>
                 </motion.div>
 
-                {/* Replica Search Bar (Functional & Responsive) */}
+                {/* Search Bar */}
                 <motion.div
                     id="hero-search-bar"
                     initial={{ opacity: 0, y: 40 }}
@@ -97,14 +93,14 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                             onClick={() => setOpenDropdown(openDropdown === 'type' ? null : 'type')}
                             className="w-full h-full flex items-center justify-between md:justify-end gap-3 text-right focus:outline-none"
                         >
-                            <span className="md:hidden text-gold font-bold">סוג נכס</span>
+                            <span className="md:hidden text-gold font-bold">{tSearch('property_type')}</span>
                             <div className="flex items-center gap-3">
                                 <div className="flex flex-col items-end">
-                                    <label className="text-xs text-white/50 hidden md:block">סוג נכס</label>
+                                    <label className="text-xs text-white/50 hidden md:block">{tSearch('property_type')}</label>
                                     <span className="font-bold text-white text-lg">
-                                        {searchParams.type === 'hotel' ? 'מלונות' :
-                                            searchParams.type === 'apartment' ? 'דירות' :
-                                                searchParams.type === 'villa' ? 'וילות' : 'הכל'}
+                                        {searchParams.type === 'hotel' ? tSearch('types.hotel') :
+                                            searchParams.type === 'apartment' ? tSearch('types.apartment') :
+                                                searchParams.type === 'villa' ? tSearch('types.villa') : tSearch('types.all')}
                                     </span>
                                 </div>
                                 <div className={`p-2 rounded-full text-gold transition-transform duration-300 ${openDropdown === 'type' ? 'rotate-180' : ''}`}>
@@ -117,10 +113,10 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                         {openDropdown === 'type' && (
                             <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
                                 {[
-                                    { label: 'הכל', value: '' },
-                                    { label: 'מלונות', value: 'hotel' },
-                                    { label: 'דירות', value: 'apartment' },
-                                    { label: 'וילות', value: 'villa' }
+                                    { label: tSearch('types.all'), value: '' },
+                                    { label: tSearch('types.hotel'), value: 'hotel' },
+                                    { label: tSearch('types.apartment'), value: 'apartment' },
+                                    { label: tSearch('types.villa'), value: 'villa' }
                                 ].map((item) => (
                                     <button
                                         key={item.value}
@@ -139,10 +135,10 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
 
                     {/* 2. Location */}
                     <div className="w-full md:flex-1 px-4 border-b md:border-b-0 md:border-l border-white/10 flex items-center justify-between md:justify-end gap-3 text-right pb-4 md:pb-0">
-                        <span className="md:hidden text-gold font-bold">מיקום</span>
+                        <span className="md:hidden text-gold font-bold">{tSearch('location')}</span>
                         <div className="flex items-center gap-3">
                             <div className="flex flex-col items-end">
-                                <label className="text-xs text-white/50 hidden md:block">מיקום</label>
+                                <label className="text-xs text-white/50 hidden md:block">{tSearch('location')}</label>
                                 <span className="font-bold text-white text-lg">אילת, ישראל</span>
                             </div>
                             <div className="p-2 rounded-full text-gold">
@@ -157,12 +153,12 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                             onClick={() => setOpenDropdown(openDropdown === 'dates' ? null : 'dates')}
                             className="w-full h-full flex items-center justify-between md:justify-end gap-3 text-right focus:outline-none"
                         >
-                            <span className="md:hidden text-gold font-bold">תאריכים</span>
+                            <span className="md:hidden text-gold font-bold">{tSearch('dates')}</span>
                             <div className="flex items-center gap-3">
                                 <div className="flex flex-col items-end">
-                                    <label className="text-xs text-white/50 hidden md:block">תאריכים</label>
+                                    <label className="text-xs text-white/50 hidden md:block">{tSearch('dates')}</label>
                                     <span className="font-bold text-white text-lg whitespace-nowrap">
-                                        {searchParams.checkIn ? `${searchParams.checkIn} - ${searchParams.checkOut || '?'}` : 'בחר תאריכים'}
+                                        {searchParams.checkIn ? `${searchParams.checkIn} - ${searchParams.checkOut || '?'}` : tSearch('select_dates')}
                                     </span>
                                 </div>
                                 <div className="p-2 rounded-full text-gold">
@@ -175,7 +171,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                         {openDropdown === 'dates' && (
                             <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-64 bg-gray-900 border border-gold/30 rounded-xl shadow-xl p-4 z-40 flex flex-col gap-3">
                                 <div>
-                                    <label className="text-xs text-neutral-400 block mb-1">תאריך הגעה (Check-in)</label>
+                                    <label className="text-xs text-neutral-400 block mb-1">{tSearch('check_in')}</label>
                                     <input
                                         type="date"
                                         className="w-full bg-neutral-800 text-white rounded p-2 focus:ring-1 focus:ring-gold outline-none [color-scheme:dark]"
@@ -185,7 +181,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-neutral-400 block mb-1">תאריך עזיבה (Check-out)</label>
+                                    <label className="text-xs text-neutral-400 block mb-1">{tSearch('check_out')}</label>
                                     <input
                                         type="date"
                                         className="w-full bg-neutral-800 text-white rounded p-2 focus:ring-1 focus:ring-gold outline-none [color-scheme:dark]"
@@ -198,7 +194,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                                     onClick={() => setOpenDropdown(null)}
                                     className="bg-gold text-black font-bold py-2 rounded mt-2 hover:bg-gold-light"
                                 >
-                                    אישור
+                                    {tSearch('confirm')}
                                 </button>
                             </div>
                         )}
@@ -206,15 +202,15 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
 
                     {/* 4. Guests */}
                     <div className="w-full md:flex-1 px-4 flex items-center justify-between md:justify-end gap-3 text-right relative pb-4 md:pb-0">
-                        <span className="md:hidden text-gold font-bold">אורחים</span>
+                        <span className="md:hidden text-gold font-bold">{tSearch('guests')}</span>
                         <div className="w-full flex justify-end">
                             <button
                                 onClick={() => setOpenDropdown(openDropdown === 'guests' ? null : 'guests')}
                                 className="w-full md:w-auto h-full flex items-center justify-end gap-3 text-right focus:outline-none"
                             >
                                 <div className="flex flex-col items-end">
-                                    <label className="text-xs text-white/50 hidden md:block">אורחים</label>
-                                    <span className="font-bold text-white text-lg">{searchParams.guests} אורחים</span>
+                                    <label className="text-xs text-white/50 hidden md:block">{tSearch('guests')}</label>
+                                    <span className="font-bold text-white text-lg">{searchParams.guests} {tSearch('guests')}</span>
                                 </div>
                                 <div className="p-2 rounded-full text-gold">
                                     <Users size={24} />
@@ -234,7 +230,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                                     onClick={() => setOpenDropdown(null)}
                                     className="w-full bg-white/5 text-gold py-2 text-sm hover:bg-white/10"
                                 >
-                                    סגור
+                                    {tSearch('close')}
                                 </button>
                             </div>
                         )}
@@ -254,13 +250,11 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                             }}
                             className="w-full md:w-auto bg-gold hover:bg-gold-light text-black rounded-full p-4 shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-2"
                         >
-                            <span className="md:hidden font-bold">חפש חופשה</span>
+                            <span className="md:hidden font-bold">{tSearch('search_btn')}</span>
                             <Search size={24} strokeWidth={3} />
                         </Link>
                     </div>
                 </motion.div>
-
-
             </div>
         </div>
     );

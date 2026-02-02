@@ -5,9 +5,11 @@ import { motion } from 'framer-motion';
 import { Search, Calendar, Users, MapPin, Home } from 'lucide-react';
 import EditableText from '../admin/editable-text';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) {
     const t = useTranslations('Hero');
+    const router = useRouter();
     const [videoUrl, setVideoUrl] = useState(initialVideoUrl || '/videos/hero-placeholder.mp4');
 
     // Search State
@@ -18,6 +20,15 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
         checkIn: '',
         checkOut: ''
     });
+
+    const handleSearch = () => {
+        const params = new URLSearchParams();
+        if (searchParams.type) params.set('type', searchParams.type);
+        if (searchParams.guests) params.set('guests', searchParams.guests.toString());
+        if (searchParams.checkIn) params.set('checkIn', searchParams.checkIn);
+
+        router.push(`/search?${params.toString()}`);
+    };
 
     useEffect(() => {
         // If we already have initialVideoUrl, we technically don't need to fetch again,
@@ -152,7 +163,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     {/* 5. Search Button */}
                     <div className="pl-1">
                         <button
-                            onClick={() => console.log('Search:', searchParams)}
+                            onClick={handleSearch}
                             className="bg-gold hover:bg-gold-light text-black rounded-full p-4 shadow-lg transition-transform hover:scale-105 flex items-center justify-center"
                         >
                             <Search size={24} strokeWidth={3} />

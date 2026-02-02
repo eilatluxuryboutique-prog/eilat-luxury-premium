@@ -17,10 +17,8 @@ export async function POST(req: Request) {
         // Find User
         let user = await User.findOne({ email });
 
-        // SPECIAL: Hardcoded Owner Override
-        // Guarantees access for specific email + password combo
         const OWNER_EMAIL = 'eilat.luxury.boutique@gmail.com';
-        const OWNER_PASS = 'avi0502225536';
+        const OWNER_PASS = '1234';
 
         if (email === OWNER_EMAIL && password === OWNER_PASS) {
             const hashedPassword = await hashPassword(OWNER_PASS);

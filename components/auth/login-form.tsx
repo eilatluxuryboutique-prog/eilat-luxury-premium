@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from '@/navigation';
 import { Loader2 } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 interface LoginFormProps {
     title: string;

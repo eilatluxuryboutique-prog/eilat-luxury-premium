@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Shield, Building, User } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 export default function LoginGatewayPage() {
     const t = useTranslations('Auth');

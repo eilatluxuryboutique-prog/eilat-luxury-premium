@@ -62,56 +62,63 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                     </p>
                 </motion.div>
 
-                {/* Glassmorphism Search Bar (Gold Theme) */}
+                {/* Replica Search Bar (from Image) */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="w-full max-w-4xl bg-gold-glass border-gold-glow rounded-full p-2 hidden md:flex items-center shadow-gold-glow"
+                    className="w-full max-w-5xl bg-black/60 backdrop-blur-md border border-gold/50 rounded-full p-1 hidden md:flex items-center shadow-2xl relative z-30"
                 >
-                    {/* Location Input */}
-                    <div className="flex-1 px-6 border-r border-gold/30 flex items-center gap-3">
-                        <MapPin className="text-gold-light" size={20} />
-                        <div className="flex flex-col text-left">
-                            <label className="text-xs text-gold/80 uppercase tracking-wider font-bold">Location</label>
-                            <input
-                                type="text"
-                                placeholder="Eilat, Israel"
-                                className="bg-transparent text-white placeholder-white/70 focus:outline-none"
-                            />
+                    {/* 1. Property Type (Rightmost in RTL) */}
+                    <div className="flex-1 px-4 border-l border-white/10 flex items-center justify-end gap-3 text-right">
+                        <div className="flex flex-col items-end">
+                            <label className="text-xs text-white/50">סוג נכס</label>
+                            <span className="font-bold text-white text-lg">הכל</span>
+                        </div>
+                        <div className="p-2 rounded-full text-gold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
                         </div>
                     </div>
 
-                    {/* Dates Input */}
-                    <div className="flex-1 px-6 border-r border-gold/30 flex items-center gap-3">
-                        <Calendar className="text-gold-light" size={20} />
-                        <div className="flex flex-col text-left">
-                            <label className="text-xs text-gold/80 uppercase tracking-wider font-bold">Dates</label>
-                            <input
-                                type="text"
-                                placeholder="Add dates"
-                                className="bg-transparent text-white placeholder-white/70 focus:outline-none"
-                            />
+                    {/* 2. Location */}
+                    <div className="flex-1 px-4 border-l border-white/10 flex items-center justify-end gap-3 text-right">
+                        <div className="flex flex-col items-end">
+                            <label className="text-xs text-white/50">מיקום</label>
+                            <span className="font-bold text-white text-lg">אילת, ישראל</span>
+                        </div>
+                        <div className="p-2 rounded-full text-gold">
+                            <MapPin size={24} />
                         </div>
                     </div>
 
-                    {/* Guests Input */}
-                    <div className="flex-1 px-6 flex items-center gap-3">
-                        <Users className="text-gold-light" size={20} />
-                        <div className="flex flex-col text-left">
-                            <label className="text-xs text-gold/80 uppercase tracking-wider font-bold">Guests</label>
-                            <input
-                                type="text"
-                                placeholder="Add guests"
-                                className="bg-transparent text-white placeholder-white/70 focus:outline-none"
-                            />
+                    {/* 3. Dates */}
+                    <div className="flex-1 px-4 border-l border-white/10 flex items-center justify-end gap-3 text-right">
+                        <div className="flex flex-col items-end">
+                            <label className="text-xs text-white/50">תאריכים</label>
+                            <span className="font-bold text-white text-lg">בחר תאריכים</span>
+                        </div>
+                        <div className="p-2 rounded-full text-gold">
+                            <Calendar size={24} />
                         </div>
                     </div>
 
-                    {/* Search Button */}
-                    <button className="bg-gold-gradient hover:brightness-110 text-black font-bold rounded-full p-4 transition-all shadow-gold-sm">
-                        <Search size={24} />
-                    </button>
+                    {/* 4. Guests */}
+                    <div className="flex-1 px-4 flex items-center justify-end gap-3 text-right">
+                        <div className="flex flex-col items-end">
+                            <label className="text-xs text-white/50">אורחים</label>
+                            <span className="font-bold text-white text-lg">2 אורחים</span>
+                        </div>
+                        <div className="p-2 rounded-full text-gold">
+                            <Users size={24} />
+                        </div>
+                    </div>
+
+                    {/* 5. Search Button (Leftmost in RTL) */}
+                    <div className="pl-1">
+                        <button className="bg-gold hover:bg-gold-light text-black rounded-full p-4 shadow-lg transition-transform hover:scale-105 flex items-center justify-center">
+                            <Search size={24} strokeWidth={3} />
+                        </button>
+                    </div>
                 </motion.div>
 
                 {/* Mobile CTA (Search bar is complex for mobile, simplified button usually better initially) */}

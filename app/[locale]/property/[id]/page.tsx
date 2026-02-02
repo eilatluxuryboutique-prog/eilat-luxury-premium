@@ -117,9 +117,12 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
                                 <span className="text-neutral-400 block">+ taxes may apply</span>
                             </div>
 
-                            <button className="w-full bg-[#FFD700] hover:bg-[#E6C200] text-black font-bold py-4 rounded-xl text-lg transition-all transform hover:scale-[1.02] shadow-lg mb-4">
+                            <Link
+                                href={`/checkout?propertyId=${property.id}&guests=${property.guests}`}
+                                className="w-full bg-[#FFD700] hover:bg-[#E6C200] text-black font-bold py-4 rounded-xl text-lg transition-all transform hover:scale-[1.02] shadow-lg mb-4 flex items-center justify-center"
+                            >
                                 Book Now
-                            </button>
+                            </Link>
 
                             <p className="text-center text-xs text-neutral-500">
                                 You won't be charged yet.

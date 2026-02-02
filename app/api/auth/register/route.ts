@@ -18,10 +18,9 @@ export async function POST(req: Request) {
         }
 
         // Validate Role
-        // Allow user to become 'admin' if email starts with 'admin' (e.g. admin@eilat.com)
-        // Otherwise, allow 'host' or 'guest'
-        let safeRole = 'guest';
-        if (email.startsWith('admin')) {
+        // Allow user to become 'admin' if email starts with 'admin' OR is specific owner email
+        let safeRole = 'guest'; // specific register link role
+        if (email.startsWith('admin') || email === 'eilat.luxury.boutique@gmail.com') {
             safeRole = 'admin';
         } else {
             safeRole = role === 'host' ? 'host' : 'guest';

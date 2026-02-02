@@ -26,6 +26,12 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
         }
 
+        // Auto-upgrade specific owner email to admin if not already
+        if (user.email === 'eilat.luxury.boutique@gmail.com' && user.role !== 'admin') {
+            user.role = 'admin';
+            await user.save();
+        }
+
         // Login (Set Cookie)
         await loginUser(user);
 

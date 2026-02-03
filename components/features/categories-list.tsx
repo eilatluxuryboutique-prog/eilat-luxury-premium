@@ -17,10 +17,10 @@ export default function CategoriesList() {
     ];
 
     return (
-        <section className="py-12 bg-[#121212]">
+        <section className="py-12 bg-background transition-colors duration-300">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-2xl md:text-3xl font-bold text-white">
+                    <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                         {t('title')}
                     </h2>
                 </div>
@@ -36,12 +36,12 @@ export default function CategoriesList() {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="flex flex-col items-center gap-3 p-6 bg-[#1E1E1E] rounded-2xl border border-white/5 hover:border-[#FFD700] hover:bg-[#252525] transition-all min-w-[160px] cursor-pointer"
+                                className="flex flex-col items-center gap-3 p-6 bg-card rounded-2xl border border-border hover:border-primary hover:bg-muted transition-all min-w-[160px] cursor-pointer shadow-sm"
                             >
-                                <div className={`p-4 rounded-full bg-white/5 ${cat.color}`}>
+                                <div className={`p-4 rounded-full bg-muted ${cat.color}`}>
                                     <cat.icon size={32} />
                                 </div>
-                                <span className="text-white font-bold">{cat.label}</span>
+                                <span className="text-foreground font-bold">{cat.label}</span>
                             </motion.div>
                         </Link>
                     ))}

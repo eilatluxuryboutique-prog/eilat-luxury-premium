@@ -182,20 +182,21 @@ export default function AiAssistant() {
                     </motion.div>
                 )}
             </AnimatePresence>
-            {/* Toggle Button */}
+            {/* Toggle Button - Video Mascot */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-14 h-14 relative rounded-full shadow-xl shadow-gold/20 flex items-center justify-center transition-all overflow-hidden border-2 border-gold bg-black"
+                className="w-32 h-32 relative flex items-center justify-center transition-all focus:outline-none"
                 aria-label="Toggle AI Assistant"
             >
-                <div className="absolute inset-0 bg-gold/10 animate-pulse"></div>
-                <Image
-                    src="/images/ai-mascot.png"
-                    alt="AI Assistant"
-                    fill
-                    className="object-cover p-1"
+                <video
+                    src="/videos/ai-mascot.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-contain drop-shadow-2xl"
                 />
             </motion.button>
         </div>

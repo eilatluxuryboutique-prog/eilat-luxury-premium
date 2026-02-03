@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Search, Calendar, Users, MapPin, Home } from 'lucide-react';
+import { Search, Calendar, Users, MapPin, Home, ChevronDown } from 'lucide-react';
 import EditableText from '../admin/editable-text';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/navigation';
 import { Link } from '@/navigation';
 
 export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) {
@@ -253,6 +253,28 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                             <span className="md:hidden font-bold">{tSearch('search_btn')}</span>
                             <Search size={24} strokeWidth={3} />
                         </Link>
+                    </div>
+                </motion.div>
+
+                {/* Scroll Down Indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, y: [0, 10, 0] }}
+                    transition={{
+                        opacity: { delay: 1, duration: 1 },
+                        y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
+                    }}
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
+                    onClick={() => {
+                        window.scrollTo({
+                            top: window.innerHeight,
+                            behavior: 'smooth'
+                        });
+                    }}
+                >
+                    <div className="flex flex-col items-center gap-1">
+                        <span className="text-white/80 text-xs tracking-widest font-light uppercase">Scroll</span>
+                        <ChevronDown className="text-white w-6 h-6" />
                     </div>
                 </motion.div>
             </div>

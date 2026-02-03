@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BarChart3, Edit, Image as ImageIcon, Settings, LogOut } from 'lucide-react';
+import { BarChart3, Edit, Image as ImageIcon, Settings, LogOut, Megaphone } from 'lucide-react';
 import { useRouter } from '@/navigation';
 import AnalyticsTab from '@/components/admin/analytics-tab';
 import ContentTab from '@/components/admin/content-tab';
 import MediaTab from '@/components/admin/media-tab';
+import AdsTab from '@/components/admin/ads-tab';
 
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState('analytics');
@@ -21,6 +22,7 @@ export default function AdminDashboard() {
         { id: 'analytics', label: 'Analytics', icon: BarChart3 },
         { id: 'content', label: 'Content CMS', icon: Edit },
         { id: 'media', label: 'Media Library', icon: ImageIcon },
+        { id: 'ads', label: 'Ads Manager', icon: Megaphone },
     ];
 
     return (
@@ -69,6 +71,7 @@ export default function AdminDashboard() {
                     {activeTab === 'analytics' && <AnalyticsTab />}
                     {activeTab === 'content' && <ContentTab />}
                     {activeTab === 'media' && <MediaTab />}
+                    {activeTab === 'ads' && <AdsTab />}
 
                 </motion.div>
             </div>

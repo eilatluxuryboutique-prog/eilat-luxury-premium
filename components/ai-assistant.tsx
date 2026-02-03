@@ -12,9 +12,55 @@ type Message = {
 
 export default function AiAssistant() {
     const locale = useLocale();
-    const [context, setContext] = useState<any>({}); // Memory for "follow-up" questions
+    const [isOpen, setIsOpen] = useState(false);
+    const [messages, setMessages] = useState<Message[]>([
+        { role: "assistant", content: locale === 'he' ? "היי! אני העוזר האישי שלך. איך אפשר לעזור?" : "Hi! I'm your AI assistant. How can I help?" }
+    ]);
+    const [input, setInput] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [isListening, setIsListening] = useState(false);
+    const [context, setContext] = useState<any>({});
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const recognitionRef = useRef<any>(null);
 
-    // ... (Hooks) ...
+    useEffect(() => {
+        if (typeof window !== 'undefined' && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+            recognitionRef.current = new SpeechRecognition();
+            recognitionRef.current.continuous = false;
+            recognitionRef.current.lang = locale === 'he' ? 'he-IL' : 'en-US';
+            recognitionRef.current.interimResults = true;
+
+            recognitionRef.current.onresult = (event: any) => {
+                const transcript = event.results[0][0].transcript;
+                setInput(transcript);
+            };
+
+            recognitionRef.current.onend = () => {
+                setIsListening(false);
+            };
+        }
+    }, [locale]);
+
+    const toggleListening = () => {
+        if (!recognitionRef.current) {
+            alert(locale === 'he' ? "הדפדפן שלך לא תומך בדיבור." : "Browser does not support speech recognition.");
+            return;
+        }
+
+        if (isListening) {
+            recognitionRef.current.stop();
+        } else {
+            recognitionRef.current.start();
+            setIsListening(true);
+        }
+    };
+
+    useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+        }
+    }, [messages]);
 
     const handleSend = async () => {
         if (!input.trim()) return;

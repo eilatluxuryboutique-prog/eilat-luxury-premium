@@ -187,16 +187,26 @@ export default function AiAssistant() {
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-32 h-32 relative flex items-center justify-center transition-all focus:outline-none"
+                className="w-56 h-56 relative flex items-center justify-center transition-all focus:outline-none z-50 pointer-events-auto"
                 aria-label="Toggle AI Assistant"
             >
+                {/* Speech Bubble */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ delay: 1 }}
+                    className="absolute -top-12 right-10 bg-gold text-white px-4 py-2 rounded-2xl rounded-br-none shadow-lg whitespace-nowrap z-50 font-bold border border-white/20"
+                >
+                    איך אני יכול לעזור?
+                </motion.div>
+
                 <video
                     src="/videos/ai-mascot.mp4"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-contain drop-shadow-2xl"
+                    className="w-full h-full object-contain filter mix-blend-screen drop-shadow-2xl"
                 />
             </motion.button>
         </div>

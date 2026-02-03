@@ -9,13 +9,13 @@ import { useTranslations } from 'next-intl';
 export const dynamic = 'force-dynamic';
 
 const Section = ({ title, items, link, viewAll }: { title: string, items: Property[], link: string, viewAll: string }) => (
-    <section className="py-12 border-b border-white/5">
+    <section className="py-12 border-b border-border">
         <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-white border-l-4 border-[#FFD700] pl-4">
+                <h2 className="text-3xl font-bold text-foreground border-l-4 border-primary pl-4">
                     {title}
                 </h2>
-                <Link href={link} className="text-[#FFD700] hover:text-white transition-colors flex items-center gap-2 font-medium">
+                <Link href={link} className="text-primary hover:text-foreground transition-colors flex items-center gap-2 font-medium">
                     {viewAll}
                     <span className="text-xl">←</span>
                 </Link>
@@ -33,7 +33,7 @@ export default function Home() {
     const apartments = properties.filter(p => p.type === 'apartment').slice(0, 4);
 
     return (
-        <main className="min-h-screen bg-[#121212]">
+        <main className="min-h-screen bg-background transition-colors duration-300">
             <Hero />
             <CategoriesList />
 

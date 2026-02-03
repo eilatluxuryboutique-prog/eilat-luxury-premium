@@ -18,29 +18,30 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
     // ... (rest of filtering)
 
     return (
-        <main className="min-h-screen bg-[#121212] text-white pt-24 pb-20">
+    return (
+        <main className="min-h-screen bg-background text-foreground pt-24 pb-20 transition-colors duration-300">
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
                     <div>
                         <div className="flex items-center gap-2 mb-2">
-                            <span className="bg-[#FFD700] text-black text-xs font-bold px-2 py-1 rounded uppercase">
+                            <span className="bg-primary text-black text-xs font-bold px-2 py-1 rounded uppercase">
                                 {property.type}
                             </span>
-                            <div className="flex items-center gap-1 text-[#FFD700]">
+                            <div className="flex items-center gap-1 text-primary">
                                 <Star size={14} fill="currentColor" />
                                 <span className="font-bold text-sm">{property.rating}</span>
                             </div>
                         </div>
                         <h1 className="text-3xl md:text-5xl font-bold mb-2">{property.title}</h1>
-                        <div className="flex items-center gap-2 text-neutral-400">
+                        <div className="flex items-center gap-2 text-muted-foreground">
                             <MapPin size={18} />
                             <span>{property.location}</span>
                         </div>
                     </div>
                     <div className="text-right">
-                        <div className="text-3xl font-bold text-[#FFD700]">₪{property.price}</div>
-                        <div className="text-neutral-500 text-sm">{t('per_night')}</div>
+                        <div className="text-3xl font-bold text-primary">₪{property.price}</div>
+                        <div className="text-muted-foreground text-sm">{t('per_night')}</div>
                     </div>
                 </div>
 
@@ -64,8 +65,8 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                         ) : (
                             // Fallback if no gallery images
                             <>
-                                <div className="relative flex-1 rounded-xl overflow-hidden bg-neutral-800" />
-                                <div className="relative flex-1 rounded-xl overflow-hidden bg-neutral-800" />
+                                <div className="relative flex-1 rounded-xl overflow-hidden bg-muted" />
+                                <div className="relative flex-1 rounded-xl overflow-hidden bg-muted" />
                             </>
                         )}
                     </div>
@@ -76,36 +77,36 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                     {/* Left: Description & Amenities */}
                     <div className="lg:col-span-2">
                         <h2 className="text-2xl font-bold mb-4">{t('about')}</h2>
-                        <p className="text-neutral-300 leading-relaxed mb-8 text-lg text-right" dir="rtl">
+                        <p className="text-muted-foreground leading-relaxed mb-8 text-lg text-right" dir="rtl">
                             {property.description}
                         </p>
 
                         <h3 className="text-xl font-bold mb-4">{t('amenities')}</h3>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
                             {property.amenities.map(am => (
-                                <div key={am} className="flex items-center gap-3 bg-white/5 p-4 rounded-xl">
-                                    <Check size={18} className="text-[#FFD700]" />
+                                <div key={am} className="flex items-center gap-3 bg-card border border-border p-4 rounded-xl shadow-sm">
+                                    <Check size={18} className="text-primary" />
                                     <span>{am}</span>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="flex gap-8 border-t border-white/10 pt-8">
+                        <div className="flex gap-8 border-t border-border pt-8">
                             <div className="flex items-center gap-3">
-                                <div className="bg-white/10 p-3 rounded-full">
+                                <div className="bg-muted p-3 rounded-full">
                                     <Users size={24} />
                                 </div>
                                 <div>
-                                    <div className="text-sm text-neutral-400">{t('guests')}</div>
+                                    <div className="text-sm text-muted-foreground">{t('guests')}</div>
                                     <div className="font-bold">{property.guests} {t('guests_max')}</div>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
-                                <div className="bg-white/10 p-3 rounded-full">
+                                <div className="bg-muted p-3 rounded-full">
                                     <Bed size={24} />
                                 </div>
                                 <div>
-                                    <div className="text-sm text-neutral-400">{t('rooms')}</div>
+                                    <div className="text-sm text-muted-foreground">{t('rooms')}</div>
                                     <div className="font-bold">{property.rooms} {t('bedrooms')}</div>
                                 </div>
                             </div>
@@ -114,23 +115,23 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
 
                     {/* Right: Booking Card */}
                     <div>
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sticky top-24">
+                        <div className="bg-card border border-border rounded-2xl p-6 sticky top-24 shadow-lg">
                             <div className="text-center mb-6">
-                                <span className="text-neutral-400">{t('total_price')}</span>
-                                <div className="text-4xl font-bold text-[#FFD700] my-2">₪{property.price}</div>
-                                <span className="text-neutral-400 block">{t('taxes')}</span>
+                                <span className="text-muted-foreground">{t('total_price')}</span>
+                                <div className="text-4xl font-bold text-primary my-2">₪{property.price}</div>
+                                <span className="text-muted-foreground block">{t('taxes')}</span>
                             </div>
 
                             <Link
                                 href={`/checkout?propertyId=${property.id}&guests=${property.guests}`}
-                                className="w-full bg-[#FFD700] hover:bg-[#E6C200] text-black font-bold py-4 rounded-xl text-lg transition-all transform hover:scale-[1.02] shadow-lg mb-4 flex items-center justify-center"
+                                className="w-full bg-primary hover:brightness-110 text-black font-bold py-4 rounded-xl text-lg transition-all transform hover:scale-[1.02] shadow-lg mb-4 flex items-center justify-center"
                             >
                                 {t('book_now')}
                             </Link>
 
                             <AddToCartButton property={property} />
 
-                            <p className="text-center text-xs text-neutral-500">
+                            <p className="text-center text-xs text-muted-foreground mt-4">
                                 {t('not_charged')}
                             </p>
                         </div>

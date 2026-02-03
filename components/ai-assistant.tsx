@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Bot, Send, X, MessageSquare, Mic, MicOff } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from 'react';
+import { Send, X, Sparkles, Mic, MicOff, Volume2, VolumeX, Maximize2, Minimize2, Loader2, StopCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
 import { useLocale } from "next-intl";
 
 type Message = {
@@ -181,15 +183,22 @@ export default function AiAssistant() {
                     </motion.div>
                 )}
             </AnimatePresence>
-
+            {/* Toggle Button */}
             <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-4 right-4 bg-gradient-to-tr from-gold to-yellow-300 text-black p-4 rounded-full shadow-lg z-50 border-2 border-white/20"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-14 h-14 relative rounded-full shadow-xl shadow-gold/20 flex items-center justify-center transition-all overflow-hidden border-2 border-gold bg-black"
+                aria-label="Toggle AI Assistant"
             >
-                {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
+                <div className="absolute inset-0 bg-gold/10 animate-pulse"></div>
+                <Image
+                    src="/images/ai-mascot.png"
+                    alt="AI Assistant"
+                    fill
+                    className="object-cover p-1"
+                />
             </motion.button>
-        </>
+        </div >
     );
 }

@@ -48,7 +48,7 @@ export default function UserMenu() {
                 className="flex items-center gap-2 bg-gold/10 hover:bg-gold/20 text-gold px-4 py-2 rounded-full font-medium transition-colors border border-gold/30"
             >
                 <User size={18} />
-                <span className="hidden md:inline">{user.name.split(' ')[0]}</span>
+                <span className="hidden md:inline">{t('account_menu_label')}</span>
             </button>
 
             {isOpen && (

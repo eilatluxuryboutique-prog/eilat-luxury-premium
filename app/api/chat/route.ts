@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: Request) {
     try {
         const { message, locale } = await req.json();
-        const apiKey = process.env.GEMINI_API_KEY;
+        const apiKey = process.env.GEMINI_API_KEY?.trim();
 
         // If no API key, use fallback mock (user still needs to provide key)
         if (!apiKey) {
@@ -29,7 +29,8 @@ export async function POST(req: Request) {
 
         // Real AI Logic
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const modelName = "gemini-pro";
+        const model = genAI.getGenerativeModel({ model: modelName });
 
         const systemPrompt = `
         You are "Eilat Luxury Assistant", a helpful, polite, and professional agent for a luxury vacation rental business in Eilat, Israel.
@@ -56,6 +57,6 @@ export async function POST(req: Request) {
 
     } catch (error: any) {
         console.error('Chat Error:', error);
-        return NextResponse.json({ reply: `Error: ${error.message || error}` }, { status: 500 });
+        return NextResponse.json({ reply: `Error (Key: ${process.env.GEMINI_API_KEY ? 'Present' : 'Missing'}): ${error.message || error}` }, { status: 500 });
     }
 }

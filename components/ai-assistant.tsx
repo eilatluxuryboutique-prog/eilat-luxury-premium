@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Bot, Send, X, MessageSquare } from "lucide-react";
+import { Bot, Send, X, MessageSquare, Mic, MicOff } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "next-intl";
 
@@ -18,7 +18,42 @@ export default function AiAssistant() {
     ]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isListening, setIsListening] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const recognitionRef = useRef<any>(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+            recognitionRef.current = new SpeechRecognition();
+            recognitionRef.current.continuous = false;
+            recognitionRef.current.lang = locale === 'he' ? 'he-IL' : 'en-US';
+            recognitionRef.current.interimResults = true;
+
+            recognitionRef.current.onresult = (event: any) => {
+                const transcript = event.results[0][0].transcript;
+                setInput(transcript);
+            };
+
+            recognitionRef.current.onend = () => {
+                setIsListening(false);
+            };
+        }
+    }, [locale]);
+
+    const toggleListening = () => {
+        if (!recognitionRef.current) {
+            alert(locale === 'he' ? "הדפדפן שלך לא תומך בדיבור." : "Browser does not support speech recognition.");
+            return;
+        }
+
+        if (isListening) {
+            recognitionRef.current.stop();
+        } else {
+            recognitionRef.current.start();
+            setIsListening(true);
+        }
+    };
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -76,8 +111,8 @@ export default function AiAssistant() {
                             {messages.map((m, i) => (
                                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-start' : 'justify-end'}`}>
                                     <div className={`max-w-[80%] p-3 rounded-2xl ${m.role === 'user'
-                                            ? 'bg-blue-600 text-white rounded-br-none'
-                                            : 'bg-white text-gray-800 shadow-sm border border-gold/10 rounded-bl-none'
+                                        ? 'bg-blue-600 text-white rounded-br-none'
+                                        : 'bg-white text-gray-800 shadow-sm border border-gold/10 rounded-bl-none'
                                         }`}>
                                         {m.content}
                                     </div>
@@ -95,14 +130,21 @@ export default function AiAssistant() {
                         </div>
 
                         {/* Input */}
-                        <div className="p-3 bg-white border-t border-gray-100 flex gap-2">
+                        <div className="p-3 bg-white border-t border-gray-100 flex gap-2 items-center">
+                            <button
+                                onClick={toggleListening}
+                                className={`p-2 rounded-full transition-all ${isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                title="Speak (Hebrew)"
+                            >
+                                {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                            </button>
                             <input
                                 type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                placeholder={locale === 'he' ? "שאל אותי משהו..." : "Ask me anything..."}
-                                className="flex-1 bg-gray-100 rounded-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gold text-black"
+                                placeholder={isListening ? (locale === 'he' ? "מקשיב..." : "Listening...") : (locale === 'he' ? "שאל אותי משהו..." : "Ask me anything...")}
+                                className="flex-1 bg-gray-100 rounded-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gold text-black transition-all"
                             />
                             <button
                                 onClick={handleSend}

@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server';
-import content from '@/data/content.json';
+import { properties } from '@/lib/mock-data';
 
 // Local NLP Logic (No External API)
 // This ensures 100% reliability even if Google/OpenAI are blocked.
 
-const KEYWORDS = {
+interface KeywordMap {
+    [key: string]: string[];
+}
+
+const KEYWORDS: KeywordMap = {
     pool: ['pool', 'בריכה', 'שחייה', 'מים'],
     price: ['price', 'cost', 'money', 'מחיר', 'כמה', 'עולה', 'תשלום'],
     contact: ['contact', 'phone', 'call', 'email', 'טלפון', 'צור קשר', 'מספר', 'וואטסאפ'],
@@ -25,24 +29,30 @@ export async function POST(req: Request) {
         // 1. Check for Greeting
         if (KEYWORDS.greeting.some(k => lowerMsg.includes(k))) {
             reply = locale === 'he'
-                ? "שלום! איך אני יכול לעזור לך למצוא את החופשה המושלמת באילת?"
-                : "Hello! How can I help you find the perfect vacation in Eilat?";
+                ? "שלום! איך אני יכול לעזור לך למצוא את החופשה המושלמת באילת? אני מכיר את כל הנכסים שלנו."
+                : "Hello! How can I help you find the perfect vacation in Eilat? I know all our properties.";
         }
 
         // 2. Check for "Pool"
         else if (KEYWORDS.pool.some(k => lowerMsg.includes(k))) {
-            const poolProps = content.filter(p => JSON.stringify(p).toLowerCase().includes('pool') || JSON.stringify(p).toLowerCase().includes('בריכה'));
-            const names = poolProps.map(p => locale === 'he' ? p.titleHE : p.title).join(', ');
+            const poolProps = properties.filter(p =>
+                JSON.stringify(p).toLowerCase().includes('pool') ||
+                JSON.stringify(p).toLowerCase().includes('בריכה')
+            );
+            // Take top 3
+            const names = poolProps.slice(0, 3).map(p => p.title).join(', ');
+            const count = poolProps.length;
+
             reply = locale === 'he'
-                ? `יש לנו ${poolProps.length} דירות עם בריכה: ${names}. תרצה לראות אותן?`
-                : `We have ${poolProps.length} apartments with a pool: ${names}. Would you like to see them?`;
+                ? `יש לנו ${count} נכסים עם בריכה, למשל: ${names}... תרצה שאשלח לך קישור?`
+                : `We have ${count} properties with a pool, for example: ${names}... Would you like a link?`;
         }
 
         // 3. Check for "Price"
         else if (KEYWORDS.price.some(k => lowerMsg.includes(k))) {
             reply = locale === 'he'
-                ? "המחירים שלנו נעים בין 800₪ ל-2500₪ ללילה, תלוי בעונה ובנכס. לפרטים מדויקים, מומלץ לבחור תאריכים באתר."
-                : "Our prices range from 800₪ to 2500₪ per night, depending on the season and property. For exact rates, please select dates on the site.";
+                ? "המחירים שלנו נעים בין 400₪ ל-5000₪ ללילה, תלוי בעונה ובנכס (דירה, פנטהאוז או וילה). לפרטים מדויקים, מומלץ לבחור תאריכים באתר."
+                : "Our prices range from 400₪ to 5000₪ per night, depending on the season and property type. For exact rates, please select dates on the site.";
         }
 
         // 4. Check for "Contact"
@@ -52,16 +62,26 @@ export async function POST(req: Request) {
                 : "We are available for any question! Phone/WhatsApp: 050-522-2536.";
         }
 
-        // 5. Fallback
+        // 5. Check for "Villa"
+        else if (lowerMsg.includes('villa') || lowerMsg.includes('וילה')) {
+            const villaProps = properties.filter(p => p.type === 'villa');
+            const names = villaProps.slice(0, 3).map(p => p.title).join(', ');
+            reply = locale === 'he'
+                ? `יש לנו ${villaProps.length} וילות יוקרתיות: ${names}.`
+                : `We have ${villaProps.length} luxury villas: ${names}.`;
+        }
+
+        // 6. Fallback
         else {
             reply = locale === 'he'
-                ? "אני יכול לעזור לך למצוא דירות, לבדוק מחירים או לענות על שאלות נפוצות. נסה לשאול על 'בריכה', 'חניה' או 'מחיר'."
-                : "I can help you find apartments, check prices, or answer common questions. Try asking about 'pool', 'parking', or 'price'.";
+                ? "אני יכול לעזור לך למצוא דירות, וילות, לבדוק מחירים או לענות על שאלות. נסה לשאול על 'בריכה', 'וילות' או 'מחיר'."
+                : "I can help see apartments, villas, check prices, or answer questions. Try asking about 'pool', 'villas', or 'price'.";
         }
 
         return NextResponse.json({ reply });
 
     } catch (error: any) {
+        console.error("Local NLP Error:", error);
         return NextResponse.json({ reply: "System Error." }, { status: 500 });
     }
 }

@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Send, X, Sparkles, Mic, MicOff, Volume2, VolumeX, Maximize2, Minimize2, Loader2, StopCircle, Bot } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
 import { useLocale } from "next-intl";
 
 type Message = {

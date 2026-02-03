@@ -12,54 +12,9 @@ type Message = {
 
 export default function AiAssistant() {
     const locale = useLocale();
-    const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<Message[]>([
-        { role: "assistant", content: locale === 'he' ? "היי! אני העוזר האישי שלך. איך אפשר לעזור?" : "Hi! I'm your AI assistant. How can I help?" }
-    ]);
-    const [input, setInput] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [isListening, setIsListening] = useState(false);
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const recognitionRef = useRef<any>(null);
+    const [context, setContext] = useState<any>({}); // Memory for "follow-up" questions
 
-    useEffect(() => {
-        if (typeof window !== 'undefined' && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-            recognitionRef.current = new SpeechRecognition();
-            recognitionRef.current.continuous = false;
-            recognitionRef.current.lang = locale === 'he' ? 'he-IL' : 'en-US';
-            recognitionRef.current.interimResults = true;
-
-            recognitionRef.current.onresult = (event: any) => {
-                const transcript = event.results[0][0].transcript;
-                setInput(transcript);
-            };
-
-            recognitionRef.current.onend = () => {
-                setIsListening(false);
-            };
-        }
-    }, [locale]);
-
-    const toggleListening = () => {
-        if (!recognitionRef.current) {
-            alert(locale === 'he' ? "הדפדפן שלך לא תומך בדיבור." : "Browser does not support speech recognition.");
-            return;
-        }
-
-        if (isListening) {
-            recognitionRef.current.stop();
-        } else {
-            recognitionRef.current.start();
-            setIsListening(true);
-        }
-    };
-
-    useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-        }
-    }, [messages]);
+    // ... (Hooks) ...
 
     const handleSend = async () => {
         if (!input.trim()) return;
@@ -73,9 +28,13 @@ export default function AiAssistant() {
             const res = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMsg, locale })
+                body: JSON.stringify({ message: userMsg, locale, context }) // Send Context
             });
             const data = await res.json();
+
+            if (data.context) {
+                setContext(data.context); // Update Memory
+            }
 
             setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
         } catch (error) {
@@ -83,6 +42,25 @@ export default function AiAssistant() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    // Helper to render Markdown Links: [Text](Url)
+    const renderContent = (content: string) => {
+        const parts = content.split(/\[([^\]]+)\]\(([^)]+)\)/g);
+        if (parts.length === 1) return content;
+
+        return parts.map((part, i) => {
+            if (i % 3 === 0) return part; // Regular text
+            if (i % 3 === 1) { // Link Text
+                const url = parts[i + 1];
+                return (
+                    <a key={i} href={url} className="text-blue-600 underline font-bold hover:text-blue-800 mx-1">
+                        {part}
+                    </a>
+                );
+            }
+            return null; // Skip URL part (already handled)
+        });
     };
 
     return (
@@ -110,11 +88,11 @@ export default function AiAssistant() {
                         <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
                             {messages.map((m, i) => (
                                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-start' : 'justify-end'}`}>
-                                    <div className={`max-w-[80%] p-3 rounded-2xl ${m.role === 'user'
+                                    <div className={`max-w-[85%] p-3 rounded-2xl ${m.role === 'user'
                                         ? 'bg-blue-600 text-white rounded-br-none'
                                         : 'bg-white text-gray-800 shadow-sm border border-gold/10 rounded-bl-none'
                                         }`}>
-                                        {m.content}
+                                        {m.role === 'assistant' ? renderContent(m.content) : m.content}
                                     </div>
                                 </div>
                             ))}

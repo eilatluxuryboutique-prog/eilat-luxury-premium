@@ -9,6 +9,7 @@ import Providers from "@/app/providers";
 import ThemeProvider from "@/components/theme-provider";
 import AiAssistant from "@/components/ai-assistant";
 import CartDrawer from "@/components/features/cart-drawer";
+import Footer from "@/components/ui/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,6 +57,7 @@ export default async function RootLayout({
                             {children}
                             <AiAssistant />
                             <CartDrawer />
+                            <Footer />
                         </ThemeProvider>
                     </Providers>
                 </NextIntlClientProvider>

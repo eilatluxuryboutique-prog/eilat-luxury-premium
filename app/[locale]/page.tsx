@@ -3,6 +3,7 @@ import ApartmentsList from '@/components/features/apartments-list';
 import CategoriesList from '@/components/features/categories-list';
 import AccessibilityButton from '@/components/ui/accessibility-button';
 import { properties, Property } from '@/lib/mock-data';
+import AdvertisementsSection from '@/components/features/advertisements-section';
 import { Link } from '@/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -35,6 +36,7 @@ export default function Home() {
     return (
         <main className="min-h-screen bg-background transition-colors duration-300">
             <Hero />
+            <AdvertisementsSection />
             <CategoriesList />
 
             <div className="flex flex-col gap-8 pb-20">

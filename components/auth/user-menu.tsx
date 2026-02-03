@@ -6,7 +6,7 @@ import { User, LogOut, LayoutDashboard, ShoppingBag } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function UserMenu() {
-    const t = useTranslations('Navigation');
+    const t = useTranslations('Auth');
     const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +36,7 @@ export default function UserMenu() {
                 href="/login"
                 className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full font-medium transition-colors text-sm"
             >
-                {t('Auth.login_link')}
+                {t('login_link')}
             </Link>
         );
     }
@@ -56,8 +56,8 @@ export default function UserMenu() {
                     <div className="px-4 py-2 border-b border-white/5 mb-2">
                         <p className="text-white font-medium truncate">{user.name}</p>
                         <p className="text-white/50 text-xs truncate capitalize">
-                            {user.role === 'admin' ? t('Auth.admin_panel') :
-                                user.role === 'host' ? t('Auth.role_host_desc') : t('Auth.role_guest_desc')}
+                            {user.role === 'admin' ? t('admin_panel') :
+                                user.role === 'host' ? t('role_host_desc') : t('role_guest_desc')}
                         </p>
                     </div>
 
@@ -68,7 +68,7 @@ export default function UserMenu() {
                             onClick={() => setIsOpen(false)}
                         >
                             <LayoutDashboard size={16} />
-                            {t('Auth.business_dashboard')}
+                            {t('business_dashboard')}
                         </Link>
                     )}
 
@@ -79,7 +79,7 @@ export default function UserMenu() {
                             onClick={() => setIsOpen(false)}
                         >
                             <ShoppingBag size={16} />
-                            {t('Auth.my_account')}
+                            {t('my_account')}
                         </Link>
                     )}
 
@@ -90,7 +90,7 @@ export default function UserMenu() {
                             onClick={() => setIsOpen(false)}
                         >
                             <LayoutDashboard size={16} />
-                            {t('Auth.admin_panel')}
+                            {t('admin_panel')}
                         </Link>
                     )}
 
@@ -100,7 +100,7 @@ export default function UserMenu() {
                             className="w-full flex items-center gap-3 px-4 py-2 text-red-400 hover:bg-red-500/10 transition-colors text-left"
                         >
                             <LogOut size={16} />
-                            {t('Auth.logout')}
+                            {t('logout')}
                         </button>
                     </div>
                 </div>

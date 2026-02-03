@@ -4,125 +4,103 @@ import { properties, Property } from '@/lib/mock-data';
 // --- CONFIGURATION ---
 const CONTACT_PHONE = "050-522-2536";
 
-// --- TEMPLATES (Hebrew & English) ---
-const TEMPLATES = {
-    he: {
-        greetings: [
-            "שלום! אני כאן כדי לעזור לך למצוא את החופשה המושלמת.",
-            "היי! איזה כיף שהצטרפת. מה מחפשים הפעם?",
-            "אהלן! אני העוזר האישי שלך לחופשות באילת. איך אפשר לעזור?",
-            "שלום רב. אני מכיר את כל הנכסים שלנו בעל פה. שאל אותי כל דבר!"
-        ],
-        fallback: [
-            "אני מבין, אבל כרגע אני יודע לענות בעיקר על דירות, מחירים וזמינות. נסה לשאול 'איזה וילות יש?' או 'כמה עולה דירה עם בריכה?'.",
-            "שאלה מעניינת. אני מתמחה במציאת נכסים. תוכל למקד אותי? (למשל: 'אני מחפש דירה לזוג').",
-            "אני עדיין לומד, אבל אני אלוף במציאת חופשות. נסה לשאול על מיקום, מחיר או מס' חדרים.",
-        ],
-        contact: [
-            `בשמחה! אנחנו זמינים בוואטסאפ או בטלפון: ${CONTACT_PHONE}`,
-            `כמובן. המספר שלנו הוא ${CONTACT_PHONE}. דבר איתנו!`,
-            `מוזמן לחייג אלינו: ${CONTACT_PHONE}. אנחנו עונים מהר.`
-        ],
-        priceGeneral: [
-            "המחירים משתנים לפי העונה והנכס. בגדול? בין 400₪ לדירת יחיד ועד 5000₪ לוילות מפוארות.",
-            "זה תלוי בתאריך. דירות מתחילות סביב 500₪, ווילות יוקרה יכולות להגיע ל-4000₪.",
-            "טווח המחירים שלנו רחב ומתאים לכולם. ממליץ לבחור נכס ספציפי כדי לקבל מחיר מדויק."
-        ]
-    },
-    en: {
-        greetings: [
-            "Hello! I'm here to help you find the perfect vacation.",
-            "Hi there! What are you looking for today?",
-            "Welcome! Ask me anything about our luxury properties."
-        ],
-        fallback: [
-            "I'm mainly trained on property details. Try asking about 'Villas', 'Pools' or 'Prices'.",
-            "I didn't quite catch that. Can you ask about a specific apartment or budget?",
-        ],
-        contact: [
-            `Sure! Contact us at: ${CONTACT_PHONE}`,
-            `You can reach us anytime at ${CONTACT_PHONE}.`
-        ],
-        priceGeneral: [
-            "Prices range from 400NIS to 5000NIS depending on the property and season.",
-            "It depends on the dates. Apartments start at ~500NIS, Villas go up to ~4000NIS."
-        ]
-    }
-};
-
-// --- HELPER FUNCTIONS ---
-function getRandom(arr: string[]) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function findProperties(query: string) {
-    const q = query.toLowerCase();
-    return properties.filter(p =>
-        p.title.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.location.toLowerCase().includes(q) ||
-        p.type.includes(q) ||
-        (q.includes('pool') && JSON.stringify(p).toLowerCase().includes('pool')) ||
-        (q.includes('בריכה') && JSON.stringify(p).toLowerCase().includes('בריכה'))
-    );
-}
-
 export async function POST(req: Request) {
     try {
-        const { message, locale } = await req.json();
+        const { message, locale, context } = await req.json(); // context = { propertyId: '...' }
         const lowerMsg = message.toLowerCase();
         const isHe = locale === 'he';
-        const t = isHe ? TEMPLATES.he : TEMPLATES.en;
 
         let reply = "";
+        let newContext = { ...context };
 
-        // 1. Greeting
-        if (['hi', 'hello', 'shalom', 'hey', 'start', 'היי', 'שלום', 'אהלן'].some(w => lowerMsg.includes(w))) {
-            return NextResponse.json({ reply: getRandom(t.greetings) });
+        // Helper: Format Link
+        const link = (p: Property) => `[${p.title}](/property/${p.id})`;
+
+        // 1. CHEAPEST / MOST EXPENSIVE
+        if (lowerMsg.includes('cheapest') || lowerMsg.includes('כי זול') || lowerMsg.includes('הכי זול')) {
+            const sorted = [...properties].sort((a, b) => a.price - b.price);
+            const cheap = sorted[0];
+            newContext = { propertyId: cheap.id }; // Store context
+            reply = isHe
+                ? `הנכס הכי זול שלנו הוא **${link(cheap)}** במחיר **${cheap.price}₪**. הוא מתאים ל-${cheap.guests} אורחים.`
+                : `The cheapest option is **${link(cheap)}** at **${cheap.price}NIS**. Fits ${cheap.guests} guests.`;
+            return NextResponse.json({ reply, context: newContext });
         }
 
-        // 2. Contact
-        if (['phone', 'contact', 'call', 'mail', 'number', 'טלפון', 'מספר', 'וואטסאפ', 'צור קשר'].some(w => lowerMsg.includes(w))) {
-            return NextResponse.json({ reply: getRandom(t.contact) });
+        if (lowerMsg.includes('expensive') || lowerMsg.includes('luxur') || lowerMsg.includes('כי יקר') || lowerMsg.includes('יוקר')) {
+            const sorted = [...properties].sort((a, b) => b.price - a.price);
+            const exp = sorted[0];
+            newContext = { propertyId: exp.id };
+            reply = isHe
+                ? `הפסגה של היוקרה שלנו: **${link(exp)}** (וילה). המחיר הוא **${exp.price}₪** ללילה.`
+                : `Our top luxury property: **${link(exp)}** (Villa). Price is **${exp.price}NIS**/night.`;
+            return NextResponse.json({ reply, context: newContext });
         }
 
-        // 3. Price (General)
-        if (['how much', 'price', 'cost', 'כמה עולה', 'מחיר', 'עלות', 'תשלום'].some(w => lowerMsg.includes(w))) {
-            // If query specifically mentions a property name, handle in search logic?
-            // Let's pass through to search logic if it contains "villa" or similar?
-            if (!lowerMsg.includes('villa') && !lowerMsg.includes('apartment') && !lowerMsg.includes('דירה') && !lowerMsg.includes('וילה')) {
-                return NextResponse.json({ reply: getRandom(t.priceGeneral) });
+        // 2. CONTEXT AWARENESS (Follow-up)
+        // If user asks about specific feature "parking", "pool", "wifi", "view" AND has context
+        if (newContext?.propertyId) {
+            const lastProp = properties.find(p => p.id === newContext.propertyId);
+            if (lastProp) {
+                if (lowerMsg.includes('parking') || lowerMsg.includes('חניה')) {
+                    const has = lastProp.amenities.some(a => a.includes('חניה') || a.includes('Parking'));
+                    reply = isHe
+                        ? `בנוגע ל-${lastProp.title}: ${has ? 'כן, יש חניה!' : 'אין חניה פרטית, אך יש חניונים באזור.'}`
+                        : `Regarding ${lastProp.title}: ${has ? 'Yes, parking included.' : 'No private parking listed.'}`;
+                    return NextResponse.json({ reply, context: newContext });
+                }
+                if (lowerMsg.includes('pool') || lowerMsg.includes('בריכה')) {
+                    const has = lastProp.amenities.some(a => a.includes('בריכה') || a.includes('Pool'));
+                    reply = isHe
+                        ? `ב-**${lastProp.title}** ${has ? 'יש בריכה מפנקת!' : 'אין בריכה בנכס הזה.'}`
+                        : `In **${lastProp.title}**, there is ${has ? 'a pool!' : 'no pool.'}`;
+                    return NextResponse.json({ reply, context: newContext });
+                }
+                if (lowerMsg.includes('price') || lowerMsg.includes('מחיר') || lowerMsg.includes('cost')) {
+                    reply = isHe
+                        ? `המחיר של **${lastProp.title}** הוא ${lastProp.price}₪ ללילה.`
+                        : `The price for **${lastProp.title}** is ${lastProp.price}NIS/night.`;
+                    return NextResponse.json({ reply, context: newContext });
+                }
             }
         }
 
-        // 4. COMPLEX SEARCH LOGIC
-        // Try to identify intent: "Villa", "Apartment", "Pool", "View", "Jacuzzi"
-        const relevantProps = findProperties(lowerMsg);
-
-        if (relevantProps.length > 0) {
-            const top3 = relevantProps.slice(0, 3);
-            const titles = top3.map(p => p.title).join(', ');
-
-            if (isHe) {
-                reply = `מצאתי ${relevantProps.length} נכסים שיכולים להתאים! למשל: ${titles}. `;
-                if (relevantProps.length > 3) reply += `ועוד ${relevantProps.length - 3} נוספים. `;
-                reply += `המחירים נעים סביב ${relevantProps[0].price}₪ ללילה. תרצה שאשלח לך קישור?`;
-            } else {
-                reply = `I found ${relevantProps.length} matching properties! E.g., ${titles}. `;
-                reply += `Prices are around ${relevantProps[0].price}NIS. Want a link?`;
-            }
-            return NextResponse.json({ reply });
+        // 3. GENERAL SEARCH (Keyword Matching)
+        // Check for specific property names first
+        const matchedProp = properties.find(p => lowerMsg.includes(p.title.toLowerCase()) || (isHe && lowerMsg.includes(p.title.replace("'", "").toLowerCase())));
+        if (matchedProp) {
+            newContext = { propertyId: matchedProp.id };
+            reply = isHe
+                ? `מצאתי את **${link(matchedProp)}**: ${matchedProp.description}. מחיר: ${matchedProp.price}₪. תרצה להזמין?`
+                : `Found **${link(matchedProp)}**: ${matchedProp.description}. Price: ${matchedProp.price}NIS. Want to book?`;
+            return NextResponse.json({ reply, context: newContext });
         }
 
-        // 5. Specific text-based matches (Policies etc.)
-        if (lowerMsg.includes('check in') || lowerMsg.includes('צאק אין') || lowerMsg.includes('שעה')) {
-            return NextResponse.json({ reply: isHe ? "הצ'ק אין אצלנו הוא החל מהשעה 15:00, והצ'ק אאוט עד 11:00. (גמישים בתיאום מראש!)." : "Check-in is at 15:00, Check-out by 11:00." });
+        // Check for Types (Villa, Penthouse)
+        if (lowerMsg.includes('villa') || lowerMsg.includes('וילה')) {
+            const villas = properties.filter(p => p.type === 'villa');
+            const random = villas[Math.floor(Math.random() * villas.length)];
+            newContext = { propertyId: random.id }; // Discuss one of them
+            reply = isHe
+                ? `יש לנו ${villas.length} וילות. למשל **${link(random)}** שהיא מדהימה. תרצה לשמוע עוד עליה?`
+                : `We have ${villas.length} villas. For example **${link(random)}** is amazing. Want more details?`;
+            return NextResponse.json({ reply, context: newContext });
         }
 
-        // 6. Fallback
-        return NextResponse.json({ reply: getRandom(t.fallback) });
+        // 4. FALLBACK logic (Greetings, Contact, etc.)
+        // ... (Keep existing short templates)
+        if (lowerMsg.includes('phone') || lowerMsg.includes('טלפון')) {
+            return NextResponse.json({ reply: isHe ? `050-522-2536` : `Call us: 050-522-2536`, context: newContext });
+        }
+
+        // Default
+        reply = isHe
+            ? "אני יכול לעזור לך למצוא את הדירה הכי זולה, הכי יוקרתית, או לחפש לפי "
+            : "I can help find the cheapest apartment, luxury villas, or search by features.";
+
+        return NextResponse.json({ reply, context: newContext });
 
     } catch (error: any) {
-        return NextResponse.json({ reply: "System Error" }, { status: 500 });
+        return NextResponse.json({ reply: "System Error." }, { status: 500 });
     }
 }

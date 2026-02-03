@@ -56,6 +56,9 @@ export async function POST(req: Request) {
 
     } catch (error) {
         console.error('Chat Error:', error);
-        return NextResponse.json({ reply: "סליחה, יש לי תקלה בחיבור למוח (System Error)." }, { status: 500 });
+    } catch (error: any) {
+        console.error('Chat Error:', error);
+        return NextResponse.json({ reply: `Error: ${error.message || error}` }, { status: 500 });
     }
+}
 }

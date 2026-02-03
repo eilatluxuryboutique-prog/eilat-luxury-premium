@@ -99,7 +99,7 @@ export default function AiAssistant() {
                         <div className="bg-gradient-to-r from-gold/80 to-gold text-black p-4 flex justify-between items-center">
                             <div className="flex items-center gap-2">
                                 <Bot className="w-6 h-6" />
-                                <span className="font-bold">Eilat AI Assistant</span>
+                                <span className="font-bold">{locale === 'he' ? "היי, איך אני יכול לעזור?" : "Hey, how can I help?"}</span>
                             </div>
                             <button onClick={() => setIsOpen(false)} className="hover:bg-white/20 rounded-full p-1">
                                 <X className="w-5 h-5" />

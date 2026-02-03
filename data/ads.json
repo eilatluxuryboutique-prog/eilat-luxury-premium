@@ -5,7 +5,8 @@
         "ads": [
             {
                 "id": "ad-1-1",
-                "image": "https://images.unsplash.com/photo-1540541338287-41700207dee6",
+                "type": "video",
+                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
                 "link": "/search?type=hotel",
                 "title": "Luxury Hotels"
             }
@@ -17,7 +18,8 @@
         "ads": [
             {
                 "id": "ad-2-1",
-                "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427",
+                "type": "video",
+                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
                 "link": "/search?type=villa",
                 "title": "Private Villas"
             }
@@ -29,7 +31,8 @@
         "ads": [
             {
                 "id": "ad-3-1",
-                "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+                "type": "video",
+                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
                 "link": "/search?type=apartment",
                 "title": "Cozy Apartments"
             }
@@ -41,7 +44,8 @@
         "ads": [
             {
                 "id": "ad-4-1",
-                "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+                "type": "video",
+                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
                 "link": "/contact",
                 "title": "Contact Us"
             }

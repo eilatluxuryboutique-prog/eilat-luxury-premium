@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus, Trash, Save, ImageIcon, Link as LinkIcon, Type } from "lucide-react";
+import { Plus, Trash, Save, ImageIcon, Link as LinkIcon, Type, Video, Image as ImgIcon } from "lucide-react";
 
 type Ad = {
     id: string;
-    image: string;
+    type: 'image' | 'video';
+    media: string;
     link: string;
     title?: string;
 };
@@ -52,7 +53,7 @@ export default function AdsTab() {
             if (b.id === bannerId) {
                 return {
                     ...b,
-                    ads: [...b.ads, { id: Date.now().toString(), image: '', link: '', title: '' }]
+                    ads: [...b.ads, { id: Date.now().toString(), type: 'video', media: '', link: '', title: '' }]
                 };
             }
             return b;
@@ -71,7 +72,7 @@ export default function AdsTab() {
         }));
     };
 
-    const updateAd = (bannerId: string, adId: string, field: keyof Ad, value: string) => {
+    const updateAd = (bannerId: string, adId: string, field: keyof Ad, value: any) => {
         setBanners(prev => prev.map(b => {
             if (b.id === bannerId) {
                 return {
@@ -95,7 +96,7 @@ export default function AdsTab() {
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h2 className="text-2xl font-bold text-white">Manage Advertisements</h2>
-                    <p className="text-neutral-400">Configure the 4 banners on the homepage.</p>
+                    <p className="text-neutral-400">Configure the 4 banners (Videos/Images).</p>
                 </div>
                 <button
                     onClick={handleSave}
@@ -120,19 +121,36 @@ export default function AdsTab() {
                                 <div key={ad.id} className="bg-black/40 p-4 rounded-lg border border-white/5 relative group">
                                     <button
                                         onClick={() => removeAd(banner.id, ad.id)}
-                                        className="absolute top-2 right-2 text-neutral-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                                        className="absolute top-2 right-2 text-neutral-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity z-10"
                                         title="Remove Ad"
                                     >
                                         <Trash size={16} />
                                     </button>
+
                                     <div className="space-y-3">
+                                        {/* Type Selector */}
+                                        <div className="flex gap-2 mb-2">
+                                            <button
+                                                onClick={() => updateAd(banner.id, ad.id, 'type', 'video')}
+                                                className={`flex-1 flex items-center justify-center gap-2 py-1 rounded text-xs ${ad.type === 'video' ? 'bg-gold text-black font-bold' : 'bg-white/5 text-neutral-400 hover:bg-white/10'}`}
+                                            >
+                                                <Video size={14} /> Video
+                                            </button>
+                                            <button
+                                                onClick={() => updateAd(banner.id, ad.id, 'type', 'image')}
+                                                className={`flex-1 flex items-center justify-center gap-2 py-1 rounded text-xs ${ad.type === 'image' ? 'bg-gold text-black font-bold' : 'bg-white/5 text-neutral-400 hover:bg-white/10'}`}
+                                            >
+                                                <ImgIcon size={14} /> Image
+                                            </button>
+                                        </div>
+
                                         <div className="flex items-center gap-3">
-                                            <ImageIcon size={16} className="text-neutral-500" />
+                                            {ad.type === 'video' ? <Video size={16} className="text-neutral-500" /> : <ImageIcon size={16} className="text-neutral-500" />}
                                             <input
                                                 type="text"
-                                                placeholder="Image URL"
-                                                value={ad.image}
-                                                onChange={(e) => updateAd(banner.id, ad.id, 'image', e.target.value)}
+                                                placeholder={ad.type === 'video' ? "Video URL (mp4/webm)" : "Image URL"}
+                                                value={ad.media || ''}
+                                                onChange={(e) => updateAd(banner.id, ad.id, 'media', e.target.value)}
                                                 className="bg-transparent border-b border-white/20 w-full text-sm text-white focus:border-gold outline-none py-1"
                                             />
                                         </div>
@@ -140,7 +158,7 @@ export default function AdsTab() {
                                             <LinkIcon size={16} className="text-neutral-500" />
                                             <input
                                                 type="text"
-                                                placeholder="Link URL (e.g., /search?type=hotel)"
+                                                placeholder="Link URL"
                                                 value={ad.link}
                                                 onChange={(e) => updateAd(banner.id, ad.id, 'link', e.target.value)}
                                                 className="bg-transparent border-b border-white/20 w-full text-sm text-white focus:border-gold outline-none py-1"
@@ -150,7 +168,7 @@ export default function AdsTab() {
                                             <Type size={16} className="text-neutral-500" />
                                             <input
                                                 type="text"
-                                                placeholder="Title (Optional)"
+                                                placeholder="Title"
                                                 value={ad.title || ''}
                                                 onChange={(e) => updateAd(banner.id, ad.id, 'title', e.target.value)}
                                                 className="bg-transparent border-b border-white/20 w-full text-sm text-white focus:border-gold outline-none py-1"
@@ -158,7 +176,7 @@ export default function AdsTab() {
                                         </div>
                                     </div>
                                     <div className="mt-2 text-xs text-neutral-600">
-                                        Ad #{i + 1} in Rotation
+                                        Ad #{i + 1} ({ad.type})
                                     </div>
                                 </div>
                             ))}
@@ -166,10 +184,10 @@ export default function AdsTab() {
 
                         <button
                             onClick={() => addAd(banner.id)}
-                            className="w-full mt-4 border border-dashed border-white/20 hover:border-gold text-neutral-400 hover:text-gold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors test-sm"
+                            className="w-full mt-4 border border-dashed border-white/20 hover:border-gold text-neutral-400 hover:text-gold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors key-sm"
                         >
                             <Plus size={16} />
-                            Add another Ad to Rotation
+                            Add Video/Image
                         </button>
                     </div>
                 ))}

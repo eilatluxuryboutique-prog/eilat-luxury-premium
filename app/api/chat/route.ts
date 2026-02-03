@@ -54,11 +54,8 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ reply: text });
 
-    } catch (error) {
-        console.error('Chat Error:', error);
     } catch (error: any) {
         console.error('Chat Error:', error);
         return NextResponse.json({ reply: `Error: ${error.message || error}` }, { status: 500 });
     }
-}
 }

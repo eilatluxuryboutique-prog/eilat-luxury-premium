@@ -1,50 +1,61 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
-import Content from '@/models/Content';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import content from '@/data/content.json';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
     try {
         const { message, locale } = await req.json();
-        const lowerMsg = message.toLowerCase();
+        const apiKey = process.env.GEMINI_API_KEY;
 
-        // Connect DB to fetch real content
-        await dbConnect();
-
-        let reply = "";
-
-        // Simple Keyword Matching (Mock AI)
-        if (lowerMsg.includes('pool') || lowerMsg.includes('בריכה')) {
-            reply = locale === 'he'
-                ? "כן! יש לנו דירות מרהיבות עם בריכה. הפנטהאוז שלנו ברויאל ביץ' כולל בריכה פרטית."
-                : "Yes! We have amazing apartments with pools. Our Royal Beach Penthouse features a private pool.";
-        }
-        else if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('מחיר') || lowerMsg.includes('כמה')) {
-            reply = locale === 'he'
-                ? "המחירים משתנים לפי העונה. טווח המחירים הוא בין ₪800 ל-₪2500 ללילה. תרצה שאבדוק זמינות?"
-                : "Prices vary by season, ranging from 800₪ to 2500₪ per night. Would you like me to check availability?";
-        }
-        else if (lowerMsg.includes('contact') || lowerMsg.includes('phone') || lowerMsg.includes('טלפון') || lowerMsg.includes('צור קשר')) {
-            reply = locale === 'he'
-                ? "תוכל ליצור קשר בטלפון: 050-522-2536 או בוואטסאפ."
-                : "You can reach us at 050-522-2536 or via WhatsApp.";
-        }
-        else if (lowerMsg.includes('location') || lowerMsg.includes('where') || lowerMsg.includes('מיקום') || lowerMsg.includes('איפה')) {
-            reply = locale === 'he'
-                ? "הדירות שלנו נמצאות במיקומים הכי טובים באילת: רויאל ביץ', מגדלי אילת, ואיזור המלונות."
-                : "Our apartments are in prime locations: Royal Beach, Eilat Towers, and the hotel zone.";
-        }
-        else {
-            reply = locale === 'he'
-                ? "אני עוזר AI חכם (בשלבי למידה). אני יכול לעזור לך למצוא דירה, לבדוק מחירים או לענות על שאלות. מה תרצה לדעת?"
-                : "I am a smart AI assistant (still learning). I can help you find an apartment, check prices, or answer questions. What would you like to know?";
+        // If no API key, use fallback mock (user still needs to provide key)
+        if (!apiKey) {
+            console.log("No GEMINI_API_KEY found. Using Mock.");
+            const lowerMsg = message.toLowerCase();
+            let reply = "";
+            if (lowerMsg.includes('pool') || lowerMsg.includes('בריכה')) {
+                reply = locale === 'he'
+                    ? "כן! יש לנו דירות מרהיבות עם בריכה. הפנטהאוז שלנו ברויאל ביץ' כולל בריכה פרטית."
+                    : "Yes! We have amazing apartments with pools. Our Royal Beach Penthouse features a private pool.";
+            } else {
+                reply = locale === 'he'
+                    ? "כדי שאהיה חכם באמת, המנהל שלי צריך להוסיף מפתח API (Gemini Key). כרגע אני במצב הדגמה."
+                    : "To be truly smart, my admin needs to configure the Gemini API Key. I am in demo mode.";
+            }
+            return NextResponse.json({ reply });
         }
 
-        return NextResponse.json({ reply });
+        // Real AI Logic
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        const systemPrompt = `
+        You are "Eilat Luxury Assistant", a helpful, polite, and professional agent for a luxury vacation rental business in Eilat, Israel.
+        Your Goal: Help users find the perfect apartment, answer questions about policies, and assist with booking inquiries.
+        
+        Inventory Data:
+        ${JSON.stringify(content)}
+
+        Instructions:
+        1. Always answer in the language requested: ${locale === 'he' ? 'Hebrew (עברית)' : 'English'}.
+        2. Be concise but warm. Use emojis occasionally (🏖️, ☀️).
+        3. Only recommend properties from the provided data. Do not invent properties.
+        4. If the user asks for contact info, provide: 050-522-2536.
+        5. If asked about prices, say "Prices vary by season, typically 800-2500 NIS per night."
+        
+        User Query: ${message}
+        `;
+
+        const result = await model.generateContent(systemPrompt);
+        const response = await result.response;
+        const text = response.text();
+
+        return NextResponse.json({ reply: text });
 
     } catch (error) {
         console.error('Chat Error:', error);
-        return NextResponse.json({ reply: "Sorry, I am having a bad hair day." }, { status: 500 });
+        return NextResponse.json({ reply: locale === 'he' ? "סליחה, יש לי תקלה בחיבור למוח." : "Sorry, I am having trouble connecting to my brain." }, { status: 500 });
     }
 }

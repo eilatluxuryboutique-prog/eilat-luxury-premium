@@ -8,6 +8,7 @@ import Header from "@/components/ui/header";
 import Providers from "@/app/providers";
 import ThemeProvider from "@/components/theme-provider";
 import AiAssistant from "@/components/ai-assistant";
+import CartDrawer from "@/components/features/cart-drawer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,6 +55,7 @@ export default async function RootLayout({
                             <Header initialData={siteContent || {}} />
                             {children}
                             <AiAssistant />
+                            <CartDrawer />
                         </ThemeProvider>
                     </Providers>
                 </NextIntlClientProvider>

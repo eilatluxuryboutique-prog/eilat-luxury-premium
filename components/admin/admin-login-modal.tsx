@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, X, ChevronRight } from 'lucide-react';
+import { Lock, X, ChevronRight, Megaphone, Image as ImageIcon } from 'lucide-react';
 import { useRouter } from '@/navigation';
+import AdsTab from './ads-tab';
 
 interface AdminLoginModalProps {
     isOpen: boolean;

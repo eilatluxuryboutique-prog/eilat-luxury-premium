@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, X, ChevronRight, Megaphone, Image as ImageIcon } from 'lucide-react';
+import { Lock, X, ChevronRight, Megaphone, Image as ImageIcon, Settings, LayoutDashboard, FileText, LogOut, Check } from 'lucide-react';
 import { useRouter } from '@/navigation';
+import ContentTab from './content-tab';
+import MediaTab from './media-tab';
+import AdminTab from './settings-tab';
 import AdsTab from './ads-tab';
 
 interface AdminLoginModalProps {

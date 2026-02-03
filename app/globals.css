@@ -4,11 +4,19 @@
   --background: #121212;
   --foreground: #ffffff;
   --primary: #FFD700;
-  /* Gold */
   --card: #1E1E1E;
   --card-foreground: #ffffff;
   --accent: #FFD700;
   --accent-foreground: #000000;
+}
+
+.light {
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --primary: #E6C200;
+  /* Darker Gold for visibility on white */
 }
 
 @theme inline {

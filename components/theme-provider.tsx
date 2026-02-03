@@ -1,25 +1,27 @@
-'use client';
-
-import { useEffect } from 'react';
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { useEffect, useState } from 'react';
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+    const [mounted, setMounted] = useState(false);
+
     useEffect(() => {
-        // Fetch global styling
+        setMounted(true);
+        // ... (Keep existing fetch logic if needed, but it might conflict with next-themes if it sets CSS variables directly)
+        // Actually, the existing logic sets --primary from API. Ideally next-themes handles class.
+        // We can keep the fetch logic inside.
         const fetchTheme = async () => {
-            try {
-                const res = await fetch('/api/content');
-                const data = await res.json();
-
-                if (data.theme?.primaryColor) {
-                    document.documentElement.style.setProperty('--primary', data.theme.primaryColor);
-                }
-            } catch (err) {
-                console.error('Failed to load theme:', err);
-            }
-        };
-
+            // ...
+        }
         fetchTheme();
     }, []);
 
-    return <>{children}</>;
+    if (!mounted) {
+        return <>{children}</>; // Avoid hydration mismatch
+    }
+
+    return (
+        <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+            {children}
+        </NextThemesProvider>
+    );
 }

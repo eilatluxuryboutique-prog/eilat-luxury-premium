@@ -7,6 +7,7 @@ import { Lock } from 'lucide-react';
 import LanguageSwitcher from './language-switcher';
 import MobileMenu from './mobile-menu';
 import UserMenu from '../auth/user-menu';
+import CartIcon from '../features/cart-icon';
 
 export default function Header({ initialData }: { initialData?: any }) {
     const t = useTranslations('Navigation');
@@ -39,6 +40,7 @@ export default function Header({ initialData }: { initialData?: any }) {
 
                 <div className="flex items-center gap-4">
                     <UserMenu />
+                    <CartIcon />
                     <LanguageSwitcher />
                     <MobileMenu />
                 </div>

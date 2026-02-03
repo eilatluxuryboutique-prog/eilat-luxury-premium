@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { MapPin, Users, Bed, Wifi, Star, Check } from 'lucide-react';
 import { Link } from '@/navigation';
+import AddToCartButton from '@/components/features/add-to-cart';
 
 export default async function PropertyPage(props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
@@ -126,6 +127,8 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                             >
                                 {t('book_now')}
                             </Link>
+
+                            <AddToCartButton property={property} />
 
                             <p className="text-center text-xs text-neutral-500">
                                 {t('not_charged')}

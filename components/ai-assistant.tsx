@@ -112,7 +112,7 @@ export default function AiAssistant() {
     };
 
     return (
-        <>
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -199,6 +199,6 @@ export default function AiAssistant() {
                     className="object-cover p-1"
                 />
             </motion.button>
-        </div >
+        </div>
     );
 }

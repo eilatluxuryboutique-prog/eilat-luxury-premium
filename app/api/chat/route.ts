@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
         // Real AI Logic
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
         const systemPrompt = `
         You are "Eilat Luxury Assistant", a helpful, polite, and professional agent for a luxury vacation rental business in Eilat, Israel.

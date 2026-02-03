@@ -111,7 +111,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
 
                         {/* Dropdown Menu */}
                         {openDropdown === 'type' && (
-                            <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
+                            <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-48 bg-card border border-border rounded-xl shadow-xl overflow-hidden z-40">
                                 {[
                                     { label: tSearch('types.all'), value: '' },
                                     { label: tSearch('types.hotel'), value: 'hotel' },
@@ -124,7 +124,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                                             setSearchParams({ ...searchParams, type: item.value });
                                             setOpenDropdown(null);
                                         }}
-                                        className="w-full text-right px-4 py-3 text-white hover:bg-gold/20 transition-colors border-b border-white/5 last:border-0"
+                                        className="w-full text-right px-4 py-3 text-foreground hover:bg-muted transition-colors border-b border-border last:border-0"
                                     >
                                         {item.label}
                                     </button>
@@ -169,22 +169,22 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
 
                         {/* Date Range Popover */}
                         {openDropdown === 'dates' && (
-                            <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-64 bg-gray-900 border border-gold/30 rounded-xl shadow-xl p-4 z-40 flex flex-col gap-3">
+                            <div className="absolute top-full right-0 mt-2 md:mt-4 w-full md:w-64 bg-card border border-border rounded-xl shadow-xl p-4 z-40 flex flex-col gap-3">
                                 <div>
-                                    <label className="text-xs text-neutral-400 block mb-1">{tSearch('check_in')}</label>
+                                    <label className="text-xs text-muted-foreground block mb-1">{tSearch('check_in')}</label>
                                     <input
                                         type="date"
-                                        className="w-full bg-neutral-800 text-white rounded p-2 focus:ring-1 focus:ring-gold outline-none [color-scheme:dark]"
+                                        className="w-full bg-muted text-foreground rounded p-2 focus:ring-1 focus:ring-primary outline-none"
                                         value={searchParams.checkIn}
                                         onChange={(e) => setSearchParams({ ...searchParams, checkIn: e.target.value })}
                                         min={new Date().toISOString().split('T')[0]}
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-neutral-400 block mb-1">{tSearch('check_out')}</label>
+                                    <label className="text-xs text-muted-foreground block mb-1">{tSearch('check_out')}</label>
                                     <input
                                         type="date"
-                                        className="w-full bg-neutral-800 text-white rounded p-2 focus:ring-1 focus:ring-gold outline-none [color-scheme:dark]"
+                                        className="w-full bg-muted text-foreground rounded p-2 focus:ring-1 focus:ring-primary outline-none"
                                         value={searchParams.checkOut}
                                         onChange={(e) => setSearchParams({ ...searchParams, checkOut: e.target.value })}
                                         min={searchParams.checkIn || new Date().toISOString().split('T')[0]}
@@ -192,7 +192,7 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
                                 </div>
                                 <button
                                     onClick={() => setOpenDropdown(null)}
-                                    className="bg-gold text-black font-bold py-2 rounded mt-2 hover:bg-gold-light"
+                                    className="bg-primary text-black font-bold py-2 rounded mt-2 hover:brightness-110"
                                 >
                                     {tSearch('confirm')}
                                 </button>
@@ -220,15 +220,15 @@ export default function Hero({ initialVideoUrl }: { initialVideoUrl?: string }) 
 
                         {/* Guests Dropdown */}
                         {openDropdown === 'guests' && (
-                            <div className="absolute top-full left-0 mt-2 md:mt-4 w-full md:w-48 bg-gray-900 border border-gold/30 rounded-xl shadow-xl overflow-hidden z-40">
+                            <div className="absolute top-full left-0 mt-2 md:mt-4 w-full md:w-48 bg-card border border-border rounded-xl shadow-xl overflow-hidden z-40">
                                 <div className="flex items-center justify-between p-4">
-                                    <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.max(1, p.guests - 1) }))} className="w-8 h-8 bg-gray-800 rounded-full text-white hover:bg-gray-700">-</button>
-                                    <span className="text-white font-bold text-xl">{searchParams.guests}</span>
-                                    <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.min(20, p.guests + 1) }))} className="w-8 h-8 bg-gold text-black rounded-full hover:bg-gold-light">+</button>
+                                    <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.max(1, p.guests - 1) }))} className="w-8 h-8 bg-muted rounded-full text-foreground hover:bg-gray-200">-</button>
+                                    <span className="text-foreground font-bold text-xl">{searchParams.guests}</span>
+                                    <button onClick={() => setSearchParams(p => ({ ...p, guests: Math.min(20, p.guests + 1) }))} className="w-8 h-8 bg-primary text-black rounded-full hover:brightness-110">+</button>
                                 </div>
                                 <button
                                     onClick={() => setOpenDropdown(null)}
-                                    className="w-full bg-white/5 text-gold py-2 text-sm hover:bg-white/10"
+                                    className="w-full bg-muted text-primary py-2 text-sm hover:brightness-95"
                                 >
                                     {tSearch('close')}
                                 </button>

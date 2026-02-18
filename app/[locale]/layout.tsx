@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Rubik } from "next/font/google";
 import "../globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -10,15 +10,52 @@ import ThemeProvider from "@/components/theme-provider";
 import AiAssistant from "@/components/ai-assistant";
 import CartDrawer from "@/components/features/cart-drawer";
 import Footer from "@/components/ui/footer";
+import BottomNav from "@/components/ui/bottom-nav";
+import AccessibilityButton from "@/components/ui/accessibility-button";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
+import { CompareProvider } from "@/components/features/compare-context";
+import CompareBar from "@/components/features/compare-bar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+const rubik = Rubik({ subsets: ["hebrew", "latin"], variable: '--font-rubik' });
 
 export const metadata: Metadata = {
-    title: "Eilat Booking Premium",
-    description: "Luxury vacation apartments in Eilat",
+    title: {
+        default: "Eilat Booking Premium | Luxury Vacation Rentals",
+        template: "%s | Eilat Booking Premium"
+    },
+    description: "Discover exclusive luxury apartments, villas, and boutique hotels in Eilat. Book your perfect premium vacation today.",
+    keywords: ["Eilat", "Vacation", "Luxury", "Apartments", "Villas", "Booking", "Israel", "Travel", "Red Sea"],
+    authors: [{ name: "Eilat Luxury Team" }],
+    creator: "Eilat Luxury Premium",
+    publisher: "Eilat Luxury Premium",
+    openGraph: {
+        title: "Eilat Booking Premium | The Best Vacation 2026",
+        description: "Experience the ultimate luxury in Eilat. Handpicked villas and apartments for an unforgettable stay.",
+        url: "https://eilat-booking-premium.vercel.app",
+        siteName: "Eilat Booking Premium",
+        images: [
+            {
+                url: "/og-image.jpg", // Assuming we will add this later or use a cloud URL
+                width: 1200,
+                height: 630,
+                alt: "Eilat Luxury Vacation View",
+            },
+        ],
+        locale: "he_IL",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Eilat Booking Premium",
+        description: "Your gateway to a luxury vacation in Eilat.",
+        images: ["/og-image.jpg"],
+    },
     icons: {
         icon: '/globe.svg',
-    }
+        apple: '/globe.svg',
+    },
+    manifest: '/site.webmanifest',
 };
 
 export const dynamic = 'force-dynamic';
@@ -49,15 +86,23 @@ export default async function RootLayout({
 
     return (
         <html lang={locale} dir={dir}>
-            <body className={inter.className}>
+            <body className={`${rubik.className} ${inter.variable} ${rubik.variable} antialiased`}>
                 <NextIntlClientProvider messages={messages}>
                     <Providers>
                         <ThemeProvider>
-                            <Header initialData={siteContent || {}} />
-                            {children}
-                            <AiAssistant />
-                            <CartDrawer />
-                            <Footer />
+                            <CompareProvider>
+                                <Header initialData={siteContent || {}} />
+                                <main className="pb-20 md:pb-0">
+                                    {children}
+                                </main>
+                                <AiAssistant />
+                                <AccessibilityButton />
+                                <CartDrawer />
+                                <CompareBar />
+                                <BottomNav />
+                                <WhatsAppButton />
+                                <Footer />
+                            </CompareProvider>
                         </ThemeProvider>
                     </Providers>
                 </NextIntlClientProvider>

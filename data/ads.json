@@ -1,53 +1,53 @@
 [
     {
-        "id": "banner-1",
-        "name": "Banner 1",
+        "id": "ad-dolphin-reef",
+        "name": "Dolphin Reef Eilat",
         "ads": [
             {
-                "id": "ad-1-1",
+                "id": "ad-dr-1",
                 "type": "video",
-                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
-                "link": "/search?type=hotel",
-                "title": "Luxury Hotels"
+                "media": "https://videos.pexels.com/video-files/2493547/2493547-uhd_2560_1440_24fps.mp4",
+                "link": "https://www.dolphinreef.co.il/",
+                "title": "ריף הדולפינים - חוויה בלב הטבע"
             }
         ]
     },
     {
-        "id": "banner-2",
-        "name": "Banner 2",
+        "id": "ad-whale-eilat",
+        "name": "Whale Eilat",
         "ads": [
             {
-                "id": "ad-2-1",
+                "id": "ad-we-1",
                 "type": "video",
-                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
-                "link": "/search?type=villa",
-                "title": "Private Villas"
+                "media": "https://videos.pexels.com/video-files/2628905/2628905-uhd_2560_1440_24fps.mp4",
+                "link": "https://whale-restaurant.co.il/",
+                "title": "מסעדת לווייתן - שף וים"
             }
         ]
     },
     {
-        "id": "banner-3",
-        "name": "Banner 3",
+        "id": "ad-ice-mall",
+        "name": "Ice Mall Eilat",
         "ads": [
             {
-                "id": "ad-3-1",
+                "id": "ad-im-1",
                 "type": "video",
-                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
-                "link": "/search?type=apartment",
-                "title": "Cozy Apartments"
+                "media": "https://videos.pexels.com/video-files/3248235/3248235-uhd_2560_1440_25fps.mp4",
+                "link": "https://icemall.co.il/",
+                "title": "אייס מול - שופינג ובילויים"
             }
         ]
     },
     {
-        "id": "banner-4",
-        "name": "Banner 4",
+        "id": "ad-observatory",
+        "name": "Underwater Observatory",
         "ads": [
             {
-                "id": "ad-4-1",
+                "id": "ad-uo-1",
                 "type": "video",
-                "media": "https://res.cloudinary.com/demo/video/upload/v1687250325/sea_turtle.mp4",
-                "link": "/contact",
-                "title": "Contact Us"
+                "media": "https://videos.pexels.com/video-files/3029272/3029272-uhd_3840_2160_24fps.mp4",
+                "link": "https://www.coralworld.co.il/",
+                "title": "המצפה התת-ימי - עולם הים"
             }
         ]
     }

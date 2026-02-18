@@ -34,9 +34,22 @@ export default function CheckoutPage() {
     const start = checkIn ? new Date(checkIn) : new Date();
     const end = checkOut ? new Date(checkOut) : new Date(new Date().setDate(new Date().getDate() + 1));
     const nights = Math.max(1, Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
-    const total = property.price * nights;
-    const serviceFee = Math.round(total * 0.10); // 10% fee
-    const grandTotal = total + serviceFee;
+    // Dynamic Pricing Calculation
+    const propertyPrice = property.price;
+    const weekendPrice = (property as any).weekendPrice || propertyPrice;
+
+    let totalPrice = 0;
+    const currentDate = new Date(start);
+
+    for (let i = 0; i < nights; i++) {
+        const day = currentDate.getDay(); // 5=Fri, 6=Sat
+        const isWeekend = day === 5 || day === 6;
+        totalPrice += isWeekend ? weekendPrice : propertyPrice;
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    const serviceFee = Math.round(totalPrice * 0.10); // 10% fee
+    const grandTotal = totalPrice + serviceFee;
 
     return (
         <div className="min-h-screen bg-[#121212] text-white pb-20">
@@ -64,7 +77,13 @@ export default function CheckoutPage() {
                             <p className="text-neutral-400">{t('booking_for')} {property.title}</p>
                         </div>
 
-                        <PaymentForm amount={grandTotal} />
+                        <PaymentForm
+                            amount={grandTotal}
+                            propertyId={property.id}
+                            checkIn={start.toISOString()}
+                            checkOut={end.toISOString()}
+                            guests={Number(guests || 2)}
+                        />
                     </div>
 
                     {/* Right Column: Summary */}
@@ -99,8 +118,10 @@ export default function CheckoutPage() {
 
                             <div className="mt-6 space-y-3">
                                 <div className="flex justify-between text-neutral-400">
-                                    <span>₪{property.price} x {nights} nights</span>
-                                    <span>₪{total.toLocaleString()}</span>
+                                    <span>
+                                        ₪{Math.round(totalPrice / nights).toLocaleString()} avg/night x {nights} nights
+                                    </span>
+                                    <span>₪{totalPrice.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between text-neutral-400">
                                     <span>{t('service_fee')}</span>

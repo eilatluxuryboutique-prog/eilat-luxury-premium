@@ -19,6 +19,14 @@ const UserSchema = new mongoose.Schema({
         enum: ['admin', 'host', 'guest'],
         default: 'guest',
     },
+    phone: {
+        type: String,
+        required: false
+    },
+    wishlist: {
+        type: [String],
+        default: []
+    },
     createdAt: {
         type: Date,
         default: Date.now,

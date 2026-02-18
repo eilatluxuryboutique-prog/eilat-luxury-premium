@@ -1,7 +1,9 @@
 import Hero from '@/components/features/hero';
+import LastMinuteDeals from '@/components/features/last-minute-deals';
 import ApartmentsList from '@/components/features/apartments-list';
 import CategoriesList from '@/components/features/categories-list';
-import AccessibilityButton from '@/components/ui/accessibility-button';
+import BlogSection from '@/components/features/blog-section';
+import NewsletterSignup from '@/components/features/newsletter-signup';
 import { properties, Property } from '@/lib/mock-data';
 import AdvertisementsSection from '@/components/features/advertisements-section';
 import { Link } from '@/navigation';
@@ -10,18 +12,18 @@ import { useTranslations } from 'next-intl';
 export const dynamic = 'force-dynamic';
 
 const Section = ({ title, items, link, viewAll }: { title: string, items: Property[], link: string, viewAll: string }) => (
-    <section className="py-12 border-b border-border">
+    <section className="py-12 md:py-16 border-b border-border/40">
         <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-foreground border-l-4 border-primary pl-4">
+                <h2 className="text-3xl font-bold text-foreground border-r-4 border-primary pr-4">
                     {title}
                 </h2>
-                <Link href={link} className="text-primary hover:text-foreground transition-colors flex items-center gap-2 font-medium">
+                <Link href={link} className="text-primary hover:text-foreground transition-colors flex items-center gap-2 font-medium group">
                     {viewAll}
-                    <span className="text-xl">←</span>
+                    <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
                 </Link>
             </div>
-            <ApartmentsList items={items} />
+            <ApartmentsList items={items} limit={4} />
         </div>
     </section>
 );
@@ -29,17 +31,38 @@ const Section = ({ title, items, link, viewAll }: { title: string, items: Proper
 export default function Home() {
     const t = useTranslations('Home');
 
-    const hotels = properties.filter(p => p.type === 'hotel').slice(0, 4);
-    const villas = properties.filter(p => p.type === 'villa').slice(0, 4);
-    const apartments = properties.filter(p => p.type === 'apartment').slice(0, 4);
+    const hotels = properties.filter(p => p.type === 'hotel');
+    const villas = properties.filter(p => p.type === 'villa');
+    const apartments = properties.filter(p => p.type === 'apartment');
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'TravelAgency',
+        name: 'Eilat Booking Premium',
+        description: 'Luxury vacation rentals, villas, and apartments in Eilat.',
+        url: 'https://eilat-booking-premium.vercel.app',
+        address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Eilat',
+            addressCountry: 'IL'
+        },
+        priceRange: '$$$$',
+        image: 'https://eilat-booking-premium.vercel.app/og-image.jpg'
+    };
 
     return (
         <main className="min-h-screen bg-background transition-colors duration-300">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+
             <Hero />
+            <LastMinuteDeals />
             <AdvertisementsSection />
             <CategoriesList />
 
-            <div className="flex flex-col gap-8 pb-20">
+            <div className="flex flex-col gap-0 pb-0">
                 <Section
                     title={t('hotels_title')}
                     items={hotels}
@@ -60,7 +83,8 @@ export default function Home() {
                 />
             </div>
 
-            <AccessibilityButton />
+            <BlogSection />
+            <NewsletterSignup />
         </main>
     );
 }

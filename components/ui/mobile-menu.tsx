@@ -5,10 +5,14 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import UserMenu from '../auth/user-menu';
+import ThemeToggle from '../features/theme-toggle';
+import CartIcon from '../features/cart-icon';
 
 export default function MobileMenu() {
     const [isOpen, setIsOpen] = useState(false);
     const t = useTranslations('Navigation');
+    const tCats = useTranslations('Categories');
 
     const menuVariants: Variants = {
         closed: {
@@ -35,7 +39,7 @@ export default function MobileMenu() {
         <div className="md:hidden">
             <button
                 onClick={() => setIsOpen(true)}
-                className="p-2 text-white hover:text-blue-400 transition-colors"
+                className="p-2 text-white hover:text-gold transition-all bg-white/5 rounded-lg border border-white/10 active:scale-95"
                 aria-label="Open menu"
             >
                 <Menu size={24} />
@@ -59,44 +63,81 @@ export default function MobileMenu() {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-black/90 border-l border-white/10 z-50 p-6 shadow-2xl"
+                            className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm border-l border-gold/40 z-[9999] p-6 shadow-[0_0_100px_rgba(0,0,0,1)] flex flex-col overflow-y-auto !bg-black"
+                            style={{ backgroundColor: '#000000' }}
                         >
-                            <div className="flex justify-end mb-8">
+                            <div className="flex justify-between items-center mb-8">
+                                <Link href="/" className="text-xl font-bold text-white">
+                                    Eilat<span className="text-gold">Luxury</span>
+                                </Link>
                                 <button
                                     onClick={() => setIsOpen(false)}
                                     className="p-2 text-white hover:text-red-400 transition-colors"
                                     aria-label="Close menu"
                                 >
-                                    <X size={24} />
+                                    <X size={28} />
                                 </button>
                             </div>
 
-                            <nav className="flex flex-col gap-6 text-lg">
+                            <div className="flex flex-col gap-4 mb-8 p-4 bg-white/5 rounded-xl border border-white/10">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-white/60 text-sm">פרופיל</span>
+                                    <UserMenu />
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-white/60 text-sm">מצב לילה</span>
+                                    <ThemeToggle />
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-white/60 text-sm">עגלת קניות</span>
+                                    <CartIcon />
+                                </div>
+                            </div>
+
+                            <nav className="flex flex-col gap-4 text-lg">
                                 <Link
                                     href="/"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-blue-400 transition-colors border-b border-white/5 pb-4"
+                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2"
                                 >
                                     {t('home')}
                                 </Link>
+
+                                {/* Categories Section */}
+                                <div className="mt-2 mb-2">
+                                    <span className="text-gold text-xs font-bold uppercase tracking-widest">{tCats('title')}</span>
+                                    <div className="flex flex-col gap-3 mt-4 pr-2">
+                                        <Link href="/search?type=hotel" onClick={() => setIsOpen(false)} className="text-white/80 hover:text-gold transition-colors text-base flex justify-between items-center">
+                                            <span>{tCats('hotels')}</span>
+                                            <span className="text-[10px] bg-gold/10 text-gold px-2 py-0.5 rounded-full border border-gold/20">PREMIUM</span>
+                                        </Link>
+                                        <Link href="/search?type=apartment" onClick={() => setIsOpen(false)} className="text-white/80 hover:text-gold transition-colors text-base">
+                                            {tCats('apartments')}
+                                        </Link>
+                                        <Link href="/search?type=villa" onClick={() => setIsOpen(false)} className="text-white/80 hover:text-gold transition-colors text-base">
+                                            {tCats('villas')}
+                                        </Link>
+                                    </div>
+                                </div>
+
                                 <Link
                                     href="/apartments"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-blue-400 transition-colors border-b border-white/5 pb-4"
+                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2 mt-2"
                                 >
                                     {t('apartments')}
                                 </Link>
                                 <Link
                                     href="/about"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-blue-400 transition-colors border-b border-white/5 pb-4"
+                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2"
                                 >
                                     {t('about')}
                                 </Link>
                                 <Link
                                     href="/contact"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-blue-400 transition-colors border-b border-white/5 pb-4"
+                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2"
                                 >
                                     {t('contact')}
                                 </Link>

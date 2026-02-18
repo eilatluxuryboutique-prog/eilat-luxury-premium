@@ -7,7 +7,10 @@
         "home": "דף הבית",
         "apartments": "דירות נופש",
         "about": "אודות",
-        "contact": "צור קשר"
+        "contact": "צור קשר",
+        "search": "חיפוש",
+        "accessibility": "נגישות",
+        "profile": "פרופיל"
     },
     "Hero": {
         "title": "חווית אירוח יוקרתית באילת",
@@ -26,6 +29,8 @@
     },
     "Property": {
         "about": "על הנכס",
+        "location": "מיקום",
+        "waze": "נווט עם Waze",
         "amenities": "שירותים ומתקנים",
         "guests": "אורחים",
         "guests_max": "מקסימום",
@@ -75,6 +80,7 @@
         "hotels_title": "מלונות יוקרה",
         "villas_title": "וילות אקסקלוסיביות",
         "apartments_title": "דירות נופש",
+        "recommended_title": "המומלצים שלנו",
         "view_all": "הצג הכל"
     },
     "SearchForm": {
@@ -127,6 +133,45 @@
         "login_host_title": "כניסת בעל עסק",
         "login_host_subtitle": "נהל את הנכסים שלך",
         "login_customer_title": "כניסת לקוח",
-        "login_customer_subtitle": "צפה בהזמנות שלך"
+        "login_customer_subtitle": "צפה בהזמנות שלך",
+        "list_asset": "פרסם נכס"
+    },
+    "Host": {
+        "hero_title": "הצטרף לנבחרת המארחים",
+        "hero_subtitle": "הפוך את הנכס שלך ליעד המבוקש הבא באילת. פתח דלת להזמנות יוקרה.",
+        "form_title": "התחל את המסע שלך",
+        "form_subtitle": "מלא את הפרטים ונחזור אליך תוך 24 שעות.",
+        "first_name": "שם פרטי",
+        "last_name": "שם משפחה",
+        "property_type": "סוג הנכס",
+        "phone": "טלפון",
+        "submit": "שלח בקשה",
+        "benefits": {
+            "earn_title": "הרווח יותר",
+            "earn_desc": "שמור עד 90% מההכנסות שלך עם העמלות הנמוכות שלנו.",
+            "protection_title": "הגנה מלאה",
+            "protection_desc": "ביטוח מארחים בשווי 1,000,000 ש\"ח בכל הזמנה.",
+            "guests_title": "אורחים איכותיים",
+            "guests_desc": "אנחנו מושכים קהל איכותי שמחפש יוקרה.",
+            "manage_title": "ניהול קל",
+            "manage_desc": "מערכת AI מתקדמת לניהול הכל בקלות."
+        },
+        "types": {
+            "villa": "וילת יוקרה",
+            "penthouse": "פנטהאוז",
+            "hotel": "מלון בוטיק",
+            "other": "אחר"
+        },
+        "add_property_title": "הוספת נכס חדש",
+        "add_property_subtitle": "מלא את הפרטים כדי לפרסם את הנכס שלך",
+        "basic_info": "פרטים כלליים",
+        "property_title": "כותרת הנכס",
+        "price_per_night": "מחיר ללילה",
+        "description": "תיאור הנכס",
+        "photos": "תמונות",
+        "upload_click": "העלאת תמונות",
+        "cancel": "ביטול",
+        "publish": "פרסם נכס",
+        "processing": "שומר..."
     }
 }

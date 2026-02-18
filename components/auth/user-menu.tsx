@@ -61,6 +61,15 @@ export default function UserMenu() {
                         </p>
                     </div>
 
+                    <Link
+                        href="/host/join"
+                        className="flex items-center gap-3 px-4 py-2 text-gold hover:bg-white/5 hover:text-white transition-colors font-bold"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        <LayoutDashboard size={16} />
+                        {t('list_asset') || 'פרסם נכס'}
+                    </Link>
+
                     {(user.role === 'host' || user.role === 'admin') && (
                         <Link
                             href="/host"

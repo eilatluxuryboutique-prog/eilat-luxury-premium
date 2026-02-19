@@ -38,8 +38,32 @@ export async function GET(req: Request, props: { params: Promise<{ id: string }>
         }));
 
         // Merge manual blocks and bookings
+        let allUnavailable = [...unavailableDates, ...bookingDates];
+
+        // Fetch iCal Bookings (Real-time)
+        if (property && property.icalLinks && property.icalLinks.length > 0) {
+            const { fetchExternalBookings } = await import('@/lib/ical');
+
+            for (const link of property.icalLinks) {
+                if (link.url) {
+                    try {
+                        const externalEvents = await fetchExternalBookings(link.url);
+                        const mappedEvents = externalEvents.map((e: any) => ({
+                            start: e.start,
+                            end: e.end,
+                            reason: 'external',
+                            source: link.name || 'External Platform'
+                        }));
+                        allUnavailable = [...allUnavailable, ...mappedEvents];
+                    } catch (err) {
+                        console.error(`Failed to sync iCal from ${link.name}`, err);
+                    }
+                }
+            }
+        }
+
         return NextResponse.json({
-            unavailableDates: [...unavailableDates, ...bookingDates],
+            unavailableDates: allUnavailable,
             blockedDates: blockedDates
         });
 

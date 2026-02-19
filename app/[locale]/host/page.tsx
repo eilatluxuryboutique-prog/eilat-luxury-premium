@@ -59,6 +59,7 @@ export default async function HostDashboard(props: { params: Promise<{ locale: s
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    {/* ... existing stats ... */}
                     <div className="bg-[#1E1E1E] p-6 rounded-xl border border-white/10">
                         <div className="flex justify-between items-start mb-4">
                             <div className="p-3 bg-blue-500/10 rounded-lg text-blue-400">
@@ -101,6 +102,55 @@ export default async function HostDashboard(props: { params: Promise<{ locale: s
                         <h3 className="text-white/50 text-sm mb-1">הזמנות החודש</h3>
                         <p className="text-2xl font-bold text-white">{bookingsCount}</p>
                     </div>
+                </div>
+
+                {/* Advanced Tools (Phase 18+19) */}
+                <h2 className="text-xl font-bold text-white mb-6">כלי ניהול מתקדמים</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <Link href="/host/analytics/investor" className="group bg-[#1E1E1E] p-6 rounded-xl border border-white/10 hover:border-gold/50 transition-colors">
+                        <div className="flex items-center gap-4 mb-4">
+                            <div className="p-3 bg-emerald-500/10 rounded-lg text-emerald-400 group-hover:scale-110 transition-transform">
+                                <TrendingUp size={24} />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-white">דשבורד משקיעים</h3>
+                                <p className="text-xs text-white/50">ניתוח תשואה ו-ROI בזמן אמת</p>
+                            </div>
+                        </div>
+                        <div className="text-sm text-neutral-400">
+                            צפה בביצועי הנכסים שלך, השוואת הכנסות שנתית וניתוח רווחיות מתקדם.
+                        </div>
+                    </Link>
+
+                    <Link href="/host/calendar" className="group bg-[#1E1E1E] p-6 rounded-xl border border-white/10 hover:border-blue-500/50 transition-colors cursor-pointer">
+                        <div className="flex items-center gap-4 mb-4">
+                            <div className="p-3 bg-blue-500/10 rounded-lg text-blue-400 group-hover:scale-110 transition-transform">
+                                <DollarSign size={24} />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-white">ניהול יומנים (Channel Manager)</h3>
+                                <p className="text-xs text-white/50">סנכרון Airbnb & Booking</p>
+                            </div>
+                        </div>
+                        <div className="text-sm text-neutral-400">
+                            צפה בכל ההזמנות שלך בלוח שנה אחד מרוכז. המערכת מסנכרנת אוטומטית ומונעת כפילויות.
+                        </div>
+                    </Link>
+
+                    <Link href="/room-service" className="group bg-[#1E1E1E] p-6 rounded-xl border border-white/10 hover:border-purple-500/50 transition-colors">
+                        <div className="flex items-center gap-4 mb-4">
+                            <div className="p-3 bg-purple-500/10 rounded-lg text-purple-400 group-hover:scale-110 transition-transform">
+                                <Edit size={24} />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-white">ניהול שירות חודרים</h3>
+                                <p className="text-xs text-white/50">הזמנות אורחים בוואטסאפ</p>
+                            </div>
+                        </div>
+                        <div className="text-sm text-neutral-400">
+                            צפה בתפריט השירותים הדיגיטלי שהאורחים שלך רואים ונהל את ההזמנות.
+                        </div>
+                    </Link>
                 </div>
 
                 {/* Properties List */}

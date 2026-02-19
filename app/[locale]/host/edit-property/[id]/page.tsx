@@ -25,7 +25,10 @@ export default function EditPropertyPage({ params }: EditPropertyProps) {
         price: "",
         type: "apartment",
         address: "",
-        amenities: [] as string[]
+        amenities: [] as string[],
+        virtualTourUrl: "",
+        smartPricing: false,
+        icalLinks: [] as { name: string, url: string }[]
     });
 
     const [images, setImages] = useState<File[]>([]);
@@ -53,7 +56,10 @@ export default function EditPropertyPage({ params }: EditPropertyProps) {
                                 price: found.price || found.pricePerNight,
                                 type: found.type || 'apartment',
                                 address: found.location || '',
-                                amenities: found.amenities || []
+                                amenities: found.amenities || [],
+                                virtualTourUrl: found.virtualTourUrl || '',
+                                smartPricing: found.smartPricing || false,
+                                icalLinks: found.icalLinks || []
                             });
                             setPreviewUrls(found.images || []);
                             setIsDemo(true);
@@ -75,7 +81,10 @@ export default function EditPropertyPage({ params }: EditPropertyProps) {
                         price: found.price || found.pricePerNight,
                         type: found.type || 'apartment',
                         address: found.location || '',
-                        amenities: found.amenities || []
+                        amenities: found.amenities || [],
+                        virtualTourUrl: found.virtualTourUrl || '',
+                        smartPricing: found.smartPricing || false,
+                        icalLinks: found.icalLinks || []
                     });
                     setPreviewUrls(found.images || []);
                 } else {
@@ -261,6 +270,85 @@ export default function EditPropertyPage({ params }: EditPropertyProps) {
                                         <span className="text-sm text-white">{item.label}</span>
                                     </label>
                                 ))}
+                            </div>
+                        </div>
+
+                        {/* Super Features Section (Phase 18) */}
+                        <div className="border-t border-white/10 pt-6 mt-6">
+                            <h3 className="text-xl font-bold text-gold mb-4">מתקדם (Super Features)</h3>
+
+                            {/* Smart Pricing */}
+                            <div className="flex items-center justify-between bg-black/40 p-4 rounded-xl border border-white/10 mb-4">
+                                <div>
+                                    <span className="font-bold text-white block">תמחור חכם (Smart Pricing)</span>
+                                    <span className="text-xs text-white/50">עדכון מחירים אוטומטי לפי ביקוש</span>
+                                </div>
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        className="sr-only peer"
+                                        checked={formData.smartPricing}
+                                        onChange={e => setFormData({ ...formData, smartPricing: e.target.checked })}
+                                    />
+                                    <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold"></div>
+                                </label>
+                            </div>
+
+                            {/* Virtual Tour */}
+                            <div className="mb-4">
+                                <label className="block text-white/80 text-sm mb-2 font-medium">קישור לסיור וירטואלי (Matterport)</label>
+                                <input
+                                    type="url"
+                                    className="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-gold outline-none"
+                                    placeholder="https://my.matterport.com/show/..."
+                                    value={formData.virtualTourUrl}
+                                    onChange={e => setFormData({ ...formData, virtualTourUrl: e.target.value })}
+                                />
+                            </div>
+
+                            {/* iCal Links */}
+                            <div className="mb-4">
+                                <label className="block text-white/80 text-sm mb-2 font-medium">סנכרון יומנים (iCal)</label>
+                                {formData.icalLinks.map((link: any, index: number) => (
+                                    <div key={index} className="flex gap-2 mb-2">
+                                        <input
+                                            type="text"
+                                            placeholder="Booking/Airbnb Name"
+                                            className="w-1/3 bg-black/40 border border-white/10 rounded-xl p-2 text-white"
+                                            value={link.name}
+                                            onChange={e => {
+                                                const newLinks = [...formData.icalLinks];
+                                                newLinks[index].name = e.target.value;
+                                                setFormData({ ...formData, icalLinks: newLinks });
+                                            }}
+                                        />
+                                        <input
+                                            type="url"
+                                            placeholder="https://..."
+                                            className="w-full bg-black/40 border border-white/10 rounded-xl p-2 text-white"
+                                            value={link.url}
+                                            onChange={e => {
+                                                const newLinks = [...formData.icalLinks];
+                                                newLinks[index].url = e.target.value;
+                                                setFormData({ ...formData, icalLinks: newLinks });
+                                            }}
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, icalLinks: formData.icalLinks.filter((_, i) => i !== index) })}
+                                            className="bg-red-500/20 text-red-500 p-2 rounded-xl"
+                                        >
+                                            <X size={18} />
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={() => setFormData({ ...formData, icalLinks: [...formData.icalLinks, { name: '', url: '' }] })}
+                                    className="text-gold text-sm font-bold hover:underline"
+                                >
+                                    + הוסף קישור יומן
+                                </button>
                             </div>
                         </div>
 

@@ -92,6 +92,14 @@ export default function UserMenu() {
                         </Link>
                     )}
 
+                    <div className="px-4 py-2">
+                        <div className="text-xs text-gold uppercase tracking-widest mb-1">Loyalty</div>
+                        <div className="flex justify-between text-sm text-white">
+                            <span>Points</span>
+                            <span className="font-bold">{user.loyaltyPoints || 0}</span>
+                        </div>
+                    </div>
+
                     {user.role === 'admin' && (
                         <Link
                             href="/admin"

@@ -40,7 +40,8 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                         rating: Number(doc.rating) || 0,
                         guests: doc.guests || 2,
                         rooms: doc.rooms || 1,
-                        type: doc.type
+                        type: doc.type,
+                        virtualTourUrl: doc.virtualTourUrl
                     };
                 }
             }
@@ -172,6 +173,23 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                         <div className="mt-12 border-t border-border pt-8">
                             <LocationMap address={property.location || 'Eilat'} />
                         </div>
+
+                        {/* Virtual Tour (Phase 18) */}
+                        {property.virtualTourUrl && (
+                            <div className="mt-12 border-t border-border pt-8">
+                                <h3 className="text-xl font-bold mb-6">סיור וירטואלי 360°</h3>
+                                <div className="aspect-video w-full rounded-2xl overflow-hidden border border-border shadow-lg bg-black/5">
+                                    <iframe
+                                        src={property.virtualTourUrl}
+                                        width="100%"
+                                        height="100%"
+                                        frameBorder="0"
+                                        allowFullScreen
+                                        className="w-full h-full"
+                                    />
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Right: Booking Card */}

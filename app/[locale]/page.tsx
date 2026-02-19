@@ -1,4 +1,5 @@
 import Hero from '@/components/features/hero';
+import LiveCam from '@/components/features/live-cam';
 import LastMinuteDeals from '@/components/features/last-minute-deals';
 import ApartmentsList from '@/components/features/apartments-list';
 import CategoriesList from '@/components/features/categories-list';
@@ -58,6 +59,12 @@ export default function Home() {
             />
 
             <Hero />
+
+            {/* Live Cam Section */}
+            <div className="w-full h-[400px] md:h-[500px] bg-black border-y border-white/10 relative">
+                <LiveCam />
+            </div>
+
             <LastMinuteDeals />
             <AdvertisementsSection />
             <CategoriesList />

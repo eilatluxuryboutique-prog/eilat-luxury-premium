@@ -12,7 +12,7 @@ import CartDrawer from "@/components/features/cart-drawer";
 import Footer from "@/components/ui/footer";
 import BottomNav from "@/components/ui/bottom-nav";
 import AccessibilityButton from "@/components/ui/accessibility-button";
-import WhatsAppButton from "@/components/ui/whatsapp-button";
+import FloatingActions from "@/components/features/floating-actions"; // NEW
 import { CompareProvider } from "@/components/features/compare-context";
 import CompareBar from "@/components/features/compare-bar";
 
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         siteName: "Eilat Booking Premium",
         images: [
             {
-                url: "/og-image.jpg", // Assuming we will add this later or use a cloud URL
+                url: "/og-image.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Eilat Luxury Vacation View",
@@ -69,15 +69,11 @@ export default async function RootLayout({
 }) {
     const { locale } = await params;
 
-    // Ensure that the incoming `locale` is valid
     if (!['he', 'en', 'ru', 'fr', 'ar'].includes(locale as any)) {
         notFound();
     }
 
-    // Providing all messages to the client
-    // side is the easiest way to get started
     const messages = await getMessages();
-
     const dir = ['he', 'ar'].includes(locale) ? 'rtl' : 'ltr';
 
     // Fetch site content server-side to avoid FOUC
@@ -86,6 +82,9 @@ export default async function RootLayout({
 
     return (
         <html lang={locale} dir={dir}>
+            <head>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6683838338383833" crossOrigin="anonymous"></script>
+            </head>
             <body className={`${rubik.className} ${inter.variable} ${rubik.variable} antialiased`}>
                 <NextIntlClientProvider messages={messages}>
                     <Providers>
@@ -100,7 +99,7 @@ export default async function RootLayout({
                                 <CartDrawer />
                                 <CompareBar />
                                 <BottomNav />
-                                <WhatsAppButton />
+                                <FloatingActions />
                                 <Footer />
                             </CompareProvider>
                         </ThemeProvider>

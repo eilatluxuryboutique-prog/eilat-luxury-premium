@@ -259,6 +259,24 @@ export default function PaymentForm({ amount, propertyId, checkIn, checkOut, gue
                         <p className="text-[10px] text-neutral-600 mt-1">המסמך נשמר בשרת מאובטח ומוצפן.</p>
                     </div>
 
+                    <div className="flex items-start gap-3 bg-blue-500/10 border border-blue-500/30 p-3 rounded-xl">
+                        <input
+                            type="checkbox"
+                            id="insurance"
+                            className="mt-1 w-4 h-4 accent-gold"
+                            onChange={(e) => {
+                                // Logic to add +50 to total would go here
+                                // For visual demo:
+                                if (e.target.checked) alert('ביטוח נסיעות נוסף (+₪50)');
+                            }}
+                        />
+                        <label htmlFor="insurance" className="text-xs text-white leading-relaxed cursor-pointer select-none">
+                            <b>הוסף ביטוח ביטול חופשה (מומלץ)</b>
+                            <br />
+                            <span className="text-neutral-400">קבל החזר מלא במקרה של מחלה או מילואים. עלות: ₪50 בלבד.</span>
+                        </label>
+                    </div>
+
                     <div className="flex items-start gap-3">
                         <input
                             type="checkbox"

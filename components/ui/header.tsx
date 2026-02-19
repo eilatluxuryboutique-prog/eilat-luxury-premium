@@ -41,10 +41,10 @@ export default function Header({ initialData }: { initialData?: any }) {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex gap-8 items-center text-foreground/90 font-medium">
-                        <Link href="/" className="hover:text-primary transition-colors">
+                        <Link href="/" className="hover:text-primary transition-colors" aria-label="Go to Home Page">
                             {t('home')}
                         </Link>
-                        <Link href="/apartments" className="hover:text-primary transition-colors">
+                        <Link href="/apartments" className="hover:text-primary transition-colors" aria-label="View Apartments">
                             {t('apartments')}
                         </Link>
                         <Link href="/about" className="hover:text-primary transition-colors">

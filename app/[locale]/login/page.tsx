@@ -1,64 +1,112 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { Shield, Building, User } from 'lucide-react';
-import { Link } from '@/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import Image from 'next/image';
+import SocialLoginButtons from '@/components/auth/social-login';
 
-export default function LoginGatewayPage() {
-    const t = useTranslations('Auth');
+export default function LoginPage() {
+    const router = useRouter();
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        const res = await signIn('credentials', {
+            redirect: false,
+            email: credentials.email,
+            password: credentials.password,
+        });
+
+        if (res?.error) {
+            setError('פרטי התחברות שגויים');
+            setLoading(false);
+        } else {
+            router.push('/dashboard');
+        }
+    };
 
     return (
-        <main className="min-h-screen pt-24 pb-12 bg-[#121212] flex items-center justify-center px-4" dir="rtl">
-            <div className="w-full max-w-4xl">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold text-white mb-4">{t('login_gateway_title')}</h1>
-                    <p className="text-white/50 text-lg">{t('login_gateway_subtitle')}</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {/* Admin */}
-                    <Link
-                        href="/login/admin"
-                        className="group bg-[#1E1E1E] border border-white/10 hover:border-gold p-8 rounded-2xl transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-gold/10 text-center flex flex-col items-center gap-6"
-                    >
-                        <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                            <Shield size={40} className="text-white/50 group-hover:text-gold transition-colors" />
-                        </div>
-                        <div>
-                            <h2 className="text-2xl font-bold text-white mb-2">{t('login_admin_title')}</h2>
-                            <p className="text-white/50">{t('login_admin_subtitle')}</p>
-                        </div>
-                    </Link>
-
-                    {/* Business Owner */}
-                    <Link
-                        href="/login/host"
-                        className="group bg-[#1E1E1E] border border-white/10 hover:border-gold p-8 rounded-2xl transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-gold/10 text-center flex flex-col items-center gap-6"
-                    >
-                        <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                            <Building size={40} className="text-white/50 group-hover:text-gold transition-colors" />
-                        </div>
-                        <div>
-                            <h2 className="text-2xl font-bold text-white mb-2">{t('login_host_title')}</h2>
-                            <p className="text-white/50">{t('login_host_subtitle')}</p>
-                        </div>
-                    </Link>
-
-                    {/* Customer */}
-                    <Link
-                        href="/login/customer"
-                        className="group bg-[#1E1E1E] border border-white/10 hover:border-gold p-8 rounded-2xl transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-gold/10 text-center flex flex-col items-center gap-6"
-                    >
-                        <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                            <User size={40} className="text-white/50 group-hover:text-gold transition-colors" />
-                        </div>
-                        <div>
-                            <h2 className="text-2xl font-bold text-white mb-2">{t('login_customer_title')}</h2>
-                            <p className="text-white/50">{t('login_customer_subtitle')}</p>
-                        </div>
-                    </Link>
+        <div className="min-h-screen bg-neutral-950 flex md:flex-row-reverse" dir="rtl">
+            {/* Image Side */}
+            <div className="hidden md:block w-1/2 relative bg-neutral-900">
+                <Image
+                    src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=2000&auto=format&fit=crop"
+                    alt="Luxury Hotel"
+                    fill
+                    className="object-cover opacity-60"
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-neutral-950 to-transparent"></div>
+                <div className="absolute bottom-20 right-20 text-white max-w-md">
+                    <h2 className="text-4xl font-bold mb-4">ברוכים הבאים לאילת לקז'רי</h2>
+                    <p className="text-xl text-white/80">החופשה החלומית שלכם מתחילה כאן.</p>
                 </div>
             </div>
-        </main>
+
+            {/* Form Side */}
+            <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+                <div className="w-full max-w-md space-y-8">
+                    <div className="text-center md:text-right">
+                        <Link href="/" className="text-gold font-bold text-2xl">Eilat Luxury</Link>
+                        <h1 className="text-3xl font-bold text-white mt-4">התחברות לחשבון</h1>
+                        <p className="text-neutral-400 mt-2">הזן את פרטיך כדי להמשיך</p>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label className="block text-white/80 text-sm font-medium mb-1">אימייל</label>
+                            <input
+                                type="email"
+                                value={credentials.email}
+                                onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+                                className="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-gold outline-none transition-colors"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-white/80 text-sm font-medium mb-1">סיסמה</label>
+                            <input
+                                type="password"
+                                value={credentials.password}
+                                onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                                className="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-gold outline-none transition-colors"
+                                required
+                            />
+                        </div>
+
+                        {error && <p className="text-red-500 text-sm bg-red-500/10 p-3 rounded-lg border border-red-500/20">{error}</p>}
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full bg-gold hover:bg-yellow-400 text-black font-bold py-3 rounded-xl transition-colors disabled:opacity-50"
+                        >
+                            {loading ? 'מתחבר...' : 'התחבר'}
+                        </button>
+                    </form>
+
+                    <div className="relative my-8">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-white/10"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                            <span className="bg-neutral-950 px-4 text-neutral-500">או המשך באמצעות</span>
+                        </div>
+                    </div>
+
+                    <SocialLoginButtons />
+
+                    <div className="text-center text-sm text-neutral-400">
+                        אין לך חשבון? <Link href="/register" className="text-gold hover:underline">הרשמה</Link>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

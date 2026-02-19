@@ -55,7 +55,7 @@ export const metadata: Metadata = {
         icon: '/globe.svg',
         apple: '/globe.svg',
     },
-    manifest: '/site.webmanifest',
+    manifest: '/manifest.json',
 };
 
 export const dynamic = 'force-dynamic';

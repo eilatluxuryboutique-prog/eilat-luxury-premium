@@ -13,6 +13,7 @@ export interface Property {
     images: string[];
     description: string;
     amenities: string[];
+    virtualTourUrl?: string;
 }
 
 export const properties: Property[] = [

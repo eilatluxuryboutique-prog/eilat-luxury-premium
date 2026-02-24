@@ -80,13 +80,13 @@ export default function LoginPage() {
                 <div className="w-full max-w-md space-y-8">
                     <div className="text-center md:text-right">
                         <Link href="/" className="text-gold font-bold text-2xl">Eilat Luxury</Link>
-                        
+
                         {/* Role Selector Tabs */}
                         <div className="flex bg-neutral-900 p-1 rounded-xl mt-6 mb-2">
                             <button
                                 type="button"
                                 onClick={() => setLoginType('customer')}
-                                className={\`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 \${loginType === 'customer' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}\`}
+                                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${loginType === 'customer' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}`}
                             >
                                 <User size={16} />
                                 צרכן
@@ -94,7 +94,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => setLoginType('host')}
-                                className={\`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 \${loginType === 'host' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}\`}
+                                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${loginType === 'host' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}`}
                             >
                                 <Briefcase size={16} />
                                 בעל עסק
@@ -102,13 +102,13 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => setLoginType('admin')}
-                                className={\`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 \${loginType === 'admin' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}\`}
+                                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${loginType === 'admin' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}`}
                             >
                                 <ShieldCheck size={16} />
                                 מנהל
                             </button>
                         </div>
-                        
+
                         <h1 className="text-3xl font-bold text-white mt-4">{getTitle()}</h1>
                         <p className="text-neutral-400 mt-2">{getSubtitle()}</p>
                     </div>
@@ -147,25 +147,25 @@ export default function LoginPage() {
                     </form>
 
                     {
-        loginType === 'customer' && (
-            <>
-                <div className="relative my-8">
-                    <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-white/10"></div>
-                    </div>
-                    <div className="relative flex justify-center text-sm">
-                        <span className="bg-neutral-950 px-4 text-neutral-500">או המשך באמצעות</span>
-                    </div>
-                </div>
+                        loginType === 'customer' && (
+                            <>
+                                <div className="relative my-8">
+                                    <div className="absolute inset-0 flex items-center">
+                                        <div className="w-full border-t border-white/10"></div>
+                                    </div>
+                                    <div className="relative flex justify-center text-sm">
+                                        <span className="bg-neutral-950 px-4 text-neutral-500">או המשך באמצעות</span>
+                                    </div>
+                                </div>
 
-                <SocialLoginButtons />
-            </>
-        )
-    }
+                                <SocialLoginButtons />
+                            </>
+                        )
+                    }
 
-    <div className="text-center text-sm text-neutral-400">
-        אין לך חשבון? <Link href="/register" className="text-gold hover:underline">הרשמה</Link>
-    </div>
+                    <div className="text-center text-sm text-neutral-400">
+                        אין לך חשבון? <Link href="/register" className="text-gold hover:underline">הרשמה</Link>
+                    </div>
                 </div >
             </div >
         </div >

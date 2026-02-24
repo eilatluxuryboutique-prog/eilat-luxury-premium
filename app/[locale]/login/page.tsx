@@ -76,7 +76,7 @@ export default function LoginPage() {
             </div>
 
             {/* Form Side */}
-            <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+            <div className="w-full md:w-1/2 flex items-center justify-center p-8 pt-32 md:p-12 md:pt-32">
                 <div className="w-full max-w-md space-y-8">
                     <div className="text-center md:text-right">
                         <Link href="/" className="hidden text-gold font-bold text-2xl">Eilat Luxury</Link>

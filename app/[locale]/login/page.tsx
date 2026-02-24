@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SocialLoginButtons from '@/components/auth/social-login';
@@ -18,17 +17,28 @@ export default function LoginPage() {
         setLoading(true);
         setError('');
 
-        const res = await signIn('credentials', {
-            redirect: false,
-            email: credentials.email,
-            password: credentials.password,
-        });
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(credentials),
+            });
 
-        if (res?.error) {
-            setError('פרטי התחברות שגויים');
+            const data = await res.json();
+
+            if (!res.ok) {
+                setError(data.error || 'פרטי התחברות שגויים');
+                setLoading(false);
+            } else {
+                // Determine redirect based on role
+                const role = data.user?.role;
+                if (role === 'admin') router.push('/admin');
+                else if (role === 'host') router.push('/host');
+                else router.push('/dashboard');
+            }
+        } catch (err) {
+            setError('שגיאת תקשורת. נסה שוב מאוחר יותר.');
             setLoading(false);
-        } else {
-            router.push('/dashboard');
         }
     };
 

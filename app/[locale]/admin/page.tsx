@@ -5,12 +5,14 @@ import { useState, useEffect } from 'react';
 import { LayoutDashboard, Hotel, Image as ImageIcon, FileText, Megaphone, Settings, LogOut, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AdminProvider } from '@/components/admin/admin-context';
-import AnalyticsTab from '@/components/admin/analytics-tab';
-import PropertiesTab from '@/components/admin/properties-tab';
-import MediaTab from '@/components/admin/media-tab';
-import ContentTab from '@/components/admin/content-tab';
-import ChatTab from '@/components/admin/chat-tab';
 import { useLocale } from 'next-intl';
+import dynamic from 'next/dynamic';
+
+const AnalyticsTab = dynamic(() => import('@/components/admin/analytics-tab'), { loading: () => <p>Loading...</p>, ssr: false });
+const PropertiesTab = dynamic(() => import('@/components/admin/properties-tab'), { loading: () => <p>Loading...</p>, ssr: false });
+const MediaTab = dynamic(() => import('@/components/admin/media-tab'), { loading: () => <p>Loading...</p>, ssr: false });
+const ContentTab = dynamic(() => import('@/components/admin/content-tab'), { loading: () => <p>Loading...</p>, ssr: false });
+const ChatTab = dynamic(() => import('@/components/admin/chat-tab'), { loading: () => <p>Loading...</p>, ssr: false });
 
 export default function AdminDashboard() {
     const router = useRouter();

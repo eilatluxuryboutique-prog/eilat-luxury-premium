@@ -1,34 +1,27 @@
-import { MetadataRoute } from 'next';
-import dbConnect from '@/lib/db';
-import Article from '@/models/Article';
+import { MetadataRoute } from 'next'
+import { properties } from '@/lib/mock-data'
 
-const BASE_URL = 'https://eilat-booking-premium.vercel.app';
+export default function sitemap(): MetadataRoute.Sitemap {
+    const baseUrl = 'https://eilat-booking-premium.vercel.app'
+    const locales = ['he', 'en', 'ru', 'fr', 'ar']
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    await dbConnect();
-    const articles = await Article.find({ published: true }).select('slug createdAt');
+    const routes = ['', '/villas', '/apartments', '/hotels', '/contact', '/about'].flatMap(route =>
+        locales.map(locale => ({
+            url: `${baseUrl}/${locale}${route}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: route === '' ? 1 : 0.8,
+        }))
+    )
 
-    const articleEntries = articles.map((article: any) => ({
-        url: `${BASE_URL}/blog/${article.slug}`,
-        lastModified: article.createdAt,
-        changeFrequency: 'weekly' as const,
-        priority: 0.8,
-    }));
+    const propertyRoutes = properties.flatMap(property =>
+        locales.map(locale => ({
+            url: `${baseUrl}/${locale}/property/${property.id}`,
+            lastModified: new Date(),
+            changeFrequency: 'daily' as const,
+            priority: 0.9,
+        }))
+    )
 
-    const staticPages = [
-        '',
-        '/about',
-        '/apartments',
-        '/contact',
-        '/blog',
-        '/concierge',
-        '/experiences',
-    ].map((route) => ({
-        url: `${BASE_URL}${route}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: route === '' ? 1.0 : 0.8,
-    }));
-
-    return [...staticPages, ...articleEntries];
+    return [...routes, ...propertyRoutes]
 }

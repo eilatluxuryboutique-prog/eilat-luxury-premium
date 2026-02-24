@@ -22,6 +22,26 @@ export const sendBookingConfirmation = async (
     }
 
     try {
+        // Generate simple ICS string for the event
+        const formatDate = (dateString: string) => {
+            const d = new Date(dateString);
+            return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        };
+
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Eilat Booking Premium//EN',
+            'BEGIN:VEVENT',
+            `DTSTART:${formatDate(bookingDetails.checkIn)}`,
+            `DTEND:${formatDate(bookingDetails.checkOut)}`,
+            `SUMMARY:חופשה באילת - ${bookingDetails.propertyName}`,
+            `LOCATION:Eilat, Israel`,
+            `DESCRIPTION:הזמנה מספר: ${bookingDetails.id}\\nאורחים: ${bookingDetails.guests}`,
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\\r\\n');
+
         const { data, error } = await resend.emails.send({
             from: 'Eilat Premium <reservations@eilat-luxury.com>',
             to: [to],
@@ -48,7 +68,7 @@ export const sendBookingConfirmation = async (
                         </ul>
                     </div>
 
-                    <p>קבלה רשמית מצורפת למייל זה (סימולציה).</p>
+                    <p>קבלה רשמית מצורפת למייל זה בנוסף לזימון יומן (ICS) לטובת סנכרון הנופש.</p>
                     <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://eilat-booking-premium.vercel.app'}/dashboard" style="display: inline-block; background-color: #D4AF37; color: #000; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold;">לצפייה בהזמנה באזור האישי</a>
                     
                     <p style="margin-top: 30px; font-size: 12px; color: #999;">אם יש שאלות, אנחנו כאן בוואטסאפ ובמייל.</p>
@@ -57,7 +77,17 @@ export const sendBookingConfirmation = async (
                     © 2026 Eilat Booking Premium
                 </div>
             </div>
-            `
+            `,
+            attachments: [
+                {
+                    filename: 'reservation.ics',
+                    content: Buffer.from(icsContent).toString('base64'),
+                },
+                {
+                    filename: 'invoice.pdf',
+                    content: Buffer.from('Mock PDF Content for Invoice').toString('base64'), // Mock invoice
+                }
+            ]
         });
 
         if (error) {

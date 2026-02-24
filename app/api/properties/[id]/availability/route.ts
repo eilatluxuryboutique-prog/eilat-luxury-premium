@@ -15,10 +15,11 @@ export async function GET(req: Request, props: { params: Promise<{ id: string }>
         // Fetch manual blocks from Property (if it exists in DB)
         let unavailableDates: any[] = [];
         let blockedDates: any[] = [];
+        let property: any = null;
 
         // Check if ID is likely a MongoDB ID
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
-            const property = await Property.findById(id);
+            property = await Property.findById(id);
             if (property) {
                 unavailableDates = property.unavailableDates || [];
                 blockedDates = property.blockedDates || [];

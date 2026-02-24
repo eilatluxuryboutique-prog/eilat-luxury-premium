@@ -12,9 +12,11 @@ import CartDrawer from "@/components/features/cart-drawer";
 import Footer from "@/components/ui/footer";
 import BottomNav from "@/components/ui/bottom-nav";
 import AccessibilityButton from "@/components/ui/accessibility-button";
-import FloatingActions from "@/components/features/floating-actions"; // NEW
+import FloatingActions from "@/components/features/floating-actions";
 import { CompareProvider } from "@/components/features/compare-context";
 import CompareBar from "@/components/features/compare-bar";
+import CookieBanner from "@/components/ui/cookie-banner";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const rubik = Rubik({ subsets: ["hebrew", "latin"], variable: '--font-rubik' });
@@ -101,11 +103,13 @@ export default async function RootLayout({
                                 <BottomNav />
                                 <FloatingActions />
                                 <Footer />
+                                <CookieBanner />
                             </CompareProvider>
                         </ThemeProvider>
                     </Providers>
                 </NextIntlClientProvider>
                 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript" async></script>
+                <Analytics />
             </body>
         </html>
     );

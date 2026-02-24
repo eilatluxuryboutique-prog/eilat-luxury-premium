@@ -10,6 +10,54 @@ import AvailabilityCalendar from '@/components/features/availability-calendar';
 import LocationMap from '@/components/features/location-map';
 import dbConnect from '@/lib/db';
 import Property from '@/models/Property';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(
+    { params }: { params: Promise<{ id: string, locale: string }> }
+): Promise<Metadata> {
+    const { id, locale } = await params;
+
+    // Fallbacks
+    let title = "Property | Eilat Booking Premium";
+    let description = "Luxury vacation rental in Eilat.";
+    let image = "/og-image.jpg";
+
+    let property = properties.find(p => p.id === id);
+
+    if (!property && id.match(/^[0-9a-fA-F]{24}$/)) {
+        try {
+            await dbConnect();
+            const doc = await Property.findById(id).lean();
+            if (doc) {
+                title = `${doc.title} | Eilat Booking Premium`;
+                description = doc.description || description;
+                image = (doc.images && doc.images[0]) || image;
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    } else if (property) {
+        title = `${property.title} | Eilat Booking Premium`;
+        description = property.description;
+        image = property.image;
+    }
+
+    return {
+        title: title,
+        description: description,
+        openGraph: {
+            title: title,
+            description: description,
+            images: [{ url: image }],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: title,
+            description: description,
+            images: [image],
+        }
+    };
+}
 
 export default async function PropertyPage(props: { params: Promise<{ id: string }> }) {
     const params = await props.params;

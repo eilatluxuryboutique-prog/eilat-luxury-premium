@@ -2,6 +2,12 @@ import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from './lib/token';
 
+// Simple in-memory rate limiter (Note: in serverless environments, this resets per instance)
+// For true distributed rate limiting, consider Upstash Redis or Vercel KV.
+const rateLimitMap = new Map<string, { count: number, lastReset: number }>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 60; // 60 requests per minute
+
 const intlMiddleware = createMiddleware({
     locales: ['he', 'en', 'ru', 'fr', 'ar'],
     defaultLocale: 'he'
@@ -9,6 +15,25 @@ const intlMiddleware = createMiddleware({
 
 export default async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
+    const ip = req.headers.get('x-forwarded-for') || 'unknown';
+
+    // Rate Limiting Logic for API and Login routes
+    if (pathname.includes('/api') || pathname.includes('/login')) {
+        const now = Date.now();
+        const limitRecord = rateLimitMap.get(ip) || { count: 0, lastReset: now };
+
+        if (now - limitRecord.lastReset > RATE_LIMIT_WINDOW_MS) {
+            limitRecord.count = 0;
+            limitRecord.lastReset = now;
+        }
+
+        limitRecord.count++;
+        rateLimitMap.set(ip, limitRecord);
+
+        if (limitRecord.count > MAX_REQUESTS_PER_WINDOW) {
+            return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+        }
+    }
 
     const isLoginPage = pathname.includes('/login');
     const isProtected = !isLoginPage && /\/(he|en|ru|fr|ar)?\/?(admin|host|account)/.test(pathname);

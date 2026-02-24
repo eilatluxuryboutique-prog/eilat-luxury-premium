@@ -66,12 +66,12 @@ export default function Header({ initialData }: { initialData?: any }) {
 
                     <div className="flex items-center gap-2 md:gap-4">
                         <div className="hidden md:flex items-center gap-4">
-                            <Link href="/wishlist" className="text-foreground/80 hover:text-red-500 transition-colors">
+                            <Link href="/wishlist" className="text-foreground/80 hover:text-red-500 transition-colors" aria-label="View Wishlist">
                                 <Heart size={20} />
                             </Link>
-                            <UserMenu />
-                            <ThemeToggle />
-                            <CartIcon />
+                            <UserMenu aria-label="User Menu" />
+                            <ThemeToggle aria-label="Toggle Theme" />
+                            <CartIcon aria-label="View Cart" />
                         </div>
                         <div className="hidden md:block">
                             <WeatherWidget />

@@ -5,12 +5,16 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import SocialLoginButtons from '@/components/auth/social-login';
+import { User, Briefcase, ShieldCheck } from 'lucide-react';
+
+type LoginType = 'customer' | 'host' | 'admin';
 
 export default function LoginPage() {
     const router = useRouter();
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [loginType, setLoginType] = useState<LoginType>('customer');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -42,6 +46,18 @@ export default function LoginPage() {
         }
     };
 
+    const getTitle = () => {
+        if (loginType === 'admin') return 'התחברות מנהל מערכת';
+        if (loginType === 'host') return 'התחברות בעלי עסקים';
+        return 'התחברות לאזור האישי';
+    };
+
+    const getSubtitle = () => {
+        if (loginType === 'admin') return 'פאנל ניהול Eilat Luxury';
+        if (loginType === 'host') return 'ניהול נכסים והזמנות';
+        return 'החופשה החלומית הבאה שלך';
+    };
+
     return (
         <div className="min-h-screen bg-neutral-950 flex md:flex-row-reverse" dir="rtl">
             {/* Image Side */}
@@ -64,8 +80,37 @@ export default function LoginPage() {
                 <div className="w-full max-w-md space-y-8">
                     <div className="text-center md:text-right">
                         <Link href="/" className="text-gold font-bold text-2xl">Eilat Luxury</Link>
-                        <h1 className="text-3xl font-bold text-white mt-4">התחברות לחשבון</h1>
-                        <p className="text-neutral-400 mt-2">הזן את פרטיך כדי להמשיך</p>
+                        
+                        {/* Role Selector Tabs */}
+                        <div className="flex bg-neutral-900 p-1 rounded-xl mt-6 mb-2">
+                            <button
+                                type="button"
+                                onClick={() => setLoginType('customer')}
+                                className={\`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 \${loginType === 'customer' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}\`}
+                            >
+                                <User size={16} />
+                                צרכן
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setLoginType('host')}
+                                className={\`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 \${loginType === 'host' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}\`}
+                            >
+                                <Briefcase size={16} />
+                                בעל עסק
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setLoginType('admin')}
+                                className={\`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 \${loginType === 'admin' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}\`}
+                            >
+                                <ShieldCheck size={16} />
+                                מנהל
+                            </button>
+                        </div>
+                        
+                        <h1 className="text-3xl font-bold text-white mt-4">{getTitle()}</h1>
+                        <p className="text-neutral-400 mt-2">{getSubtitle()}</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -101,22 +146,28 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <div className="relative my-8">
-                        <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-white/10"></div>
-                        </div>
-                        <div className="relative flex justify-center text-sm">
-                            <span className="bg-neutral-950 px-4 text-neutral-500">או המשך באמצעות</span>
-                        </div>
+                    {
+        loginType === 'customer' && (
+            <>
+                <div className="relative my-8">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-white/10"></div>
                     </div>
-
-                    <SocialLoginButtons />
-
-                    <div className="text-center text-sm text-neutral-400">
-                        אין לך חשבון? <Link href="/register" className="text-gold hover:underline">הרשמה</Link>
+                    <div className="relative flex justify-center text-sm">
+                        <span className="bg-neutral-950 px-4 text-neutral-500">או המשך באמצעות</span>
                     </div>
                 </div>
-            </div>
-        </div>
+
+                <SocialLoginButtons />
+            </>
+        )
+    }
+
+    <div className="text-center text-sm text-neutral-400">
+        אין לך חשבון? <Link href="/register" className="text-gold hover:underline">הרשמה</Link>
+    </div>
+                </div >
+            </div >
+        </div >
     );
 }

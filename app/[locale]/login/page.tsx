@@ -79,7 +79,7 @@ export default function LoginPage() {
             <div className="w-full md:w-1/2 flex items-center justify-center p-8">
                 <div className="w-full max-w-md space-y-8">
                     <div className="text-center md:text-right">
-                        <Link href="/" className="text-gold font-bold text-2xl">Eilat Luxury</Link>
+                        <Link href="/" className="hidden text-gold font-bold text-2xl">Eilat Luxury</Link>
 
                         {/* Role Selector Tabs */}
                         <div className="flex bg-neutral-900 p-1 rounded-xl mt-6 mb-2">
@@ -89,7 +89,7 @@ export default function LoginPage() {
                                 className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${loginType === 'customer' ? 'bg-gold text-black shadow-md' : 'text-neutral-400 hover:text-white'}`}
                             >
                                 <User size={16} />
-                                צרכן
+                                לקוח
                             </button>
                             <button
                                 type="button"

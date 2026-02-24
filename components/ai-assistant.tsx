@@ -5,7 +5,6 @@ import { Send, X, Mic, MicOff, Bot, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocale } from "next-intl";
 import { useUI } from '@/context/ui-context';
-import Image from 'next/image';
 
 type Message = {
     role: "user" | "assistant";
@@ -163,8 +162,8 @@ export default function AiAssistant() {
                         {/* Header */}
                         <div className="bg-gradient-to-r from-gold/80 to-gold text-black p-4 flex justify-between items-center">
                             <div className="flex items-center gap-2">
-                                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/40 shadow-sm bg-white">
-                                    <Image src="/images/ai-mascot.png" alt="AI Agent" fill className="object-cover" />
+                                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/40 shadow-sm bg-black">
+                                    <video src="/videos/ai-mascot.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover scale-150" />
                                 </div>
                                 <span className="font-bold">{locale === 'he' ? "צ'אט אונליין" : "Live Chat"}</span>
                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -237,8 +236,8 @@ export default function AiAssistant() {
                 className="hidden md:flex w-24 h-24 relative items-center justify-center transition-all focus:outline-none z-50 pointer-events-auto"
             >
                 <div className="absolute inset-0 bg-gold rounded-full opacity-20 animate-ping"></div>
-                <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg border-2 border-gold/40 relative overflow-hidden bg-white">
-                    <Image src="/images/ai-mascot.png" alt="AI Mascot" fill className="object-cover" />
+                <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg border-2 border-gold/40 relative overflow-hidden bg-black pb-4">
+                    <video src="/videos/ai-mascot.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover scale-[1.6] mt-4" />
                 </div>
                 {/* Badge */}
                 <div className="absolute top-2 right-2 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></div>

@@ -64,24 +64,24 @@ export default function WishlistPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-neutral-900 pt-32 px-4 pb-20">
+        <div className="min-h-screen bg-white pt-32 px-4 pb-20">
             <div className="container mx-auto">
-                <h1 className="text-4xl font-bold text-white mb-8 flex items-center gap-3">
+                <h1 className="text-4xl font-bold text-zinc-900 mb-8 flex items-center gap-3">
                     <Heart className="text-red-500 fill-red-500" />
                     המועדפים שלי
-                    <span className="text-2xl text-white/50">({items.length})</span>
+                    <span className="text-2xl text-zinc-300">({items.length})</span>
                 </h1>
 
                 {loading ? (
-                    <div className="text-white text-center">טוען...</div>
+                    <div className="text-zinc-900 text-center">טוען...</div>
                 ) : items.length > 0 ? (
                     <ApartmentsList items={items} limit={100} />
                 ) : (
-                    <div className="text-center py-20 bg-white/5 rounded-2xl border border-dashed border-white/10">
-                        <Heart size={48} className="text-white/20 mx-auto mb-4" />
-                        <h2 className="text-xl text-white font-bold mb-2">הרשימה ריקה</h2>
-                        <p className="text-white/60 mb-6">עדיין לא שמרו נכסים. זה הזמן להתחיל לחפש!</p>
-                        <a href="/search" className="bg-gold text-black font-bold py-3 px-8 rounded-xl hover:bg-gold-light transition-colors">
+                    <div className="text-center py-20 bg-zinc-50 rounded-2xl border border-dashed border-zinc-200">
+                        <Heart size={48} className="text-zinc-200 mx-auto mb-4" />
+                        <h2 className="text-xl text-zinc-800 font-bold mb-2">הרשימה ריקה</h2>
+                        <p className="text-zinc-500 mb-6">עדיין לא שמרו נכסים. זה הזמן להתחיל לחפש!</p>
+                        <a href="/search" className="bg-gold text-black font-bold py-3 px-8 rounded-xl hover:brightness-110 shadow-lg transition-all">
                             התחל לחפש
                         </a>
                     </div>

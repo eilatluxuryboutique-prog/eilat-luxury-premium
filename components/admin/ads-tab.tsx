@@ -89,14 +89,14 @@ export default function AdsTab() {
         }));
     };
 
-    if (loading) return <div className="text-white">Loading ads...</div>;
+    if (loading) return <div className="text-zinc-900">Loading ads...</div>;
 
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-center mb-6">
                 <div>
-                    <h2 className="text-2xl font-bold text-white">Manage Advertisements</h2>
-                    <p className="text-neutral-400">Configure the 4 banners (Videos/Images).</p>
+                    <h2 className="text-2xl font-bold text-zinc-900">Manage Advertisements</h2>
+                    <p className="text-zinc-500">Configure the 4 banners (Videos/Images).</p>
                 </div>
                 <button
                     onClick={handleSave}
@@ -110,15 +110,15 @@ export default function AdsTab() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {banners.map((banner, index) => (
-                    <div key={banner.id} className="bg-neutral-900 border border-white/10 rounded-xl p-6">
+                    <div key={banner.id} className="bg-zinc-50 border border-zinc-100 rounded-xl p-6 shadow-sm">
                         <h3 className="text-xl font-bold text-gold mb-4 flex justify-between">
                             {banner.name}
-                            <span className="text-xs bg-white/10 text-neutral-400 px-2 py-1 rounded">Column {index + 1}</span>
+                            <span className="text-xs bg-zinc-200 text-zinc-500 px-2 py-1 rounded">Column {index + 1}</span>
                         </h3>
 
                         <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                             {banner.ads.map((ad, i) => (
-                                <div key={ad.id} className="bg-black/40 p-4 rounded-lg border border-white/5 relative group">
+                                <div key={ad.id} className="bg-white p-4 rounded-lg border border-zinc-100 relative group shadow-sm">
                                     <button
                                         onClick={() => removeAd(banner.id, ad.id)}
                                         className="absolute top-2 right-2 text-neutral-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity z-10"
@@ -132,13 +132,13 @@ export default function AdsTab() {
                                         <div className="flex gap-2 mb-2">
                                             <button
                                                 onClick={() => updateAd(banner.id, ad.id, 'type', 'video')}
-                                                className={`flex-1 flex items-center justify-center gap-2 py-1 rounded text-xs ${ad.type === 'video' ? 'bg-gold text-black font-bold' : 'bg-white/5 text-neutral-400 hover:bg-white/10'}`}
+                                                className={`flex-1 flex items-center justify-center gap-2 py-1 rounded text-xs transition-all ${ad.type === 'video' ? 'bg-gold text-black font-bold shadow-sm' : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200'}`}
                                             >
                                                 <Video size={14} /> Video
                                             </button>
                                             <button
                                                 onClick={() => updateAd(banner.id, ad.id, 'type', 'image')}
-                                                className={`flex-1 flex items-center justify-center gap-2 py-1 rounded text-xs ${ad.type === 'image' ? 'bg-gold text-black font-bold' : 'bg-white/5 text-neutral-400 hover:bg-white/10'}`}
+                                                className={`flex-1 flex items-center justify-center gap-2 py-1 rounded text-xs transition-all ${ad.type === 'image' ? 'bg-gold text-black font-bold shadow-sm' : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200'}`}
                                             >
                                                 <ImgIcon size={14} /> Image
                                             </button>

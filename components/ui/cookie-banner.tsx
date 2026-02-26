@@ -23,7 +23,7 @@ export default function CookieBanner() {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 lg:bottom-4 lg:left-4 lg:right-auto lg:w-96 bg-card border border-border p-4 shadow-2xl z-50 rounded-none lg:rounded-2xl" dir="rtl">
+        <div className="fixed bottom-0 left-0 right-0 lg:bottom-4 lg:left-4 lg:right-auto lg:w-96 bg-card border border-border p-4 shadow-2xl z-[9999] rounded-none lg:rounded-2xl" dir="rtl">
             <div className="flex justify-between items-start mb-2">
                 <h3 className="font-bold text-foreground">אנו משתמשים בעוגיות</h3>
                 <button onClick={() => setIsVisible(false)} className="text-muted-foreground hover:text-foreground">

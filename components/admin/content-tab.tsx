@@ -124,16 +124,16 @@ export default function ContentTab() {
     return (
         <div className="space-y-8 text-right" dir="rtl">
             {/* Design Configuration */}
-            <div className="bg-neutral-800 border border-white/5 p-8 rounded-2xl">
-                <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Palette className="text-purple-400" />
+            <div className="bg-zinc-50 border border-zinc-100 p-8 rounded-2xl shadow-sm">
+                <h2 className="text-xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                    <Palette className="text-purple-600" />
                     עיצוב האתר
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                        <label className="text-sm text-white/60">צבע ראשי (מותג)</label>
-                        <div className="flex items-center gap-3 bg-black/20 p-2 rounded-xl border border-white/10">
+                        <label className="text-sm text-zinc-500">צבע ראשי (מותג)</label>
+                        <div className="flex items-center gap-3 bg-white p-2 rounded-xl border border-zinc-200 shadow-sm">
                             <input
                                 type="color"
                                 value={primaryColor}
@@ -141,8 +141,8 @@ export default function ContentTab() {
                                 className="w-12 h-12 rounded cursor-pointer bg-transparent border-none p-0"
                             />
                             <div className="flex flex-col">
-                                <span className="text-sm text-white">{primaryColor}</span>
-                                <span className="text-xs text-white/40">לחץ לשינוי צבע</span>
+                                <span className="text-sm text-zinc-900 font-bold">{primaryColor}</span>
+                                <span className="text-xs text-zinc-400">לחץ לשינוי צבע</span>
                             </div>
                         </div>
                     </div>
@@ -150,14 +150,14 @@ export default function ContentTab() {
             </div>
 
             {/* Hero Configuration */}
-            <div className="bg-neutral-800 border border-white/5 p-8 rounded-2xl">
-                <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <ImageIcon className="text-orange-400" />
+            <div className="bg-zinc-50 border border-zinc-100 p-8 rounded-2xl shadow-sm">
+                <h2 className="text-xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                    <ImageIcon className="text-orange-600" />
                     וידאו ראשי (Hero Section)
                 </h2>
                 <div className="space-y-6">
                     <div className="space-y-2">
-                        <label className="text-sm text-white/60">בחר וידאו מהמחשב (העלאה מהירה)</label>
+                        <label className="text-sm text-zinc-500">בחר וידאו מהמחשב (העלאה מהירה)</label>
                         <div className="relative group">
                             <input
                                 type="file"
@@ -166,15 +166,15 @@ export default function ContentTab() {
                                 disabled={uploading}
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                             />
-                            <div className={`p-6 border-2 border-dashed ${uploading ? 'border-orange-500 bg-orange-500/10' : 'border-white/10 hover:border-orange-500/50 hover:bg-white/5'} rounded-xl text-center transition-all`}>
+                            <div className={`p-6 border-2 border-dashed ${uploading ? 'border-orange-500 bg-orange-50' : 'border-zinc-200 hover:border-orange-500/50 hover:bg-orange-50/30'} rounded-xl text-center transition-all shadow-inner`}>
                                 {uploading ? (
                                     <div className="flex flex-col items-center gap-2">
                                         <Loader2 className="animate-spin text-orange-500" />
                                         <span className="text-orange-400 text-sm">מעלה... {Math.round(uploadProgress)}%</span>
                                     </div>
                                 ) : (
-                                    <div className="flex flex-col items-center gap-2 text-white/60">
-                                        <Cloud className="text-orange-400" />
+                                    <div className="flex flex-col items-center gap-2 text-zinc-400">
+                                        <Cloud className="text-orange-500" />
                                         <span className="text-sm">לחץ כאן להעלאת וידאו</span>
                                     </div>
                                 )}
@@ -183,13 +183,13 @@ export default function ContentTab() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm text-white/60">או הדבק קישור ישיר</label>
+                        <label className="text-sm text-zinc-500">או הדבק קישור ישיר</label>
                         <input
                             type="text"
                             value={heroVideoUrl}
                             onChange={(e) => setHeroVideoUrl(e.target.value)}
                             placeholder="/uploads/..."
-                            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors text-left"
+                            className="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:outline-none focus:border-gold transition-colors text-left shadow-sm"
                             dir="ltr"
                         />
                     </div>
@@ -207,7 +207,7 @@ export default function ContentTab() {
                     </div>
                     {/* Visual Confirmation */}
                     <div className="text-center pt-2">
-                        <p className="text-xs text-white/30" dir="ltr">
+                        <p className="text-xs text-zinc-300" dir="ltr">
                             Current DB Value: {heroVideoUrl ? heroVideoUrl.substring(0, 40) + '...' : 'Empty'}
                         </p>
                     </div>
@@ -215,12 +215,12 @@ export default function ContentTab() {
             </div>
 
             {/* Text Editing Mode */}
-            <div className="bg-neutral-800 border border-white/5 p-8 rounded-2xl">
-                <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Type className="text-blue-400" />
+            <div className="bg-zinc-50 border border-zinc-100 p-8 rounded-2xl shadow-sm">
+                <h2 className="text-xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                    <Type className="text-blue-600" />
                     עריכת טקסטים
                 </h2>
-                <div className="flex items-center gap-4 bg-black/20 p-4 rounded-xl border border-white/5">
+                <div className="flex items-center gap-4 bg-white border border-zinc-200 p-4 rounded-xl shadow-sm">
                     <div className="relative inline-flex items-center cursor-pointer">
                         <input
                             type="checkbox"
@@ -228,9 +228,9 @@ export default function ContentTab() {
                             checked={isEditMode}
                             onChange={toggleEditMode}
                         />
-                        <div className="w-11 h-6 bg-neutral-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 peer-checked:after:-translate-x-full"></div>
+                        <div className="w-11 h-6 bg-zinc-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gold/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold peer-checked:after:-translate-x-full"></div>
                     </div>
-                    <span className="text-white font-medium mr-4">הפעל מצב עריכה חי</span>
+                    <span className="text-zinc-900 font-medium mr-4">הפעל מצב עריכה חי</span>
                 </div>
             </div>
 

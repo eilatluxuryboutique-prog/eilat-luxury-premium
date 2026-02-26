@@ -4,13 +4,20 @@ import dbConnect from '@/lib/db';
 import Booking from '@/models/Booking';
 import Property from '@/models/Property';
 import mongoose from 'mongoose';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/route';
 import { sendBookingConfirmation } from '@/lib/email';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
     try {
-        const session = await getSession();
+        let session = await getSession() as any;
+        const nextAuthSession = await getServerSession(authOptions);
+        if (nextAuthSession?.user && (!session || !session.userId)) {
+            session = { ...nextAuthSession.user, userId: (nextAuthSession.user as any).id };
+        }
+
         // Allow guest bookings for testing: use session.userId if available, otherwise fallback
         const userId = session?.userId || 'guest_user_123';
 
@@ -90,8 +97,13 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
     try {
-        const session = await getSession();
-        if (!session) {
+        let session = await getSession() as any;
+        const nextAuthSession = await getServerSession(authOptions);
+        if (nextAuthSession?.user && (!session || !session.userId)) {
+            session = { ...nextAuthSession.user, userId: (nextAuthSession.user as any).id };
+        }
+
+        if (!session || !session.userId) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 

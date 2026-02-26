@@ -87,7 +87,7 @@ export default function ApartmentsList({ limit, items }: { limit?: number; items
                             >
                                 <Link href={`/property/${apt.id}`} className="block h-full">
                                     {/* Image */}
-                                    <div className="relative h-48 md:h-64 overflow-hidden bg-neutral-900">
+                                    <div className="relative h-48 md:h-64 overflow-hidden bg-zinc-100">
                                         <Image
                                             src={apt.image || (apt.images && apt.images[0]) || 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267'}
                                             alt={apt.title}
@@ -128,16 +128,16 @@ export default function ApartmentsList({ limit, items }: { limit?: number; items
 
                                         {/* Features Icons */}
                                         <div className="flex gap-3 mb-4 text-muted-foreground">
-                                            <div className="flex items-center gap-1 text-xs bg-muted px-2 py-1 rounded">
+                                            <div className="flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded">
                                                 <Users size={12} />
                                                 <span>{apt.guests}</span>
                                             </div>
-                                            <div className="flex items-center gap-1 text-xs bg-muted px-2 py-1 rounded">
+                                            <div className="flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded">
                                                 <Bed size={12} />
                                                 <span>{apt.rooms}</span>
                                             </div>
                                             {(apt.amenities || []).slice(0, 2).map((am, i) => (
-                                                <div key={i} className="flex items-center gap-1 text-xs bg-muted px-2 py-1 rounded">
+                                                <div key={i} className="flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded">
                                                     <Wifi size={12} />
                                                     <span>{am}</span>
                                                 </div>

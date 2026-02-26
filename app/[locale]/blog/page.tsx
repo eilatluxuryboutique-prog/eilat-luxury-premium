@@ -47,14 +47,14 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
     }
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-white pt-24 pb-20">
+        <div className="min-h-screen bg-white text-zinc-900 pt-24 pb-20">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Hero */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gold to-yellow-200 bg-clip-text text-transparent mb-4">
                         {locale === 'he' ? 'המגזין של אילת' : 'The Eilat Magazine'}
                     </h1>
-                    <p className="text-xl text-white/60 max-w-2xl mx-auto">
+                    <p className="text-xl text-zinc-500 max-w-2xl mx-auto">
                         {locale === 'he'
                             ? 'המלצות, טיפים וסקירות בלעדיות על חופשות יוקרה, קולינריה וחיי לילה.'
                             : 'Exclusive recommendations and reviews on luxury vacations, culinary, and nightlife.'}
@@ -64,7 +64,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {articles.map((article: any, i: number) => (
-                        <Link href={`/blog/${article.slug}`} key={i} className="group block bg-neutral-900 rounded-2xl overflow-hidden border border-white/10 hover:border-gold/50 transition-all hover:transform hover:-translate-y-1">
+                        <Link href={`/blog/${article.slug}`} key={i} className="group block bg-zinc-50 rounded-2xl overflow-hidden border border-zinc-100 hover:border-gold/50 transition-all hover:transform hover:-translate-y-1 shadow-sm hover:shadow-md">
                             <div className="relative h-64 overflow-hidden">
                                 <Image
                                     src={article.coverImage}
@@ -78,13 +78,13 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                                 </div>
                             </div>
                             <div className="p-6">
-                                <div className="text-sm text-white/40 mb-2">
+                                <div className="text-sm text-zinc-400 mb-2">
                                     {new Date(article.createdAt).toLocaleDateString(locale === 'he' ? 'he-IL' : 'en-US')} • 5 {locale === 'he' ? 'דק׳ קריאה' : 'min read'}
                                 </div>
-                                <h3 className="text-xl font-bold mb-3 group-hover:text-gold transition-colors line-clamp-2">
+                                <h3 className="text-xl font-bold mb-3 group-hover:text-gold transition-colors line-clamp-2 text-zinc-900">
                                     {article.title}
                                 </h3>
-                                <p className="text-white/60 text-sm line-clamp-3 leading-relaxed">
+                                <p className="text-zinc-500 text-sm line-clamp-3 leading-relaxed">
                                     {article.excerpt}
                                 </p>
                                 <div className="mt-4 flex items-center text-gold text-sm font-bold">

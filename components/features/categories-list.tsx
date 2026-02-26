@@ -9,11 +9,11 @@ export default function CategoriesList() {
     const t = useTranslations('Categories');
 
     const categories = [
-        { id: 'hotels', label: t('hotels'), type: 'hotel', icon: Hotel, color: 'text-gold' },
-        { id: 'apartments', label: t('apartments'), type: 'apartment', icon: Building, color: 'text-blue-400' },
-        { id: 'villas', label: t('villas'), type: 'villa', icon: Home, color: 'text-green-400' },
-        { id: 'attractions', label: t('attractions'), type: '', icon: Camera, color: 'text-purple-400' },
-        { id: 'vacation', label: t('vacation'), type: '', icon: Palmtree, color: 'text-orange-400' },
+        { id: 'hotels', label: t('hotels'), type: 'hotel', icon: Hotel, color: 'text-gold-dark' },
+        { id: 'apartments', label: t('apartments'), type: 'apartment', icon: Building, color: 'text-blue-600' },
+        { id: 'villas', label: t('villas'), type: 'villa', icon: Home, color: 'text-green-600' },
+        { id: 'attractions', label: t('attractions'), type: '', icon: Camera, color: 'text-purple-600' },
+        { id: 'vacation', label: t('vacation'), type: '', icon: Palmtree, color: 'text-orange-600' },
     ];
 
     return (
@@ -36,12 +36,12 @@ export default function CategoriesList() {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="flex flex-col items-center gap-3 p-6 bg-card rounded-2xl border border-border hover:border-primary hover:bg-muted transition-all min-w-[160px] cursor-pointer shadow-sm"
+                                className="flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-zinc-100 hover:border-gold hover:bg-zinc-50 transition-all min-w-[160px] cursor-pointer shadow-sm group"
                             >
-                                <div className={`p-4 rounded-full bg-muted ${cat.color}`}>
+                                <div className={`p-4 rounded-full bg-zinc-50 group-hover:bg-white transition-colors ${cat.color}`}>
                                     <cat.icon size={32} />
                                 </div>
-                                <span className="text-foreground font-bold">{cat.label}</span>
+                                <span className="text-zinc-900 font-bold">{cat.label}</span>
                             </motion.div>
                         </Link>
                     ))}

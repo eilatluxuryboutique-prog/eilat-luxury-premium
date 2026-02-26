@@ -191,21 +191,21 @@ export default function MediaTab() {
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     disabled={uploading}
                 />
-                <div className={`bg-neutral-800 border-2 border-dashed ${uploading ? 'border-blue-500 bg-blue-500/5' : 'border-white/10'} rounded-2xl p-12 text-center transition-all hover:border-blue-500/50`}>
+                <div className={`bg-zinc-50 border-2 border-dashed ${uploading ? 'border-blue-500 bg-blue-50' : 'border-zinc-200'} rounded-2xl p-12 text-center transition-all hover:border-blue-500/50 shadow-inner`}>
                     {uploading ? (
                         <div className="max-w-md mx-auto">
-                            <h3 className="text-xl font-bold text-white mb-4">Uploading to Cloud... {Math.round(progress)}%</h3>
-                            <div className="w-full bg-neutral-700 rounded-full h-2.5">
+                            <h3 className="text-xl font-bold text-zinc-900 mb-4">Uploading to Cloud... {Math.round(progress)}%</h3>
+                            <div className="w-full bg-zinc-200 rounded-full h-2.5">
                                 <div className="bg-blue-500 h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
                             </div>
                         </div>
                     ) : (
                         <>
-                            <div className="bg-blue-500/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6 text-blue-500">
+                            <div className="bg-blue-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6 text-blue-600">
                                 <Cloud size={32} />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Upload to Cloud</h3>
-                            <p className="text-white/50">Drag & drop or click to upload securely.</p>
+                            <h3 className="text-xl font-bold text-zinc-900 mb-2">Upload to Cloud</h3>
+                            <p className="text-zinc-500">Drag & drop or click to upload securely.</p>
                         </>
                     )}
                 </div>
@@ -213,7 +213,7 @@ export default function MediaTab() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {mediaItems.map((item) => (
-                    <div key={item._id} className="bg-neutral-800 rounded-xl overflow-hidden border border-white/5 group relative">
+                    <div key={item._id} className="bg-white rounded-xl overflow-hidden border border-zinc-100 group relative shadow-sm">
                         <div className="aspect-video bg-black relative">
                             {item.resourceType === 'video' ? (
                                 <video src={item.url} className="w-full h-full object-cover" muted onMouseOver={e => e.currentTarget.play()} onMouseOut={e => e.currentTarget.pause()} />
@@ -221,8 +221,8 @@ export default function MediaTab() {
                                 <img src={item.url} alt={item.publicId} className="w-full h-full object-cover" />
                             )}
                         </div>
-                        <div className="p-4">
-                            <p className="text-white text-xs truncate mb-2">{item.publicId}</p>
+                        <div className="p-4 bg-white">
+                            <p className="text-zinc-900 text-xs font-bold truncate mb-2">{item.publicId}</p>
                             <div className="flex gap-2 flex-wrap">
                                 <button onClick={() => copyToClipboard(item.url)} className="flex-1 bg-white/5 hover:bg-white/10 text-white/70 py-1.5 rounded text-xs flex items-center justify-center gap-2"><Copy size={12} /> Copy</button>
                                 {item.resourceType === 'video' && (

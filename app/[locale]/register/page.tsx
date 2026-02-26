@@ -37,7 +37,7 @@ export default function RegisterPage({ searchParams }: { searchParams: { role?: 
             if (!res.ok) throw new Error(result.error);
 
             // Redirect based on role
-            router.push(role === 'host' ? '/host' : '/account');
+            router.push(role === 'host' ? '/host' : '/dashboard');
             router.refresh();
         } catch (err: any) {
             setError(err.message);
@@ -47,11 +47,11 @@ export default function RegisterPage({ searchParams }: { searchParams: { role?: 
     };
 
     return (
-        <main className="min-h-screen pt-24 pb-12 bg-[#121212] flex items-center justify-center px-4" dir="rtl">
+        <main className="min-h-screen pt-24 pb-12 bg-white flex items-center justify-center px-4" dir="rtl">
             <div className="w-full max-w-lg">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">{t('register_title')}</h1>
-                    <p className="text-white/50">{t('register_subtitle')}</p>
+                    <h1 className="text-3xl font-bold text-zinc-900 mb-2">{t('register_title')}</h1>
+                    <p className="text-zinc-500">{t('register_subtitle')}</p>
                 </div>
 
                 {/* Role Selection */}
@@ -59,8 +59,8 @@ export default function RegisterPage({ searchParams }: { searchParams: { role?: 
                     <button
                         onClick={() => setRole('guest')}
                         className={`p-6 rounded-xl border flex flex-col items-center gap-3 transition-all ${role === 'guest'
-                            ? 'bg-gold/10 border-gold text-white'
-                            : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10'
+                            ? 'bg-gold/10 border-gold text-zinc-900'
+                            : 'bg-zinc-50 border-zinc-100 text-zinc-400 hover:bg-zinc-100'
                             }`}
                     >
                         <User size={32} className={role === 'guest' ? 'text-gold' : ''} />
@@ -69,8 +69,8 @@ export default function RegisterPage({ searchParams }: { searchParams: { role?: 
                     <button
                         onClick={() => setRole('host')}
                         className={`p-6 rounded-xl border flex flex-col items-center gap-3 transition-all ${role === 'host'
-                            ? 'bg-gold/10 border-gold text-white'
-                            : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10'
+                            ? 'bg-gold/10 border-gold text-zinc-900'
+                            : 'bg-zinc-50 border-zinc-100 text-zinc-400 hover:bg-zinc-100'
                             }`}
                     >
                         <Building size={32} className={role === 'host' ? 'text-gold' : ''} />
@@ -79,7 +79,7 @@ export default function RegisterPage({ searchParams }: { searchParams: { role?: 
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="bg-[#1E1E1E] border border-white/10 p-8 rounded-2xl shadow-xl">
+                <form onSubmit={handleSubmit} className="bg-white border border-zinc-100 p-8 rounded-2xl shadow-xl">
                     {error && (
                         <div className="bg-red-500/10 text-red-500 p-4 rounded-lg mb-6 text-sm text-center">
                             {error}
@@ -88,31 +88,31 @@ export default function RegisterPage({ searchParams }: { searchParams: { role?: 
 
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm text-neutral-400 mb-1">{t('full_name')}</label>
+                            <label className="block text-sm text-zinc-500 mb-1">{t('full_name')}</label>
                             <input
                                 name="name"
                                 type="text"
                                 required
-                                className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
+                                className="w-full bg-zinc-50 border border-zinc-100 rounded-lg p-3 text-zinc-900 focus:outline-none focus:border-gold"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm text-neutral-400 mb-1">{t('email')}</label>
+                            <label className="block text-sm text-zinc-500 mb-1">{t('email')}</label>
                             <input
                                 name="email"
                                 type="email"
                                 required
-                                className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
+                                className="w-full bg-zinc-50 border border-zinc-100 rounded-lg p-3 text-zinc-900 focus:outline-none focus:border-gold"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm text-neutral-400 mb-1">{t('password')}</label>
+                            <label className="block text-sm text-zinc-500 mb-1">{t('password')}</label>
                             <input
                                 name="password"
                                 type="password"
                                 required
                                 minLength={6}
-                                className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-gold"
+                                className="w-full bg-zinc-50 border border-zinc-100 rounded-lg p-3 text-zinc-900 focus:outline-none focus:border-gold"
                             />
                         </div>
                     </div>
@@ -125,9 +125,9 @@ export default function RegisterPage({ searchParams }: { searchParams: { role?: 
                         {loading ? <Loader2 className="animate-spin" /> : t('register_btn')}
                     </button>
 
-                    <p className="text-center text-neutral-500 mt-6 text-sm">
+                    <p className="text-center text-zinc-500 mt-6 text-sm">
                         {t('has_account')} {' '}
-                        <Link href="/login" className="text-gold hover:underline">
+                        <Link href="/login" className="text-gold hover:underline font-bold">
                             {t('login')}
                         </Link>
                     </p>

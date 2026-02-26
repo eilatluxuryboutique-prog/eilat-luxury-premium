@@ -22,13 +22,13 @@ export default function CompareBar() {
                         initial={{ y: 100 }}
                         animate={{ y: 0 }}
                         exit={{ y: 100 }}
-                        className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-900 border-t border-white/10 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]"
+                        className="fixed bottom-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-t border-zinc-100 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]"
                     >
                         <div className="container mx-auto max-w-5xl flex items-center justify-between">
                             <div className="flex items-center gap-4 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
                                 {selectedProperties.map(prop => (
                                     <div key={prop.id} className="relative group flex-shrink-0">
-                                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border border-white/20 relative">
+                                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border border-zinc-100 relative">
                                             <Image src={prop.image} alt={prop.title} fill className="object-cover" />
                                         </div>
                                         <button
@@ -40,13 +40,13 @@ export default function CompareBar() {
                                     </div>
                                 ))}
                                 {selectedProperties.length < 3 && (
-                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl border-2 border-dashed border-white/10 flex items-center justify-center text-white/30 text-xs text-center p-2">
+                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl border-2 border-dashed border-zinc-100 flex items-center justify-center text-zinc-400 text-xs text-center p-2">
                                         הוסף עוד נכס
                                     </div>
                                 )}
                             </div>
 
-                            <div className="flex items-center gap-4 pl-4 border-l border-white/10">
+                            <div className="flex items-center gap-4 pl-4 border-l border-zinc-100">
                                 <Link
                                     href="/compare"
                                     className={`flex items-center gap-2 bg-gold hover:bg-yellow-400 text-black font-bold py-3 px-6 rounded-xl transition-colors ${selectedProperties.length < 2 ? 'opacity-50 pointer-events-none' : ''}`}
@@ -57,7 +57,7 @@ export default function CompareBar() {
                                 </Link>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/50 hover:text-white"
+                                    className="text-zinc-400 hover:text-zinc-900"
                                 >
                                     <X size={24} />
                                 </button>

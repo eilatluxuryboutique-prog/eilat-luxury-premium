@@ -45,21 +45,21 @@ export default function GoogleAdsTab() {
 
     if (!connected) {
         return (
-            <div className="bg-neutral-900 border border-white/10 rounded-2xl p-10 text-center max-w-2xl mx-auto">
-                <div className="w-16 h-16 bg-blue-500/10 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-10 text-center max-w-2xl mx-auto shadow-sm">
+                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <BarChart3 size={32} />
                 </div>
-                <h2 className="text-2xl font-bold mb-4">Connect Google Ads</h2>
-                <p className="text-neutral-400 mb-8">
+                <h2 className="text-2xl font-bold mb-4 text-zinc-900">Connect Google Ads</h2>
+                <p className="text-zinc-500 mb-8">
                     Manage your Google Ads campaigns, monitor performance, and control budgets directly from this dashboard.
                 </p>
 
-                <div className="bg-black/40 border border-white/5 rounded-xl p-6 text-right mb-8 flex flex-col gap-3" dir="rtl">
+                <div className="bg-white border border-zinc-100 rounded-xl p-6 text-right mb-8 flex flex-col gap-3 shadow-inner" dir="rtl">
                     <h3 className="font-bold text-gold flex items-center gap-2 justify-end">
                         <Info size={16} />
                         מה נדרש לצורך החיבור?
                     </h3>
-                    <ul className="text-sm text-neutral-400 space-y-2">
+                    <ul className="text-sm text-zinc-500 space-y-2">
                         <li>• הקמת Developer Token בחשבון ה-Manager של גוגל.</li>
                         <li>• יצירת OAuth Client ID ב-Google Cloud Console.</li>
                         <li>• הגדרת הרשאות גישה (Customer ID).</li>
@@ -81,25 +81,25 @@ export default function GoogleAdsTab() {
         <div className="space-y-6">
             {/* Stats Header */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <StatCard label="Total Impressions" value="190K" icon={<TrendingUp size={20} />} color="text-blue-400" />
-                <StatCard label="Total Clicks" value="2,580" icon={<MousePointer2 size={20} />} color="text-green-400" />
+                <StatCard label="Total Impressions" value="190K" icon={<TrendingUp size={20} />} color="text-blue-600" />
+                <StatCard label="Total Clicks" value="2,580" icon={<MousePointer2 size={20} />} color="text-green-600" />
                 <StatCard label="Cost" value="$801.50" icon={<DollarSign size={20} />} color="text-gold" />
-                <StatCard label="Avg. CTR" value="2.45%" icon={<AlertCircle size={20} />} color="text-purple-400" />
+                <StatCard label="Avg. CTR" value="2.45%" icon={<AlertCircle size={20} />} color="text-purple-600" />
             </div>
 
             {/* Campaign Table */}
-            <div className="bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden shadow-xl">
-                <div className="p-6 border-b border-white/10 flex justify-between items-center">
-                    <h3 className="text-xl font-bold">Your Campaigns</h3>
+            <div className="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
+                <div className="p-6 border-b border-zinc-100 flex justify-between items-center">
+                    <h3 className="text-xl font-bold text-zinc-900">Your Campaigns</h3>
                     <div className="flex gap-2">
-                        <span className="text-xs bg-green-500/10 text-green-400 px-3 py-1 rounded-full border border-green-500/20">Active</span>
-                        <span className="text-xs bg-neutral-800 text-neutral-400 px-3 py-1 rounded-full border border-white/5">Synced</span>
+                        <span className="text-xs bg-green-50 text-green-600 px-3 py-1 rounded-full border border-green-200 font-bold">Active</span>
+                        <span className="text-xs bg-zinc-50 text-zinc-500 px-3 py-1 rounded-full border border-zinc-100 font-bold">Synced</span>
                     </div>
                 </div>
 
                 <div className="overflow-x-auto">
                     <table className="w-full text-right" dir="rtl">
-                        <thead className="bg-black/20 text-neutral-500 text-sm">
+                        <thead className="bg-zinc-50 text-zinc-500 text-sm">
                             <tr>
                                 <th className="px-6 py-4 font-medium">קמפיין</th>
                                 <th className="px-6 py-4 font-medium text-center">סטטוס</th>
@@ -109,18 +109,18 @@ export default function GoogleAdsTab() {
                                 <th className="px-6 py-4 font-medium">פעולות</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5">
+                        <tbody className="divide-y divide-zinc-100">
                             {campaigns.map(c => (
-                                <tr key={c.id} className="hover:bg-white/5 transition-colors group">
-                                    <td className="px-6 py-4 font-medium">{c.name}</td>
+                                <tr key={c.id} className="hover:bg-zinc-50 transition-colors group">
+                                    <td className="px-6 py-4 font-bold text-zinc-900">{c.name}</td>
                                     <td className="px-6 py-4 text-center">
-                                        <span className={`px-2 py-1 rounded-lg text-xs font-bold ${c.status === 'ENABLED' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-500'}`}>
+                                        <span className={`px-2 py-1 rounded-lg text-xs font-bold ${c.status === 'ENABLED' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
                                             {c.status === 'ENABLED' ? 'פעיל' : 'מושהה'}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-center font-mono">{c.clicks.toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-center font-mono">{c.impressions.toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-center font-mono text-gold">${c.cost.toFixed(2)}</td>
+                                    <td className="px-6 py-4 text-center font-mono text-zinc-900">{c.clicks.toLocaleString()}</td>
+                                    <td className="px-6 py-4 text-center font-mono text-zinc-500">{c.impressions.toLocaleString()}</td>
+                                    <td className="px-6 py-4 text-center font-mono text-gold font-bold">${c.cost.toFixed(2)}</td>
                                     <td className="px-6 py-4">
                                         <button
                                             onClick={() => toggleStatus(c.id)}

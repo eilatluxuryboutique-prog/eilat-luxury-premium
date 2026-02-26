@@ -93,19 +93,19 @@ export default function AdminChatPage() {
     }, [selectedUser]);
 
     return (
-        <div className="flex h-[calc(100vh-100px)] text-white bg-black/50 rounded-xl overflow-hidden border border-white/10">
+        <div className="flex h-[calc(100vh-100px)] text-zinc-900 bg-white shadow-xl rounded-xl overflow-hidden border border-zinc-100">
             {/* Sidebar */}
-            <div className="w-1/3 border-l border-white/10 flex flex-col bg-neutral-900/50">
-                <div className="p-4 border-b border-white/10 font-bold flex justify-between items-center">
+            <div className="w-1/3 border-l border-zinc-100 flex flex-col bg-zinc-50">
+                <div className="p-4 border-b border-zinc-100 font-bold flex justify-between items-center text-zinc-900">
                     <span>Conversations</span>
-                    <button onClick={fetchConversations} className="text-xs bg-gold text-black px-2 py-1 rounded-full hover:bg-white/90">Refresh</button>
+                    <button onClick={fetchConversations} className="text-xs bg-gold text-black px-2 py-1 rounded-full hover:brightness-110 shadow-sm">Refresh</button>
                 </div>
                 <div className="flex-1 overflow-y-auto p-2 space-y-2">
                     {conversations.map(conv => (
                         <div
                             key={conv.userId}
                             onClick={() => selectUser(conv.userId)}
-                            className={`p-3 rounded-lg cursor-pointer flex gap-3 items-center ${selectedUser === conv.userId ? 'bg-white/10' : 'hover:bg-white/5'}`}
+                            className={`p-3 rounded-lg cursor-pointer flex gap-3 items-center ${selectedUser === conv.userId ? 'bg-white shadow-sm ring-1 ring-zinc-200' : 'hover:bg-zinc-100'}`}
                         >
                             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center font-bold relative">
                                 {conv.userId.substring(0, 2).toUpperCase()}
@@ -113,27 +113,27 @@ export default function AdminChatPage() {
                             </div>
                             <div className="flex-1 min-w-0">
                                 <div className="flex justify-between">
-                                    <span className="font-bold text-sm truncate">{conv.userId}</span>
-                                    <span className="text-xs text-white/30">{new Date(conv.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                    <span className="font-bold text-sm truncate text-zinc-900">{conv.userId}</span>
+                                    <span className="text-xs text-zinc-400">{new Date(conv.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                 </div>
-                                <p className="text-xs text-white/50 truncate">
+                                <p className="text-xs text-zinc-500 truncate">
                                     {conv.lastMessage.senderId === 'admin' ? 'You: ' : ''}
                                     {conv.lastMessage.content}
                                 </p>
                             </div>
                         </div>
                     ))}
-                    {conversations.length === 0 && <div className="p-4 text-center text-white/30 text-sm">No messages yet</div>}
+                    {conversations.length === 0 && <div className="p-4 text-center text-zinc-300 text-sm">No messages yet</div>}
                 </div>
             </div>
 
             {/* Chat Area */}
-            <div className="flex-1 flex flex-col bg-[#121212]">
+            <div className="flex-1 flex flex-col bg-white">
                 {selectedUser ? (
                     <>
-                        <div className="p-4 border-b border-white/10 font-bold flex items-center gap-2 bg-neutral-900/80">
+                        <div className="p-4 border-b border-zinc-100 font-bold flex items-center gap-2 bg-white">
                             <User size={18} className="text-gold" />
-                            <span>Chat with {selectedUser}</span>
+                            <span className="text-zinc-900">Chat with {selectedUser}</span>
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-4 space-y-4">

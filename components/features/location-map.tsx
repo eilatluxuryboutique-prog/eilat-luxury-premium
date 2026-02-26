@@ -32,7 +32,7 @@ export default function LocationMap({ address, className }: LocationMapProps) {
                 </a>
             </div>
 
-            <div className="w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden border border-white/10 relative bg-neutral-900">
+            <div className="w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden border border-zinc-100 relative bg-zinc-50">
                 <iframe
                     width="100%"
                     height="100%"
@@ -43,7 +43,7 @@ export default function LocationMap({ address, className }: LocationMapProps) {
                     src={`https://maps.google.com/maps?q=${encodedAddress}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
                 ></iframe>
             </div>
-            <p className="text-sm text-white/40 flex items-center gap-1">
+            <p className="text-sm text-zinc-500 flex items-center gap-1">
                 <MapPin size={12} />
                 {address}
             </p>

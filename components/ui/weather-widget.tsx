@@ -20,7 +20,7 @@ export default function WeatherWidget() {
     }, []);
 
     return (
-        <div className="flex items-center gap-2 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-white/90 text-sm font-medium hover:bg-black/30 transition-colors cursor-default select-none">
+        <div className="flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-zinc-100 text-zinc-800 text-sm font-medium hover:bg-white transition-colors cursor-default select-none shadow-sm">
             <Sun className="text-gold animate-spin-slow" size={16} />
             <span>אילת {temp}°</span>
         </div>

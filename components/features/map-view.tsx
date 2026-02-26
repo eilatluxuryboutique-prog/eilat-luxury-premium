@@ -27,7 +27,7 @@ export default function MapView({ properties }: { properties: Property[] }) {
         setMounted(true);
     }, []);
 
-    if (!mounted) return <div className="h-[400px] w-full bg-neutral-900 animate-pulse rounded-xl" />;
+    if (!mounted) return <div className="h-[400px] w-full bg-zinc-100 animate-pulse rounded-xl" />;
 
     // Default center (Eilat)
     const center = [29.5577, 34.9519];

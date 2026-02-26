@@ -1,53 +1,148 @@
 'use client';
 
-import { useState } from 'react';
-import { Save, Palette, Type, Layout } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Save, Palette, Type, Layout, Settings as SettingsIcon, Mail, Phone, AlertTriangle } from 'lucide-react';
 
 export default function SettingsTab() {
-    const [primaryColor, setPrimaryColor] = useState('#3B82F6');
-    const [font, setFont] = useState('Inter');
+    const [settings, setSettings] = useState({
+        primaryColor: '#D4AF37',
+        font: 'Inter',
+        enableHeroVideo: true,
+        showFeaturedBadge: true,
+        contactEmail: '',
+        contactPhone: '',
+        maintenanceMode: false
+    });
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
 
-    const handleSave = () => {
-        // In real app: save to DB or Context
-        document.documentElement.style.setProperty('--primary-color', primaryColor);
-        alert('Settings saved! Colors updated.');
+    useEffect(() => {
+        fetch('/api/admin/settings')
+            .then(res => res.json())
+            .then(data => {
+                if (data && !data.error) {
+                    setSettings(prev => ({ ...prev, ...data }));
+                }
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Fetch settings error:", err);
+                setLoading(false);
+            });
+    }, []);
+
+    const handleSave = async () => {
+        setSaving(true);
+        try {
+            const res = await fetch('/api/admin/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(settings)
+            });
+            if (res.ok) {
+                alert('ההגדרות נשמרו בהצלחה!');
+                // document.documentElement.style.setProperty('--primary-color', settings.primaryColor);
+            } else {
+                alert('שגיאה בשמירת ההגדרות.');
+            }
+        } catch (error) {
+            alert('שגיאה בשמירת ההגדרות.');
+        } finally {
+            setSaving(false);
+        }
     };
 
+    const updateSetting = (key: string, value: any) => {
+        setSettings(prev => ({ ...prev, [key]: value }));
+    };
+
+    if (loading) return <div className="text-zinc-900 p-6">טוען הגדרות...</div>;
+
     return (
-        <div className="space-y-8">
-            <div className="bg-neutral-800 border border-white/5 p-8 rounded-2xl">
-                <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Palette className="text-purple-400" />
-                    Visual Appearance
+        <div className="space-y-8" dir="rtl">
+            <div className="bg-zinc-50 border border-zinc-100 p-8 rounded-2xl shadow-sm">
+                <h2 className="text-xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                    <SettingsIcon className="text-blue-600" />
+                    הגדרות כלליות (General Config)
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
-                        <label className="text-sm text-white/60 font-medium">Brand Color</label>
+                        <label className="text-sm text-zinc-500 font-medium flex items-center gap-2"><Mail size={16} /> אימייל יצירת קשר</label>
+                        <input
+                            type="email"
+                            value={settings.contactEmail}
+                            onChange={(e) => updateSetting('contactEmail', e.target.value)}
+                            className="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-gold outline-none transition-colors"
+                        />
+                    </div>
+                    <div className="space-y-3">
+                        <label className="text-sm text-zinc-500 font-medium flex items-center gap-2"><Phone size={16} /> טלפון / סוכן</label>
+                        <input
+                            type="text"
+                            value={settings.contactPhone}
+                            onChange={(e) => updateSetting('contactPhone', e.target.value)}
+                            className="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-gold outline-none transition-colors"
+                            dir="ltr"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-zinc-50 border border-zinc-100 p-8 rounded-2xl shadow-sm">
+                <h2 className="text-xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                    <Layout className="text-green-600" />
+                    אפשרויות פריסה (Layout & Features)
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label className="flex items-center justify-between p-4 bg-white border border-zinc-200 rounded-xl cursor-pointer hover:bg-zinc-50 transition-colors shadow-sm">
+                        <span className="text-zinc-900">וידאו מסך מלא בעמוד הבית</span>
+                        <input type="checkbox" checked={settings.enableHeroVideo} onChange={(e) => updateSetting('enableHeroVideo', e.target.checked)} className="accent-gold w-5 h-5" />
+                    </label>
+                    <label className="flex items-center justify-between p-4 bg-white border border-zinc-200 rounded-xl cursor-pointer hover:bg-zinc-50 transition-colors shadow-sm">
+                        <span className="text-zinc-900">תגית "מומלץ" בנכסים</span>
+                        <input type="checkbox" checked={settings.showFeaturedBadge} onChange={(e) => updateSetting('showFeaturedBadge', e.target.checked)} className="accent-gold w-5 h-5" />
+                    </label>
+                    <label className="flex items-center justify-between p-4 bg-red-50 border border-red-200 rounded-xl cursor-pointer hover:bg-red-100 transition-colors shadow-sm">
+                        <span className="text-red-600 flex items-center gap-2 font-bold"><AlertTriangle size={18} /> מצב תחזוקה (אתר סגור ללקוחות)</span>
+                        <input type="checkbox" checked={settings.maintenanceMode} onChange={(e) => updateSetting('maintenanceMode', e.target.checked)} className="accent-red-600 w-5 h-5" />
+                    </label>
+                </div>
+            </div>
+
+            <div className="bg-zinc-50 border border-zinc-100 p-8 rounded-2xl shadow-sm">
+                <h2 className="text-xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                    <Palette className="text-purple-600" />
+                    סגנון ויזואלי (Branding)
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                        <label className="text-sm text-zinc-500 font-medium">צבע מותג</label>
                         <div className="flex items-center gap-4">
                             <input
                                 type="color"
-                                value={primaryColor}
-                                onChange={(e) => setPrimaryColor(e.target.value)}
-                                className="w-16 h-16 rounded-xl cursor-pointer bg-transparent border border-white/10 p-1"
+                                value={settings.primaryColor}
+                                onChange={(e) => updateSetting('primaryColor', e.target.value)}
+                                className="w-16 h-16 rounded-xl cursor-pointer bg-transparent border border-zinc-200 p-1"
                             />
                             <div>
-                                <p className="text-white font-mono">{primaryColor}</p>
-                                <p className="text-white/40 text-xs mt-1">Used for buttons & highlights</p>
+                                <p className="text-zinc-900 font-mono font-bold" dir="ltr">{settings.primaryColor}</p>
+                                <p className="text-zinc-500 text-xs mt-1">צבע כפתורים והדגשות</p>
                             </div>
                         </div>
                     </div>
 
                     <div className="space-y-3">
-                        <label className="text-sm text-white/60 font-medium">Typography</label>
-                        <div className="flex gap-2">
+                        <label className="text-sm text-white/60 font-medium">גופן (Typography)</label>
+                        <div className="flex gap-2" dir="ltr">
                             {['Inter', 'Roboto', 'Outfit'].map((f) => (
                                 <button
                                     key={f}
-                                    onClick={() => setFont(f)}
-                                    className={`flex-1 py-3 rounded-xl border transition-all ${font === f
-                                            ? 'bg-blue-600/20 border-blue-500 text-blue-400'
-                                            : 'bg-black/20 border-white/10 text-white/60 hover:text-white'
+                                    onClick={() => updateSetting('font', f)}
+                                    className={`flex-1 py-3 rounded-xl border transition-all ${settings.font === f
+                                        ? 'bg-gold/10 border-gold text-gold font-bold shadow-sm'
+                                        : 'bg-white border-zinc-200 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 shadow-sm'
                                         }`}
                                 >
                                     {f}
@@ -58,30 +153,14 @@ export default function SettingsTab() {
                 </div>
             </div>
 
-            <div className="bg-neutral-800 border border-white/5 p-8 rounded-2xl">
-                <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Layout className="text-green-400" />
-                    Layout Options
-                </h2>
-                <div className="space-y-4">
-                    <label className="flex items-center justify-between p-4 bg-black/20 rounded-xl cursor-pointer hover:bg-black/30 transition-colors">
-                        <span className="text-white">Enable Full-Width Hero Video</span>
-                        <input type="checkbox" defaultChecked className="accent-blue-500 w-5 h-5" />
-                    </label>
-                    <label className="flex items-center justify-between p-4 bg-black/20 rounded-xl cursor-pointer hover:bg-black/30 transition-colors">
-                        <span className="text-white">Show "Featured" Badge on Apartments</span>
-                        <input type="checkbox" defaultChecked className="accent-blue-500 w-5 h-5" />
-                    </label>
-                </div>
-            </div>
-
             <div className="flex justify-end pt-4">
                 <button
                     onClick={handleSave}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-medium flex items-center gap-2 transition-transform active:scale-95 shadow-lg shadow-blue-500/20"
+                    disabled={saving}
+                    className="bg-gold hover:bg-gold-light text-black px-8 py-3 rounded-xl font-bold flex items-center gap-2 transition-transform active:scale-95 shadow-lg shadow-gold/20 disabled:opacity-50"
                 >
                     <Save size={20} />
-                    Save Global Settings
+                    {saving ? 'שומר...' : 'שמור הגדרות מערכת'}
                 </button>
             </div>
         </div>

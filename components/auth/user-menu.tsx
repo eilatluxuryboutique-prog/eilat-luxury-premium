@@ -83,7 +83,7 @@ export default function UserMenu() {
 
                     {user.role === 'guest' && (
                         <Link
-                            href="/account"
+                            href="/dashboard"
                             className="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/5 hover:text-gold transition-colors"
                             onClick={() => setIsOpen(false)}
                         >

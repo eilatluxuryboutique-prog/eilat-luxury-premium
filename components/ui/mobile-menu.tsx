@@ -39,7 +39,7 @@ export default function MobileMenu() {
         <div className="md:hidden">
             <button
                 onClick={() => setIsOpen(true)}
-                className="p-2 text-white hover:text-gold transition-all bg-white/5 rounded-lg border border-white/10 active:scale-95"
+                className="p-2 text-zinc-800 hover:text-gold transition-all bg-white/80 rounded-lg border border-zinc-200 active:scale-95 shadow-sm"
                 aria-label="Open menu"
             >
                 <Menu size={24} />
@@ -54,7 +54,7 @@ export default function MobileMenu() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+                            className="fixed inset-0 bg-white/20 backdrop-blur-md z-40"
                         />
 
                         {/* Menu Panel */}
@@ -63,33 +63,32 @@ export default function MobileMenu() {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm border-l border-gold/40 z-[9999] p-6 shadow-[0_0_100px_rgba(0,0,0,1)] flex flex-col overflow-y-auto !bg-black"
-                            style={{ backgroundColor: '#000000' }}
+                            className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm border-l border-zinc-100 z-[9999] p-6 shadow-2xl flex flex-col overflow-y-auto bg-white/95 backdrop-blur-xl"
                         >
                             <div className="flex justify-between items-center mb-8">
-                                <Link href="/" className="text-xl font-bold text-white">
+                                <Link href="/" className="text-xl font-bold text-zinc-900">
                                     Eilat<span className="text-gold">Luxury</span>
                                 </Link>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="p-2 text-white hover:text-red-400 transition-colors"
+                                    className="p-2 text-zinc-500 hover:text-red-500 transition-colors"
                                     aria-label="Close menu"
                                 >
                                     <X size={28} />
                                 </button>
                             </div>
 
-                            <div className="flex flex-col gap-4 mb-8 p-4 bg-white/5 rounded-xl border border-white/10">
+                            <div className="flex flex-col gap-4 mb-8 p-4 bg-zinc-50 rounded-xl border border-zinc-100">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-white/60 text-sm">פרופיל</span>
+                                    <span className="text-zinc-500 text-sm">פרופיל</span>
                                     <UserMenu />
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-white/60 text-sm">מצב לילה</span>
+                                    <span className="text-zinc-500 text-sm">מצב לילה</span>
                                     <ThemeToggle />
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-white/60 text-sm">עגלת קניות</span>
+                                    <span className="text-zinc-500 text-sm">עגלת קניות</span>
                                     <CartIcon />
                                 </div>
                             </div>
@@ -98,7 +97,7 @@ export default function MobileMenu() {
                                 <Link
                                     href="/"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2"
                                 >
                                     {t('home')}
                                 </Link>
@@ -107,14 +106,14 @@ export default function MobileMenu() {
                                 <div className="mt-2 mb-2">
                                     <span className="text-gold text-xs font-bold uppercase tracking-widest">{tCats('title')}</span>
                                     <div className="flex flex-col gap-3 mt-4 pr-2">
-                                        <Link href="/search?type=hotel" onClick={() => setIsOpen(false)} className="text-white/80 hover:text-gold transition-colors text-base flex justify-between items-center">
+                                        <Link href="/search?type=hotel" onClick={() => setIsOpen(false)} className="text-zinc-700 hover:text-gold transition-colors text-base flex justify-between items-center">
                                             <span>{tCats('hotels')}</span>
                                             <span className="text-[10px] bg-gold/10 text-gold px-2 py-0.5 rounded-full border border-gold/20">PREMIUM</span>
                                         </Link>
-                                        <Link href="/search?type=apartment" onClick={() => setIsOpen(false)} className="text-white/80 hover:text-gold transition-colors text-base">
+                                        <Link href="/search?type=apartment" onClick={() => setIsOpen(false)} className="text-zinc-700 hover:text-gold transition-colors text-base">
                                             {tCats('apartments')}
                                         </Link>
-                                        <Link href="/search?type=villa" onClick={() => setIsOpen(false)} className="text-white/80 hover:text-gold transition-colors text-base">
+                                        <Link href="/search?type=villa" onClick={() => setIsOpen(false)} className="text-zinc-700 hover:text-gold transition-colors text-base">
                                             {tCats('villas')}
                                         </Link>
                                     </div>
@@ -123,21 +122,21 @@ export default function MobileMenu() {
                                 <Link
                                     href="/apartments"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2 mt-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2 mt-2"
                                 >
                                     {t('apartments')}
                                 </Link>
                                 <Link
                                     href="/about"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2"
                                 >
                                     {t('about')}
                                 </Link>
                                 <Link
                                     href="/contact"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/90 hover:text-gold transition-colors border-b border-white/5 pb-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2"
                                 >
                                     {t('contact')}
                                 </Link>

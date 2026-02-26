@@ -2,20 +2,22 @@
 
 import { useState } from 'react';
 import { Chrome, Facebook } from 'lucide-react';
+import { signIn } from 'next-auth/react';
 
 export default function SocialLoginButtons() {
     const [loading, setLoading] = useState<string | null>(null);
 
-    const handleLogin = (provider: string) => {
+    const handleLogin = async (provider: string) => {
         setLoading(provider);
-        // In a real app with keys, this would redirect to Google/Facebook
-        // signIn(provider, { callbackUrl: '/dashboard' });
-
-        // Simulation
-        setTimeout(() => {
-            alert(`התחברות עם ${provider} דורשת מפתח API אמיתי.\n(Login with ${provider} requires real API Keys)`);
-            setLoading(null);
-        }, 1000);
+        if (provider === 'google') {
+            await signIn('google', { callbackUrl: '/dashboard' });
+        } else {
+            // Facebook simulation for now unless requested
+            setTimeout(() => {
+                alert(`התחברות עם ${provider} דורשת מפתח API אמיתי.\n(Login with ${provider} requires real API Keys)`);
+                setLoading(null);
+            }, 1000);
+        }
     };
 
     return (

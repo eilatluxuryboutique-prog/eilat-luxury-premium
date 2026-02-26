@@ -3,13 +3,20 @@ import dbConnect from '@/lib/db';
 import Booking from '@/models/Booking';
 import Property from '@/models/Property';
 import { getSession } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../../auth/[...nextauth]/route';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
     try {
         // Authenticate (Admin only)
-        const session = await getSession();
+        let session = await getSession() as any;
+        const nextAuthSession = await getServerSession(authOptions);
+        if (nextAuthSession?.user && (!session || !session.userId)) {
+            session = { ...nextAuthSession.user, userId: (nextAuthSession.user as any).id };
+        }
+
         if (!session || session.role !== 'admin') {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }

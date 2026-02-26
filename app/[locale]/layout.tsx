@@ -6,6 +6,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from "next/navigation";
 import Header from "@/components/ui/header";
 import Providers from "@/app/providers";
+import AuthProvider from "@/components/auth/auth-provider";
 import ThemeProvider from "@/components/theme-provider";
 import AiAssistant from "@/components/ai-assistant";
 import CartDrawer from "@/components/features/cart-drawer";
@@ -87,25 +88,26 @@ export default async function RootLayout({
             <head>
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6683838338383833" crossOrigin="anonymous"></script>
             </head>
-            <body className={`${rubik.className} ${inter.variable} ${rubik.variable} antialiased`}>
+            <body className={`${rubik.className} ${inter.variable} ${rubik.variable} antialiased bg-white text-zinc-900`}>
                 <NextIntlClientProvider messages={messages}>
                     <Providers>
-                        <ThemeProvider>
-                            <CompareProvider>
-                                <Header initialData={siteContent || {}} />
-                                <main className="pb-20 md:pb-0">
-                                    {children}
-                                </main>
-                                <AiAssistant />
-                                <AccessibilityButton />
-                                <CartDrawer />
-                                <CompareBar />
-                                <BottomNav />
-                                <FloatingActions />
-                                <Footer />
-                                <CookieBanner />
-                            </CompareProvider>
-                        </ThemeProvider>
+                        <AuthProvider>
+                            <ThemeProvider>
+                                <CompareProvider>
+                                    <Header initialData={siteContent || {}} />
+                                    <main className="pb-32 md:pb-20">
+                                        {children}
+                                    </main>
+                                    <AiAssistant />
+                                    <AccessibilityButton />
+                                    <CartDrawer />
+                                    <CompareBar />
+                                    <BottomNav />
+                                    <Footer />
+                                    <CookieBanner />
+                                </CompareProvider>
+                            </ThemeProvider>
+                        </AuthProvider>
                     </Providers>
                 </NextIntlClientProvider>
                 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript" async></script>

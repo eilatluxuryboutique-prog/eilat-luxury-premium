@@ -66,39 +66,39 @@ export default function UserDashboard() {
     const getProperty = (id: string) => properties.find(p => p.id === id);
 
     return (
-        <div className="min-h-screen bg-[#121212] pt-24 pb-12 px-4 md:px-8">
+        <div className="min-h-screen bg-white pt-24 pb-12 px-4 md:px-8">
             <div className="max-w-6xl mx-auto">
-                <h1 className="text-4xl font-black text-white mb-2">שלום, {user?.name || 'אורח'} 👋</h1>
-                <p className="text-white/60 mb-8">ברוך הבא לאזור האישי שלך. כאן תוכל לנהל את החופשות שלך.</p>
+                <h1 className="text-4xl font-black text-zinc-900 mb-2">שלום, {user?.name || 'אורח'} 👋</h1>
+                <p className="text-zinc-500 mb-8">ברוך הבא לאזור האישי שלך. כאן תוכל לנהל את החופשות שלך.</p>
 
                 <div className="flex flex-col md:flex-row gap-8">
                     {/* Sidebar */}
                     <aside className="w-full md:w-64 flex-shrink-0">
-                        <div className="bg-[#1a1a1a] rounded-2xl p-4 sticky top-24 border border-white/5">
+                        <div className="bg-zinc-50 rounded-2xl p-4 sticky top-24 border border-zinc-100 shadow-sm">
                             <nav className="flex flex-col gap-2">
                                 <button
                                     onClick={() => setActiveTab("bookings")}
-                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "bookings" ? "bg-gold text-black font-bold" : "text-white/70 hover:bg-white/5"}`}
+                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "bookings" ? "bg-gold text-black font-bold shadow-md" : "text-zinc-600 hover:bg-zinc-100"}`}
                                 >
                                     <Calendar size={20} />
                                     <span>ההזמנות שלי</span>
                                 </button>
                                 <button
                                     onClick={() => setActiveTab("wishlist")}
-                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "wishlist" ? "bg-gold text-black font-bold" : "text-white/70 hover:bg-white/5"}`}
+                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "wishlist" ? "bg-gold text-black font-bold shadow-md" : "text-zinc-600 hover:bg-zinc-100"}`}
                                 >
                                     <Heart size={20} />
                                     <span>מועדפים</span>
                                 </button>
                                 <button
                                     onClick={() => setActiveTab("settings")}
-                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "settings" ? "bg-gold text-black font-bold" : "text-white/70 hover:bg-white/5"}`}
+                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "settings" ? "bg-gold text-black font-bold shadow-md" : "text-zinc-600 hover:bg-zinc-100"}`}
                                 >
                                     <Settings size={20} />
                                     <span>הגדרות</span>
                                 </button>
-                                <div className="h-px bg-white/10 my-2"></div>
-                                <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-400/10 transition-all font-medium">
+                                <div className="h-px bg-zinc-200 my-2"></div>
+                                <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition-all font-medium">
                                     <LogOut size={20} />
                                     <span>התנתק</span>
                                 </button>
@@ -140,28 +140,28 @@ export default function UserDashboard() {
                                             <div className="p-6 flex-1 flex flex-col justify-between">
                                                 <div className="flex justify-between items-start">
                                                     <div>
-                                                        <h3 className="text-xl font-bold text-white mb-1">{prop.title}</h3>
-                                                        <div className="flex items-center gap-2 text-white/50 text-sm">
+                                                        <h3 className="text-xl font-bold text-zinc-900 mb-1">{prop.title}</h3>
+                                                        <div className="flex items-center gap-2 text-zinc-500 text-sm">
                                                             <MapPin size={14} />
                                                             <span>{prop.location}</span>
                                                         </div>
                                                     </div>
-                                                    <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${booking.status === 'confirmed' || booking.status === 'upcoming' ? 'bg-green-500/20 text-green-500' : 'bg-white/10 text-white/50'}`}>
+                                                    <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${booking.status === 'confirmed' || booking.status === 'upcoming' ? 'bg-green-100 text-green-700' : 'bg-zinc-100 text-zinc-500'}`}>
                                                         {booking.status === 'confirmed' ? 'מאושר' : booking.status}
                                                     </div>
                                                 </div>
 
                                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                                                     <div>
-                                                        <div className="text-xs text-white/40 mb-1">תאריך הגעה</div>
-                                                        <div className="text-white font-mono">{checkIn}</div>
+                                                        <div className="text-xs text-zinc-400 mb-1">תאריך הגעה</div>
+                                                        <div className="text-zinc-900 font-mono font-bold">{checkIn}</div>
                                                     </div>
                                                     <div>
-                                                        <div className="text-xs text-white/40 mb-1">תאריך עזיבה</div>
-                                                        <div className="text-white font-mono">{checkOut}</div>
+                                                        <div className="text-xs text-zinc-400 mb-1">תאריך עזיבה</div>
+                                                        <div className="text-zinc-900 font-mono font-bold">{checkOut}</div>
                                                     </div>
                                                     <div>
-                                                        <div className="text-xs text-white/40 mb-1">סה"כ לתשלום</div>
+                                                        <div className="text-xs text-zinc-400 mb-1">סה"כ לתשלום</div>
                                                         <div className="text-gold font-bold">₪{booking.totalPrice?.toLocaleString()}</div>
                                                     </div>
                                                     <div className="flex items-end justify-end">

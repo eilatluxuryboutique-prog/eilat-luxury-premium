@@ -98,13 +98,13 @@ export default function ChatTab() {
     }, [messages]);
 
     return (
-        <div className="flex h-[600px] text-white bg-black/20 rounded-xl overflow-hidden border border-white/10" dir="ltr">
+        <div className="flex h-[600px] text-zinc-900 bg-white rounded-xl overflow-hidden border border-zinc-200 shadow-sm font-sans" dir="ltr">
             {/* Sidebar */}
-            <div className="w-1/3 border-r border-white/10 flex flex-col bg-neutral-900/50">
-                <div className="p-4 border-b border-white/10 font-bold flex justify-between items-center">
+            <div className="w-1/3 border-r border-zinc-200 flex flex-col bg-zinc-50">
+                <div className="p-4 border-b border-zinc-200 font-bold flex justify-between items-center text-zinc-900">
                     <span>Conversations</span>
-                    <button onClick={fetchConversations} className="text-xs bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors">
-                        <RefreshCw size={14} />
+                    <button onClick={fetchConversations} className="text-xs bg-zinc-200 p-2 rounded-full hover:bg-zinc-300 transition-colors">
+                        <RefreshCw size={14} className="text-zinc-600" />
                     </button>
                 </div>
                 <div className="flex-1 overflow-y-auto p-2 space-y-2">
@@ -112,7 +112,7 @@ export default function ChatTab() {
                         <div
                             key={conv.userId}
                             onClick={() => selectUser(conv.userId)}
-                            className={`p-3 rounded-lg cursor-pointer flex gap-3 items-center ${selectedUser === conv.userId ? 'bg-white/10' : 'hover:bg-white/5'}`}
+                            className={`p-3 rounded-lg cursor-pointer flex gap-3 items-center transition-colors ${selectedUser === conv.userId ? 'bg-gold/10' : 'hover:bg-zinc-100'}`}
                         >
                             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center font-bold text-xs relative">
                                 {conv.userId.startsWith('guest_') ? 'G' : conv.userId.substring(0, 2).toUpperCase()}
@@ -123,35 +123,35 @@ export default function ChatTab() {
                                     <span className="font-bold text-sm truncate w-24">
                                         {conv.userId.startsWith('guest_') ? 'Guest' : conv.userId}
                                     </span>
-                                    <span className="text-[10px] text-white/30">{new Date(conv.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                    <span className="text-[10px] text-zinc-400">{new Date(conv.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                 </div>
-                                <p className="text-xs text-white/50 truncate">
+                                <p className="text-xs text-zinc-500 truncate">
                                     {conv.lastMessage.senderId === 'admin' ? 'You: ' : ''}
                                     {conv.lastMessage.content}
                                 </p>
                             </div>
                         </div>
                     ))}
-                    {conversations.length === 0 && <div className="p-4 text-center text-white/30 text-sm">No active chats</div>}
+                    {conversations.length === 0 && <div className="p-4 text-center text-zinc-400 text-sm italic">No active chats</div>}
                 </div>
             </div>
 
             {/* Chat Area */}
-            <div className="flex-1 flex flex-col bg-[#121212]/50">
+            <div className="flex-1 flex flex-col bg-white">
                 {selectedUser ? (
                     <>
-                        <div className="p-4 border-b border-white/10 font-bold flex items-center gap-2 bg-neutral-900/50">
+                        <div className="p-4 border-b border-zinc-200 font-bold flex items-center gap-2 bg-zinc-50">
                             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span>Chat with {selectedUser.startsWith('guest_') ? 'Guest' : selectedUser}</span>
-                            <span className="text-xs text-white/30 ml-2">ID: {selectedUser}</span>
+                            <span className="text-zinc-900">Chat with {selectedUser.startsWith('guest_') ? 'Guest' : selectedUser}</span>
+                            <span className="text-xs text-zinc-400 ml-2">ID: {selectedUser}</span>
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-4 space-y-4">
                             {messages.map((m, i) => (
                                 <div key={i} className={`flex ${m.senderId === 'admin' ? 'justify-end' : 'justify-start'}`}>
-                                    <div className={`max-w-[70%] p-3 rounded-2xl ${m.senderId === 'admin'
+                                    <div className={`max-w-[70%] p-3 rounded-2xl shadow-sm ${m.senderId === 'admin'
                                         ? 'bg-blue-600 text-white rounded-br-none'
-                                        : 'bg-neutral-800 text-white rounded-bl-none border border-white/10'
+                                        : 'bg-zinc-100 text-zinc-900 rounded-bl-none border border-zinc-200'
                                         }`}>
                                         <p className="whitespace-pre-wrap break-words text-sm">{m.content}</p>
                                         <div className="flex justify-end items-center gap-1 mt-1 opacity-50 text-[10px]">
@@ -165,27 +165,27 @@ export default function ChatTab() {
                         </div>
 
                         {/* Input Area */}
-                        <div className="p-4 bg-neutral-900/50 border-t border-white/10 flex gap-2">
+                        <div className="p-4 bg-zinc-50 border-t border-zinc-200 flex gap-2">
                             <input
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                className="flex-1 bg-black/20 border border-white/10 rounded-full px-4 py-2 focus:border-blue-500 outline-none transition-colors"
+                                className="flex-1 bg-white border border-zinc-200 rounded-full px-4 py-2 focus:border-gold outline-none transition-colors text-zinc-900 shadow-inner"
                                 placeholder="Type a reply..."
                             />
                             <button
                                 onClick={handleSend}
                                 disabled={!input.trim()}
-                                className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="bg-gold text-black p-2 rounded-full hover:bg-gold-light transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <Send size={18} />
                             </button>
                         </div>
                     </>
                 ) : (
-                    <div className="flex-1 flex flex-col items-center justify-center text-white/20 gap-4">
+                    <div className="flex-1 flex flex-col items-center justify-center text-zinc-300 gap-4">
                         <Bot size={48} />
-                        <p>Select a conversation to start chatting</p>
+                        <p className="font-bold">Select a conversation to start chatting</p>
                     </div>
                 )}
             </div>

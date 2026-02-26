@@ -103,13 +103,13 @@ export default function PropertiesTab() {
     return (
         <div className="space-y-6" dir="rtl">
             {/* Header / Actions */}
-            <div className="flex justify-between items-center bg-[#1E1E1E] p-4 rounded-xl border border-white/10">
+            <div className="flex justify-between items-center bg-zinc-50 p-4 rounded-xl border border-zinc-100 shadow-sm">
                 <div className="relative w-64">
-                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40" size={18} />
+                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400" size={18} />
                     <input
                         type="text"
                         placeholder="חיפוש נכסים..."
-                        className="w-full bg-black/40 border border-white/10 rounded-lg py-2 pr-10 pl-4 text-white text-sm focus:border-gold outline-none"
+                        className="w-full bg-white border border-zinc-200 rounded-lg py-2 pr-10 pl-4 text-zinc-900 text-sm focus:border-gold outline-none"
                         value={searchTerm}
                         onChange={e => setSearchTerm(e.target.value)}
                     />
@@ -120,9 +120,9 @@ export default function PropertiesTab() {
             </div>
 
             {/* List */}
-            <div className="bg-[#1E1E1E] rounded-xl border border-white/10 overflow-hidden">
+            <div className="bg-white rounded-xl border border-zinc-100 overflow-hidden shadow-sm">
                 <table className="w-full text-right">
-                    <thead className="bg-white/5 text-white/60 text-xs uppercase font-medium">
+                    <thead className="bg-zinc-50 text-zinc-500 text-xs uppercase font-medium">
                         <tr>
                             <th className="px-6 py-4">נכס</th>
                             <th className="px-6 py-4">מיקום</th>
@@ -131,14 +131,14 @@ export default function PropertiesTab() {
                             <th className="px-6 py-4">פעולות</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/10">
+                    <tbody className="divide-y divide-zinc-100">
                         {isLoading ? (
-                            <tr><td colSpan={5} className="p-8 text-center text-white/50">טוען נכסים...</td></tr>
+                            <tr><td colSpan={5} className="p-8 text-center text-zinc-400">טוען נכסים...</td></tr>
                         ) : filteredProperties.length === 0 ? (
-                            <tr><td colSpan={5} className="p-8 text-center text-white/50">לא נמצאו נכסים.</td></tr>
+                            <tr><td colSpan={5} className="p-8 text-center text-zinc-400">לא נמצאו נכסים.</td></tr>
                         ) : (
                             filteredProperties.map((property: any) => (
-                                <tr key={property.id || property._id} className="hover:bg-white/5 transition-colors group">
+                                <tr key={property.id || property._id} className="hover:bg-zinc-50 transition-colors group">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 rounded bg-gray-700 overflow-hidden shrink-0">
@@ -150,8 +150,8 @@ export default function PropertiesTab() {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 text-white/80 text-sm">{property.location || 'אילת'}</td>
-                                    <td className="px-6 py-4 text-white/80 text-sm">₪{property.price || property.pricePerNight}</td>
+                                    <td className="px-6 py-4 text-zinc-600 text-sm">{property.location || 'אילת'}</td>
+                                    <td className="px-6 py-4 text-zinc-900 font-bold text-sm">₪{property.price || property.pricePerNight}</td>
                                     <td className="px-6 py-4">
                                         <span className={`px-2 py-1 rounded text-xs font-medium ${property.isDemo ? 'bg-yellow-500/10 text-yellow-400' : 'bg-green-500/10 text-green-400'}`}>
                                             {property.isDemo ? 'Demo' : 'Active'}
@@ -161,14 +161,14 @@ export default function PropertiesTab() {
                                         <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button
                                                 onClick={() => openCalendar(property)}
-                                                className="p-2 hover:bg-white/10 rounded text-blue-400"
+                                                className="p-2 hover:bg-zinc-100 rounded text-blue-600"
                                                 title="ניהול יומן"
                                             >
                                                 <Calendar size={16} />
                                             </button>
                                             <button
                                                 onClick={() => handleDelete(property.id || property._id)}
-                                                className="p-2 hover:bg-white/10 rounded text-red-400"
+                                                className="p-2 hover:bg-zinc-100 rounded text-red-600"
                                                 title="מחק נכס"
                                             >
                                                 <Trash2 size={16} />

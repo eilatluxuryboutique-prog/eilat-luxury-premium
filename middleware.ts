@@ -10,7 +10,8 @@ const MAX_REQUESTS_PER_WINDOW = 60; // 60 requests per minute
 
 const intlMiddleware = createMiddleware({
     locales: ['he', 'en', 'ru', 'fr', 'ar'],
-    defaultLocale: 'he'
+    defaultLocale: 'he',
+    localeDetection: false
 });
 
 export default async function middleware(req: NextRequest) {
@@ -40,6 +41,14 @@ export default async function middleware(req: NextRequest) {
 
     if (isProtected) {
         const token = req.cookies.get('auth-token')?.value;
+        const nextAuthToken = req.cookies.get('next-auth.session-token')?.value || req.cookies.get('__Secure-next-auth.session-token')?.value;
+
+        // If they have a NextAuth token, we let them pass the edge middleware. 
+        // The individual page components (via useSession or getServerSession) will handle the actual role-based auth.
+        if (nextAuthToken) {
+            return intlMiddleware(req);
+        }
+
         const payload = token ? await verifyToken(token) : null;
 
         if (!payload) {

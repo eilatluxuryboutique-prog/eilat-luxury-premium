@@ -37,12 +37,12 @@ const articles = [
 
 export default function BlogSection() {
     return (
-        <section className="py-20 bg-neutral-900 border-t border-white/5">
+        <section className="py-20 bg-white border-t border-zinc-100">
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-end mb-12">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">המגזין שלנו</h2>
-                        <p className="text-neutral-400">טיפים, המלצות וכל מה שחם באילת</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-3">המגזין שלנו</h2>
+                        <p className="text-zinc-500">טיפים, המלצות וכל מה שחם באילת</p>
                     </div>
                     <Link href="/blog" className="text-gold hidden md:flex items-center gap-2 hover:gap-3 transition-all">
                         לכל הכתבות <ArrowLeft size={16} />
@@ -67,14 +67,14 @@ export default function BlogSection() {
                                         fill
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/10">
+                                    <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-md text-zinc-900 text-xs px-3 py-1 rounded-full border border-zinc-100">
                                         {article.category}
                                     </div>
                                 </div>
                                 <div className="space-y-3">
-                                    <span className="text-gold text-sm font-medium">{article.date}</span>
-                                    <h3 className="text-xl font-bold text-white group-hover:text-gold transition-colors">{article.title}</h3>
-                                    <p className="text-neutral-400 text-sm leading-relaxed line-clamp-2">{article.excerpt}</p>
+                                    <span className="text-gold-dark text-sm font-medium">{article.date}</span>
+                                    <h3 className="text-xl font-bold text-zinc-900 group-hover:text-gold transition-colors">{article.title}</h3>
+                                    <p className="text-zinc-500 text-sm leading-relaxed line-clamp-2">{article.excerpt}</p>
                                 </div>
                             </Link>
                         </motion.div>

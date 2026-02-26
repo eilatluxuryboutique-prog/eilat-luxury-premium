@@ -8,7 +8,6 @@ import LanguageSwitcher from './language-switcher';
 import MobileMenu from './mobile-menu';
 import UserMenu from '../auth/user-menu';
 import CartIcon from '../features/cart-icon';
-import ThemeToggle from '../features/theme-toggle';
 import WeatherWidget from './weather-widget';
 
 export default function Header({ initialData }: { initialData?: any }) {
@@ -33,51 +32,55 @@ export default function Header({ initialData }: { initialData?: any }) {
                 ⚠️ אתר זה נמצא בשלבי פיתוח (BETA). הנכסים המוצגים הם להדגמה בלבד ואינם זמינים להזמנה אמיתית.
             </div>
 
-            <header className={`fixed top-[24px] left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md border-b border-border/50 py-3' : 'bg-transparent py-5'}`}>
-                <div className="container mx-auto px-4 flex items-center justify-between">
-                    <Link href="/" className="text-xl md:text-2xl font-bold text-foreground transition-colors">
-                        Eilat<span className={logoColorClass}>Luxury</span>
+            <header className={`fixed top-[24px] left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-xl border-b border-zinc-100 py-3 shadow-lg' : 'bg-transparent py-5'}`}>
+                <div className="max-w-[1600px] mx-auto px-6 flex items-center justify-between">
+                    <Link href="/" className="text-lg md:text-xl font-black text-foreground transition-all hover:scale-105 shrink-0">
+                        Eilat<span className="text-[#FFD700]">Luxury</span>
                     </Link>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex gap-8 items-center text-foreground/90 font-medium">
-                        <Link href="/" className="hover:text-primary transition-colors" aria-label="Go to Home Page">
+                    {/* Desktop Navigation - Optimized Spacing */}
+                    <nav className="hidden lg:flex gap-6 xl:gap-10 items-center text-zinc-900 font-bold text-sm uppercase tracking-wide">
+                        <Link href="/" className="hover:text-gold transition-colors relative group">
                             {t('home')}
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/apartments" className="hover:text-primary transition-colors" aria-label="View Apartments">
+                        <Link href="/apartments" className="hover:text-gold transition-colors relative group">
                             {t('apartments')}
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/about" className="hover:text-primary transition-colors">
-                            {t('about')}
-                        </Link>
-                        <Link href="/experiences" className="hover:text-primary transition-colors">
+                        <Link href="/experiences" className="hover:text-gold transition-colors relative group">
                             חוויות
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/concierge" className="hover:text-primary transition-colors flex items-center gap-1">
+                        <Link href="/concierge" className="hover:text-gold transition-colors flex items-center gap-1 relative group">
                             <span className="text-gold">★</span> VIP
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/blog" className="hover:text-primary transition-colors">
+                        <Link href="/blog" className="hover:text-gold transition-colors relative group">
                             מגזין
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/contact" className="hover:text-primary transition-colors">
+                        <Link href="/contact" className="hover:text-gold transition-colors relative group">
                             {t('contact')}
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
                         </Link>
                     </nav>
 
-                    <div className="flex items-center gap-2 md:gap-4">
-                        <div className="hidden md:flex items-center gap-4">
-                            <Link href="/wishlist" className="text-foreground/80 hover:text-red-500 transition-colors" aria-label="View Wishlist">
-                                <Heart size={20} />
+                    <div className="flex items-center gap-3 md:gap-6">
+                        <div className="hidden sm:flex items-center gap-4">
+                            <Link href="/wishlist" className="text-zinc-400 hover:text-red-500 transition-colors p-2 hover:bg-zinc-50 rounded-full" aria-label="View Wishlist">
+                                <Heart size={22} />
                             </Link>
-                            <UserMenu aria-label="User Menu" />
-                            <ThemeToggle aria-label="Toggle Theme" />
-                            <CartIcon aria-label="View Cart" />
+                            <UserMenu />
+                            <CartIcon />
                         </div>
-                        <div className="hidden md:block">
+                        <div className="hidden xl:block">
                             <WeatherWidget />
                         </div>
-                        <LanguageSwitcher />
-                        <MobileMenu />
+                        <div className="flex items-center gap-2">
+                            <LanguageSwitcher isScrolled={isScrolled} />
+                            <MobileMenu />
+                        </div>
                     </div>
                 </div>
             </header>

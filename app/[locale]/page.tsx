@@ -58,10 +58,13 @@ export default function Home() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            <Hero />
+            {/* Hero Section */}
+            <div className="bg-white">
+                <Hero />
+            </div>
 
-            {/* Live Cam Section */}
-            <div className="w-full h-[400px] md:h-[500px] bg-black border-y border-white/10 relative">
+            {/* LiveCam Section */}
+            <div className="bg-zinc-50 py-20 border-y border-zinc-100">
                 <LiveCam />
             </div>
 

@@ -58,13 +58,10 @@ export default function AdvertisementsSection() {
 
     return (
         <>
-            {/* Gap between Hero and Ads */}
-            <div className="h-6 md:h-10 bg-black w-full" />
-
-            <section className="bg-background py-8 md:py-12 border-b border-border">
+            <section className="bg-white py-8 md:py-12 border-b border-zinc-100">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col items-center mb-8">
-                        <h2 className="text-2xl md:text-3xl font-bold text-gold mb-2">{t('recommended_title')}</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-2">{t('recommended_title')}</h2>
                         <div className="w-20 h-1 bg-gold rounded-full" />
                     </div>
 
@@ -76,7 +73,7 @@ export default function AdvertisementsSection() {
                             if (!currentAd) return null;
 
                             return (
-                                <div key={banner.id} className="relative h-40 md:h-80 w-full overflow-hidden rounded-xl shadow-lg group bg-black">
+                                <div key={banner.id} className="relative h-40 md:h-80 w-full overflow-hidden rounded-xl shadow-sm group bg-zinc-50 border border-zinc-100">
                                     <AnimatePresence mode="wait">
                                         <motion.div
                                             key={currentAd.id}
@@ -113,8 +110,8 @@ export default function AdvertisementsSection() {
                                                     <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent -z-10" />
 
                                                     {currentAd.title && (
-                                                        <div className="absolute bottom-0 left-0 right-0 p-2 md:p-4 bg-gradient-to-t from-black/80 to-transparent z-10">
-                                                            <h3 className="text-white font-bold text-center text-xs md:text-lg shadow-black drop-shadow-md">{currentAd.title}</h3>
+                                                        <div className="absolute bottom-0 left-0 right-0 p-2 md:p-4 bg-gradient-to-t from-white/90 to-transparent z-10">
+                                                            <h3 className="text-zinc-900 font-bold text-center text-xs md:text-lg shadow-white drop-shadow-sm">{currentAd.title}</h3>
                                                         </div>
                                                     )}
                                                 </div>
@@ -127,7 +124,7 @@ export default function AdvertisementsSection() {
                                             {banner.ads.map((_, idx) => (
                                                 <div
                                                     key={idx}
-                                                    className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? "bg-gold scale-125" : "bg-white/50"}`}
+                                                    className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? "bg-gold scale-125" : "bg-black/20"}`}
                                                 />
                                             ))}
                                         </div>

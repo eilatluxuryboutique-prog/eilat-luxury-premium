@@ -66,7 +66,7 @@ export default function AnalyticsTab() {
         plugins: {
             legend: {
                 position: 'top' as const,
-                labels: { color: 'white' }
+                labels: { color: '#18181b' } // zinc-900
             },
             title: {
                 display: false,
@@ -74,12 +74,12 @@ export default function AnalyticsTab() {
         },
         scales: {
             y: {
-                ticks: { color: 'rgba(255,255,255,0.5)' },
-                grid: { color: 'rgba(255,255,255,0.1)' }
+                ticks: { color: 'rgba(24, 24, 27, 0.5)' },
+                grid: { color: 'rgba(24, 24, 27, 0.05)' }
             },
             x: {
-                ticks: { color: 'rgba(255,255,255,0.5)' },
-                grid: { color: 'rgba(255,255,255,0.1)' }
+                ticks: { color: 'rgba(24, 24, 27, 0.5)' },
+                grid: { color: 'rgba(24, 24, 27, 0.05)' }
             }
         }
     };
@@ -87,96 +87,96 @@ export default function AnalyticsTab() {
     return (
         <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100 shadow-sm">
                     <div className="flex justify-between items-start mb-4">
-                        <div className="p-3 bg-green-500/20 rounded-xl text-green-400">
+                        <div className="p-3 bg-green-100 rounded-xl text-green-600">
                             <DollarSign size={24} />
                         </div>
-                        <div className="flex items-center gap-1 text-green-400 text-sm">
+                        <div className="flex items-center gap-1 text-green-600 text-sm">
                             <ArrowUpRight size={16} />
                             <span>+12.5%</span>
                         </div>
                     </div>
                     <div>
-                        <p className="text-white/50 text-sm">Total Revenue</p>
-                        <h3 className="text-2xl font-bold">₪{stats.revenue.toLocaleString()}</h3>
+                        <p className="text-zinc-500 text-sm">Total Revenue</p>
+                        <h3 className="text-2xl font-bold text-zinc-900">₪{stats.revenue.toLocaleString()}</h3>
                     </div>
                 </div>
 
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100 shadow-sm">
                     <div className="flex justify-between items-start mb-4">
-                        <div className="p-3 bg-blue-500/20 rounded-xl text-blue-400">
+                        <div className="p-3 bg-blue-100 rounded-xl text-blue-600">
                             <ShoppingCart size={24} />
                         </div>
-                        <div className="flex items-center gap-1 text-green-400 text-sm">
+                        <div className="flex items-center gap-1 text-green-600 text-sm">
                             <ArrowUpRight size={16} />
                             <span>+8.2%</span>
                         </div>
                     </div>
                     <div>
-                        <p className="text-white/50 text-sm">Total Bookings</p>
-                        <h3 className="text-2xl font-bold">{stats.bookings}</h3>
+                        <p className="text-zinc-500 text-sm">Total Bookings</p>
+                        <h3 className="text-2xl font-bold text-zinc-900">{stats.bookings}</h3>
                     </div>
                 </div>
 
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100 shadow-sm">
                     <div className="flex justify-between items-start mb-4">
-                        <div className="p-3 bg-purple-500/20 rounded-xl text-purple-400">
+                        <div className="p-3 bg-purple-100 rounded-xl text-purple-600">
                             <Users size={24} />
                         </div>
-                        <div className="flex items-center gap-1 text-red-400 text-sm">
+                        <div className="flex items-center gap-1 text-red-600 text-sm">
                             <ArrowDownRight size={16} />
                             <span>-2.1%</span>
                         </div>
                     </div>
                     <div>
-                        <p className="text-white/50 text-sm">Active Guests</p>
-                        <h3 className="text-2xl font-bold">{stats.guests}</h3>
+                        <p className="text-zinc-500 text-sm">Active Guests</p>
+                        <h3 className="text-2xl font-bold text-zinc-900">{stats.guests}</h3>
                     </div>
                 </div>
 
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100 shadow-sm">
                     <div className="flex justify-between items-start mb-4">
-                        <div className="p-3 bg-gold/20 rounded-xl text-gold">
+                        <div className="p-3 bg-gold/10 rounded-xl text-gold">
                             <Eye size={24} />
                         </div>
-                        <div className="flex items-center gap-1 text-green-400 text-sm">
+                        <div className="flex items-center gap-1 text-green-600 text-sm">
                             <ArrowUpRight size={16} />
                             <span>+24%</span>
                         </div>
                     </div>
                     <div>
-                        <p className="text-white/50 text-sm">Profit (10%)</p>
+                        <p className="text-zinc-500 text-sm">Profit (10%)</p>
                         <h3 className="text-2xl font-bold text-gold">₪{Math.round(stats.profit).toLocaleString()}</h3>
                     </div>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2 bg-white/5 p-6 rounded-2xl border border-white/10">
-                    <h3 className="text-xl font-bold mb-6">Revenue Overview</h3>
+                <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
+                    <h3 className="text-xl font-bold mb-6 text-zinc-900">Revenue Overview</h3>
                     <div className="h-[300px] w-full">
                         <Line options={options} data={data} />
                     </div>
                 </div>
 
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
-                    <h3 className="text-xl font-bold mb-6">Recent Activity</h3>
+                <div className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
+                    <h3 className="text-xl font-bold mb-6 text-zinc-900">Recent Activity</h3>
                     <div className="space-y-4">
                         {[1, 2, 3, 4, 5].map((_, i) => (
-                            <div key={i} className="flex items-center gap-4 p-3 hover:bg-white/5 rounded-xl transition-colors cursor-pointer border border-transparent hover:border-white/5">
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center font-bold text-sm">
+                            <div key={i} className="flex items-center gap-4 p-3 hover:bg-zinc-50 rounded-xl transition-colors cursor-pointer border border-transparent hover:border-zinc-100">
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center font-bold text-sm text-white">
                                     Guest
                                 </div>
                                 <div className="flex-1">
-                                    <h4 className="font-bold text-sm">New Booking</h4>
-                                    <p className="text-xs text-white/50">2 minutes ago</p>
+                                    <h4 className="font-bold text-sm text-zinc-900">New Booking</h4>
+                                    <p className="text-xs text-zinc-400">2 minutes ago</p>
                                 </div>
                                 <div className="text-gold font-bold text-sm">+₪2,400</div>
                             </div>
                         ))}
                     </div>
-                    <button className="w-full mt-6 py-3 bg-white/10 hover:bg-white/20 rounded-xl font-bold text-sm transition-colors">
+                    <button className="w-full mt-6 py-3 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-xl font-bold text-sm transition-colors">
                         View All Activity
                     </button>
                 </div>

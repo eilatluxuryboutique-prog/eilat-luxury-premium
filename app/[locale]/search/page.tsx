@@ -10,7 +10,7 @@ import { Map, List } from 'lucide-react';
 // Dynamic Import for Map (No SSR)
 const MapView = dynamic(() => import('@/components/features/map-view'), {
     ssr: false,
-    loading: () => <div className="h-[400px] w-full bg-neutral-900 animate-pulse rounded-xl" />
+    loading: () => <div className="h-[400px] w-full bg-zinc-100 animate-pulse rounded-xl" />
 });
 
 function SearchContent() {
@@ -126,8 +126,8 @@ function SearchContent() {
 
 export default function SearchPage() {
     return (
-        <main className="min-h-screen pt-24 pb-12 bg-neutral-900">
-            <Suspense fallback={<div className="container mx-auto px-4 text-white">Loading...</div>}>
+        <main className="min-h-screen pt-24 pb-12 bg-white">
+            <Suspense fallback={<div className="container mx-auto px-4 text-zinc-900">Loading...</div>}>
                 <SearchContent />
             </Suspense>
         </main>

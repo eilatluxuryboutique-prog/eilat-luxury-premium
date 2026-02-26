@@ -32,7 +32,7 @@ export default function Header({ initialData }: { initialData?: any }) {
                 ⚠️ אתר זה נמצא בשלבי פיתוח (BETA). הנכסים המוצגים הם להדגמה בלבד ואינם זמינים להזמנה אמיתית.
             </div>
 
-            <header className={`fixed top-[24px] left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-xl border-b border-zinc-100 py-3 shadow-lg' : 'bg-transparent py-5'}`}>
+            <header className={`fixed top-[24px] left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-xl border-b border-zinc-100 py-3 shadow-sm' : 'bg-white border-b border-zinc-100 py-3 shadow-md'}`}>
                 <div className="max-w-[1600px] mx-auto px-6 flex items-center justify-between">
                     <Link href="/" className="text-lg md:text-xl font-black text-foreground transition-all hover:scale-105 shrink-0">
                         Eilat<span className="text-[#FFD700]">Luxury</span>

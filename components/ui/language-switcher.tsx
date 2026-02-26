@@ -20,18 +20,14 @@ export default function LanguageSwitcher({ isScrolled = false }: { isScrolled?: 
 
     return (
         <div className="relative group">
-            <div className={`absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${isScrolled ? 'text-zinc-500 group-hover:text-zinc-900' : 'text-white/70 group-hover:text-white'
-                }`}>
-                <Globe size={14} />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-colors text-zinc-500 group-hover:text-zinc-700">
+                <Globe size={16} />
             </div>
             <select
-                defaultValue={locale}
+                value={locale}
                 onChange={handleChange}
                 disabled={isPending}
-                className={`appearance-none bg-black/10 backdrop-blur-md border rounded-full pl-9 pr-4 py-1.5 text-sm font-semibold focus:outline-none cursor-pointer transition-all shadow-sm ${isScrolled
-                    ? 'border-zinc-300 text-zinc-900 focus:border-zinc-500 hover:bg-zinc-100/80'
-                    : 'border-white/30 text-white focus:border-white/60 hover:bg-white/20'
-                    }`}
+                className="bg-black/5 backdrop-blur-md border border-zinc-300 rounded-full pl-9 pr-4 py-1.5 focus:outline-none cursor-pointer transition-colors text-zinc-900 focus:border-zinc-500 hover:bg-black/10 text-sm font-medium"
             >
                 <option value="he" className="text-black text-right">שפות: עברית</option>
                 <option value="en" className="text-black text-right">English</option>

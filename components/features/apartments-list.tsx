@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import FavoriteButton from "../ui/favorite-button";
-import { Users, Bed, Wifi, MapPin, Star } from 'lucide-react';
+import { Users, Bed, Wifi, MapPin, Star, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -51,7 +51,7 @@ const item = {
     show: { opacity: 1, y: 0 }
 };
 
-export default function ApartmentsList({ limit, items }: { limit?: number; items?: Property[] }) {
+export default function ApartmentsList({ limit, items, isCarousel = false }: { limit?: number; items?: Property[]; isCarousel?: boolean }) {
     const t = useTranslations('Featured');
     // const [isLoading, setIsLoading] = useState(true); // Removing loading for instant render
     const sourceData = items || allProperties;
@@ -64,116 +64,124 @@ export default function ApartmentsList({ limit, items }: { limit?: number; items
     // }, []);
 
     return (
-        <section className="py-16 bg-background transition-colors duration-300">
+        <section className="py-8 md:py-16 bg-background transition-colors duration-300">
             <div className="container mx-auto px-4">
                 {/* Header */}
-                <div className="flex justify-between items-end mb-10">
+                <div className="flex justify-between items-end mb-4 md:mb-10">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{t('title')}</h2>
-                        <p className="text-muted-foreground">{t('subtitle')}</p>
+                        <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-1 md:mb-2">{t('title')}</h2>
+                        <p className="text-xs md:text-base text-muted-foreground">{t('subtitle')}</p>
                     </div>
                     <Link href="/search" className="text-primary font-medium hover:underline hidden md:block">
                         View All
                     </Link>
                 </div>
 
-                {/* Grid - Simplified for Robustness */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-6">
-                    {displayedApartments.length > 0 ? (
-                        displayedApartments.map((apt) => (
-                            <div
-                                key={apt.id}
-                                className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 shadow-sm"
-                            >
-                                <Link href={`/property/${apt.id}`} className="block h-full">
-                                    {/* Image */}
-                                    <div className="relative h-48 md:h-64 overflow-hidden bg-zinc-100">
-                                        <Image
-                                            src={apt.image || (apt.images && apt.images[0]) || 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267'}
-                                            alt={apt.title}
-                                            fill
-                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-
-                                        <div className="absolute top-3 left-3 bg-gold/90 text-black px-2 py-1 rounded-md flex items-center gap-1 shadow-lg z-10">
-                                            <Star size={12} fill="currentColor" />
-                                            <span className="text-xs font-bold">{apt.rating}</span>
-                                        </div>
-                                        <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm text-foreground px-2 py-1 rounded-md text-xs z-10 font-bold">
-                                            {t('recommended')}
-                                        </div>
-                                        <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
-                                            <FavoriteButton propertyId={apt.id} />
-                                            <ShareButton title={apt.title} url={`/property/${apt.id}`} />
-                                        </div>
-
-                                        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 items-start">
-                                            {(apt as any).isBestSeller && (
-                                                <div className="bg-gold text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                                                    BEST SELLER
-                                                </div>
-                                            )}
-                                            <SocialProof id={apt.id} />
-                                        </div>
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="p-4">
-                                        <h3 className="text-lg font-bold text-foreground mb-1 truncate group-hover:text-primary transition-colors">{apt.title}</h3>
-                                        <div className="flex items-center gap-1 text-muted-foreground text-xs mb-3">
-                                            <MapPin size={12} />
-                                            <span>{apt.location}</span>
-                                        </div>
-
-                                        {/* Features Icons */}
-                                        <div className="flex gap-3 mb-4 text-muted-foreground">
-                                            <div className="flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded">
-                                                <Users size={12} />
-                                                <span>{apt.guests}</span>
-                                            </div>
-                                            <div className="flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded">
-                                                <Bed size={12} />
-                                                <span>{apt.rooms}</span>
-                                            </div>
-                                            {(apt.amenities || []).slice(0, 2).map((am, i) => (
-                                                <div key={i} className="flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded">
-                                                    <Wifi size={12} />
-                                                    <span>{am}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        {/* Urgency */}
-                                        <div className="mb-3">
-                                            <UrgencyTimer />
-                                        </div>
-
-                                        {/* Divider */}
-                                        <div className="h-px bg-border mb-4" />
-
-                                        {/* Price & Action */}
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <span className="text-xl font-bold text-foreground">₪{apt.price}</span>
-                                                <span className="text-muted-foreground text-xs"> {t('night')}</span>
-                                            </div>
-                                            <span className="bg-primary text-black px-4 py-2 rounded-lg text-sm font-bold group-hover:bg-primary/90 transition-colors">
-                                                {t('details')}
-                                            </span>
-                                        </div>
-                                        <div className="mt-3">
-                                            <CompareCheckbox id={apt.id} />
-                                        </div>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="col-span-full text-center py-12 text-muted-foreground">
-                            No properties found.
+                {/* Grid / Mobile Carousel */}
+                <div className="relative">
+                    {/* Arrow hint for mobile carousel */}
+                    {isCarousel && displayedApartments.length > 2 && (
+                        <div className="absolute top-[40%] left-0 -translate-y-1/2 z-20 w-8 h-8 rounded-r-2xl bg-white/90 shadow-lg border border-l-0 border-border flex items-center justify-center md:hidden pointer-events-none opacity-80 animate-pulse">
+                            <ChevronLeft size={18} className="text-black pr-0.5" />
                         </div>
                     )}
+                    <div className={`${isCarousel ? 'flex overflow-x-auto snap-x scrollbar-hide -mx-4 px-4 pb-4 gap-3 md:pb-6 md:-mx-0 md:px-0' : 'grid grid-cols-1 gap-6 pb-6'} md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6`}>
+                        {displayedApartments.length > 0 ? (
+                            displayedApartments.map((apt) => (
+                                <div
+                                    key={apt.id}
+                                    className={`group bg-card rounded-2xl md:rounded-3xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 shadow-sm flex flex-col ${isCarousel ? 'min-w-[190px] w-[190px] snap-center shrink-0' : 'w-full'} md:min-w-0 md:w-auto md:shrink`}
+                                >
+                                    <Link href={`/property/${apt.id}`} className="block h-full">
+                                        {/* Image */}
+                                        <div className="relative h-36 md:h-56 lg:h-64 overflow-hidden bg-zinc-100">
+                                            <Image
+                                                src={apt.image || (apt.images && apt.images[0]) || 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267'}
+                                                alt={apt.title}
+                                                fill
+                                                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+
+                                            <div className="absolute top-3 left-3 bg-gold/90 text-black px-2 py-1 rounded-md flex items-center gap-1 shadow-lg z-10">
+                                                <Star size={12} fill="currentColor" />
+                                                <span className="text-xs font-bold">{apt.rating}</span>
+                                            </div>
+                                            <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm text-foreground px-2 py-1 rounded-md text-xs z-10 font-bold">
+                                                {t('recommended')}
+                                            </div>
+                                            <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+                                                <FavoriteButton propertyId={apt.id} />
+                                                <ShareButton title={apt.title} url={`/property/${apt.id}`} />
+                                            </div>
+
+                                            <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 items-start">
+                                                {(apt as any).isBestSeller && (
+                                                    <div className="bg-gold text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                                                        BEST SELLER
+                                                    </div>
+                                                )}
+                                                <SocialProof id={apt.id} />
+                                            </div>
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="p-3 md:p-4">
+                                            <h3 className="text-base md:text-lg font-bold text-foreground mb-1 truncate group-hover:text-primary transition-colors">{apt.title}</h3>
+                                            <div className="flex items-center gap-1 text-muted-foreground text-[10px] md:text-xs mb-3">
+                                                <MapPin size={12} />
+                                                <span className="truncate">{apt.location}</span>
+                                            </div>
+
+                                            {/* Features Icons */}
+                                            <div className="flex gap-2 md:gap-3 mb-4 text-muted-foreground flex-wrap">
+                                                <div className="flex items-center gap-1 text-[10px] md:text-xs bg-zinc-100 text-zinc-600 px-1.5 py-1 md:px-2 rounded">
+                                                    <Users size={12} />
+                                                    <span>{apt.guests}</span>
+                                                </div>
+                                                <div className="flex items-center gap-1 text-[10px] md:text-xs bg-zinc-100 text-zinc-600 px-1.5 py-1 md:px-2 rounded">
+                                                    <Bed size={12} />
+                                                    <span>{apt.rooms}</span>
+                                                </div>
+                                                {(apt.amenities || []).slice(0, 2).map((am, i) => (
+                                                    <div key={i} className="flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded">
+                                                        <Wifi size={12} />
+                                                        <span>{am}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            {/* Urgency */}
+                                            <div className="mb-3">
+                                                <UrgencyTimer />
+                                            </div>
+
+                                            {/* Divider */}
+                                            <div className="h-px bg-border mb-3 md:mb-4" />
+
+                                            {/* Price & Action */}
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <span className="text-base md:text-xl font-bold text-foreground">₪{apt.price}</span>
+                                                    <span className="text-muted-foreground text-[10px] md:text-xs"> {t('night')}</span>
+                                                </div>
+                                                <span className="bg-primary text-black px-2.5 py-1.5 md:px-4 md:py-2 rounded-lg text-[10px] md:text-sm font-bold group-hover:bg-primary/90 transition-colors">
+                                                    {t('details')}
+                                                </span>
+                                            </div>
+                                            <div className="mt-2 md:mt-3">
+                                                <CompareCheckbox id={apt.id} />
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="col-span-full text-center py-12 text-muted-foreground">
+                                No properties found.
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </section>

@@ -58,14 +58,14 @@ export default function AdvertisementsSection() {
 
     return (
         <>
-            <section className="bg-white py-8 md:py-12 border-b border-zinc-100">
+            <section className="bg-white py-6 md:py-12 border-b border-zinc-100">
                 <div className="container mx-auto px-4">
-                    <div className="flex flex-col items-center mb-8">
-                        <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-2">{t('recommended_title')}</h2>
-                        <div className="w-20 h-1 bg-gold rounded-full" />
+                    <div className="flex flex-col items-center mb-4 md:mb-8">
+                        <h2 className="text-xl md:text-3xl font-bold text-zinc-900 mb-1 md:mb-2">{t('recommended_title')}</h2>
+                        <div className="w-12 md:w-20 h-1 bg-gold rounded-full" />
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
                         {banners.map(banner => {
                             const currentIndex = indexes[banner.id] || 0;
                             const currentAd = banner.ads[currentIndex];
@@ -73,7 +73,7 @@ export default function AdvertisementsSection() {
                             if (!currentAd) return null;
 
                             return (
-                                <div key={banner.id} className="relative h-40 md:h-80 w-full overflow-hidden rounded-xl shadow-sm group bg-zinc-50 border border-zinc-100">
+                                <div key={banner.id} className="relative h-28 md:h-80 w-full overflow-hidden rounded-lg md:rounded-xl shadow-sm group bg-zinc-50 border border-zinc-100">
                                     <AnimatePresence mode="wait">
                                         <motion.div
                                             key={currentAd.id}

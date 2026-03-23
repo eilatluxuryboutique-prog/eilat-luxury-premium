@@ -90,6 +90,13 @@ export async function GET(req: Request) {
             if (ownerId) query.ownerId = ownerId;
             if (type) query.type = type;
 
+            // Hide suspended properties from public view
+            const session = await getSession();
+            const isAdmin = session?.role === 'admin';
+            if (!isAdmin && (!ownerId || ownerId !== session?.userId)) {
+                query.status = { $ne: 'suspended' };
+            }
+
             // Only execute DB query if we didn't rule it out (e.g. searching for "h1" in DB)
             const shouldQueryDB = !id || (id && id.match(/^[0-9a-fA-F]{24}$/));
 

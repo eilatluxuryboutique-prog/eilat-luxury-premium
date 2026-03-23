@@ -1,20 +1,288 @@
 {
-    "Metadata": {
-        "title": "Eilat Booking Premium - Vacances de luxe à Eilat",
-        "description": "Réservez vos prochaines vacances à Eilat dans les appartements les plus luxueux."
-    },
-    "Navigation": {
-        "home": "Accueil",
-        "apartments": "Appartements",
-        "about": "À propos",
-        "contact": "Contact"
-    },
-    "Hero": {
-        "title": "Hospitalité de luxe à Eilat",
-        "subtitle": "Appartements de vacances exclusifs dans les meilleurs emplacements",
-        "cta": "Réserver"
-    },
-    "Home": {
-        "recommended_title": "Nos recommandations"
+  "Metadata": {
+    "title": "Eilat Booking Premium - Vacances de luxe à Eilat",
+    "description": "Réservez vos prochaines vacances à Eilat dans les appartements les plus luxueux."
+  },
+  "Navigation": {
+    "home": "Accueil",
+    "apartments": "Appartements",
+    "hotels": "Hôtels de Luxe",
+    "villas": "Villas",
+    "experiences": "Expériences",
+    "magazine": "Magazine",
+    "vip": "Services VIP",
+    "about": "À propos",
+    "contact": "Contact",
+    "search": "Recherche",
+    "accessibility": "Accessibilité",
+    "profile": "Profil",
+    "dark_mode": "Mode Sombre"
+  },
+  "Hero": {
+    "title": "Hospitalité de luxe à Eilat",
+    "subtitle": "Appartements de vacances exclusifs",
+    "cta": "Réservez"
+  },
+  "Featured": {
+    "title": "Nos offres vedettes",
+    "subtitle": "Choisissez parmi notre collection exclusive",
+    "night": "nuit",
+    "book": "Réserver",
+    "details": "Plus de détails",
+    "guests": "Invités",
+    "rooms": "Chambres",
+    "recommended": "Recommandé"
+  },
+  "Property": {
+    "about": "À propos",
+    "location": "Localisation",
+    "waze": "Naviguer avec Waze",
+    "amenities": "Équipements",
+    "guests": "Invités",
+    "guests_max": "Max",
+    "rooms": "Chambres",
+    "bedrooms": "Chambres à coucher",
+    "per_night": "Par nuit",
+    "book_now": "Réserver",
+    "total_price": "Prix Total",
+    "taxes": "Taxes incluses",
+    "not_charged": "Vous ne serez pas débité"
+  },
+  "Checkout": {
+    "title": "Paiement Sécurisé",
+    "confirm": "Confirmer et Payer",
+    "booking_for": "Réservation pour",
+    "dates": "Dates",
+    "guests": "Invités",
+    "total": "Total à payer",
+    "service_fee": "Frais de service",
+    "back": "Retour"
+  },
+  "Payment": {
+    "card_name": "Nom de la carte",
+    "card_number": "Numéro de la carte",
+    "expiry": "Expiration",
+    "cvc": "CVC",
+    "pay": "Payer",
+    "processing": "Traitement...",
+    "success_title": "Paiement Réussi!",
+    "success_msg": "Votre réservation est confirmée.",
+    "secure": "Paiement Sécurisé SSL",
+    "or_card": "Ou payer par carte"
+  },
+  "Search": {
+    "title": "Résultats de recherche",
+    "view_all": "Voir tout"
+  },
+  "Categories": {
+    "title": "Vacances par Catégorie",
+    "hotels": "Hôtels",
+    "apartments": "Appartements",
+    "villas": "Villas",
+    "attractions": "Attractions",
+    "vacation": "Vacances"
+  },
+  "Home": {
+    "hotels_title": "Hôtels de Luxe",
+    "villas_title": "Villas",
+    "apartments_title": "Appartements",
+    "recommended_title": "Nos Recommandations",
+    "view_all": "Voir tout"
+  },
+  "SearchForm": {
+    "property_type": "Type de propriété",
+    "location": "Localisation",
+    "dates": "Dates",
+    "guests": "Invités",
+    "search_btn": "Rechercher",
+    "check_in": "Arrivée",
+    "check_out": "Départ",
+    "select_dates": "Sélectionnez des dates",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "ai_mode": "Recherche IA Intelligente",
+    "standard_mode": "Recherche Standard",
+    "ai_placeholder": "Décrivez vos vacances de rêve...",
+    "thinking": "Réflexion...",
+    "magic_search": "Recherche Magique",
+    "types": {
+      "all": "Tout",
+      "hotel": "Hôtels",
+      "apartment": "Apprt.",
+      "villa": "Villas"
     }
+  },
+  "Auth": {
+    "login_title": "Bon retour",
+    "login_subtitle": "Connectez-vous à votre compte",
+    "register_title": "Rejoignez-nous",
+    "register_subtitle": "Choisissez le type de compte",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "full_name": "Nom complet",
+    "login_btn": "Connexion",
+    "register_btn": "Créer un compte",
+    "no_account": "Pas de compte?",
+    "has_account": "Déjà un compte?",
+    "sign_up": "S'inscrire",
+    "login": "Connexion",
+    "role_guest": "Je veux réserver",
+    "role_host": "Je veux héberger",
+    "role_guest_desc": "Client",
+    "role_host_desc": "Propriétaire",
+    "welcome": "Bonjour",
+    "logout": "Se déconnecter",
+    "my_account": "Mon Compte",
+    "business_dashboard": "Tableau de Bord",
+    "admin_panel": "Panneau d'administration",
+    "login_link": "Se Connecter",
+    "account_menu_label": "Connexion au compte",
+    "login_gateway_title": "Qui êtes-vous?",
+    "login_gateway_subtitle": "Choisissez votre type de connexion",
+    "login_admin_title": "Connexion Admin",
+    "login_admin_subtitle": "Accès Admin",
+    "login_host_title": "Connexion Propriétaire",
+    "login_host_subtitle": "Gérez vos propriétés",
+    "login_customer_title": "Connexion Client",
+    "login_customer_subtitle": "Vos réservations",
+    "list_asset": "Inscrire"
+  },
+  "Host": {
+    "hero_title": "Devenez un Hôte",
+    "hero_subtitle": "Transformez votre propriété en une destination prisée.",
+    "form_title": "Commencez votre aventure",
+    "form_subtitle": "Remplissez les détails et nous vous contacterons.",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "property_type": "Type de propriété",
+    "phone": "Téléphone",
+    "submit": "Soumettre la demande",
+    "benefits": {
+      "earn_title": "Gagnez plus",
+      "earn_desc": "Conservez jusqu'à 90 % de vos revenus.",
+      "protection_title": "Protection totale",
+      "protection_desc": "Assurance de 1 000 000 ILS par réservation.",
+      "guests_title": "Invités de qualité",
+      "guests_desc": "Nous attirons un public recherchant le luxe.",
+      "manage_title": "Gestion facile",
+      "manage_desc": "Système IA avancé pour tout gérer facilement."
+    },
+    "types": {
+      "villa": "Villa",
+      "penthouse": "Attique",
+      "hotel": "Hôtel de charme",
+      "other": "Autre"
+    },
+    "add_property_title": "Ajouter Propriété",
+    "add_property_subtitle": "Remplissez les informations",
+    "basic_info": "Infos Générales",
+    "property_title": "Titre",
+    "price_per_night": "Prix par nuit",
+    "description": "Description",
+    "photos": "Photos",
+    "upload_click": "Télécharger Photos",
+    "cancel": "Annuler",
+    "publish": "Publier",
+    "processing": "Enregistrement..."
+  },
+  "Footer": {
+    "quick_links": "Liens Rapides",
+    "support": "Support & Compte",
+    "contact_us": "Contactez-nous",
+    "newsletter_placeholder": "Votre Email...",
+    "newsletter_btn": "S'abonner",
+    "rights": "Tous droits réservés.",
+    "brand_desc": "Vivez le summum du luxe à Eilat. Notre collection garantit des vacances inoubliables.",
+    "my_orders": "Mes Réservations",
+    "login_register": "Connexion / Inscription",
+    "admin_login": "Connexion Admin",
+    "terms": "Conditions Générales",
+    "privacy": "Politique de Confidentialité",
+    "address": "Blvd HaTmarim, Eilat",
+    "secure_clearing": "Paiement Sécurisé PCI",
+    "tlh": "Sauf Erreur"
+  },
+  "Accessibility": {
+    "enlarge_text": "Agrandir le texte",
+    "decrease_text": "Réduire le texte",
+    "high_contrast": "Contraste Élevé",
+    "monochrome": "Monochrome",
+    "readable_font": "Police Lisible",
+    "highlight_links": "Mettre en Évidence",
+    "stop_animations": "Arrêter les Animations",
+    "reset": "Réinitialiser"
+  },
+  "Cart": {
+    "title": "Votre Panier",
+    "empty": "Le panier est vide",
+    "sold_out": "Épuisé!",
+    "per_night": "Nuit",
+    "view_property": "Voir la Propriété",
+    "total": "Total:",
+    "proceed": "Passer à la Caisse",
+    "clear": "Vider le Panier",
+    "added": "Ajouté",
+    "save_later": "Enregistrer pour plus tard"
+  },
+  "Deals": {
+    "last_minute": "Jusqu'à 25% de réduction ce week-end !",
+    "sales_end": "La vente se termine dans",
+    "title": "Offres de",
+    "title_highlight": "Dernière Minute",
+    "hours": "Heures",
+    "minutes": "Minutes",
+    "seconds": "Secondes",
+    "grab_deal": "Saisir l'offre 🔥",
+    "spots_left": "Plus que 2 places à ce prix !"
+  },
+  "Experiences": {
+    "title": "Expériences Inoubliables",
+    "subtitle": "Attractions et expériences exclusives à Eilat.",
+    "hero_title": "Expériences Inoubliables",
+    "hero_desc": "Vos vacances sont bien plus qu'un simple sommeil. Nous avons sélectionné les meilleures attractions d'Eilat.",
+    "starting_from": "À partir de ",
+    "book_whatsapp": "Réserver sur WhatsApp",
+    "local_suppliers": "Exploité en collaboration avec des fournisseurs locaux sélectionnés à Eilat.",
+    "yacht_title": "Location Yacht Privé",
+    "yacht_desc": "Croisière de luxe dans le golfe d'Eilat. Jusqu'à 12 personnes.",
+    "jeep_title": "Tour en Jeep au Coucher du Soleil",
+    "jeep_desc": "Expérience époustouflante dans le désert.",
+    "diving_title": "Plongée d'initiation VIP",
+    "diving_desc": "Plongée avec instructeur privé à la réserve corallienne.",
+    "massage_title": "Massage à domicile",
+    "massage_desc": "Masseurs professionnels qui viennent à vous.",
+    "hours": "heures",
+    "hour_and_half": "1,5 heures",
+    "minutes": "minutes"
+  },
+  "OnlineChat": {
+    "live_chat": "Chat en ligne",
+    "voice_on": "Voix Activée",
+    "voice_off": "Voix Désactivée",
+    "stop_audio": "Arrêter l'Audio",
+    "whatsapp": "Ouvrir WhatsApp",
+    "call_management": "Contacter la direction"
+  },
+  "Calendar": {
+    "next": "Suivant",
+    "previous": "Précédent",
+    "today": "Aujourd'hui",
+    "month": "Mois",
+    "week": "Semaine",
+    "day": "Jour"
+  },
+  "Reviews": {
+    "name_placeholder": "Votre nom...",
+    "review_placeholder": "Racontez-nous vos vacances...",
+    "submit": "Envoyer"
+  },
+  "Blog": {
+    "subtitle": "Conseils, recommandations et tendances à Eilat",
+    "view_all": "Tous les Articles",
+    "magazine_title": "Le Magazine Eilat",
+    "magazine_desc": "Recommandations exclusives et avis pour vos vacances.",
+    "article": "Article",
+    "min_read": "min de lecture",
+    "read_more": "Lire plus"
+  }
 }

@@ -13,6 +13,7 @@ export default function MobileMenu() {
     const [isOpen, setIsOpen] = useState(false);
     const t = useTranslations('Navigation');
     const tCats = useTranslations('Categories');
+    const tCart = useTranslations('Cart');
 
     const menuVariants: Variants = {
         closed: {
@@ -36,13 +37,13 @@ export default function MobileMenu() {
     };
 
     return (
-        <div className="md:hidden">
+        <div>
             <button
                 onClick={() => setIsOpen(true)}
-                className="p-2 text-zinc-800 hover:text-gold transition-all bg-white/80 rounded-lg border border-zinc-200 active:scale-95 shadow-sm"
+                className="p-1.5 md:p-2 text-zinc-800 hover:text-gold transition-all bg-white/80 rounded-lg border border-zinc-200 active:scale-95 shadow-sm"
                 aria-label="Open menu"
             >
-                <Menu size={24} />
+                <Menu size={22} className="md:w-6 md:h-6" />
             </button>
 
             <AnimatePresence>
@@ -63,7 +64,7 @@ export default function MobileMenu() {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm border-l border-zinc-100 z-[9999] p-6 shadow-2xl flex flex-col overflow-y-auto bg-white/95 backdrop-blur-xl"
+                            className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm border-l border-zinc-100 z-[990] p-6 shadow-2xl flex flex-col overflow-y-auto bg-white/95 backdrop-blur-xl"
                         >
                             <div className="flex justify-between items-center mb-8">
                                 <Link href="/" className="text-xl font-bold text-zinc-900">
@@ -80,15 +81,15 @@ export default function MobileMenu() {
 
                             <div className="flex flex-col gap-4 mb-8 p-4 bg-zinc-50 rounded-xl border border-zinc-100">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-zinc-500 text-sm">פרופיל</span>
+                                    <span className="text-zinc-600 text-sm font-medium">{t('profile')}</span>
                                     <UserMenu />
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-zinc-500 text-sm">מצב לילה</span>
+                                    <span className="text-zinc-600 text-sm font-medium">{t('dark_mode')}</span>
                                     <ThemeToggle />
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-zinc-500 text-sm">עגלת קניות</span>
+                                    <span className="text-zinc-600 text-sm font-medium">{tCart('title')}</span>
                                     <CartIcon />
                                 </div>
                             </div>
@@ -97,7 +98,7 @@ export default function MobileMenu() {
                                 <Link
                                     href="/"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2 font-bold"
                                 >
                                     {t('home')}
                                 </Link>
@@ -120,23 +121,40 @@ export default function MobileMenu() {
                                 </div>
 
                                 <Link
-                                    href="/apartments"
+                                    href="/experiences"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2 mt-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2 font-bold"
                                 >
-                                    {t('apartments')}
+                                    {t('experiences')}
                                 </Link>
+
+                                <Link
+                                    href="/concierge"
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-gold hover:text-yellow-600 transition-colors border-b border-zinc-50 pb-2 font-bold flex items-center gap-1"
+                                >
+                                    <span className="text-xl">★</span> {t('vip')}
+                                </Link>
+
+                                <Link
+                                    href="/blog"
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2 font-bold"
+                                >
+                                    {t('magazine')}
+                                </Link>
+
                                 <Link
                                     href="/about"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2 font-bold"
                                 >
                                     {t('about')}
                                 </Link>
                                 <Link
                                     href="/contact"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2"
+                                    className="text-zinc-800 hover:text-gold transition-colors border-b border-zinc-50 pb-2 font-bold"
                                 >
                                     {t('contact')}
                                 </Link>

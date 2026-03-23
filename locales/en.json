@@ -1,32 +1,288 @@
 {
-    "Metadata": {
-        "title": "Eilat Booking Premium - Luxury Vacations in Eilat",
-        "description": "Book your next vacation in Eilat at the most luxurious holiday apartments."
-    },
-    "Navigation": {
-        "home": "Home",
-        "apartments": "Apartments",
-        "about": "About",
-        "contact": "Contact",
-        "search": "Search",
-        "accessibility": "Accessibility",
-        "profile": "Profile"
-    },
-    "Hero": {
-        "title": "Luxury Hospitality in Eilat",
-        "subtitle": "Exclusive holiday apartments in prime locations",
-        "cta": "Book Now"
-    },
-    "Featured": {
-        "title": "Our Featured Apartments",
-        "subtitle": "Choose from our exclusive collection for the perfect vacation",
-        "night": "night",
-        "book": "Book Now",
-        "details": "More Details",
-        "guests": "Guests",
-        "rooms": "Rooms"
-    },
-    "Home": {
-        "recommended_title": "Our Recommended"
+  "Metadata": {
+    "title": "Eilat Booking Premium - Luxury Vacations in Eilat",
+    "description": "Book your next vacation in Eilat at the most luxurious holiday apartments."
+  },
+  "Navigation": {
+    "home": "Home",
+    "apartments": "Apartments",
+    "hotels": "Luxury Hotels",
+    "villas": "Villas",
+    "experiences": "Experiences",
+    "magazine": "Magazine",
+    "vip": "VIP Services",
+    "about": "About",
+    "contact": "Contact",
+    "search": "Search",
+    "accessibility": "Accessibility",
+    "profile": "Profile",
+    "dark_mode": "Dark Mode"
+  },
+  "Hero": {
+    "title": "Luxury Hospitality in Eilat",
+    "subtitle": "Exclusive holiday apartments in prime locations",
+    "cta": "Book Now"
+  },
+  "Featured": {
+    "title": "Our Featured Properties",
+    "subtitle": "Choose from our exclusive collection for the perfect vacation",
+    "night": "night",
+    "book": "Book Now",
+    "details": "More Details",
+    "guests": "Guests",
+    "rooms": "Rooms",
+    "recommended": "Recommended"
+  },
+  "Property": {
+    "about": "About Property",
+    "location": "Location",
+    "waze": "Navigate with Waze",
+    "amenities": "Amenities",
+    "guests": "Guests",
+    "guests_max": "Max",
+    "rooms": "Rooms",
+    "bedrooms": "Bedrooms",
+    "per_night": "Per Night",
+    "book_now": "Book Now",
+    "total_price": "Total Price",
+    "taxes": "Including taxes and fees",
+    "not_charged": "You won't be charged yet"
+  },
+  "Checkout": {
+    "title": "Secure Checkout",
+    "confirm": "Confirm & Pay",
+    "booking_for": "Your booking for",
+    "dates": "Dates",
+    "guests": "Guests",
+    "total": "Total to pay",
+    "service_fee": "Service Fee",
+    "back": "Back"
+  },
+  "Payment": {
+    "card_name": "Cardholder Name",
+    "card_number": "Card Number",
+    "expiry": "Expiry",
+    "cvc": "CVC",
+    "pay": "Pay",
+    "processing": "Processing...",
+    "success_title": "Payment Successful!",
+    "success_msg": "Your booking is confirmed. A receipt has been sent.",
+    "secure": "SSL Secure Payment",
+    "or_card": "Or pay with card"
+  },
+  "Search": {
+    "title": "Search Results",
+    "view_all": "View All"
+  },
+  "Categories": {
+    "title": "Vacations by Category",
+    "hotels": "Luxury Hotels",
+    "apartments": "Holiday Apartments",
+    "villas": "Exclusive Villas",
+    "attractions": "Attractions",
+    "vacation": "Vacation"
+  },
+  "Home": {
+    "hotels_title": "Luxury Hotels",
+    "villas_title": "Exclusive Villas",
+    "apartments_title": "Holiday Apartments",
+    "recommended_title": "Our Recommendations",
+    "view_all": "View All"
+  },
+  "SearchForm": {
+    "property_type": "Property Type",
+    "location": "Location",
+    "dates": "Dates",
+    "guests": "Guests",
+    "search_btn": "Search",
+    "check_in": "Check In",
+    "check_out": "Check Out",
+    "select_dates": "Select Dates",
+    "confirm": "Confirm",
+    "close": "Close",
+    "ai_mode": "Smart AI Search",
+    "standard_mode": "Standard Search",
+    "ai_placeholder": "Describe your dream vacation... (e.g., 'Luxury villa for 10 people with pool')",
+    "thinking": "Thinking...",
+    "magic_search": "Magic Search",
+    "types": {
+      "all": "All",
+      "hotel": "Hotels",
+      "apartment": "Apartments",
+      "villa": "Villas"
     }
+  },
+  "Auth": {
+    "login_title": "Welcome Back",
+    "login_subtitle": "Login to your account",
+    "register_title": "Join Eilat Luxury",
+    "register_subtitle": "Choose your account type",
+    "email": "Email",
+    "password": "Password",
+    "full_name": "Full Name",
+    "login_btn": "Sign In",
+    "register_btn": "Create Account",
+    "no_account": "Don't have an account?",
+    "has_account": "Already have an account?",
+    "sign_up": "Sign Up",
+    "login": "Login",
+    "role_guest": "I want to book",
+    "role_host": "I want to host",
+    "role_guest_desc": "Customer",
+    "role_host_desc": "Business Owner",
+    "welcome": "Hello",
+    "logout": "Logout",
+    "my_account": "My Account",
+    "business_dashboard": "Business Dashboard",
+    "admin_panel": "Admin Panel",
+    "login_link": "Login",
+    "account_menu_label": "Account Login",
+    "login_gateway_title": "Who are you?",
+    "login_gateway_subtitle": "Choose your login type",
+    "login_admin_title": "Admin Login",
+    "login_admin_subtitle": "Access Admin Panel",
+    "login_host_title": "Host Login",
+    "login_host_subtitle": "Manage your properties",
+    "login_customer_title": "Customer Login",
+    "login_customer_subtitle": "View your bookings",
+    "list_asset": "List Property"
+  },
+  "Host": {
+    "hero_title": "Join Our Hosts",
+    "hero_subtitle": "Turn your property into Eilat's next top destination. Open the door to luxury bookings.",
+    "form_title": "Start your journey",
+    "form_subtitle": "Fill in the details and we will contact you within 24 hours.",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "property_type": "Property Type",
+    "phone": "Phone",
+    "submit": "Submit Request",
+    "benefits": {
+      "earn_title": "Earn More",
+      "earn_desc": "Keep up to 90% of your revenue with our low fees.",
+      "protection_title": "Full Protection",
+      "protection_desc": "Host insurance worth 1,000,000 NIS per booking.",
+      "guests_title": "Quality Guests",
+      "guests_desc": "We attract a high-quality audience looking for luxury.",
+      "manage_title": "Easy Management",
+      "manage_desc": "Advanced AI system to manage everything easily."
+    },
+    "types": {
+      "villa": "Luxury Villa",
+      "penthouse": "Penthouse",
+      "hotel": "Boutique Hotel",
+      "other": "Other"
+    },
+    "add_property_title": "Add New Property",
+    "add_property_subtitle": "Fill in the details to publish your property",
+    "basic_info": "General Details",
+    "property_title": "Property Title",
+    "price_per_night": "Price per night",
+    "description": "Property Description",
+    "photos": "Photos",
+    "upload_click": "Upload Photos",
+    "cancel": "Cancel",
+    "publish": "Publish Property",
+    "processing": "Saving..."
+  },
+  "Footer": {
+    "quick_links": "Quick Links",
+    "support": "Support & Account",
+    "contact_us": "Contact Us",
+    "newsletter_placeholder": "Your Email...",
+    "newsletter_btn": "Subscribe",
+    "rights": "All rights reserved.",
+    "brand_desc": "Experience the peak of luxury in Eilat. Our curated collection of villas, apartments, and hotels ensures an unforgettable vacation.",
+    "my_orders": "My Orders",
+    "login_register": "Login / Register",
+    "admin_login": "Admin Login",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "address": "HaTmarim Blvd, Eilat",
+    "secure_clearing": "PCI Secure Clearing",
+    "tlh": "E&OE"
+  },
+  "Accessibility": {
+    "enlarge_text": "Enlarge Text",
+    "decrease_text": "Decrease Text",
+    "high_contrast": "High Contrast",
+    "monochrome": "Monochrome",
+    "readable_font": "Readable Font",
+    "highlight_links": "Highlight Links",
+    "stop_animations": "Stop Animations",
+    "reset": "Reset Settings"
+  },
+  "Cart": {
+    "title": "Your Cart",
+    "empty": "Cart is empty",
+    "sold_out": "Sold Out!",
+    "per_night": "Night",
+    "view_property": "View Property",
+    "total": "Total:",
+    "proceed": "Proceed to Checkout",
+    "clear": "Clear Cart",
+    "added": "Added",
+    "save_later": "Save for Later"
+  },
+  "Deals": {
+    "last_minute": "Up to 25% discount for upcoming weekend!",
+    "sales_end": "Sale ends in",
+    "title": "Last Minute",
+    "title_highlight": "Deals",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "grab_deal": "Grab the deal 🔥",
+    "spots_left": "Only 2 spots left at this price!"
+  },
+  "Experiences": {
+    "title": "Unforgettable Experiences",
+    "subtitle": "Your vacation is much more than sleep. We've collected the best attractions and experiences in Eilat, at exclusive prices for our guests.",
+    "hero_title": "Unforgettable Experiences",
+    "hero_desc": "Your vacation is much more than sleep. We've curated the best attractions in Eilat at exclusive prices.",
+    "starting_from": "From ",
+    "book_whatsapp": "Book on WhatsApp",
+    "local_suppliers": "Operated in collaboration with selected local suppliers in Eilat.",
+    "yacht_title": "Private Yacht Rental",
+    "yacht_desc": "Luxury cruise in the Gulf of Eilat including a skipper, soft drinks and fruits. Up to 12 people.",
+    "jeep_title": "Sunset Jeep Tour",
+    "jeep_desc": "Breathtaking desert experience in the Eilat Mountains. Includes herbal tea and pita bread on the fire.",
+    "diving_title": "VIP Introductory Dive",
+    "diving_desc": "Personal dive with a private instructor at the coral reserve. Includes underwater photography.",
+    "massage_title": "Massage to the door",
+    "massage_desc": "Professional masseurs who will come to you for a perfect spa experience.",
+    "hours": "hours",
+    "hour_and_half": "1.5 hours",
+    "minutes": "minutes"
+  },
+  "OnlineChat": {
+    "live_chat": "Live Chat",
+    "voice_on": "Voice On",
+    "voice_off": "Voice Off",
+    "stop_audio": "Stop Audio",
+    "whatsapp": "Move to WhatsApp",
+    "call_management": "Call Management"
+  },
+  "Calendar": {
+    "next": "Next",
+    "previous": "Previous",
+    "today": "Today",
+    "month": "Month",
+    "week": "Week",
+    "day": "Day"
+  },
+  "Reviews": {
+    "name_placeholder": "Your name...",
+    "review_placeholder": "Tell us how your vacation was...",
+    "submit": "Submit Review"
+  },
+  "Blog": {
+    "subtitle": "Tips, recommendations, and everything hot in Eilat",
+    "view_all": "All Articles",
+    "magazine_title": "The Eilat Magazine",
+    "magazine_desc": "Exclusive recommendations, tips, and reviews on luxury vacations, culinary, and nightlife.",
+    "article": "Article",
+    "min_read": "min read",
+    "read_more": "Read More"
+  }
 }

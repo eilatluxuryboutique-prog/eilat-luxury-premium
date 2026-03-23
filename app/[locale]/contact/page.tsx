@@ -61,8 +61,8 @@ export default function ContactPage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-2">טלפון</h3>
                             <p className="text-white/60 mb-4">זמינים בימים א'-ה' בין 09:00-20:00</p>
-                            <a href="tel:050-522-2536" className="text-2xl font-bold text-gold hover:text-white transition-colors ltr">
-                                050-522-2536
+                            <a href="tel:050-222-5536" className="text-2xl font-bold text-gold hover:text-white transition-colors ltr">
+                                050-222-5536
                             </a>
                         </div>
 
@@ -72,8 +72,8 @@ export default function ContactPage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-2">אימייל</h3>
                             <p className="text-white/60 mb-4">מענה תוך 24 שעות לכל פנייה</p>
-                            <a href="mailto:info@eilat-luxury.com" className="text-xl font-bold text-gold hover:text-white transition-colors">
-                                info@eilat-luxury.com
+                            <a href="mailto:eilat.luxury.boutique@gmail.com" className="text-xl font-bold text-gold hover:text-white transition-colors">
+                                eilat.luxury.boutique@gmail.com
                             </a>
                         </div>
 
@@ -140,8 +140,8 @@ export default function ContactPage() {
                                 type="submit"
                                 disabled={status === 'sending' || status === 'success'}
                                 className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${status === 'success'
-                                        ? 'bg-green-500 text-white'
-                                        : 'bg-gold hover:bg-yellow-400 text-black hover:shadow-lg hover:shadow-gold/20'
+                                    ? 'bg-green-500 text-white'
+                                    : 'bg-gold hover:bg-yellow-400 text-black hover:shadow-lg hover:shadow-gold/20'
                                     }`}
                             >
                                 {status === 'sending' ? (

@@ -4,9 +4,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Accessibility, X, Type, Sun, Eye, MousePointer2, Settings2, RotateCcw, Activity } from 'lucide-react';
 import { useUI } from '@/context/ui-context';
+import { useTranslations } from 'next-intl';
 
 export default function AccessibilityButton() {
     const { isAccessibilityOpen: isOpen, setAccessibilityOpen: setIsOpen } = useUI();
+    const tA = useTranslations('Accessibility');
+    const tN = useTranslations('Navigation');
     const [fontSize, setFontSize] = useState(100);
     const [contrast, setContrast] = useState(false);
     const [grayscale, setGrayscale] = useState(false);
@@ -77,7 +80,7 @@ export default function AccessibilityButton() {
                         <div className="p-6 border-b border-white/5 flex justify-between items-center bg-gold/5">
                             <span className="font-bold text-black flex items-center gap-2">
                                 <Accessibility size={20} />
-                                הצהרת נגישות
+                                {tN('accessibility')}
                             </span>
                             <button onClick={() => setIsOpen(false)} className="text-black/70 hover:text-black">
                                 <X size={20} />
@@ -88,43 +91,43 @@ export default function AccessibilityButton() {
                             <AccessibilityOption
                                 active={fontSize > 100}
                                 icon={<Type size={18} />}
-                                label="הגדלת טקסט"
+                                label={tA('enlarge_text')}
                                 onClick={() => setFontSize(prev => Math.min(prev + 10, 150))}
                             />
                             <AccessibilityOption
                                 active={fontSize < 100}
                                 icon={<Type size={16} />}
-                                label="הקטנת טקסט"
+                                label={tA('decrease_text')}
                                 onClick={() => setFontSize(prev => Math.max(prev - 10, 80))}
                             />
                             <AccessibilityOption
                                 active={contrast}
                                 icon={<Sun size={18} />}
-                                label="ניגודיות גבוהה"
+                                label={tA('high_contrast')}
                                 onClick={() => setContrast(!contrast)}
                             />
                             <AccessibilityOption
                                 active={grayscale}
                                 icon={<Eye size={18} />}
-                                label="מונוכרום (אפור)"
+                                label={tA('monochrome')}
                                 onClick={() => setGrayscale(!grayscale)}
                             />
                             <AccessibilityOption
                                 active={readableFont}
                                 icon={<Settings2 size={18} />}
-                                label="גופן קריא"
+                                label={tA('readable_font')}
                                 onClick={() => setReadableFont(!readableFont)}
                             />
                             <AccessibilityOption
                                 active={underlineLinks}
                                 icon={<MousePointer2 size={18} />}
-                                label="הדגשת קישורים"
+                                label={tA('highlight_links')}
                                 onClick={() => setUnderlineLinks(!underlineLinks)}
                             />
                             <AccessibilityOption
                                 active={stopAnimations}
                                 icon={<Activity size={18} />}
-                                label="עצירת אנימציות"
+                                label={tA('stop_animations')}
                                 onClick={() => setStopAnimations(!stopAnimations)}
                             />
 
@@ -133,7 +136,7 @@ export default function AccessibilityButton() {
                                 className="w-full flex items-center justify-center gap-2 p-3 mt-4 bg-white/5 hover:bg-white/10 text-white/70 rounded-xl transition-colors text-sm"
                             >
                                 <RotateCcw size={16} />
-                                איפוס הגדרות
+                                {tA('reset')}
                             </button>
                         </div>
                     </motion.div>

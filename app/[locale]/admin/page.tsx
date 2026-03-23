@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { LayoutDashboard, Hotel, Image as ImageIcon, FileText, Megaphone, Settings, LogOut, MessageSquare } from 'lucide-react';
+import { LayoutDashboard, Hotel, Image as ImageIcon, FileText, Megaphone, Settings, LogOut, MessageSquare, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AdminProvider } from '@/components/admin/admin-context';
 import SettingsTab from '@/components/admin/settings-tab';
@@ -17,37 +17,57 @@ const ContentTab = dynamic(() => import('@/components/admin/content-tab'), { loa
 const ChatTab = dynamic(() => import('@/components/admin/chat-tab'), { loading: () => <p>Loading...</p>, ssr: false });
 const AdsTab = dynamic(() => import('@/components/admin/ads-tab'), { loading: () => <p>Loading...</p>, ssr: false });
 const GoogleAdsTab = dynamic(() => import('@/components/admin/google-ads-tab'), { loading: () => <p>Loading...</p>, ssr: false });
+const UsersTab = dynamic(() => import('@/components/admin/users-tab'), { loading: () => <p>Loading...</p>, ssr: false });
 
 export default function AdminDashboard() {
     const router = useRouter();
-    const { data: session, status } = useSession();
+    const [user, setUser] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('analytics');
 
-    // Protect route client-side based on session
     useEffect(() => {
-        if (status === 'unauthenticated') {
-            router.push('/login');
-        } else if (status === 'authenticated') {
-            const role = (session.user as any)?.role;
-            const email = session.user?.email || '';
-            const isAdminEmail = ['eilat.luxury.boutique@gmail.com', 'joni.business1@gmail.com'].includes(email.toLowerCase());
-            if (role !== 'admin' && !isAdminEmail) {
-                router.push('/dashboard');
-            }
-        }
-    }, [status, session, router]);
+        const checkAuth = async () => {
+            try {
+                const res = await fetch('/api/auth/session');
+                const data = await res.json();
 
-    if (status === 'loading' || status === 'unauthenticated') {
+                if (!data.user) {
+                    router.push('/login');
+                    return;
+                }
+
+                const email = data.user.email || '';
+                const isAdminEmail = ['eilat.luxury.boutique@gmail.com', 'joni.business1@gmail.com'].includes(email.toLowerCase());
+
+                if (data.user.role !== 'admin' && !isAdminEmail) {
+                    router.push('/dashboard');
+                    return;
+                }
+
+                setUser(data.user);
+            } catch (error) {
+                console.error("Admin auth check error", error);
+                router.push('/login');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        checkAuth();
+    }, [router]);
+
+    if (loading) {
         return <div className="min-h-screen bg-white text-zinc-900 flex items-center justify-center">טוען...</div>;
     }
 
-    const un = session?.user?.name || 'Admin';
-    const email = session?.user?.email || '';
+    const un = user?.name || 'Admin';
+    const email = user?.email || '';
 
     const tabs = [
         { id: 'analytics', label: 'דשבורד', icon: LayoutDashboard },
         { id: 'chat', label: 'צ׳אט חי', icon: MessageSquare },
         { id: 'properties', label: 'נכסים', icon: Hotel },
+        { id: 'users', label: 'ניהול משתמשים', icon: Users },
         { id: 'media', label: 'מדיה', icon: ImageIcon },
         { id: 'content', label: 'תוכן ועיצוב', icon: FileText },
         { id: 'site_ads', label: 'פרסומות באתר', icon: Megaphone },
@@ -119,6 +139,7 @@ export default function AdminDashboard() {
                                 {activeTab === 'content' && <ContentTab />}
                                 {activeTab === 'media' && <MediaTab />}
                                 {activeTab === 'properties' && <PropertiesTab />}
+                                {activeTab === 'users' && <UsersTab />}
                                 {activeTab === 'site_ads' && <AdsTab />}
                                 {activeTab === 'google_ads' && <GoogleAdsTab />}
                                 {activeTab === 'settings' && <SettingsTab />}

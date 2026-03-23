@@ -89,7 +89,7 @@ export default function LoginPage() {
                             <span className="text-3xl font-black text-zinc-900 tracking-tighter">Eilat<span className="text-gold-gradient">Luxury</span></span>
                         </Link>
 
-                        <h1 className="text-4xl font-black text-white mb-2 [text-shadow:0_0_10px_rgba(255,255,255,0.3)] [-webkit-text-stroke:0.5px_#D4AF37] drop-shadow-[0_2px_5px_rgba(212,175,55,0.3)]">{getTitle()}</h1>
+                        <h1 className="text-4xl font-black text-zinc-900 mb-2">{getTitle()}</h1>
                         <p className="text-zinc-500 font-medium">{getSubtitle()}</p>
                     </div>
 

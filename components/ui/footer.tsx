@@ -4,6 +4,7 @@ import { Link } from '@/navigation';
 import { Facebook, Instagram, Phone, Mail, MapPin, Globe, CreditCard, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 function FooterSection({ title, children }: { title: string, children: React.ReactNode }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -44,6 +45,8 @@ function FooterSection({ title, children }: { title: string, children: React.Rea
 }
 
 export default function Footer() {
+    const tF = useTranslations('Footer');
+    const tN = useTranslations('Navigation');
     const currentYear = new Date().getFullYear();
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState('');
@@ -83,19 +86,19 @@ export default function Footer() {
                             </h2>
                         </div>
                         <p className="text-zinc-500 text-sm leading-relaxed text-center md:text-right">
-                            חוו את שיא היוקרה באילת. האוסף הנבחר שלנו של וילות, דירות ומלונות מבטיח חופשה בלתי נשכחת.
+                            {tF('brand_desc')}
                         </p>
 
                         {/* Newsletter Form */}
                         <form onSubmit={handleSubscribe} className="pt-4">
-                            <p className="text-zinc-800 text-sm font-bold mb-2 text-center md:text-right">הירשמו לניוזלטר שלנו</p>
+                            <p className="text-zinc-800 text-sm font-bold mb-2 text-center md:text-right">{tF('newsletter_btn')}</p>
                             <div className="flex bg-zinc-50 rounded-lg border border-zinc-200 overflow-hidden focus-within:border-gold/50 transition-colors">
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="האימייל שלך..."
-                                    className="bg-transparent flex-1 px-4 py-2 text-zinc-800 text-sm outline-none w-full"
+                                    placeholder={tF('newsletter_placeholder')}
+                                    className="bg-transparent flex-1 px-4 py-2 text-zinc-900 text-sm outline-none w-full placeholder:text-zinc-400"
                                     required
                                 />
                                 <button
@@ -106,8 +109,8 @@ export default function Footer() {
                                     <Mail size={18} />
                                 </button>
                             </div>
-                            {status === 'success' && <p className="text-green-600 text-xs mt-2 text-center md:text-right">נרשמת בהצלחה! 🎉</p>}
-                            {status === 'error' && <p className="text-red-500 text-xs mt-2 text-center md:text-right">שגיאה בהרשמה.</p>}
+                            {status === 'success' && <p className="text-green-600 text-xs mt-2 text-center md:text-right">Success 🎉</p>}
+                            {status === 'error' && <p className="text-red-500 text-xs mt-2 text-center md:text-right">Error.</p>}
                         </form>
 
                         <div className="flex gap-4 pt-4 justify-center md:justify-start">
@@ -121,46 +124,46 @@ export default function Footer() {
                     </div>
 
                     {/* Column 2: Quick Links - Accordion on Mobile */}
-                    <FooterSection title="קישורים מהירים">
+                    <FooterSection title={tF('quick_links')}>
                         <ul className="space-y-3 text-center md:text-right">
-                            <li><Link href="/" className="text-zinc-500 hover:text-gold transition-colors">דף הבית</Link></li>
-                            <li><Link href="/search?type=villa" className="text-zinc-500 hover:text-gold transition-colors">וילות יוקרה</Link></li>
-                            <li><Link href="/search?type=apartment" className="text-zinc-500 hover:text-gold transition-colors">דירות נופש</Link></li>
-                            <li><Link href="/search?type=hotel" className="text-zinc-500 hover:text-gold transition-colors">מלונות בוטיק</Link></li>
-                            <li><Link href="/cart" className="text-zinc-500 hover:text-gold transition-colors">ההזמנות שלי</Link></li>
+                            <li><Link href="/" className="text-zinc-500 hover:text-gold transition-colors">{tN('home')}</Link></li>
+                            <li><Link href="/search?type=villa" className="text-zinc-500 hover:text-gold transition-colors">{tN('villas')}</Link></li>
+                            <li><Link href="/search?type=apartment" className="text-zinc-500 hover:text-gold transition-colors">{tN('apartments')}</Link></li>
+                            <li><Link href="/search?type=hotel" className="text-zinc-500 hover:text-gold transition-colors">{tN('hotels')}</Link></li>
+                            <li><Link href="/cart" className="text-zinc-500 hover:text-gold transition-colors">{tF('my_orders')}</Link></li>
                         </ul>
                     </FooterSection>
 
                     {/* Column 3: Support - Accordion on Mobile */}
-                    <FooterSection title="איזור אישי ותמיכה">
+                    <FooterSection title={tF('support')}>
                         <ul className="space-y-3 text-center md:text-right">
-                            <li><Link href="/login" className="text-zinc-500 hover:text-gold transition-colors">כניסה / הרשמה</Link></li>
-                            <li><Link href="/login/admin" className="text-zinc-500 hover:text-gold transition-colors">כניסה למנהלים</Link></li>
-                            <li><Link href="/contact" className="text-zinc-500 hover:text-gold transition-colors">צור קשר</Link></li>
-                            <li><Link href="/terms" className="text-zinc-500 hover:text-gold transition-colors">תנאי שימוש</Link></li>
-                            <li><Link href="/privacy" className="text-zinc-500 hover:text-gold transition-colors">מדיניות פרטיות</Link></li>
+                            <li><Link href="/login" className="text-zinc-500 hover:text-gold transition-colors">{tF('login_register')}</Link></li>
+                            <li><Link href="/login/admin" className="text-zinc-500 hover:text-gold transition-colors">{tF('admin_login')}</Link></li>
+                            <li><Link href="/contact" className="text-zinc-500 hover:text-gold transition-colors">{tN('contact')}</Link></li>
+                            <li><Link href="/terms" className="text-zinc-500 hover:text-gold transition-colors">{tF('terms')}</Link></li>
+                            <li><Link href="/privacy" className="text-zinc-500 hover:text-gold transition-colors">{tF('privacy')}</Link></li>
                         </ul>
                     </FooterSection>
 
                     {/* Column 4: Contact - Accordion on Mobile */}
-                    <FooterSection title="יצירת קשר">
+                    <FooterSection title={tF('contact_us')}>
                         <ul className="space-y-4 text-center md:text-right">
                             <li className="flex items-start gap-3 text-zinc-500 justify-center md:justify-start">
                                 <MapPin className="text-gold shrink-0 mt-1" size={18} />
-                                <span>שדרות התמרים, אילת</span>
+                                <span>{tF('address')}</span>
                             </li>
                             <li className="flex items-center gap-3 text-zinc-500 justify-center md:justify-start">
                                 <Phone className="text-gold shrink-0" size={18} />
-                                <a href="tel:050-522-2536" className="hover:text-zinc-800 transition-colors">050-522-2536</a>
+                                <a href="tel:050-222-5536" className="hover:text-zinc-800 transition-colors">050-222-5536</a>
                             </li>
                             <li className="flex items-center gap-3 text-zinc-500 justify-center md:justify-start">
                                 <Mail className="text-gold shrink-0" size={18} />
-                                <a href="mailto:info@eilat-luxury.com" className="hover:text-zinc-800 transition-colors">info@eilat-luxury.com</a>
+                                <a href="mailto:eilat.luxury.boutique@gmail.com" className="hover:text-zinc-800 transition-colors">eilat.luxury.boutique@gmail.com</a>
                             </li>
                         </ul>
                         <div className="mt-6 flex items-center gap-2 text-zinc-400 text-sm justify-center md:justify-start">
                             <CreditCard size={16} />
-                            <span>סליקה מאובטחת בתקן PCI</span>
+                            <span>{tF('secure_clearing')}</span>
                         </div>
                     </FooterSection>
                 </div>
@@ -168,12 +171,12 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="border-t border-zinc-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-right">
                     <p className="text-zinc-400 text-sm py-2">
-                        © {currentYear} אילת בוקינג פרימיום. כל הזכויות שמורות. <span className="mx-2">|</span> <span className="font-bold text-zinc-300">ט.ל.ח</span>
+                        © {currentYear} Eilat Booking Premium. {tF('rights')} <span className="mx-2">|</span> <span className="font-bold text-zinc-300">{tF('tlh')}</span>
                     </p>
                     <div className="flex gap-6 text-sm text-zinc-400 justify-center">
-                        <Link href="/terms" className="hover:text-gold transition-colors">תקנון</Link>
-                        <Link href="/privacy" className="hover:text-gold transition-colors">פרטיות</Link>
-                        <Link href="/cookies" className="hover:text-gold transition-colors">נגישות</Link>
+                        <Link href="/terms" className="hover:text-gold transition-colors">{tF('terms')}</Link>
+                        <Link href="/privacy" className="hover:text-gold transition-colors">{tF('privacy')}</Link>
+                        <Link href="/cookies" className="hover:text-gold transition-colors">{tN('accessibility')}</Link>
                     </div>
                 </div>
             </div>

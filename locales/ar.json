@@ -1,20 +1,288 @@
 {
-    "Metadata": {
-        "title": "إيلات بوكينج بريميوم - عطلات فاخرة في إيلات",
-        "description": "احجز عطلتك القادمة في إيلات في أرقى شقق العطلات."
-    },
-    "Navigation": {
-        "home": "الرئيسية",
-        "apartments": "شقق",
-        "about": "حول",
-        "contact": "اتصل بنا"
-    },
-    "Hero": {
-        "title": "ضيافة فاخرة في إيلات",
-        "subtitle": "شقق عطلات حصرية في أفضل المواقع",
-        "cta": "احجز الان"
-    },
-    "Home": {
-        "recommended_title": "توصياتنا"
+  "Metadata": {
+    "title": "إيلات بوكينج بريميوم - عطلات فاخرة في إيلات",
+    "description": "احجز عطلتك القادمة في أفضل شقق العطلات الفاخرة في إيلات."
+  },
+  "Navigation": {
+    "home": "الرئيسية",
+    "apartments": "شقق",
+    "hotels": "فنادق فاخرة",
+    "villas": "فيلات",
+    "experiences": "تجارب",
+    "magazine": "مجلة",
+    "vip": "خدمات VIP",
+    "about": "حول",
+    "contact": "اتصل بنا",
+    "search": "بحث",
+    "accessibility": "سهولة الوصول",
+    "profile": "الملف الشخصي",
+    "dark_mode": "الوضع الليلي"
+  },
+  "Hero": {
+    "title": "ضيافة فاخرة في إيلات",
+    "subtitle": "شقق عطلات حصرية في أفضل المواقع",
+    "cta": "احجز الان"
+  },
+  "Featured": {
+    "title": "عقاراتنا المميزة",
+    "subtitle": "اختر من مجموعتنا الحصرية للعطلة المثالية",
+    "night": "ليلة",
+    "book": "احجز الان",
+    "details": "المزيد من التفاصيل",
+    "guests": "الضيوف",
+    "rooms": "غرف",
+    "recommended": "موصى به"
+  },
+  "Property": {
+    "about": "حول العقار",
+    "location": "الموقع",
+    "waze": "توجيه باستخدام Waze",
+    "amenities": "المرافق",
+    "guests": "الضيوف",
+    "guests_max": "الحد الأقصى",
+    "rooms": "غرف",
+    "bedrooms": "غرف نوم",
+    "per_night": "في الليلة",
+    "book_now": "احجز الان",
+    "total_price": "السعر الإجمالي",
+    "taxes": "شامل الضرائب والرسوم",
+    "not_charged": "لن يتم الخصم بعد"
+  },
+  "Checkout": {
+    "title": "دفع آمن",
+    "confirm": "تأكيد ودفع",
+    "booking_for": "حجزك لـ",
+    "dates": "التواريخ",
+    "guests": "الضيوف",
+    "total": "المجموع للدفع",
+    "service_fee": "رسوم الخدمة",
+    "back": "عودة"
+  },
+  "Payment": {
+    "card_name": "اسم صاحب البطاقة",
+    "card_number": "رقم البطاقة",
+    "expiry": "تاريخ الانتهاء",
+    "cvc": "CVC",
+    "pay": "دفع",
+    "processing": "جاري المعالجة...",
+    "success_title": "اكتمل الدفع بنجاح!",
+    "success_msg": "تم تأكيد حجزك. تم إرسال إيصال.",
+    "secure": "دفع آمن SSL",
+    "or_card": "أو ادفع بالبطاقة"
+  },
+  "Search": {
+    "title": "نتائج البحث",
+    "view_all": "عرض الكل"
+  },
+  "Categories": {
+    "title": "عطلات حسب الفئة",
+    "hotels": "فنادق فاخرة",
+    "apartments": "شقق عطلات",
+    "villas": "فيلات حصرية",
+    "attractions": "مناطق جذب",
+    "vacation": "عطلة"
+  },
+  "Home": {
+    "hotels_title": "فنادق فاخرة",
+    "villas_title": "فيلات حصرية",
+    "apartments_title": "شقق عطلات",
+    "recommended_title": "توصياتنا",
+    "view_all": "عرض الكل"
+  },
+  "SearchForm": {
+    "property_type": "نوع العقار",
+    "location": "الموقع",
+    "dates": "التواريخ",
+    "guests": "الضيوف",
+    "search_btn": "ابحث عن عطلة",
+    "check_in": "تسجيل الدخول",
+    "check_out": "تسجيل الخروج",
+    "select_dates": "اختر التواريخ",
+    "confirm": "تأكيد",
+    "close": "إغلاق",
+    "ai_mode": "بحث ذكي بالذكاء الاصطناعي",
+    "standard_mode": "بحث قياسي",
+    "ai_placeholder": "صف عطلة أحلامك... (مثل: 'فيلا فاخرة لـ 10 أشخاص مع مسبح')",
+    "thinking": "يفكر...",
+    "magic_search": "بحث سحري",
+    "types": {
+      "all": "الكل",
+      "hotel": "فنادق",
+      "apartment": "شقق",
+      "villa": "فيلات"
     }
+  },
+  "Auth": {
+    "login_title": "مرحباً بعودتك",
+    "login_subtitle": "قم بتسجيل الدخول لحسابك",
+    "register_title": "انضم إلينا",
+    "register_subtitle": "اختر نوع الحساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "full_name": "الاسم الكامل",
+    "login_btn": "دخول",
+    "register_btn": "إنشاء حساب",
+    "no_account": "ليس لديك حساب؟",
+    "has_account": "هل لديك حساب بالفعل؟",
+    "sign_up": "تسجيل",
+    "login": "تسجيل الدخول",
+    "role_guest": "أريد الحجز",
+    "role_host": "أريد الاستضافة",
+    "role_guest_desc": "عميل",
+    "role_host_desc": "صاحب عمل",
+    "welcome": "مرحباً",
+    "logout": "تسجيل الخروج",
+    "my_account": "حسابي",
+    "business_dashboard": "لوحة الأعمال",
+    "admin_panel": "لوحة الإدارة",
+    "login_link": "دخول",
+    "account_menu_label": "دخول الحساب",
+    "login_gateway_title": "من أنت؟",
+    "login_gateway_subtitle": "اختر نوع الدخول",
+    "login_admin_title": "دخول الإدارة",
+    "login_admin_subtitle": "الوصول للإدارة",
+    "login_host_title": "دخول المضيف",
+    "login_host_subtitle": "إدارة العقارات",
+    "login_customer_title": "دخول العميل",
+    "login_customer_subtitle": "عرض الحجوزات",
+    "list_asset": "إدراج عقار"
+  },
+  "Host": {
+    "hero_title": "انضم إلى مضيفينا",
+    "hero_subtitle": "اجعل عقارك الوجهة القادمة.",
+    "form_title": "ابدأ رحلتك",
+    "form_subtitle": "املأ التفاصيل وسنتواصل معك.",
+    "first_name": "الاسم",
+    "last_name": "العائلة",
+    "property_type": "نوع العقار",
+    "phone": "الهاتف",
+    "submit": "إرسال",
+    "benefits": {
+      "earn_title": "اربح المزيد",
+      "earn_desc": "احتفظ بـ 90٪ من أرباحك.",
+      "protection_title": "حماية كاملة",
+      "protection_desc": "تأمين بقيمة 1,000,000 شيكل.",
+      "guests_title": "ضيوف متميزون",
+      "guests_desc": "نجذب جمهورًا يبحث عن الفخامة.",
+      "manage_title": "إدارة سهلة",
+      "manage_desc": "نظام ذكاء اصطناعي لسهولة الإدارة."
+    },
+    "types": {
+      "villa": "فيلا",
+      "penthouse": "بنتهاوس",
+      "hotel": "فندق بوتيك",
+      "other": "أخرى"
+    },
+    "add_property_title": "إضافة عقار",
+    "add_property_subtitle": "املأ التفاصيل للنشر",
+    "basic_info": "تفاصيل عامة",
+    "property_title": "العنوان",
+    "price_per_night": "السعر لليلة",
+    "description": "الوصف",
+    "photos": "صور",
+    "upload_click": "رفع صور",
+    "cancel": "إلغاء",
+    "publish": "نشر",
+    "processing": "جاري الحفظ..."
+  },
+  "Footer": {
+    "quick_links": "روابط سريعة",
+    "support": "الدعم والحساب",
+    "contact_us": "اتصل بنا",
+    "newsletter_placeholder": "البريد الإلكتروني...",
+    "newsletter_btn": "اشتراك",
+    "rights": "جميع الحقوق محفوظة.",
+    "brand_desc": "جرب قمة الفخامة في إيلات. تضمن مجموعتنا عطلة لا تُنسى.",
+    "my_orders": "طلباتي",
+    "login_register": "عضوية",
+    "admin_login": "دخول الإدارة",
+    "terms": "شروط الاستخدام",
+    "privacy": "سياسة الخصوصية",
+    "address": "شارع هتماريم، إيلات",
+    "secure_clearing": "دفع آمن PCI",
+    "tlh": "السهو والخطأ مردود"
+  },
+  "Accessibility": {
+    "enlarge_text": "تكبير النص",
+    "decrease_text": "تصغير النص",
+    "high_contrast": "تباين عالٍ",
+    "monochrome": "ألوان أحادية",
+    "readable_font": "خط قابل للقراءة",
+    "highlight_links": "إبراز الروابط",
+    "stop_animations": "إيقاف الرسوم المتحركة",
+    "reset": "إعادة تعيين"
+  },
+  "Cart": {
+    "title": "عربتك",
+    "empty": "العربة فارغة",
+    "sold_out": "نفد الكمية!",
+    "per_night": "ليلة",
+    "view_property": "عرض العقار",
+    "total": "المجموع:",
+    "proceed": "الذهاب للدفع",
+    "clear": "إفراغ العربة",
+    "added": "تمت الإضافة",
+    "save_later": "حفظ لوقت لاحق"
+  },
+  "Deals": {
+    "last_minute": "خصم حتى 25٪ على إجازة نهاية الأسبوع القادمة!",
+    "sales_end": "ينتهي العرض خلال",
+    "title": "عروض",
+    "title_highlight": "اللحظة الأخيرة",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "seconds": "ثواني",
+    "grab_deal": "اغتنم العرض 🔥",
+    "spots_left": "بقي مكانان فقط بهذا السعر!"
+  },
+  "Experiences": {
+    "title": "تجارب لا تُنسى",
+    "subtitle": "عطلتك هي أكثر من مجرد نوم. لقد جمعنا لك أفضل المعالم والتجارب في إيلات، بأسعار حصرية.",
+    "hero_title": "تجارب لا تُنسى",
+    "hero_desc": "عطلتك هي أكثر بكثير من مجرد نوم. لقد جمعنا أفضل مناطق الجذب في إيلات بأسعار حصرية.",
+    "starting_from": "بدءاً من ",
+    "book_whatsapp": "احجز عبر واتساب",
+    "local_suppliers": "يتم التشغيل بالتعاون مع موردين محليين مختارين في إيلات.",
+    "yacht_title": "تأجير يخت خاص",
+    "yacht_desc": "رحلة بحرية فاخرة في خليج إيلات. ما يصل إلى 12 شخصًا.",
+    "jeep_title": "جولة جيب وقت الغروب",
+    "jeep_desc": "تجربة صحراوية تخطف الأنفاس في جبال إيلات.",
+    "diving_title": "غوص تعريفي VIP",
+    "diving_desc": "غوص شخصي مع مدرب خاص في محمية المرجان.",
+    "massage_title": "تدليك حتى الباب",
+    "massage_desc": "مدلكون محترفون يأتون إليك لتجربة سبا مثالية.",
+    "hours": "ساعات",
+    "hour_and_half": "ساعة ونصف",
+    "minutes": "دقائق"
+  },
+  "OnlineChat": {
+    "live_chat": "دردشة مباشرة",
+    "voice_on": "تشغيل الصوت",
+    "voice_off": "كتم الصوت",
+    "stop_audio": "إيقاف الصوت",
+    "whatsapp": "الانتقال إلى واتساب",
+    "call_management": "الاتصال بالإدارة"
+  },
+  "Calendar": {
+    "next": "التالي",
+    "previous": "السابق",
+    "today": "اليوم",
+    "month": "شهر",
+    "week": "أسبوع",
+    "day": "يوم"
+  },
+  "Reviews": {
+    "name_placeholder": "اسمك...",
+    "review_placeholder": "أخبرنا كيف كانت العطلة...",
+    "submit": "إرسال التقييم"
+  },
+  "Blog": {
+    "subtitle": "نصائح وتوصيات وكل ما هو جديد في إيلات",
+    "view_all": "جميع المقالات",
+    "magazine_title": "مجلة إيلات",
+    "magazine_desc": "توصيات ونصائح ومراجعات حصرية حول إجازات الرفاهية.",
+    "article": "مقال",
+    "min_read": "دقيقة قراءة",
+    "read_more": "اقرأ المزيد"
+  }
 }

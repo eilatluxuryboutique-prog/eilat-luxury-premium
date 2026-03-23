@@ -24,7 +24,7 @@ const Section = ({ title, items, link, viewAll }: { title: string, items: Proper
                     <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
                 </Link>
             </div>
-            <ApartmentsList items={items} limit={4} />
+            <ApartmentsList items={items} limit={8} isCarousel={true} />
         </div>
     </section>
 );
@@ -63,10 +63,6 @@ export default function Home() {
                 <Hero />
             </div>
 
-            {/* LiveCam Section */}
-            <div className="bg-zinc-50 py-20 border-y border-zinc-100">
-                <LiveCam />
-            </div>
 
             <LastMinuteDeals />
             <AdvertisementsSection />

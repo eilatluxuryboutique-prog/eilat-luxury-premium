@@ -37,22 +37,27 @@ export default async function middleware(req: NextRequest) {
     }
 
     const isLoginPage = pathname.includes('/login');
-    const isProtected = !isLoginPage && /\/(he|en|ru|fr|ar)?\/?(admin|host|account)/.test(pathname);
+    const isProtected = !isLoginPage && /\/(he|en|ru|fr|ar)?\/?(admin|host|account|dashboard|wishlist)/.test(pathname);
 
     if (isProtected) {
         const token = req.cookies.get('auth-token')?.value;
         const nextAuthToken = req.cookies.get('next-auth.session-token')?.value || req.cookies.get('__Secure-next-auth.session-token')?.value;
 
-        // If they have a NextAuth token, we let them pass the edge middleware. 
-        // The individual page components (via useSession or getServerSession) will handle the actual role-based auth.
+        // If no tokens found, redirect to login immediately
+        if (!token && !nextAuthToken) {
+            const locale = pathname.split('/')[1] || 'he';
+            const validLocale = ['he', 'en', 'ru', 'fr', 'ar'].includes(locale) ? locale : 'he';
+            return NextResponse.redirect(new URL(`/${validLocale}/login`, req.url));
+        }
+
+        // If NextAuth token exists, let it pass (page components will handle granular roles)
         if (nextAuthToken) {
             return intlMiddleware(req);
         }
 
         const payload = token ? await verifyToken(token) : null;
-
         if (!payload) {
-            const locale = req.nextUrl.pathname.split('/')[1] || 'he';
+            const locale = pathname.split('/')[1] || 'he';
             const validLocale = ['he', 'en', 'ru', 'fr', 'ar'].includes(locale) ? locale : 'he';
             return NextResponse.redirect(new URL(`/${validLocale}/login`, req.url));
         }

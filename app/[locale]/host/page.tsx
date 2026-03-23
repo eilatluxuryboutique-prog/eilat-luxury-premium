@@ -1,4 +1,4 @@
-import { getSession } from '@/lib/auth';
+import { getServerSideSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Plus, Home, Settings, Trash2, Edit, TrendingUp, DollarSign } from 'lucide-react';
@@ -9,17 +9,20 @@ import HostPropertyList from '@/components/host/property-list';
 
 export default async function HostDashboard(props: { params: Promise<{ locale: string }> }) {
     const params = await props.params;
-    const session: any = await getSession();
+    const session: any = await getServerSideSession();
+
     if (!session || (session.role !== 'host' && session.role !== 'admin')) {
         redirect(`/${params.locale}/login`);
     }
+
+    const userId = session.id || session.userId;
 
     // await dbConnect(); // Not needed for Postgres
     // Fetch user's properties from DB (Postgres)
     let properties: any[] = [];
     try {
         const { rows } = await import('@vercel/postgres').then(m => m.sql`
-            SELECT * FROM properties WHERE owner_id = ${session.userId} ORDER BY created_at DESC
+            SELECT * FROM properties WHERE owner_id = ${userId} ORDER BY created_at DESC
         `);
         // Map to match frontend expectations
         properties = rows.map(p => ({

@@ -1,20 +1,288 @@
 {
-    "Metadata": {
-        "title": "Эйлат Букиנג Премиум - Роскошный отдых в Эйлате",
-        "description": "Забронируйте ваш следующий отпуск в Эйлате в самых роскошных апартаментах."
-    },
-    "Navigation": {
-        "home": "Главная",
-        "apartments": "Апартаменты",
-        "about": "О нас",
-        "contact": "Контакты"
-    },
-    "Hero": {
-        "title": "Роскошное гостеприимство в Эйлате",
-        "subtitle": "Эксклюзивные апартаменты в лучших местах",
-        "cta": "Забронировать"
-    },
-    "Home": {
-        "recommended_title": "Наши рекомендации"
+  "Metadata": {
+    "title": "Eilat Booking Premium - Элитный отдых в Эйлате",
+    "description": "Забронируйте свой следующий отпуск в Эйлате в самых роскошных апартаментах."
+  },
+  "Navigation": {
+    "home": "Главная",
+    "apartments": "Апартаменты",
+    "hotels": "Отели",
+    "villas": "Виллы",
+    "experiences": "Впечатления",
+    "magazine": "Журнал",
+    "vip": "VIP-услуги",
+    "about": "О нас",
+    "contact": "Контакты",
+    "search": "Поиск",
+    "accessibility": "Доступность",
+    "profile": "Профиль",
+    "dark_mode": "Темный режим"
+  },
+  "Hero": {
+    "title": "Роскошное гостеприимство в Эйлате",
+    "subtitle": "Эксклюзивные апартаменты в лучших районах",
+    "cta": "Бронируйте сейчас"
+  },
+  "Featured": {
+    "title": "Наши лучшие объекты",
+    "subtitle": "Выберите из нашей эксклюзивной коллекции для идеального отдыха",
+    "night": "ночь",
+    "book": "Бронировать",
+    "details": "Подробнее",
+    "guests": "Гости",
+    "rooms": "Номера",
+    "recommended": "Рекомендуемые"
+  },
+  "Property": {
+    "about": "Об объекте",
+    "location": "Расположение",
+    "waze": "Навигация в Waze",
+    "amenities": "Удобства",
+    "guests": "Гости",
+    "guests_max": "Максимум",
+    "rooms": "Номера",
+    "bedrooms": "Спальни",
+    "per_night": "За ночь",
+    "book_now": "Бронировать сейчас",
+    "total_price": "Общая цена",
+    "taxes": "Включая налоги",
+    "not_charged": "Оплата не взимается"
+  },
+  "Checkout": {
+    "title": "Безопасная оплата",
+    "confirm": "Подтвердить и оплатить",
+    "booking_for": "Ваше бронирование",
+    "dates": "Даты",
+    "guests": "Гости",
+    "total": "К оплате",
+    "service_fee": "Сервисный сбор",
+    "back": "Назад"
+  },
+  "Payment": {
+    "card_name": "Имя на карте",
+    "card_number": "Номер карты",
+    "expiry": "Срок действия",
+    "cvc": "CVC",
+    "pay": "Оплатить",
+    "processing": "Обработка...",
+    "success_title": "Оплата прошла успешно!",
+    "success_msg": "Ваше бронирование подтверждено.",
+    "secure": "Безопасный платеж SSL",
+    "or_card": "Или оплатить картой"
+  },
+  "Search": {
+    "title": "Результаты поиска",
+    "view_all": "Смотреть все"
+  },
+  "Categories": {
+    "title": "Отдых по категориям",
+    "hotels": "Роскошные отели",
+    "apartments": "Апартаменты",
+    "villas": "Виллы",
+    "attractions": "Аттракционы",
+    "vacation": "Отдых"
+  },
+  "Home": {
+    "hotels_title": "Роскошные отели",
+    "villas_title": "Виллы",
+    "apartments_title": "Апартаменты",
+    "recommended_title": "Наши рекомендации",
+    "view_all": "Смотреть все"
+  },
+  "SearchForm": {
+    "property_type": "Тип объекта",
+    "location": "Местоположение",
+    "dates": "Даты",
+    "guests": "Гости",
+    "search_btn": "Найти отдых",
+    "check_in": "Заезд",
+    "check_out": "Выезд",
+    "select_dates": "Выберите даты",
+    "confirm": "Подтвердить",
+    "close": "Закрыть",
+    "ai_mode": "Поиск с ИИ",
+    "standard_mode": "Стандартный поиск",
+    "ai_placeholder": "Опишите отпуск своей мечты...",
+    "thinking": "Думаем...",
+    "magic_search": "Магический поиск",
+    "types": {
+      "all": "Все",
+      "hotel": "Отели",
+      "apartment": "Квартиры",
+      "villa": "Виллы"
     }
+  },
+  "Auth": {
+    "login_title": "С возвращением",
+    "login_subtitle": "Войдите в аккаунт",
+    "register_title": "Регистрация",
+    "register_subtitle": "Выберите тип аккаунта",
+    "email": "Эл. почта",
+    "password": "Пароль",
+    "full_name": "Полное имя",
+    "login_btn": "Войти",
+    "register_btn": "Создать аккаунт",
+    "no_account": "Нет аккаунта?",
+    "has_account": "Уже есть аккаунт?",
+    "sign_up": "Регистрация",
+    "login": "Войти",
+    "role_guest": "Я хочу забронировать",
+    "role_host": "Я хочу сдавать",
+    "role_guest_desc": "Клиент",
+    "role_host_desc": "Владелец",
+    "welcome": "Привет",
+    "logout": "Выйти",
+    "my_account": "Мой аккаунт",
+    "business_dashboard": "Бизнес-панель",
+    "admin_panel": "Панель админа",
+    "login_link": "Вход",
+    "account_menu_label": "Вход в аккаунт",
+    "login_gateway_title": "Кто вы?",
+    "login_gateway_subtitle": "Выберите тип входа",
+    "login_admin_title": "Вход для админа",
+    "login_admin_subtitle": "Доступ",
+    "login_host_title": "Вход для владельца",
+    "login_host_subtitle": "Управление объектами",
+    "login_customer_title": "Вход для клиента",
+    "login_customer_subtitle": "Просмотр бронирований",
+    "list_asset": "Разместить объект"
+  },
+  "Host": {
+    "hero_title": "Присоединяйтесь к нам",
+    "hero_subtitle": "Сделайте свой объект лучшим в Эйлате.",
+    "form_title": "Начните свой путь",
+    "form_subtitle": "Заполните детали, и мы свяжемся с вами в течение 24 часов.",
+    "first_name": "Имя",
+    "last_name": "Фамилия",
+    "property_type": "Тип объекта",
+    "phone": "Телефон",
+    "submit": "Отправить",
+    "benefits": {
+      "earn_title": "Зарабатывайте больше",
+      "earn_desc": "Сохраняйте до 90% долей дохода.",
+      "protection_title": "Полная защита",
+      "protection_desc": "Страхование хозяев на 1 000 000 шек.",
+      "guests_title": "Качественные гости",
+      "guests_desc": "Мы привлекаем качественную аудиторию.",
+      "manage_title": "Простое управление",
+      "manage_desc": "ИИ система для простого управления."
+    },
+    "types": {
+      "villa": "Вилла",
+      "penthouse": "Пентхаус",
+      "hotel": "Бутик-отель",
+      "other": "Другое"
+    },
+    "add_property_title": "Добавить объект",
+    "add_property_subtitle": "Заполните данные для публикации",
+    "basic_info": "Общая информация",
+    "property_title": "Название объекта",
+    "price_per_night": "Цена за ночь",
+    "description": "Описание объекта",
+    "photos": "Фотографии",
+    "upload_click": "Загрузить фото",
+    "cancel": "Отмена",
+    "publish": "Опубликовать",
+    "processing": "Сохранение..."
+  },
+  "Footer": {
+    "quick_links": "Быстрые ссылки",
+    "support": "Поддержка и профиль",
+    "contact_us": "Связаться с нами",
+    "newsletter_placeholder": "Ваш email...",
+    "newsletter_btn": "Подписаться",
+    "rights": "Все права защищены.",
+    "brand_desc": "Испытайте вершину роскоши в Эйлате. Наша коллекция гарантирует незабываемый отдых.",
+    "my_orders": "Мои заказы",
+    "login_register": "Вход / Регистрация",
+    "admin_login": "Вход для админа",
+    "terms": "Условия использования",
+    "privacy": "Политика конфиденциальности",
+    "address": "Б-р ХаТмарим, Эйлат",
+    "secure_clearing": "Безопасная оплата PCI",
+    "tlh": "Возможны ошибки"
+  },
+  "Accessibility": {
+    "enlarge_text": "Увеличить текст",
+    "decrease_text": "Уменьшить текст",
+    "high_contrast": "Высокая контрастность",
+    "monochrome": "Монохром",
+    "readable_font": "Читаемый шрифт",
+    "highlight_links": "Выделить ссылки",
+    "stop_animations": "Остановить анимацию",
+    "reset": "Сбросить настройки"
+  },
+  "Cart": {
+    "title": "Ваша корзина",
+    "empty": "Корзина пуста",
+    "sold_out": "Распродано!",
+    "per_night": "ночь",
+    "view_property": "Просмотр объекта",
+    "total": "Итого:",
+    "proceed": "К оплате",
+    "clear": "Очистить корзину",
+    "added": "Добавлено",
+    "save_later": "Сохранить на потом"
+  },
+  "Deals": {
+    "last_minute": "Скидка до 25% на выходные!",
+    "sales_end": "Акция заканчивается через",
+    "title": "Горящие",
+    "title_highlight": "Предложения",
+    "hours": "Часы",
+    "minutes": "Минуты",
+    "seconds": "Секунды",
+    "grab_deal": "Хватай скидку 🔥",
+    "spots_left": "Осталось всего 2 места!"
+  },
+  "Experiences": {
+    "title": "Незабываемые впечатления",
+    "subtitle": "Специальные аттракционы по эксклюзивным ценам для вас.",
+    "hero_title": "Незабываемые впечатления",
+    "hero_desc": "Ваш отпуск - это больше, чем просто сон. Мы собрали лучшие развлечения в Эйлате.",
+    "starting_from": "От ",
+    "book_whatsapp": "Забронировать в WhatsApp",
+    "local_suppliers": "Осуществляется совместно с местными поставщиками.",
+    "yacht_title": "Аренда частной яхты",
+    "yacht_desc": "Роскошный круиз по Эйлатскому заливу. До 12 человек.",
+    "jeep_title": "Джип-тур на закате",
+    "jeep_desc": "Захватывающее дух приключение в пустыне.",
+    "diving_title": "VIP-погружение",
+    "diving_desc": "Индивидуальное погружение с частным инструктором.",
+    "massage_title": "Массаж на дом",
+    "massage_desc": "Профессиональные массажисты приедут к вам.",
+    "hours": "часов",
+    "hour_and_half": "1,5 часа",
+    "minutes": "минут"
+  },
+  "OnlineChat": {
+    "live_chat": "Онлайн Чат",
+    "voice_on": "Включить голос",
+    "voice_off": "Выключить голос",
+    "stop_audio": "Остановить аудио",
+    "whatsapp": "Перейти в WhatsApp",
+    "call_management": "Связаться с руководством"
+  },
+  "Calendar": {
+    "next": "Следующий",
+    "previous": "Предыдущий",
+    "today": "Сегодня",
+    "month": "Месяц",
+    "week": "Неделя",
+    "day": "День"
+  },
+  "Reviews": {
+    "name_placeholder": "Ваше имя...",
+    "review_placeholder": "Расскажите, как прошел отпуск...",
+    "submit": "Отправить отзыв"
+  },
+  "Blog": {
+    "subtitle": "Советы, рекомендации и всё самое интересное в Эйлате",
+    "view_all": "Все статьи",
+    "magazine_title": "Журнал Эйлата",
+    "magazine_desc": "Эксклюзивные рекомендации и советы об отдыхе.",
+    "article": "Статья",
+    "min_read": "мин чтения",
+    "read_more": "Читать далее"
+  }
 }

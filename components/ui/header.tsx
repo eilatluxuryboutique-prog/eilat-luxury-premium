@@ -38,33 +38,7 @@ export default function Header({ initialData }: { initialData?: any }) {
                         Eilat<span className="text-[#FFD700]">Luxury</span>
                     </Link>
 
-                    {/* Desktop Navigation - Optimized Spacing */}
-                    <nav className="hidden lg:flex gap-6 xl:gap-10 items-center text-zinc-900 font-bold text-sm uppercase tracking-wide">
-                        <Link href="/" className="hover:text-gold transition-colors relative group">
-                            {t('home')}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
-                        </Link>
-                        <Link href="/apartments" className="hover:text-gold transition-colors relative group">
-                            {t('apartments')}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
-                        </Link>
-                        <Link href="/experiences" className="hover:text-gold transition-colors relative group">
-                            חוויות
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
-                        </Link>
-                        <Link href="/concierge" className="hover:text-gold transition-colors flex items-center gap-1 relative group">
-                            <span className="text-gold">★</span> VIP
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
-                        </Link>
-                        <Link href="/blog" className="hover:text-gold transition-colors relative group">
-                            מגזין
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
-                        </Link>
-                        <Link href="/contact" className="hover:text-gold transition-colors relative group">
-                            {t('contact')}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all group-hover:w-full"></span>
-                        </Link>
-                    </nav>
+                    {/* Desktop Navigation removed as per new layout. Navigation moved to hamburger menu. */}
 
                     <div className="flex items-center gap-3 md:gap-6">
                         <div className="hidden sm:flex items-center gap-4">

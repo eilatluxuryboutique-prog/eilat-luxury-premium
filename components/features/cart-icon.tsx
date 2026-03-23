@@ -9,7 +9,7 @@ export default function CartIcon() {
     return (
         <button
             onClick={() => setIsOpen(true)}
-            className="relative p-2 text-white hover:text-gold transition-colors"
+            className="relative p-2 text-zinc-800 hover:text-gold transition-colors"
         >
             <ShoppingCart className="w-6 h-6" />
             {items.length > 0 && (

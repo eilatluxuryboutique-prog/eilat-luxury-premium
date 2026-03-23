@@ -1,27 +1,54 @@
 "use client";
 
-import { CloudSun, Sun } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function WeatherWidget() {
-    // Eilat is almost always sunny. 
-    // We can fetch real data or just mock a pleasant temp for "Premium Feel".
-    // Let's do a simple mock for now that changes by time of day.
-
-    const [temp, setTemp] = useState(28);
+    const [temp, setTemp] = useState<number | null>(null);
+    const [isDay, setIsDay] = useState<boolean>(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const hour = new Date().getHours();
-        // Simple day/night logic
-        if (hour >= 6 && hour <= 10) setTemp(24);
-        else if (hour > 10 && hour <= 16) setTemp(32);
-        else if (hour > 16 && hour <= 20) setTemp(29);
-        else setTemp(22);
+        async function fetchWeather() {
+            try {
+                // Eilat coordinates: 29.5581° N, 34.9482° E
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=29.5581&longitude=34.9482&current=temperature_2m,is_day&timezone=auto');
+                const data = await res.json();
+
+                if (data && data.current) {
+                    setTemp(Math.round(data.current.temperature_2m));
+                    setIsDay(data.current.is_day === 1);
+                }
+            } catch (error) {
+                console.error("Failed to fetch Eilat weather:", error);
+                // Fallback to average pleasant temp if network fails
+                setTemp(25);
+                setIsDay(true);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchWeather();
+        // Refresh every 30 minutes
+        const interval = setInterval(fetchWeather, 30 * 60 * 1000);
+        return () => clearInterval(interval);
     }, []);
 
+    if (loading) {
+        return (
+            <div className="flex items-center gap-2 bg-zinc-50/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-zinc-200 text-zinc-400 text-sm font-bold shadow-sm animate-pulse w-24 h-8">
+            </div>
+        );
+    }
+
     return (
-        <div className="flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-zinc-100 text-zinc-800 text-sm font-medium hover:bg-white transition-colors cursor-default select-none shadow-sm">
-            <Sun className="text-gold animate-spin-slow" size={16} />
+        <div className="flex items-center gap-2 bg-zinc-50/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-zinc-200 text-zinc-800 text-sm font-bold hover:bg-white transition-all cursor-default select-none shadow-sm">
+            {isDay ? (
+                <Sun className="text-gold animate-spin-slow" size={16} />
+            ) : (
+                <Moon className="text-blue-500 hover:text-blue-600 transition-colors" size={16} />
+            )}
             <span>אילת {temp}°</span>
         </div>
     );

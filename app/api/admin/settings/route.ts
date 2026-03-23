@@ -3,7 +3,7 @@ import dbConnect from '@/lib/db';
 import Content from '@/models/Content';
 import { getSession } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../../auth/[...nextauth]/route';
+import { authOptions } from '@/lib/nextauth';
 
 export const dynamic = 'force-dynamic';
 

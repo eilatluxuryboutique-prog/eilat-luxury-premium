@@ -21,7 +21,7 @@ export default function FloatingActions() {
     };
 
     const openWhatsApp = () => {
-        window.open('https://wa.me/972501234567?text=Hi, available apartments?', '_blank');
+        window.open('https://wa.me/972502225536?text=Hi, available apartments?', '_blank');
     };
 
     const openTaxi = () => {

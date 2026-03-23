@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Trash2, Calendar, Search, Home, MoreVertical, X } from 'lucide-react';
+import { Plus, Trash2, Calendar, Search, Home, MoreVertical, X, UserCheck, UserX } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from '@/navigation';
 
@@ -66,6 +66,25 @@ export default function PropertiesTab() {
         try {
             await fetch(`/api/properties?id=${id}`, { method: 'DELETE' });
         } catch (e) { }
+    };
+
+    const toggleStatus = async (id: string, currentStatus: string) => {
+        const nextStatus = currentStatus === 'suspended' ? 'active' : 'suspended';
+        try {
+            const res = await fetch(`/api/properties/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: nextStatus })
+            });
+
+            if (res.ok) {
+                setProperties(prev => prev.map(p =>
+                    (p.id === id || p._id === id) ? { ...p, status: nextStatus } : p
+                ));
+            }
+        } catch (e) {
+            console.error("Toggle status error", e);
+        }
     };
 
     const openCalendar = (property: any) => {
@@ -153,18 +172,18 @@ export default function PropertiesTab() {
                                     <td className="px-6 py-4 text-zinc-600 text-sm">{property.location || 'אילת'}</td>
                                     <td className="px-6 py-4 text-zinc-900 font-bold text-sm">₪{property.price || property.pricePerNight}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 rounded text-xs font-medium ${property.isDemo ? 'bg-yellow-500/10 text-yellow-400' : 'bg-green-500/10 text-green-400'}`}>
-                                            {property.isDemo ? 'Demo' : 'Active'}
+                                        <span className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider ${property.status === 'suspended' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'}`}>
+                                            {property.status === 'suspended' ? 'מושעה' : 'פעיל'}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button
-                                                onClick={() => openCalendar(property)}
-                                                className="p-2 hover:bg-zinc-100 rounded text-blue-600"
-                                                title="ניהול יומן"
+                                                onClick={() => toggleStatus(property.id || property._id, property.status)}
+                                                className={`p-2 rounded transition-colors ${property.status === 'suspended' ? 'text-green-600' : 'text-orange-500'}`}
+                                                title={property.status === 'suspended' ? "החזר לאתר" : "השעיית נכס"}
                                             >
-                                                <Calendar size={16} />
+                                                {property.status === 'suspended' ? <UserCheck size={16} /> : <UserX size={16} />}
                                             </button>
                                             <button
                                                 onClick={() => handleDelete(property.id || property._id)}

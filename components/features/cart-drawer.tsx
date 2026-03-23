@@ -5,12 +5,13 @@ import { X, Trash2, ShoppingCart, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function CartDrawer() {
     const { isOpen, setIsOpen, items, removeFromCart, clearCart } = useCart();
     const locale = useLocale();
-    const isHe = locale === "he";
+    const isHe = locale === 'he' || locale === 'ar'; // RTL languages
+    const tC = useTranslations("Cart");
 
     const total = items.reduce((sum, item) => sum + item.price, 0);
 
@@ -38,7 +39,7 @@ export default function CartDrawer() {
                         <div className="p-4 border-b flex justify-between items-center bg-gray-50">
                             <h2 className="text-xl font-bold flex items-center gap-2">
                                 <ShoppingCart className="w-5 h-5 text-gold" />
-                                {isHe ? "העגלה שלך" : "Your Cart"}
+                                {tC('title')}
                                 <span className="bg-gold/20 text-gold text-xs px-2 py-1 rounded-full">{items.length}</span>
                             </h2>
                             <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-gray-200 rounded-full">
@@ -51,7 +52,7 @@ export default function CartDrawer() {
                             {items.length === 0 ? (
                                 <div className="text-center text-gray-500 mt-10">
                                     <ShoppingCart className="w-12 h-12 mx-auto mb-2 opacity-20" />
-                                    <p>{isHe ? "העגלה ריקה" : "Cart is empty"}</p>
+                                    <p>{tC('empty')}</p>
                                 </div>
                             ) : (
                                 items.map((item) => (
@@ -61,7 +62,7 @@ export default function CartDrawer() {
                                             <div className="absolute inset-0 bg-white/80 z-10 flex items-center justify-center backdrop-blur-[1px]">
                                                 <div className="text-red-500 font-bold flex flex-col items-center">
                                                     <AlertCircle className="w-6 h-6 mb-1" />
-                                                    {isHe ? "כבר לא זמין!" : "Sold Out!"}
+                                                    {tC('sold_out')}
                                                 </div>
                                             </div>
                                         )}
@@ -81,14 +82,14 @@ export default function CartDrawer() {
                                                             <Trash2 className="w-4 h-4" />
                                                         </button>
                                                     </div>
-                                                    <p className="text-gold font-bold text-sm">{item.price}₪ / {isHe ? "לילה" : "Night"}</p>
+                                                    <p className="text-gold font-bold text-sm">{item.price}₪ / {tC('per_night')}</p>
                                                 </div>
                                                 <Link
                                                     href={`/${locale}/property/${item.propertyId}`}
                                                     onClick={() => setIsOpen(false)}
                                                     className="text-xs text-blue-600 hover:underline"
                                                 >
-                                                    {isHe ? "צפה בנכס" : "View Property"}
+                                                    {tC('view_property')}
                                                 </Link>
                                             </div>
                                         </div>
@@ -101,17 +102,17 @@ export default function CartDrawer() {
                         {items.length > 0 && (
                             <div className="p-4 border-t bg-gray-50 space-y-3">
                                 <div className="flex justify-between font-bold text-lg">
-                                    <span>{isHe ? "סה\"כ:" : "Total:"}</span>
+                                    <span>{tC('total')}</span>
                                     <span>{total}₪</span>
                                 </div>
                                 <button className="w-full py-3 bg-gold text-black font-bold rounded-xl hover:brightness-110 shadow-lg transition-all">
-                                    {isHe ? "המשך לתשלום" : "Proceed to Checkout"}
+                                    {tC('proceed')}
                                 </button>
                                 <button
                                     onClick={clearCart}
                                     className="w-full py-2 text-gray-500 text-sm hover:text-red-500"
                                 >
-                                    {isHe ? "רוקן עגלה" : "Clear Cart"}
+                                    {tC('clear')}
                                 </button>
                             </div>
                         )}

@@ -34,7 +34,7 @@ export default function BottomNav() {
     };
 
     const openWhatsApp = () => {
-        window.open('https://wa.me/972505222536?text=היי, אשמח לפרטים על דירות פנויות!', '_blank');
+        window.open('https://wa.me/972502225536?text=היי, אשמח לפרטים על דירות פנויות!', '_blank');
     };
 
     const openTaxi = () => {
@@ -208,7 +208,7 @@ export default function BottomNav() {
 function BottomNavItem({ href, icon, label, active = false }: { href: string; icon: any; label: string; active?: boolean }) {
     return (
         <motion.div whileTap={{ scale: 0.9 }} className="relative flex-1 min-w-0">
-            <Link href={href} className={`flex flex-col items-center gap-1 transition-colors relative ${active ? 'text-gold' : 'text-zinc-500'} hover:text-gold`}>
+            <Link href={href} className={`flex flex-col items-center gap-1 transition-colors relative ${active ? 'text-gold' : 'text-zinc-600'} hover:text-gold`}>
                 <div className="p-1 z-10 transition-transform">
                     {React.cloneElement(icon, { size: active ? 20 : 18 })}
                 </div>

@@ -52,12 +52,10 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                 {/* Hero */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gold to-yellow-200 bg-clip-text text-transparent mb-4">
-                        {locale === 'he' ? 'המגזין של אילת' : 'The Eilat Magazine'}
+                        {t('magazine_title')}
                     </h1>
                     <p className="text-xl text-zinc-500 max-w-2xl mx-auto">
-                        {locale === 'he'
-                            ? 'המלצות, טיפים וסקירות בלעדיות על חופשות יוקרה, קולינריה וחיי לילה.'
-                            : 'Exclusive recommendations and reviews on luxury vacations, culinary, and nightlife.'}
+                        {t('magazine_desc')}
                     </p>
                 </div>
 
@@ -74,12 +72,12 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                                 <div className="absolute bottom-4 right-4 text-xs font-bold bg-gold text-black px-2 py-1 rounded-full">
-                                    {locale === 'he' ? 'כתבה' : 'Article'}
+                                    {t('article')}
                                 </div>
                             </div>
                             <div className="p-6">
                                 <div className="text-sm text-zinc-400 mb-2">
-                                    {new Date(article.createdAt).toLocaleDateString(locale === 'he' ? 'he-IL' : 'en-US')} • 5 {locale === 'he' ? 'דק׳ קריאה' : 'min read'}
+                                    {new Date(article.createdAt).toLocaleDateString(locale === 'he' || locale === 'ar' ? 'he-IL' : 'en-US')} • 5 {t('min_read')}
                                 </div>
                                 <h3 className="text-xl font-bold mb-3 group-hover:text-gold transition-colors line-clamp-2 text-zinc-900">
                                     {article.title}
@@ -88,8 +86,10 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                                     {article.excerpt}
                                 </p>
                                 <div className="mt-4 flex items-center text-gold text-sm font-bold">
-                                    {locale === 'he' ? 'קרא עוד' : 'Read More'}
-                                    <span className="mr-2 transform group-hover:-translate-x-1 transition-transform">←</span>
+                                    {t('read_more')}
+                                    <span className={`transform ${locale === 'he' || locale === 'ar' ? 'mr-2 group-hover:-translate-x-1' : 'ml-2 group-hover:translate-x-1'} transition-transform`}>
+                                        {locale === 'he' || locale === 'ar' ? '←' : '→'}
+                                    </span>
                                 </div>
                             </div>
                         </Link>

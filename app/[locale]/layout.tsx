@@ -11,7 +11,7 @@ import ThemeProvider from "@/components/theme-provider";
 import AiAssistant from "@/components/ai-assistant";
 import CartDrawer from "@/components/features/cart-drawer";
 import Footer from "@/components/ui/footer";
-import BottomNav from "@/components/ui/bottom-nav";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
 import AccessibilityButton from "@/components/ui/accessibility-button";
 import FloatingActions from "@/components/features/floating-actions";
 import { CompareProvider } from "@/components/features/compare-context";
@@ -102,7 +102,7 @@ export default async function RootLayout({
                                     <AccessibilityButton />
                                     <CartDrawer />
                                     <CompareBar />
-                                    <BottomNav />
+                                    <WhatsAppButton />
                                     <Footer />
                                     <CookieBanner />
                                 </CompareProvider>

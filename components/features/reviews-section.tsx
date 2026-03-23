@@ -104,14 +104,14 @@ export default function ReviewsSection({ propertyId }: { propertyId: string }) {
     };
 
     return (
-        <div className="bg-[#1E1E1E] border border-white/10 rounded-2xl p-8 mt-12">
-            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                <Star className="text-gold fill-gold" />
+        <div className="bg-[#1E1E1E] border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 mt-8 md:mt-12">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-8 flex items-center gap-2">
+                <Star className="text-gold fill-gold w-5 h-5 md:w-6 md:h-6" />
                 חוות דעת אורחים
-                <span className="text-sm font-normal text-white/50">({reviews.length})</span>
+                <span className="text-xs md:text-sm font-normal text-white/50">({reviews.length})</span>
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-12">
                 {/* Reviews List */}
                 <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gold/20">
                     {loading ? (

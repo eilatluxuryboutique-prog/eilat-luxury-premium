@@ -5,7 +5,7 @@ import Booking from '@/models/Booking';
 import Property from '@/models/Property';
 import mongoose from 'mongoose';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '@/lib/nextauth';
 import { sendBookingConfirmation } from '@/lib/email';
 
 export const dynamic = 'force-dynamic';

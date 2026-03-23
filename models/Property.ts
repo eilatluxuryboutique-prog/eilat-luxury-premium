@@ -57,6 +57,12 @@ const PropertySchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
+    status: {
+        type: String,
+        enum: ['active', 'suspended', 'pending'],
+        default: 'active',
+        index: true
+    },
     isDemo: {
         type: Boolean,
         default: false

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 const articles = [
     {
@@ -36,16 +37,19 @@ const articles = [
 ];
 
 export default function BlogSection() {
+    const tB = useTranslations('Blog');
+    const tN = useTranslations('Navigation');
+
     return (
-        <section className="py-20 bg-white border-t border-zinc-100">
+        <section className="py-8 md:py-20 bg-white border-t border-zinc-100">
             <div className="container mx-auto px-4">
-                <div className="flex justify-between items-end mb-12">
+                <div className="flex justify-between items-end mb-6 md:mb-12">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-3">המגזין שלנו</h2>
-                        <p className="text-zinc-500">טיפים, המלצות וכל מה שחם באילת</p>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-zinc-900 mb-1 md:mb-3">{tN('magazine')}</h2>
+                        <p className="text-sm md:text-base text-zinc-500">{tB('subtitle')}</p>
                     </div>
                     <Link href="/blog" className="text-gold hidden md:flex items-center gap-2 hover:gap-3 transition-all">
-                        לכל הכתבות <ArrowLeft size={16} />
+                        {tB('view_all')} <ArrowLeft size={16} />
                     </Link>
                 </div>
 
@@ -60,14 +64,14 @@ export default function BlogSection() {
                             className="group cursor-pointer"
                         >
                             <Link href={`/blog/${article.slug}`} className="block h-full">
-                                <div className="relative h-64 rounded-2xl overflow-hidden mb-6">
+                                <div className="relative h-48 md:h-64 rounded-xl md:rounded-2xl overflow-hidden mb-4 md:mb-6">
                                     <Image
                                         src={article.image}
                                         alt={article.title}
                                         fill
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-md text-zinc-900 text-xs px-3 py-1 rounded-full border border-zinc-100">
+                                    <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-md text-zinc-900 text-[10px] md:text-xs px-2 py-0.5 md:px-3 md:py-1 rounded-full border border-zinc-100">
                                         {article.category}
                                     </div>
                                 </div>
@@ -83,7 +87,7 @@ export default function BlogSection() {
 
                 <div className="mt-10 text-center md:hidden">
                     <Link href="/blog" className="text-gold inline-flex items-center gap-2">
-                        לכל הכתבות <ArrowLeft size={16} />
+                        {tB('view_all')} <ArrowLeft size={16} />
                     </Link>
                 </div>
             </div>

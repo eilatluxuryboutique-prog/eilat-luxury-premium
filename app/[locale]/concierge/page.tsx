@@ -107,7 +107,7 @@ export default function ConciergePage() {
                                 </p>
 
                                 <a
-                                    href={`https://wa.me/972505222536?text=היי, אשמח להזמין שירות קונסיירז': ${service.title}`}
+                                    href={`https://wa.me/972502225536?text=היי, אשמח להזמין שירות קונסיירז': ${service.title}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="w-full bg-white/5 hover:bg-gold hover:text-black text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all border border-white/10 group-hover:border-gold/50"
@@ -132,7 +132,7 @@ export default function ConciergePage() {
                     </p>
 
                     <a
-                        href="https://wa.me/972505222536?text=היי, יש לי בקשה מיוחדת לשירות קונסיירז'..."
+                        href="https://wa.me/972502225536?text=היי, יש לי בקשה מיוחדת לשירות קונסיירז'..."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-3 bg-gold hover:bg-white text-black font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:shadow-gold/50 transition-all transform hover:scale-105 relative z-10"

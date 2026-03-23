@@ -20,7 +20,7 @@ export default function RoomServicePage() {
 
     const handleOrder = () => {
         const message = `Hi, I would like to order: ${cart.map(i => i.name).join(', ')} to my room.`;
-        window.open(`https://wa.me/972501234567?text=${encodeURIComponent(message)}`, '_blank');
+        window.open(`https://wa.me/972502225536?text=${encodeURIComponent(message)}`, '_blank');
     };
 
     return (

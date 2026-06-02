@@ -56,6 +56,7 @@ export const metadata: Metadata = {
         title: "Eilat Booking Premium",
         description: "Your gateway to a luxury vacation in Eilat.",
         images: ["/og-image.jpg"],
+    },
     manifest: '/manifest.json',
 };
 

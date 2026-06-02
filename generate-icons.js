@@ -5,8 +5,8 @@ const sharp = require('sharp');
 // This shrinks the house to about 66% of the full icon size.
 const svgIcon = `
 <svg width="1024" height="1024" viewBox="-6 -6 36 36" xmlns="http://www.w3.org/2000/svg">
-  <rect x="-6" y="-6" width="36" height="36" fill="white" />
-  <path fill="#FF385C" d="M12 1.5l10 10v11h-20v-11l10-10zm0 3.328l-8 8v8.672h16v-8.672l-8-8z" />
+  <rect x="-6" y="-6" width="36" height="36" fill="#FF385C" />
+  <path fill="white" d="M12 1.5l10 10v11h-20v-11l10-10zm0 3.328l-8 8v8.672h16v-8.672l-8-8z" />
 </svg>
 `;
 

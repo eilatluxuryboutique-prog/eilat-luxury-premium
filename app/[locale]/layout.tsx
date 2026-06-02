@@ -57,6 +57,10 @@ export const metadata: Metadata = {
         description: "Your gateway to a luxury vacation in Eilat.",
         images: ["/og-image.jpg"],
     },
+    icons: {
+        icon: '/icon-192.png',
+        apple: '/apple-icon.png',
+    },
     manifest: '/manifest.json',
 };
 

@@ -67,7 +67,7 @@ export default function AccessibilityButton() {
     }, [stopAnimations]);
 
     return (
-        <div className="fixed bottom-6 left-6 z-[100]" dir="rtl">
+        <div className="fixed bottom-[90px] md:bottom-6 left-4 md:left-6 z-[100]" dir="rtl">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -145,10 +145,10 @@ export default function AccessibilityButton() {
 
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex p-3 rounded-full shadow-xl transition-all duration-300 items-center justify-center border-2 border-white/20 ${isOpen ? 'bg-white text-blue-600' : 'bg-blue-600 text-white hover:bg-blue-700 hover:scale-105'}`}
+                className={`flex p-2 md:p-3 rounded-full shadow-xl transition-all duration-300 items-center justify-center border-2 border-white/20 ${isOpen ? 'bg-white text-blue-600' : 'bg-blue-600 text-white hover:bg-blue-700 hover:scale-105'}`}
                 aria-label="נגישות"
             >
-                {isOpen ? <X size={24} /> : <Accessibility size={28} />}
+                {isOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Accessibility className="w-5 h-5 md:w-7 md:h-7" />}
             </button>
 
             <style jsx global>{`

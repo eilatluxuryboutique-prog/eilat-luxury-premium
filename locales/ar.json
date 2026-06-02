@@ -16,7 +16,8 @@
     "search": "بحث",
     "accessibility": "سهولة الوصول",
     "profile": "الملف الشخصي",
-    "dark_mode": "الوضع الليلي"
+    "dark_mode": "الوضع الليلي",
+    "loader_text": "المكان للعثور على عطلتك القادمة في إيلات"
   },
   "Hero": {
     "title": "ضيافة فاخرة في إيلات",
@@ -76,11 +77,15 @@
   },
   "Categories": {
     "title": "عطلات حسب الفئة",
-    "hotels": "فنادق فاخرة",
-    "apartments": "شقق عطلات",
-    "villas": "فيلات حصرية",
-    "attractions": "مناطق جذب",
-    "vacation": "عطلة"
+    "vacation_apartments": "شقق العطلات",
+    "villas": "فيلات",
+    "penthouses": "بنتهاوس",
+    "luxury_apartments": "شقق فاخرة",
+    "hotels": "فنادق",
+    "attractions": "أماكن جذب",
+    "businesses": "أعمال تجارية",
+    "coupons": "كوبونات",
+    "filters": "تصفيات"
   },
   "Home": {
     "hotels_title": "فنادق فاخرة",
@@ -110,7 +115,13 @@
       "hotel": "فنادق",
       "apartment": "شقق",
       "villa": "فيلات"
-    }
+    },
+    "hero_title": "Find places to stay in Eilat",
+    "hero_desc": "Discover luxury villas and apartments perfect for any trip.",
+    "anywhere": "Anywhere",
+    "any_week": "Any week",
+    "add_guests": "Add guests",
+    "guest_favorite": "Guest favorite"
   },
   "Auth": {
     "login_title": "مرحباً بعودتك",
@@ -284,5 +295,8 @@
     "article": "مقال",
     "min_read": "دقيقة قراءة",
     "read_more": "اقرأ المزيد"
+  },
+  "Map": {
+    "show_map": "Show map"
   }
 }

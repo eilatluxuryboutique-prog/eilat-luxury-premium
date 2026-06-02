@@ -3,8 +3,14 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Upload, X, ArrowRight, Home, DollarSign } from "lucide-react";
+import { Upload, X, ArrowRight, Home, DollarSign, MapPin } from "lucide-react";
 import { useRouter } from "@/navigation";
+import dynamic from 'next/dynamic';
+
+const LocationPicker = dynamic(() => import('@/components/features/location-picker'), { 
+    ssr: false, 
+    loading: () => <div className="h-[300px] w-full bg-black/40 animate-pulse rounded-xl border border-white/10" />
+});
 
 export default function AddPropertyPage() {
     const t = useTranslations('Host');
@@ -20,6 +26,7 @@ export default function AddPropertyPage() {
         address: ""
     });
 
+    const [coordinates, setCoordinates] = useState({ lat: 29.5577, lng: 34.9519 });
     const [images, setImages] = useState<File[]>([]);
     const [previewUrls, setPreviewUrls] = useState<string[]>([]); // For display
     const [uploadedUrls, setUploadedUrls] = useState<string[]>([]); // Actual Cloudinary URLs
@@ -106,6 +113,7 @@ export default function AddPropertyPage() {
                 type: formData.type,
                 images: imageUrls,
                 location: formData.address || 'Eilat',
+                coordinates: coordinates,
                 amenities: (formData as any).amenities || []
             };
 
@@ -203,6 +211,15 @@ export default function AddPropertyPage() {
                                     required
                                 />
                             </div>
+                        </div>
+
+                        {/* Location */}
+                        <div>
+                            <label className="flex items-center gap-2 text-white/80 text-sm mb-2 font-medium">
+                                <MapPin size={16} className="text-gold" />
+                                סימון מיקום על המפה
+                            </label>
+                            <LocationPicker value={coordinates} onChange={setCoordinates} />
                         </div>
 
                         {/* Description */}

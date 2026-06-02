@@ -1,4 +1,4 @@
-export type PropertyType = 'hotel' | 'apartment' | 'villa';
+export type PropertyType = 'hotel' | 'apartment' | 'luxury-apartment' | 'penthouse' | 'villa' | 'attraction' | 'business' | 'coupon';
 
 export interface Property {
     id: string;
@@ -441,5 +441,227 @@ export const properties: Property[] = [
         images: [],
         description: 'הוילה הכי גדולה בעיר.',
         amenities: ['הכל כלול', 'באטלר', 'קולנוע']
+    },
+    // --- NEW CATEGORIES ---
+    {
+        id: 'c1',
+        type: 'luxury-apartment',
+        title: 'וילה על הים',
+        location: 'חוף אלמוג',
+        price: 3500,
+        rating: 4.9,
+        guests: 8,
+        rooms: 4,
+        image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2670&auto=format&fit=crop',
+        images: [],
+        description: 'גישה ישירה אל חוף הים מאחורי הוילה.',
+        amenities: ['חוף פרטי', 'נוף לים', 'WIFI']
+    },
+    {
+        id: 'c2',
+        type: 'luxury-apartment',
+        title: 'אחוזת הבריכות',
+        location: 'שחמון',
+        price: 2800,
+        rating: 4.8,
+        guests: 10,
+        rooms: 5,
+        image: 'https://images.unsplash.com/photo-1572331165267-854da2b10ccc?q=80&w=2670&auto=format&fit=crop',
+        images: [],
+        description: 'וילה עם בריכת אינפיניטי ענקית.',
+        amenities: ['בריכת אינפיניטי', 'ג\'קוזי', 'מנגל']
+    },
+    {
+        id: 'c3',
+        type: 'penthouse',
+        title: 'בקתת עץ הרים',
+        location: 'הרי אילת',
+        price: 900,
+        rating: 4.7,
+        guests: 4,
+        rooms: 2,
+        image: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2670&auto=format&fit=crop',
+        images: [],
+        description: 'בקתת עץ רומנטית מבודדת.',
+        amenities: ['אח עצים', 'נוף להרים', 'WIFI']
+    },
+    {
+        id: 'c4',
+        type: 'penthouse',
+        title: 'טירת המלכים',
+        location: 'מצפה רמון (קרוב לאילת)',
+        price: 4500,
+        rating: 5.0,
+        guests: 15,
+        rooms: 8,
+        image: 'https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?q=80&w=2670&auto=format&fit=crop',
+        images: [],
+        description: 'חוויה של פעם בחיים בטירה אמיתית.',
+        amenities: ['מרתף יינות', 'שירותי ניקיון', 'בריכה']
+    },
+    {
+        id: 'c5',
+        type: 'business',
+        title: 'מסעדת שף יוקרתית',
+        location: 'פארק תמנע',
+        price: 600,
+        rating: 4.6,
+        guests: 6,
+        rooms: 2,
+        image: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=2670&auto=format&fit=crop',
+        images: [],
+        description: 'לינה בלב הפארק הלאומי.',
+        amenities: ['טיולי שטח', 'מנגל', 'חניה']
+    },
+    {
+        id: 'c6',
+        type: 'attraction',
+        title: 'מתחם צלילה VIP',
+        location: 'ריף הדולפינים',
+        price: 1500,
+        rating: 4.9,
+        guests: 2,
+        rooms: 1,
+        image: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=2670&auto=format&fit=crop',
+        images: [],
+        description: 'לינה ממש מעל המים עם אטרקציות צלילה.',
+        amenities: ['צלילה', 'ארוחת בוקר', 'WIFI']
+    },
+    {
+        id: 'c7',
+        type: 'coupon',
+        title: 'קופון 50% לספא',
+        location: 'החוף הדרומי',
+        price: 250,
+        rating: 4.8,
+        guests: 2,
+        rooms: 0,
+        image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2670&auto=format&fit=crop',
+        images: [],
+        description: 'קופון זוגי ליום ספא מפנק כולל עיסוי וארוחת בוקר.',
+        amenities: ['ספא', 'בריכה']
+    }
+];
+
+export interface Attraction {
+    id: string;
+    title: string;
+    type: 'restaurant' | 'activity' | 'shopping' | 'nature';
+    description: string;
+    coordinates: { lat: number; lng: number };
+}
+
+export const attractions: Attraction[] = [
+    {
+        id: 'att1',
+        title: 'ריף הדולפינים',
+        type: 'nature',
+        description: 'חוף אקולוגי ייחודי מסוגו בעולם בו תוכלו לשחות ולצלול עם דולפינים חופשיים בסביבתם הטבעית. חוויה בלתי נשכחת לכל המשפחה!',
+        coordinates: { lat: 29.5244, lng: 34.9351 }
+    },
+    {
+        id: 'att2',
+        title: 'המצפה התת ימי',
+        type: 'nature',
+        description: 'הפארק הימי הגדול והוותיק בישראל. צפייה מרהיבה באלמוגים, כרישים, צבי ים ושפע דגים נדירים מבלי להירטב.',
+        coordinates: { lat: 29.5042, lng: 34.9174 }
+    },
+    {
+        id: 'att3',
+        title: 'מסעדת המחבוא של אדי',
+        type: 'restaurant',
+        description: 'מוסד קולינרי אילתי משנת 1979! בשרים איכותיים, פירות ים ואווירה חמימה. המלצה שלנו: סטייק פילה ברוטב חרדל.',
+        coordinates: { lat: 29.5583, lng: 34.9482 }
+    },
+    {
+        id: 'att4',
+        title: 'טיילת אילת והמרינה',
+        type: 'shopping',
+        description: 'מרכז החיים והבילויים של אילת. חנויות ללא מע"מ, דוכנים צבעוניים, בתי קפה ואווירת חופש שלא נגמרת לאורך החוף.',
+        coordinates: { lat: 29.5513, lng: 34.9577 }
+    },
+    {
+        id: 'att5',
+        title: 'פארק יטבתה אילת',
+        type: 'restaurant',
+        description: 'מושלם למשפחות - מגוון עצום של גלידות מפורסמות, שוקו מהחבית, ארוחות קלות ומרחב ישיבה ענק במרכז העיר.',
+        coordinates: { lat: 29.5532, lng: 34.9585 }
+    },
+    {
+        id: 'att6',
+        title: 'מועדון צלילה מנטה',
+        type: 'activity',
+        description: 'מועדון הצלילה המוביל בעיר, מציע קורסי צלילה לכל הרמות, צלילות היכרות ללא ניסיון קודם וציוד מקצועי.',
+        coordinates: { lat: 29.5188, lng: 34.9298 }
+    },
+    {
+        id: 'att7',
+        title: 'קניון האייס מול',
+        type: 'shopping',
+        description: 'מעבר לקניות ללא מע"מ, הקניון מציע משטח החלקה אולימפי על הקרח, פארק טרמפולינות ומתחמי גיימינג מטורפים.',
+        coordinates: { lat: 29.5540, lng: 34.9654 }
+    },
+    {
+        id: 'att8',
+        title: 'שמורת חוף אלמוג',
+        type: 'nature',
+        description: 'גן עדן לשנורקלינג. ריף אלמוגים רדוד ועשיר במרחק שחייה קצרה מהחוף. מומלץ להצטייד במשקפת מראש!',
+        coordinates: { lat: 29.5113, lng: 34.9238 }
+    },
+    {
+        id: 'att9',
+        title: 'מסעדת לוויתן',
+        type: 'restaurant',
+        description: 'מסעדת שף מהמדוברות בישראל השוכנת באילת. מציעה המבורגרים מיוחדים מנתחי פרימיום, קוקטיילים ואווירה צעירה.',
+        coordinates: { lat: 29.5492, lng: 34.9548 }
+    },
+    {
+        id: 'att10',
+        title: 'ברביס (Baris)',
+        type: 'restaurant',
+        description: 'הדיינר האמריקאי המפורסם של אילת! המבורגרים מושחתים, מנות ענקיות וקינוחים שישאירו אתכם פעורי פה.',
+        coordinates: { lat: 29.5498, lng: 34.9541 }
+    },
+    {
+        id: 'att11',
+        title: 'הגן הבוטני של אילת',
+        type: 'nature',
+        description: 'פנינת טבע אורגנית ונדירה שנבנתה על גבי מחצבת אבן לשעבר. שבילי הליכה מוצלים, מפלי מים ויער גשם אקולוגי קטן.',
+        coordinates: { lat: 29.5824, lng: 34.9667 }
+    },
+    {
+        id: 'att12',
+        title: 'כפר הצוללים',
+        type: 'activity',
+        description: 'מקום אותנטי וקסום לחוות את הים האדום. מציע צלילות לשברים של ספינות (כמו הסטיל) והדרכות אישיות.',
+        coordinates: { lat: 29.5075, lng: 34.9205 }
+    },
+    {
+        id: 'att13',
+        title: 'בנק הפועלים - סניף אילת',
+        type: 'bank',
+        description: 'סניף מרכזי של בנק הפועלים כולל כספומט זמין 24/7.',
+        coordinates: { lat: 29.5565, lng: 34.9512 }
+    },
+    {
+        id: 'att14',
+        title: 'בנק לאומי',
+        type: 'bank',
+        description: 'בנק לאומי באזור התיירות, מציע שירותי מט"ח וכספומט חיצוני.',
+        coordinates: { lat: 29.5538, lng: 34.9540 }
+    },
+    {
+        id: 'att15',
+        title: 'סופר-פארם קניון מול הים',
+        type: 'pharmacy',
+        description: 'בית מרקחת מרכזי, כולל מחלקת קוסמטיקה ומוצרי תינוקות.',
+        coordinates: { lat: 29.5495, lng: 34.9535 }
+    },
+    {
+        id: 'att16',
+        title: 'סופר-פארם אייס מול',
+        type: 'pharmacy',
+        description: 'בית מרקחת נוח למבקרים באייס מול, פתוח עד מאוחר.',
+        coordinates: { lat: 29.5538, lng: 34.9650 }
     }
 ];

@@ -16,7 +16,8 @@
     "search": "חיפוש",
     "accessibility": "נגישות",
     "profile": "פרופיל",
-    "dark_mode": "מצב לילה"
+    "dark_mode": "מצב לילה",
+    "loader_text": "המקום למצוא בו את החופשה הבאה שלכם באילת"
   },
   "Hero": {
     "title": "חווית אירוח יוקרתית באילת",
@@ -75,12 +76,16 @@
     "view_all": "צפה בהכל"
   },
   "Categories": {
-    "title": "חופשה לפי קטגוריה",
-    "hotels": "מלונות יוקרה",
-    "apartments": "דירות נופש",
-    "villas": "וילות אקסקלוסיביות",
+    "title": "חופשות לפי קטגוריה",
+    "vacation_apartments": "דירות נופש",
+    "villas": "וילות",
+    "penthouses": "פנטהאוזים",
+    "luxury_apartments": "דירות יוקרה",
+    "hotels": "מלונות",
     "attractions": "אטרקציות",
-    "vacation": "חופש"
+    "businesses": "בתי עסק",
+    "coupons": "קופונים",
+    "filters": "סינונים"
   },
   "Home": {
     "hotels_title": "מלונות יוקרה",
@@ -110,7 +115,13 @@
       "hotel": "מלונות",
       "apartment": "דירות",
       "villa": "וילות"
-    }
+    },
+    "hero_title": "חפש מקומות לינה באילת",
+    "hero_desc": "גלה וילות ודירות יוקרה מושלמות לכל חופשה.",
+    "anywhere": "בכל מקום",
+    "any_week": "בכל תאריך",
+    "add_guests": "הוסף אורחים",
+    "guest_favorite": "מועדף אורחים"
   },
   "Auth": {
     "login_title": "ברוך שובך",
@@ -284,5 +295,8 @@
     "article": "כתבה",
     "min_read": "דק׳ קריאה",
     "read_more": "קרא עוד"
+  },
+  "Map": {
+    "show_map": "הצג מפה"
   }
 }

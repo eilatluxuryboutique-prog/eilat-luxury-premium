@@ -1,40 +1,44 @@
 import Hero from '@/components/features/hero';
 import LiveCam from '@/components/features/live-cam';
 import LastMinuteDeals from '@/components/features/last-minute-deals';
-import ApartmentsList from '@/components/features/apartments-list';
 import CategoriesList from '@/components/features/categories-list';
 import BlogSection from '@/components/features/blog-section';
 import NewsletterSignup from '@/components/features/newsletter-signup';
-import { properties, Property } from '@/lib/mock-data';
+import { properties as rawProperties, attractions as rawAttractions, Property } from '@/lib/mock-data';
+import { translateProperties, translateAttractions } from '@/lib/translate-mock';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import AdvertisementsSection from '@/components/features/advertisements-section';
 import { Link } from '@/navigation';
-import { useTranslations } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import MainContentToggle from '@/components/features/main-content-toggle';
+import MobileSearchPill from '@/components/features/mobile-search-pill';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
-const Section = ({ title, items, link, viewAll }: { title: string, items: Property[], link: string, viewAll: string }) => (
-    <section className="py-12 md:py-16 border-b border-border/40">
-        <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-foreground border-r-4 border-primary pr-4">
-                    {title}
-                </h2>
-                <Link href={link} className="text-primary hover:text-foreground transition-colors flex items-center gap-2 font-medium group">
-                    {viewAll}
-                    <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
-                </Link>
-            </div>
-            <ApartmentsList items={items} limit={8} isCarousel={true} />
-        </div>
-    </section>
-);
+export default async function Home({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams?: Promise<any> }) {
+    const { locale } = await params;
+    setRequestLocale(locale);
+    const t = await getTranslations({ locale, namespace: 'Home' });
+    const tMap = await getTranslations({ locale, namespace: 'Map' });
 
-export default function Home() {
-    const t = useTranslations('Home');
-
-    const hotels = properties.filter(p => p.type === 'hotel');
-    const villas = properties.filter(p => p.type === 'villa');
-    const apartments = properties.filter(p => p.type === 'apartment');
+    const search = await searchParams || {};
+    
+    const properties = translateProperties(rawProperties, locale);
+    
+    // Filter properties based on search params
+    let filteredProperties = [...properties];
+    
+    if (search.type) {
+        filteredProperties = filteredProperties.filter(p => p.type === search.type);
+    }
+    
+    if (search.guests) {
+        const requiredGuests = parseInt(search.guests as string, 10);
+        if (!isNaN(requiredGuests)) {
+            filteredProperties = filteredProperties.filter(p => p.guests >= requiredGuests);
+        }
+    }
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -52,45 +56,22 @@ export default function Home() {
     };
 
     return (
-        <main className="min-h-screen bg-background transition-colors duration-300">
+        <main className="min-h-screen bg-white transition-colors duration-300 relative">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            {/* Hero Section */}
-            <div className="bg-white">
-                <Hero />
+            {/* Airbnb layout: Categories immediately below header */}
+            <div className="sticky top-[110px] md:top-[80px] z-40 bg-white shadow-sm md:shadow-none pb-1 md:pb-0">
+                <CategoriesList />
             </div>
 
+            {/* Landing Page Hero image + Search Widget (Desktop only) */}
+            <Hero />
 
-            <LastMinuteDeals />
-            <AdvertisementsSection />
-            <CategoriesList />
-
-            <div className="flex flex-col gap-0 pb-0">
-                <Section
-                    title={t('hotels_title')}
-                    items={hotels}
-                    link="/search?type=hotel"
-                    viewAll={t('view_all')}
-                />
-                <Section
-                    title={t('villas_title')}
-                    items={villas}
-                    link="/search?type=villa"
-                    viewAll={t('view_all')}
-                />
-                <Section
-                    title={t('apartments_title')}
-                    items={apartments}
-                    link="/search?type=apartment"
-                    viewAll={t('view_all')}
-                />
-            </div>
-
-            <BlogSection />
-            <NewsletterSignup />
+            {/* Main Content: List or Map */}
+            <MainContentToggle properties={filteredProperties} />
         </main>
     );
 }

@@ -16,7 +16,8 @@
     "search": "Recherche",
     "accessibility": "Accessibilité",
     "profile": "Profil",
-    "dark_mode": "Mode Sombre"
+    "dark_mode": "Mode Sombre",
+    "loader_text": "L'endroit pour trouver vos prochaines vacances à Eilat"
   },
   "Hero": {
     "title": "Hospitalité de luxe à Eilat",
@@ -75,12 +76,16 @@
     "view_all": "Voir tout"
   },
   "Categories": {
-    "title": "Vacances par Catégorie",
-    "hotels": "Hôtels",
-    "apartments": "Appartements",
+    "title": "Vacances par catégorie",
+    "vacation_apartments": "Appartements de vacances",
     "villas": "Villas",
+    "penthouses": "Penthouses",
+    "luxury_apartments": "Appartements de luxe",
+    "hotels": "Hôtels",
     "attractions": "Attractions",
-    "vacation": "Vacances"
+    "businesses": "Commerces",
+    "coupons": "Coupons",
+    "filters": "Filtres"
   },
   "Home": {
     "hotels_title": "Hôtels de Luxe",
@@ -110,7 +115,13 @@
       "hotel": "Hôtels",
       "apartment": "Apprt.",
       "villa": "Villas"
-    }
+    },
+    "hero_title": "Find places to stay in Eilat",
+    "hero_desc": "Discover luxury villas and apartments perfect for any trip.",
+    "anywhere": "Anywhere",
+    "any_week": "Any week",
+    "add_guests": "Add guests",
+    "guest_favorite": "Guest favorite"
   },
   "Auth": {
     "login_title": "Bon retour",
@@ -284,5 +295,8 @@
     "article": "Article",
     "min_read": "min de lecture",
     "read_more": "Lire plus"
+  },
+  "Map": {
+    "show_map": "Show map"
   }
 }

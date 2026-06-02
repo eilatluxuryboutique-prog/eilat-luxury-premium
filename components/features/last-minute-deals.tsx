@@ -5,15 +5,18 @@ import { motion } from 'framer-motion';
 import { Clock, Tag, ChevronLeft, ChevronRight, MapPin, Star } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/navigation';
-import { properties } from '@/lib/mock-data';
+import { useLocalizedProperties } from '@/hooks/use-localized-data';
 import { useTranslations } from 'next-intl';
 
 export default function LastMinuteDeals() {
+    const properties = useLocalizedProperties();
     const t = useTranslations('Deals');
     const [timeLeft, setTimeLeft] = useState({ hours: 12, minutes: 45, seconds: 30 });
     const [deals, setDeals] = useState<any[]>([]);
 
     useEffect(() => {
+        if (!properties.length) return;
+
         // Mock countdown logic
         const timer = setInterval(() => {
             setTimeLeft(prev => {

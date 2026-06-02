@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Link, useRouter } from '@/navigation'; // Ensure using correct navigation imports
-import { User, LogOut, LayoutDashboard, ShoppingBag } from 'lucide-react';
+import { User, LogOut, LayoutDashboard, ShoppingBag, Menu, UserCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function UserMenu() {
@@ -37,10 +37,10 @@ export default function UserMenu() {
         return (
             <Link
                 href="/login"
-                className="bg-zinc-100 hover:bg-zinc-200 text-zinc-900 px-5 py-2.5 rounded-full font-bold transition-all text-sm border border-zinc-200 shadow-sm flex items-center gap-2"
+                className="flex items-center gap-3 border border-[#dddddd] rounded-full p-[5px] pl-3 hover:shadow-md transition-shadow bg-white cursor-pointer"
             >
-                <User size={16} className="text-gold" />
-                {t('login_link')}
+                <Menu size={18} className="text-[#222222]" />
+                <UserCircle size={30} className="text-[#717171]" />
             </Link>
         );
     }
@@ -49,10 +49,15 @@ export default function UserMenu() {
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 bg-gold/10 hover:bg-gold/20 text-gold px-4 py-2 rounded-full font-medium transition-colors border border-gold/30"
+                className="flex items-center gap-3 border border-[#dddddd] rounded-full p-[5px] pl-3 hover:shadow-md transition-shadow bg-white cursor-pointer"
+                aria-label="תפריט משתמש"
+                aria-expanded={isOpen}
             >
-                <User size={18} />
-                <span className="hidden md:inline">{t('account_menu_label')}</span>
+                <Menu size={18} className="text-[#222222]" aria-hidden="true" />
+                <div className="relative">
+                    <UserCircle size={30} className="text-[#717171]" aria-hidden="true" />
+                    <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></div>
+                </div>
             </button>
 
             {isOpen && (
@@ -97,9 +102,9 @@ export default function UserMenu() {
                     )}
 
                     <div className="px-4 py-3 bg-zinc-50/30 my-1">
-                        <div className="text-[10px] text-gold font-black uppercase tracking-widest mb-1">Loyalty Rewards</div>
+                        <div className="text-[10px] text-gold font-black uppercase tracking-widest mb-1">מועדון יוקרה</div>
                         <div className="flex justify-between text-sm text-zinc-900 font-medium">
-                            <span>Points</span>
+                            <span>נקודות</span>
                             <span className="font-bold text-gold">{user.loyaltyPoints || 0}</span>
                         </div>
                     </div>

@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { Inter, Rubik } from "next/font/google";
 import "../globals.css";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from "next/navigation";
 import Header from "@/components/ui/header";
 import Providers from "@/app/providers";
 import AuthProvider from "@/components/auth/auth-provider";
 import ThemeProvider from "@/components/theme-provider";
-import AiAssistant from "@/components/ai-assistant";
 import CartDrawer from "@/components/features/cart-drawer";
 import Footer from "@/components/ui/footer";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
@@ -18,6 +17,10 @@ import { CompareProvider } from "@/components/features/compare-context";
 import CompareBar from "@/components/features/compare-bar";
 import CookieBanner from "@/components/ui/cookie-banner";
 import { Analytics } from "@vercel/analytics/react";
+import NavigationLoader from "@/components/features/navigation-loader";
+import { Suspense } from "react";
+import MobileBottomNav from "@/components/ui/mobile-bottom-nav";
+
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const rubik = Rubik({ subsets: ["hebrew", "latin"], variable: '--font-rubik' });
@@ -61,7 +64,7 @@ export const metadata: Metadata = {
     manifest: '/manifest.json',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export default async function RootLayout({
     children,
@@ -71,6 +74,7 @@ export default async function RootLayout({
     params: Promise<{ locale: string }>;
 }) {
     const { locale } = await params;
+    setRequestLocale(locale);
 
     if (!['he', 'en', 'ru', 'fr', 'ar'].includes(locale as any)) {
         notFound();
@@ -95,15 +99,18 @@ export default async function RootLayout({
                             <ThemeProvider>
                                 <CompareProvider>
                                     <Header initialData={siteContent || {}} />
-                                    <main className="pb-32 md:pb-20">
+                                    <Suspense fallback={null}>
+                                        <NavigationLoader />
+                                    </Suspense>
+                                    <main className="pb-32 md:pb-20 pt-[115px] md:pt-[80px]">
                                         {children}
                                     </main>
-                                    <AiAssistant />
                                     <AccessibilityButton />
                                     <CartDrawer />
                                     <CompareBar />
                                     <WhatsAppButton />
                                     <Footer />
+                                    <MobileBottomNav />
                                     <CookieBanner />
                                 </CompareProvider>
                             </ThemeProvider>

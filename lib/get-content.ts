@@ -1,8 +1,9 @@
 import { headers } from 'next/headers';
 import dbConnect from './db';
 import Content from '@/models/Content';
+import { unstable_cache } from 'next/cache';
 
-export async function getSiteContent() {
+export const getSiteContent = unstable_cache(async () => {
     try {
         await dbConnect();
 
@@ -39,4 +40,4 @@ export async function getSiteContent() {
             hero: { videoUrl: 'https://res.cloudinary.com/drr2qzpzk/video/upload/v1769920628/eilat_premium/hero_final_1769920616899.mp4' }
         };
     }
-}
+}, ['site-content'], { revalidate: 3600, tags: ['site-content'] });

@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import { properties } from '@/lib/mock-data';
+import { properties as rawProperties } from '@/lib/mock-data';
+import { translateProperties } from '@/lib/translate-mock';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { MapPin, Users, Bed, Wifi, Star, Check } from 'lucide-react';
@@ -8,6 +9,7 @@ import AddToCartButton from '@/components/features/add-to-cart';
 import ReviewsSection from '@/components/features/reviews-section';
 import AvailabilityCalendar from '@/components/features/availability-calendar';
 import LocationMap from '@/components/features/location-map';
+import BookingInteractiveSection from '@/components/features/booking-interactive-section';
 import dbConnect from '@/lib/db';
 import Property from '@/models/Property';
 import type { Metadata } from 'next';
@@ -16,6 +18,7 @@ export async function generateMetadata(
     { params }: { params: Promise<{ id: string, locale: string }> }
 ): Promise<Metadata> {
     const { id, locale } = await params;
+    const properties = translateProperties(rawProperties, locale);
 
     // Fallbacks
     let title = "Property | Eilat Booking Premium";
@@ -59,10 +62,11 @@ export async function generateMetadata(
     };
 }
 
-export default async function PropertyPage(props: { params: Promise<{ id: string }> }) {
+export default async function PropertyPage(props: { params: Promise<{ id: string, locale: string }> }) {
     const params = await props.params;
-    const { id } = params;
-    const t = await getTranslations('Property');
+    const { id, locale } = params;
+    const t = await getTranslations({ locale, namespace: 'Property' });
+    const properties = translateProperties(rawProperties, locale);
 
     // 1. Try fetching from Mock Data first (Legacy/Static)
     let property = properties.find(p => p.id === params.id);
@@ -209,60 +213,19 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                                     <div className="font-bold">{property.rooms} {t('bedrooms')}</div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Availability Calendar (Inside Left Column) */}
-                        <div className="mt-12 border-t border-border pt-8">
-                            <h3 className="text-xl font-bold mb-6">{t('availability')}</h3>
-                            <AvailabilityCalendar propertyId={property.id} className="w-full max-w-md mx-auto md:mx-0" />
-                        </div>
-
-                        {/* Location Map */}
-                        <div className="mt-12 border-t border-border pt-8">
-                            <LocationMap address={property.location || 'Eilat'} />
-                        </div>
-
-                        {/* Virtual Tour (Phase 18) */}
-                        {property.virtualTourUrl && (
-                            <div className="mt-12 border-t border-border pt-8">
-                                <h3 className="text-xl font-bold mb-6">סיור וירטואלי 360°</h3>
-                                <div className="aspect-video w-full rounded-2xl overflow-hidden border border-border shadow-lg bg-black/5">
-                                    <iframe
-                                        src={property.virtualTourUrl}
-                                        width="100%"
-                                        height="100%"
-                                        frameBorder="0"
-                                        allowFullScreen
-                                        className="w-full h-full"
-                                    />
-                                </div>
-                            </div>
-                        )}
                     </div>
+                </div>
 
-                    {/* Right: Booking Card */}
-                    <div>
-                        <div className="bg-card border border-border rounded-2xl p-6 sticky top-24 shadow-lg">
-                            <div className="text-center mb-6">
-                                <span className="text-muted-foreground">{t('total_price')}</span>
-                                <div className="text-4xl font-bold text-primary my-2">₪{property.price}</div>
-                                <span className="text-muted-foreground block">{t('taxes')}</span>
-                            </div>
-
-                            <Link
-                                href={`/checkout?propertyId=${property.id}&guests=${property.guests}`}
-                                className="w-full bg-primary hover:brightness-110 text-black font-bold py-4 rounded-xl text-lg transition-all transform hover:scale-[1.02] shadow-lg mb-4 flex items-center justify-center"
-                            >
-                                {t('book_now')}
-                            </Link>
-
-                            <AddToCartButton property={property} />
-
-                            <p className="text-center text-xs text-muted-foreground mt-4">
-                                {t('not_charged')}
-                            </p>
-                        </div>
-                    </div>
+                <BookingInteractiveSection 
+                    property={property} 
+                    tLabels={{
+                        availability: t('availability'),
+                        total_price: t('total_price'),
+                        taxes: t('taxes'),
+                        book_now: t('book_now'),
+                        not_charged: t('not_charged')
+                    }}
+                />
                 </div>
 
                 {/* Reviews Section */}

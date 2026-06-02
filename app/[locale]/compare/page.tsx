@@ -1,13 +1,17 @@
 "use client";
 
 import { useCompare } from '@/components/features/compare-context';
-import { properties } from '@/lib/mock-data';
+import { properties as rawProperties } from '@/lib/mock-data';
+import { translateProperties } from '@/lib/translate-mock';
+import { useLocale } from 'next-intl';
 import { Link } from '@/navigation';
 import Image from 'next/image';
 import { Check, X, MapPin, Users, Bed, Wifi, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function ComparePage() {
+    const locale = useLocale();
+    const properties = translateProperties(rawProperties, locale);
     const { selectedIds, toggleProperty, clearComparison } = useCompare();
     const selectedProperties = properties.filter(p => selectedIds.includes(p.id));
 

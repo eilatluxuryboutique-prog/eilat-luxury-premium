@@ -16,7 +16,8 @@
     "search": "Поиск",
     "accessibility": "Доступность",
     "profile": "Профиль",
-    "dark_mode": "Темный режим"
+    "dark_mode": "Темный режим",
+    "loader_text": "Место, где можно найти ваш следующий отпуск в Эйлате"
   },
   "Hero": {
     "title": "Роскошное гостеприимство в Эйлате",
@@ -75,12 +76,16 @@
     "view_all": "Смотреть все"
   },
   "Categories": {
-    "title": "Отдых по категориям",
-    "hotels": "Роскошные отели",
-    "apartments": "Апартаменты",
+    "title": "Отпуск по категориям",
+    "vacation_apartments": "Апартаменты для отдыха",
     "villas": "Виллы",
+    "penthouses": "Пентхаусы",
+    "luxury_apartments": "Элитные апартаменты",
+    "hotels": "Отели",
     "attractions": "Аттракционы",
-    "vacation": "Отдых"
+    "businesses": "Бизнесы",
+    "coupons": "Купоны",
+    "filters": "Фильтры"
   },
   "Home": {
     "hotels_title": "Роскошные отели",
@@ -110,7 +115,13 @@
       "hotel": "Отели",
       "apartment": "Квартиры",
       "villa": "Виллы"
-    }
+    },
+    "hero_title": "Find places to stay in Eilat",
+    "hero_desc": "Discover luxury villas and apartments perfect for any trip.",
+    "anywhere": "Anywhere",
+    "any_week": "Any week",
+    "add_guests": "Add guests",
+    "guest_favorite": "Guest favorite"
   },
   "Auth": {
     "login_title": "С возвращением",
@@ -284,5 +295,8 @@
     "article": "Статья",
     "min_read": "мин чтения",
     "read_more": "Читать далее"
+  },
+  "Map": {
+    "show_map": "Show map"
   }
 }

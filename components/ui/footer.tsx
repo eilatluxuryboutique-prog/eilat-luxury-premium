@@ -26,20 +26,28 @@ function FooterSection({ title, children }: { title: string, children: React.Rea
 
             <h3 className="hidden md:block text-lg font-bold text-zinc-800 mb-6">{title}</h3>
 
-            <AnimatePresence>
-                {(isOpen || typeof window !== 'undefined' && window.innerWidth >= 768) && (
-                    <motion.div
-                        initial={false}
-                        animate={{
-                            height: (isOpen || (typeof window !== 'undefined' && window.innerWidth >= 768)) ? "auto" : 0,
-                            opacity: (isOpen || (typeof window !== 'undefined' && window.innerWidth >= 768)) ? 1 : 0
-                        }}
-                        className="overflow-hidden md:!h-auto md:!opacity-100"
-                    >
-                        {children}
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Mobile Accordion Content */}
+            <div className="md:hidden">
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden"
+                        >
+                            <div className="pt-2 pb-4">
+                                {children}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+
+            {/* Desktop Static Content */}
+            <div className="hidden md:block">
+                {children}
+            </div>
         </div>
     );
 }
@@ -109,8 +117,8 @@ export default function Footer() {
                                     <Mail size={18} />
                                 </button>
                             </div>
-                            {status === 'success' && <p className="text-green-600 text-xs mt-2 text-center md:text-right">Success 🎉</p>}
-                            {status === 'error' && <p className="text-red-500 text-xs mt-2 text-center md:text-right">Error.</p>}
+                            {status === 'success' && <p className="text-green-600 text-xs mt-2 text-center md:text-right">נרשמת בהצלחה 🎉</p>}
+                            {status === 'error' && <p className="text-red-500 text-xs mt-2 text-center md:text-right">אירעה שגיאה. נסה שוב.</p>}
                         </form>
 
                         <div className="flex gap-4 pt-4 justify-center md:justify-start">

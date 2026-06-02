@@ -546,7 +546,7 @@ export const properties: Property[] = [
 export interface Attraction {
     id: string;
     title: string;
-    type: 'restaurant' | 'activity' | 'shopping' | 'nature';
+    type: 'restaurant' | 'activity' | 'shopping' | 'nature' | 'bank' | 'pharmacy';
     description: string;
     coordinates: { lat: number; lng: number };
 }

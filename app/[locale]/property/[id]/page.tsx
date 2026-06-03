@@ -213,6 +213,8 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                                     <div className="font-bold">{property.rooms} {t('bedrooms')}</div>
                                 </div>
                             </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -226,7 +228,6 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
                         not_charged: t('not_charged')
                     }}
                 />
-                </div>
 
                 {/* Reviews Section */}
                 <ReviewsSection propertyId={property.id} />

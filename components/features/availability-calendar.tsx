@@ -48,8 +48,21 @@ export default function AvailabilityCalendar({ propertyId, onDateSelect, classNa
         }
     }, [propertyId]);
 
-    const handleSelect = (range: any) => {
-        // Range can be undefined if deselecting
+    const handleSelect = (range: any, selectedDay: Date) => {
+        // If we already have a complete range, start a new one
+        if (selectedRange?.from && selectedRange?.to) {
+            setSelectedRange({ from: selectedDay, to: undefined });
+            if (onDateSelect) onDateSelect(undefined);
+            return;
+        }
+
+        // If clicking a date before the start date, reset the start date
+        if (selectedRange?.from && !selectedRange?.to && selectedDay < selectedRange.from) {
+            setSelectedRange({ from: selectedDay, to: undefined });
+            return;
+        }
+
+        // Normal selection logic for first and second click
         setSelectedRange(range);
         if (onDateSelect) {
             if (range?.from && range?.to) {
@@ -61,16 +74,17 @@ export default function AvailabilityCalendar({ propertyId, onDateSelect, classNa
     };
 
     if (isLoading) {
-        return <div className="flex justify-center p-8"><Loader2 className="animate-spin text-gold" /></div>;
+        return <div className="flex justify-center p-8"><Loader2 className="animate-spin text-primary" /></div>;
     }
 
     return (
-        <div className={`p-4 bg-[#1a1a1a] rounded-xl border border-white/10 ${className}`} dir="ltr">
+        <div className={`p-4 bg-white rounded-xl border border-neutral-200 shadow-sm ${className}`} dir="ltr">
             <style>{`
-                .rdp { --rdp-accent-color: #D4AF37; --rdp-background-color: #2a2a2a; color: white; margin: 0; }
-                .rdp-day_selected:not([disabled]) { color: black; font-weight: bold; }
-                .rdp-day_today { color: #D4AF37; font-weight: bold; }
-                .rdp-button:hover:not([disabled]):not(.rdp-day_selected) { background-color: rgba(255,255,255,0.1); }
+                .rdp { --rdp-accent-color: #FF385C; --rdp-background-color: #fff8f9; color: #222222; margin: 0; }
+                .rdp-day_selected:not([disabled]) { color: white; font-weight: bold; }
+                .rdp-day_range_middle { color: #222222 !important; font-weight: normal; }
+                .rdp-day_today { color: #FF385C; font-weight: bold; }
+                .rdp-button:hover:not([disabled]):not(.rdp-day_selected) { background-color: #f7f7f7; }
             `}</style>
             <DayPicker
                 mode="range"
@@ -81,16 +95,16 @@ export default function AvailabilityCalendar({ propertyId, onDateSelect, classNa
                 pagedNavigation
                 locale={he}
                 modifiersStyles={{
-                    disabled: { color: '#555', textDecoration: 'line-through' }
+                    disabled: { color: '#d4d4d4', textDecoration: 'line-through' }
                 }}
             />
-            <div className="mt-4 flex items-center justify-between text-sm text-neutral-400 px-2" dir="rtl">
+            <div className="mt-4 flex items-center justify-between text-sm text-neutral-600 px-2" dir="rtl">
                 <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-[#D4AF37]"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#FF385C]"></div>
                     <span>פנוי / נבחר</span>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-[#555]"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#d4d4d4]"></div>
                     <span>תפוס</span>
                 </div>
             </div>

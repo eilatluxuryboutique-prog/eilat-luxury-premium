@@ -37,6 +37,7 @@
   "Property": {
     "about": "על הנכס",
     "location": "מיקום",
+    "availability": "זמינות",
     "waze": "נווט עם Waze",
     "amenities": "שירותים ומתקנים",
     "guests": "אורחים",

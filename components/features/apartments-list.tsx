@@ -5,6 +5,7 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { Property, properties as allProperties } from '@/lib/mock-data';
 import { Link } from '@/navigation';
+import FavoriteButton from '@/components/ui/favorite-button';
 
 export default function ApartmentsList({ limit, items, isCarousel = false }: { limit?: number; items?: Property[]; isCarousel?: boolean }) {
     const t = useTranslations('Featured');
@@ -29,9 +30,7 @@ export default function ApartmentsList({ limit, items, isCarousel = false }: { l
                                     />
                                     {/* Heart Button overlay */}
                                     <div className="absolute top-3 right-3 z-10" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: 'block', fill: 'rgba(0, 0, 0, 0.5)', height: '24px', width: '24px', stroke: '#ffffff', strokeWidth: 2, overflow: 'visible' }}>
-                                            <path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path>
-                                        </svg>
+                                        <FavoriteButton propertyId={apt.id} />
                                     </div>
                                     {apt.rating > 4.8 && (
                                         <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[#222222] px-2 py-1 rounded-full text-[11px] font-bold shadow-sm">

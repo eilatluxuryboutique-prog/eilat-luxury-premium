@@ -20,8 +20,13 @@ export default function Header({ initialData }: { initialData?: any }) {
         const handleScroll = () => {
             setScrolled(window.scrollY > 0);
         };
+        const handleOpenSearch = () => setIsSearchOpen(true);
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('openSearchModal', handleOpenSearch);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('openSearchModal', handleOpenSearch);
+        };
     }, []);
 
     return (

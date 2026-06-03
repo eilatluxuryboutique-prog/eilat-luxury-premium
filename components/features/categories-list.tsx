@@ -41,7 +41,10 @@ export default function CategoriesList() {
                         })}
                     </div>
                     {/* Filters button */}
-                    <div className="hidden md:flex items-center gap-2 border border-[#dddddd] rounded-xl px-4 py-2 hover:border-[#222222] cursor-pointer bg-white transition-colors mb-3">
+                    <div 
+                        onClick={() => window.dispatchEvent(new Event('openSearchModal'))}
+                        className="hidden md:flex items-center gap-2 border border-[#dddddd] rounded-xl px-4 py-2 hover:border-[#222222] cursor-pointer bg-white transition-colors mb-3"
+                    >
                         <SlidersHorizontal size={14} className="text-[#222222]" />
                         <span className="text-[12px] font-medium text-[#222222]">{t('filters') || 'סינונים'}</span>
                     </div>

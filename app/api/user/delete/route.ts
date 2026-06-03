@@ -5,6 +5,8 @@ import User from '@/models/User';
 import Property from '@/models/Property';
 import Booking from '@/models/Booking';
 import Review from '@/models/Review';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/nextauth';
 
 export async function DELETE(req: Request) {
     try {

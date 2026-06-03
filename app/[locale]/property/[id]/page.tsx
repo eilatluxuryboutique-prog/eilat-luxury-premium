@@ -123,9 +123,9 @@ export default async function PropertyPage(props: { params: Promise<{ id: string
 
     return (
         <main className="min-h-screen bg-background text-foreground pt-24 pb-20 transition-colors duration-300">
-            <div className="container mx-auto px-4">
+            <div className="max-w-[1120px] mx-auto px-4">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                <div className="flex flex-col md:flex-row justify-start items-start md:items-end mb-8 gap-4 md:gap-24">
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="bg-primary text-black text-xs font-bold px-2 py-1 rounded uppercase">

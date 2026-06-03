@@ -90,7 +90,7 @@ export default function Header({ initialData }: { initialData?: any }) {
 
                     {/* User Actions Desktop */}
                     <div className="hidden md:flex flex-1 items-center justify-end gap-1 min-w-[200px]">
-                        <Link href="/host" className="text-[14px] font-semibold text-[#222222] hover:bg-[#f7f7f7] px-4 py-3 rounded-full transition-colors" aria-label="פרסם נכס">
+                        <Link href="/host/join" className="text-[14px] font-semibold text-[#222222] hover:bg-[#f7f7f7] px-4 py-3 rounded-full transition-colors" aria-label="פרסם נכס">
                             {tAuth('list_asset')}
                         </Link>
                         

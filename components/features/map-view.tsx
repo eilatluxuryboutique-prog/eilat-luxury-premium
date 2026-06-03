@@ -121,29 +121,6 @@ export default function MapView({ properties, attractions = [] }: { properties: 
                 )
             ))}
 
-            {/* Render Attractions */}
-            {attractions.map(attraction => (
-                <Marker
-                    key={`att-${attraction.id}`}
-                    position={[attraction.coordinates.lat, attraction.coordinates.lng]}
-                    icon={createAttractionIcon(attraction.title, attraction.type)}
-                >
-                    <Popup>
-                        <div className="text-black text-sm max-w-[220px]">
-                            <strong className="text-lg mb-1 block" style={{ color: attraction.type === 'restaurant' ? '#F59E0B' : attraction.type === 'nature' ? '#10B981' : '#D90B42' }}>
-                                {attraction.title}
-                            </strong>
-                            <div className="bg-gray-100 px-2 py-1 rounded text-xs text-gray-600 inline-block mb-2 font-medium">
-                                {attraction.type === 'restaurant' ? 'מסעדה מומלצת' : attraction.type === 'shopping' ? 'קניות ובילוי' : attraction.type === 'nature' ? 'טבע ואטרקציות' : 'פעילות'}
-                            </div>
-                            <p className="text-sm mt-1 leading-relaxed text-gray-700 border-t pt-2">{attraction.description}</p>
-                            <div className="mt-3 text-xs text-blue-600 font-semibold cursor-pointer hover:underline">
-                                קרא עוד המלצות...
-                            </div>
-                        </div>
-                    </Popup>
-                </Marker>
-            ))}
         </MapContainer>
     );
 }

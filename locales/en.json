@@ -297,6 +297,7 @@
     "read_more": "Read More"
   },
   "Map": {
-    "show_map": "Show map"
+    "show_map": "Show map",
+    "show_list": "Show list"
   }
 }
